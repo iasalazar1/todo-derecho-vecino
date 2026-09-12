@@ -1529,33 +1529,12 @@
     "tema_principal": null,
     "tipo_disposicion": null,
     "sujetos_obligados": [
-      "la Ley"
+      "la Ley",
+      "ARTÍCULO"
     ],
     "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 8, Fracc. VIII",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Las demás que les señalen la Ley y otras disposiciones aplicables.",
-    "needs_review": true
-  },
-  {
-    "chunk_id": "cd6d36fdc6c4",
-    "tipo_documento": "Ley",
-    "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
-    "jurisdiccion": "Ciudad de México",
-    "fecha_publicacion": null,
-    "fecha_ultima_reforma": "2025-12-24",
-    "estado_vigencia": "Vigente",
-    "titulo": "TITULO II",
-    "capitulo": null,
-    "seccion": null,
-    "articulo": "8",
-    "fraccion": null,
-    "contexto_superior": "TITULO II",
-    "tema_principal": null,
-    "tipo_disposicion": null,
-    "sujetos_obligados": [],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 8",
-    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Se deroga.",
+    "texto": "Las demás que les señalen la Ley y otras disposiciones aplicables. Artículo 8 Bis. - Se deroga.",
     "needs_review": true
   },
   {
@@ -3625,44 +3604,17 @@
     "fraccion": "V",
     "contexto_superior": "TITULO VI / CAPITULO II",
     "tema_principal": null,
-    "tipo_disposicion": "Obligación",
-    "sujetos_obligados": [
-      "Ciudad de México",
-      "MÉXICO",
-      "Fracción",
-      "ARTÍCULO"
-    ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 27, Fracc. V",
-    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Está obligado a contratar elementos de seguridad acreditados por la Secretaría de Seguridad Ciudadana de la Ciudad de México, quienes deberán primordialmente vigilar se lleve a cabo lo establecido en la fracción VIII del apartado B del artículo 10 de la presente Ley . Fracción reformada G.O. CDMX 24/12/25",
-    "needs_review": true
-  },
-  {
-    "chunk_id": "7b4544e1d6a2",
-    "tipo_documento": "Ley",
-    "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
-    "jurisdiccion": "Ciudad de México",
-    "fecha_publicacion": null,
-    "fecha_ultima_reforma": "2025-12-24",
-    "estado_vigencia": "Vigente",
-    "titulo": "TITULO VI",
-    "capitulo": "CAPITULO II",
-    "seccion": null,
-    "articulo": "27",
-    "fraccion": null,
-    "contexto_superior": "TITULO VI / CAPITULO II",
-    "tema_principal": null,
     "tipo_disposicion": "Prohibición",
     "sujetos_obligados": [
       "Ciudad de México",
       "DISTRITO FEDERAL",
       "Distrito Federal",
       "MÉXICO",
-      "GOBIERNO"
+      "Fracción"
     ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 27",
+    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 27, Fracc. V",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Son de impacto zonal los establecimientos mercantiles cuyo giro principal sea la realización de juegos con apuestas y sorteos, que cuenten con permiso de la Secretaría de Gobernación. Además, son considerados de impacto zonal: estadios, bares, cantinas, antros, discotecas, casinos, espacios de diversión nocturnos, cabarets, cervecerías, chelerías o peñas, así como establecimientos dedicados al entretenimiento para adultos y/o con bailes eróticos, y en general los distintos a bajo impacto o impacto vecinal. Estos establecimientos deberán cumplir con las obligaciones contenidas en el apartado A y en las fracciones I, III, IV, VI, IX y X del apartado B del Artículo 10, así como las del artículo 13 de esta Ley, y obtener el visto bueno de la Secretaría de Gobierno. Queda prohibida la entrada a menores de edad a este tipo de establecimientos mismos que no podrán ubicarse a menos de trescientos metros de centros educativos, ni en inmuebles que conforme a los Programas de Desarrollo Urbano de la Ciudad de México tengan zonificación habitacional. Párrafo reformad o G.O. CDMX 24/12/25 La vigilancia del cumplimiento de las obligaciones a cargo de los Titulares de los establecimientos previstos en el presente artículo, está a cargo del Instituto de Verificación Administrativa de la Ciudad de México, quien ordenará la práctica de visitas de verificación administrativa y sustanciará el procedimiento respectivo, conforme a la Ley del Instituto, de Verificación Administrativa de la Ciudad de México, la Ley de Procedimiento Administrativo, de la Ciudad de México, el Reglamento de Verificación Administrativa del Distrito Federal y el Reglamento de la Ley de Establecimientos Mercantiles, todos vigentes en la Ciudad de México, en Materia de Aforo y de Seguridad en Establecimientos de Impacto Zonal. Dichas visitas podrán ser realizadas con el apoyo de la Secretaría de Gestión Integral de Riesgos y Protección Civil de la Ciudad de México . Párrafo reformad o G.O. CDMX 24/12/25 CAPITULO III GENERALIDADES.",
+    "texto": "Está obligado a contratar elementos de seguridad acreditados por la Secretaría de Seguridad Ciudadana de la Ciudad de México, quienes deberán primordialmente vigilar se lleve a cabo lo establecido en la fracción VIII del apartado B del artículo 10 de la presente Ley . Fracción reformada G.O. CDMX 24/12/25 Artículo 27 Bis. - Son de impacto zonal los establecimientos mercantiles cuyo giro principal sea la realización de juegos con apuestas y sorteos, que cuenten con permiso de la Secretaría de Gobernación. Además, son considerados de impacto zonal: estadios, bares, cantinas, antros, discotecas, casinos, espacios de diversión nocturnos, cabarets, cervecerías, chelerías o peñas, así como establecimientos dedicados al entretenimiento para adultos y/o con bailes eróticos, y en general los distintos a bajo impacto o impacto vecinal. Estos establecimientos deberán cumplir con las obligaciones contenidas en el apartado A y en las fracciones I, III, IV, VI, IX y X del apartado B del Artículo 10, así como las del artículo 13 de esta Ley, y obtener el visto bueno de la Secretaría de Gobierno. Queda prohibida la entrada a menores de edad a este tipo de establecimientos mismos que no podrán ubicarse a menos de trescientos metros de centros educativos, ni en inmuebles que conforme a los Programas de Desarrollo Urbano de la Ciudad de México tengan zonificación habitacional. Párrafo reformad o G.O. CDMX 24/12/25 La vigilancia del cumplimiento de las obligaciones a cargo de los Titulares de los establecimientos previstos en el presente artículo, está a cargo del Instituto de Verificación Administrativa de la Ciudad de México, quien ordenará la práctica de visitas de verificación administrativa y sustanciará el procedimiento respectivo, conforme a la Ley del Instituto, de Verificación Administrativa de la Ciudad de México, la Ley de Procedimiento Administrativo, de la Ciudad de México, el Reglamento de Verificación Administrativa del Distrito Federal y el Reglamento de la Ley de Establecimientos Mercantiles, todos vigentes en la Ciudad de México, en Materia de Aforo y de Seguridad en Establecimientos de Impacto Zonal. Dichas visitas podrán ser realizadas con el apoyo de la Secretaría de Gestión Integral de Riesgos y Protección Civil de la Ciudad de México . Párrafo reformad o G.O. CDMX 24/12/25 CAPITULO III GENERALIDADES.",
     "needs_review": true
   },
   {
@@ -5217,31 +5169,7 @@
     ],
     "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 42, Fracc. V",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "En el caso de los establecimientos mercantiles que tengan el giro de lavado de vehículos deberán contar con sistemas de reciclado y reutilización de agua. Está prohibida la utilización de la vía pública para la prestación de los servicios a que se refiere este artículo y cualquier otro relacionado con la prestación de los mismos.",
-    "needs_review": true
-  },
-  {
-    "chunk_id": "515602b792d5",
-    "tipo_documento": "Ley",
-    "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
-    "jurisdiccion": "Ciudad de México",
-    "fecha_publicacion": null,
-    "fecha_ultima_reforma": "2025-12-24",
-    "estado_vigencia": "Vigente",
-    "titulo": "Titulo ingresarán",
-    "capitulo": null,
-    "seccion": null,
-    "articulo": "42",
-    "fraccion": null,
-    "contexto_superior": "Titulo ingresarán",
-    "tema_principal": null,
-    "tipo_disposicion": null,
-    "sujetos_obligados": [
-      "ESTABLECIMIENTOS MERCANTILES"
-    ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 42",
-    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Todos los establecimientos mercantiles donde se realice lavado de vehículos procurarán la instalación de tecnologías para reciclado y reutilización de agua.",
+    "texto": "En el caso de los establecimientos mercantiles que tengan el giro de lavado de vehículos deberán contar con sistemas de reciclado y reutilización de agua. Está prohibida la utilización de la vía pública para la prestación de los servicios a que se refiere este artículo y cualquier otro relacionado con la prestación de los mismos. Artículo 42 Bis. - Todos los establecimientos mercantiles donde se realice lavado de vehículos procurarán la instalación de tecnologías para reciclado y reutilización de agua.",
     "needs_review": true
   },
   {
@@ -6753,19 +6681,18 @@
     "tema_principal": null,
     "tipo_disposicion": "Sanción",
     "sujetos_obligados": [
-      "Ciudad de México",
-      "MÉXICO",
       "PRIMERO",
       "Fracción",
-      "SEGUNDO"
+      "SEGUNDO",
+      "ARTÍCULO"
     ],
     "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 64",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Se sancionará con el equivalente de 25 a 1 25 veces la Unidad de Medida y Actualización vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones VIII, IX inciso a) y XV, y; 10 apartado B fracción I; 11 fracción VIII; 15 fracciones I, II y IV; 23 fracciones I, VI y VII; 28 párrafos primero, segundo, cuarto y quinto; 40 fracciones II y III; 42 fracciones I y II; 43 fracciones II, IV, V, VI, VII y VIII; 45; 56 fracciones IV, V, VI y VIII, y 57 de la presente Ley. Artículo reformado G.O. CDMX 19/12/25 Artículo 65. Se sancionará con el equivalente de 126 a 350 veces la Unidad de Cuenta de la Ciudad de México vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones III, VII párrafo primero, IX incisos b) y c), X, y; 10 apartado B fracciones II, III y VII; 11 fracciones III, IV, y VII, 12; 15 fracciones III y VI; 21; 22; fracción II; 23 fracción V; 33; 34; 37; 39; 40, fracciones I, IV, V, VI; 42 fracciones III, IV, V, 43 fracciones I y III; 46; 47 fracciones I, II, III, 48 fracciones III, VI, VII, X, 50; 53; 54; 56 fracciones II, III y VII. Artículo reformado G.O. CDMX 21/04/ 23",
+    "texto": "Se sancionará con el equivalente de 25 a 1 25 veces la Unidad de Medida y Actualización vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones VIII, IX inciso a) y XV, y; 10 apartado B fracción I; 11 fracción VIII; 15 fracciones I, II y IV; 23 fracciones I, VI y VII; 28 párrafos primero, segundo, cuarto y quinto; 40 fracciones II y III; 42 fracciones I y II; 43 fracciones II, IV, V, VI, VII y VIII; 45; 56 fracciones IV, V, VI y VIII, y 57 de la presente Ley. Artículo reformado G.O. CDMX 19/12/25",
     "needs_review": true
   },
   {
-    "chunk_id": "26f24ae2a974",
+    "chunk_id": "5cabfe4dbfd1",
     "tipo_documento": "Ley",
     "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
     "jurisdiccion": "Ciudad de México",
@@ -6775,7 +6702,7 @@
     "titulo": "título y",
     "capitulo": null,
     "seccion": null,
-    "articulo": "66",
+    "articulo": "65",
     "fraccion": null,
     "contexto_superior": "título y",
     "tema_principal": null,
@@ -6783,13 +6710,13 @@
     "sujetos_obligados": [
       "Ciudad de México",
       "MÉXICO",
+      "PRIMERO",
       "Fracción",
-      "SEGUNDO",
       "ARTÍCULO"
     ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 66",
+    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 65",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Se sancionará con el equivalente de 351 a 2500 veces la Unidad de Cuenta de la Ciudad de México vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones I, II, IV, V, VI, VII párrafo segundo, X I, XII, XIII y XIV; 10 apartado B fracciones V, VI y VIII; 11 fracciones I, II, V, VI, IX, X; 13; 18; 20; 22 fracción XI segundo y tercer párrafo; 24; 25 párrafo tercero; 26 párrafo cuarto; 27; 28 párrafo tercero; 29; 30; 32; 35; 36; 41; 45; 47 fracción IV y V; 48 fracciones I, II, V, VIII y IX; 49 párrafo segundo; 52; 55; 56 fracción I y 58 de esta Ley. Las sanciones económicas señaladas en los artículos 64, 65, 66 y 66 bis de la presente Ley, tendrán una reducción del 50% en sus montos mínimos y máximos cuando se trate de giros de bajo impacto que no vendan bebidas alcohólicas. Fracción reformada G.O. CDMX 21/04/23 Artículo 66 bis. El incumplimiento de la obligación establecida en el artículo 10, Apartado A, fracción VIII bis de la presente Ley, se sancionará de la siguiente manera: a) Para los establecimientos de bajo impacto se impondrá una multa por el equivalente de 126 a 500 veces la Unidad de Medida y Actualización diaria vigente. b) Para los establecimientos de impacto vecinal se sancionará con una multa de 150 a 15,000 veces la Unidad de Medida y Actualización de la Ciudad de México vigente. c) Para los establecimientos de impacto zonal se impondrá una multa de 250 a 25,000 veces la Unidad de Medida y Actualización de la Ciudad de México vigente. Además de dichas sanciones, la autoridad competente deberá dar vista y remitirá al titular del establecimiento mercantil sancionado, con el Consejo para Prevenir y Eliminar la Discriminación, a fin de que, de conformidad con la normativa aplicable, se emitan las medidas de no repetición que se estimen conducentes, y dará seguimiento conjuntamente con el Consejo del cumplimiento de las mismas. Artículo adicionado G.O. CDMX 21/04/ 23",
+    "texto": "Se sancionará con el equivalente de 126 a 350 veces la Unidad de Cuenta de la Ciudad de México vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones III, VII párrafo primero, IX incisos b) y c), X, y; 10 apartado B fracciones II, III y VII; 11 fracciones III, IV, y VII, 12; 15 fracciones III y VI; 21; 22; fracción II; 23 fracción V; 33; 34; 37; 39; 40, fracciones I, IV, V, VI; 42 fracciones III, IV, V, 43 fracciones I y III; 46; 47 fracciones I, II, III, 48 fracciones III, VI, VII, X, 50; 53; 54; 56 fracciones II, III y VII. Artículo reformado G.O. CDMX 21/04/ 23",
     "needs_review": true
   },
   {
@@ -6817,7 +6744,7 @@
     ],
     "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 66",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "El incumplimiento de lo dispuesto en la fracción II del artículo 23 de esta ley se sancionará con multa de 1,000 a 5,000 veces la Unidad de Medida y Actualización vigente y la clausura temporal de hasta quince días naturales en caso de reincidencia. El incumplimiento de lo dispuesto en las fracciones II Bis, II Ter, IV, IV Bis y IV Ter del artículo 23 y en el artículo 31 Ter se sancionarán con multa de 3,000 a 10,000 veces la Unidad de Medida y Actualización vigente y clausura temporal inmediata de quince a treinta días naturales; en caso de reincidencia procederá la clausura permanente. Las alcaldías resolverán conforme a la Ley del Procedimiento Administrativo de la Ciudad de México, fundando y motivando la sanción impuesta con base en los criterios de proporcionalidad, gravedad de la infracción y reincidencia; dando oportunidad para que la persona interesada exponga lo que a su derecho convenga, y en su caso, aporte las pruebas con las que cuente. El Instituto de Verificación Administrativa de la Ciudad de México (INVEA) en coordinación con las alcaldías y demás autoridades competentes llevarán a cabo visitas de verificación ordinarias y extraordinarias, para comprobar el cumplimiento de las disposiciones previstas en los artículos 2 3 y 31 Ter de esta Ley, con pleno respeto a los derechos humanos de las personas titulares, responsables, trabajadoras, huéspedes y visitantes. La ejecución de las sanciones será realizada por el Instituto de Verificación Administrativa de la Ciudad de México, en coordinación con las alcaldías y demás autoridades competentes. Artículo adicionado G.O. CDMX 19/12/25",
+    "texto": "Se sancionará con el equivalente de 351 a 2500 veces la Unidad de Cuenta de la Ciudad de México vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones I, II, IV, V, VI, VII párrafo segundo, X I, XII, XIII y XIV; 10 apartado B fracciones V, VI y VIII; 11 fracciones I, II, V, VI, IX, X; 13; 18; 20; 22 fracción XI segundo y tercer párrafo; 24; 25 párrafo tercero; 26 párrafo cuarto; 27; 28 párrafo tercero; 29; 30; 32; 35; 36; 41; 45; 47 fracción IV y V; 48 fracciones I, II, V, VIII y IX; 49 párrafo segundo; 52; 55; 56 fracción I y 58 de esta Ley. Las sanciones económicas señaladas en los artículos 64, 65, 66 y 66 bis de la presente Ley, tendrán una reducción del 50% en sus montos mínimos y máximos cuando se trate de giros de bajo impacto que no vendan bebidas alcohólicas. Fracción reformada G.O. CDMX 21/04/23 Artículo 66 bis. El incumplimiento de la obligación establecida en el artículo 10, Apartado A, fracción VIII bis de la presente Ley, se sancionará de la siguiente manera: a) Para los establecimientos de bajo impacto se impondrá una multa por el equivalente de 126 a 500 veces la Unidad de Medida y Actualización diaria vigente. b) Para los establecimientos de impacto vecinal se sancionará con una multa de 150 a 15,000 veces la Unidad de Medida y Actualización de la Ciudad de México vigente. c) Para los establecimientos de impacto zonal se impondrá una multa de 250 a 25,000 veces la Unidad de Medida y Actualización de la Ciudad de México vigente. Además de dichas sanciones, la autoridad competente deberá dar vista y remitirá al titular del establecimiento mercantil sancionado, con el Consejo para Prevenir y Eliminar la Discriminación, a fin de que, de conformidad con la normativa aplicable, se emitan las medidas de no repetición que se estimen conducentes, y dará seguimiento conjuntamente con el Consejo del cumplimiento de las mismas. Artículo adicionado G.O. CDMX 21/04/ 23 Artículo 66 Ter. - El incumplimiento de lo dispuesto en la fracción II del artículo 23 de esta ley se sancionará con multa de 1,000 a 5,000 veces la Unidad de Medida y Actualización vigente y la clausura temporal de hasta quince días naturales en caso de reincidencia. El incumplimiento de lo dispuesto en las fracciones II Bis, II Ter, IV, IV Bis y IV Ter del artículo 23 y en el artículo 31 Ter se sancionarán con multa de 3,000 a 10,000 veces la Unidad de Medida y Actualización vigente y clausura temporal inmediata de quince a treinta días naturales; en caso de reincidencia procederá la clausura permanente. Las alcaldías resolverán conforme a la Ley del Procedimiento Administrativo de la Ciudad de México, fundando y motivando la sanción impuesta con base en los criterios de proporcionalidad, gravedad de la infracción y reincidencia; dando oportunidad para que la persona interesada exponga lo que a su derecho convenga, y en su caso, aporte las pruebas con las que cuente. El Instituto de Verificación Administrativa de la Ciudad de México (INVEA) en coordinación con las alcaldías y demás autoridades competentes llevarán a cabo visitas de verificación ordinarias y extraordinarias, para comprobar el cumplimiento de las disposiciones previstas en los artículos 2 3 y 31 Ter de esta Ley, con pleno respeto a los derechos humanos de las personas titulares, responsables, trabajadoras, huéspedes y visitantes. La ejecución de las sanciones será realizada por el Instituto de Verificación Administrativa de la Ciudad de México, en coordinación con las alcaldías y demás autoridades competentes. Artículo adicionado G.O. CDMX 19/12/25",
     "needs_review": true
   },
   {
@@ -7286,88 +7213,17 @@
     "fraccion": "IX",
     "contexto_superior": "título y",
     "tema_principal": null,
-    "tipo_disposicion": "Procedimiento",
+    "tipo_disposicion": "Sanción",
     "sujetos_obligados": [
       "Ciudad de México",
       "MÉXICO",
+      "Aviso",
       "la Ley",
-      "Instituto"
+      "ARTÍCULO"
     ],
     "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 71, Fracc. IX",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Por utilizar aislantes de sonido que pongan en riesgo la seguridad de los usuarios; Cuando exista oposición a la ejecución de la clausura, el Instituto podrá hacer uso de la fuerza pública en términos de la Ley de Procedimiento Administrativo de la Ciudad de México.",
-    "needs_review": true
-  },
-  {
-    "chunk_id": "79ffb84ae76b",
-    "tipo_documento": "Ley",
-    "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
-    "jurisdiccion": "Ciudad de México",
-    "fecha_publicacion": null,
-    "fecha_ultima_reforma": "2025-12-24",
-    "estado_vigencia": "Vigente",
-    "titulo": "Título Sexto",
-    "capitulo": null,
-    "seccion": null,
-    "articulo": "71",
-    "fraccion": "I",
-    "contexto_superior": "Título Sexto",
-    "tema_principal": null,
-    "tipo_disposicion": null,
-    "sujetos_obligados": [
-      "Aviso"
-    ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 71, Fracc. I",
-    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Cuando se detecten en verificación modificaciones a las condiciones originalmente manifestadas en el Aviso o Solicitud de Permiso de Funcionamiento del establecimiento mercantil de bajo impacto e impacto vecinal;",
-    "needs_review": true
-  },
-  {
-    "chunk_id": "fe2819ad9069",
-    "tipo_documento": "Ley",
-    "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
-    "jurisdiccion": "Ciudad de México",
-    "fecha_publicacion": null,
-    "fecha_ultima_reforma": "2025-12-24",
-    "estado_vigencia": "Vigente",
-    "titulo": "Título Sexto",
-    "capitulo": null,
-    "seccion": null,
-    "articulo": "71",
-    "fraccion": "II",
-    "contexto_superior": "Título Sexto",
-    "tema_principal": null,
-    "tipo_disposicion": null,
-    "sujetos_obligados": [
-      "Aviso"
-    ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 71, Fracc. II",
-    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Cuando se exceda con los enseres la superficie declarada en el aviso correspondiente;",
-    "needs_review": true
-  },
-  {
-    "chunk_id": "6ddd09133360",
-    "tipo_documento": "Ley",
-    "titulo_completo": "Ley de Establecimientos Mercantiles para la Ciudad de México",
-    "jurisdiccion": "Ciudad de México",
-    "fecha_publicacion": null,
-    "fecha_ultima_reforma": "2025-12-24",
-    "estado_vigencia": "Vigente",
-    "titulo": "Título Sexto",
-    "capitulo": null,
-    "seccion": null,
-    "articulo": "71",
-    "fraccion": "III",
-    "contexto_superior": "Título Sexto",
-    "tema_principal": null,
-    "tipo_disposicion": "Sanción",
-    "sujetos_obligados": [
-      "Instituto"
-    ],
-    "cita_legal": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 71, Fracc. III",
-    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Cuando no se permita el acceso al establecimiento mercantil de impacto vecinal y de bajo impacto al personal autorizado por el Instituto para realizar las funciones de verificación; No obstante, lo anterior, detectada alguna de las hipótesis durante la visita de verificación y que el visitado no haya subsanado durante el procedimiento de calificación, la autoridad al momento de emitir la resolución señalará un plazo de quince días hábiles para que el visitado subsane tales irregularidades realizando el apercibimiento respectivo, plazo que será contado a partir del día siguiente de la notificación de la resolución que ponga fin a la visita de verificación. Transcurrido este plazo y no subsanadas las irregularidades hechas del conocimiento del visitado, la autoridad emisora de la resolución procederá a hacer efectivo el apercibimiento y ordenará la clausura temporal del establecimiento de acuerdo con lo preceptuado en la propia resolución. Lo anterior se hará sin perjuicio y con tal independencia de las sanciones pecuniarias a que se haga acreedor el particular verificado y establecidas en el texto de la presente Ley.",
+    "texto": "Por utilizar aislantes de sonido que pongan en riesgo la seguridad de los usuarios; Cuando exista oposición a la ejecución de la clausura, el Instituto podrá hacer uso de la fuerza pública en términos de la Ley de Procedimiento Administrativo de la Ciudad de México. Artículo 71 Bis. - El incumplimiento a las siguientes obligaciones normativas consideradas no graves en principio no será motivo de clausura: I. Cuando se detecten en verificación modificaciones a las condiciones originalmente manifestadas en el Aviso o Solicitud de Permiso de Funcionamiento del establecimiento mercantil de bajo impacto e impacto vecinal; II. Cuando se exceda con los enseres la superficie declarada en el aviso correspondiente; III. Cuando no se permita el acceso al establecimiento mercantil de impacto vecinal y de bajo impacto al personal autorizado por el Instituto para realizar las funciones de verificación; No obstante, lo anterior, detectada alguna de las hipótesis durante la visita de verificación y que el visitado no haya subsanado durante el procedimiento de calificación, la autoridad al momento de emitir la resolución señalará un plazo de quince días hábiles para que el visitado subsane tales irregularidades realizando el apercibimiento respectivo, plazo que será contado a partir del día siguiente de la notificación de la resolución que ponga fin a la visita de verificación. Transcurrido este plazo y no subsanadas las irregularidades hechas del conocimiento del visitado, la autoridad emisora de la resolución procederá a hacer efectivo el apercibimiento y ordenará la clausura temporal del establecimiento de acuerdo con lo preceptuado en la propia resolución. Lo anterior se hará sin perjuicio y con tal independencia de las sanciones pecuniarias a que se haga acreedor el particular verificado y establecidas en el texto de la presente Ley.",
     "needs_review": true
   },
   {

@@ -5475,6 +5475,28 @@
     "fraccion": "XIII",
     "contexto_superior": "TÍTULO TERCERO / CAPÍTULO III",
     "tema_principal": null,
+    "tipo_disposicion": null,
+    "sujetos_obligados": [],
+    "cita_legal": "Ley de Cultura Cívica de la Ciudad de México, Art. 46, Fracc. XIII",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "texto": "Las demás que señalen las disposiciones aplicables.",
+    "needs_review": true
+  },
+  {
+    "chunk_id": "d1cff3dd9a59",
+    "tipo_documento": "Ley",
+    "titulo_completo": "Ley de Cultura Cívica de la Ciudad de México",
+    "jurisdiccion": "Ciudad de México",
+    "fecha_publicacion": null,
+    "fecha_ultima_reforma": "2025-12-24",
+    "estado_vigencia": "Vigente",
+    "titulo": "TÍTULO CUARTO",
+    "capitulo": "CAPÍTULO I",
+    "seccion": null,
+    "articulo": "48",
+    "fraccion": null,
+    "contexto_superior": "TÍTULO CUARTO / CAPÍTULO I",
+    "tema_principal": null,
     "tipo_disposicion": "Sanción",
     "sujetos_obligados": [
       "Persona Juzgadora",
@@ -5483,9 +5505,9 @@
       "Juzgados",
       "Consejería"
     ],
-    "cita_legal": "Ley de Cultura Cívica de la Ciudad de México, Art. 46, Fracc. XIII",
+    "cita_legal": "Ley de Cultura Cívica de la Ciudad de México, Art. 48",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Las demás que señalen las disposiciones aplicables. Artículo 48. El procedimiento será oral y público y se sustanciará en una sola audiencia. Los procedimientos que se realicen ante los juzgados, se iniciarán con la presentación de la persona probable infractora, por la persona policía, con la queja de particulares por la probable comisión de infracciones, por la remisión o a solicitud de otras autoridades que pongan en conocimiento a la Persona Juzgadora hechos presuntamente considerados infracciones a esta Ley y demás ordenamientos aplicables, en caso de ser competente, así lo acordará y continuará con el procedimiento. Asimismo se conocerá de los procedimientos de hechos de tránsito causados por bache, para el reclamo del pago de daños ante la instancia correspondiente. Las resoluciones administrativas que impongan alguna sanción por violaciones a la presente Ley, podrán ser impugnadas median te el recurso de revisión, que se tramitará ante la Consejería, juicio de nulidad administrativa o juicio de amparo.",
+    "texto": "El procedimiento será oral y público y se sustanciará en una sola audiencia. Los procedimientos que se realicen ante los juzgados, se iniciarán con la presentación de la persona probable infractora, por la persona policía, con la queja de particulares por la probable comisión de infracciones, por la remisión o a solicitud de otras autoridades que pongan en conocimiento a la Persona Juzgadora hechos presuntamente considerados infracciones a esta Ley y demás ordenamientos aplicables, en caso de ser competente, así lo acordará y continuará con el procedimiento. Asimismo se conocerá de los procedimientos de hechos de tránsito causados por bache, para el reclamo del pago de daños ante la instancia correspondiente. Las resoluciones administrativas que impongan alguna sanción por violaciones a la presente Ley, podrán ser impugnadas median te el recurso de revisión, que se tramitará ante la Consejería, juicio de nulidad administrativa o juicio de amparo.",
     "needs_review": true
   },
   {

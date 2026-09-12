@@ -70,17 +70,25 @@ TITULO_RE = re.compile(r"\bT[ÍI]TULO\s+([A-ZÁÉÍÓÚ]+)\b\.?", re.IGNORECASE)
 CAPITULO_RE = re.compile(r"\bCAP[ÍI]TULO\s+([IVXLCDM]+)\b\.?", re.IGNORECASE)
 SECCION_RE = re.compile(r"\bSECCI[ÓO]N\s+([A-ZÁÉÍÓÚ]+)\b\.?", re.IGNORECASE)
 
-# Cubre variantes reales observadas: "Artículo 1º .- ", "Artículo 25.-",
-# "Artículo 7 Bis.-". El ".-" se exige como obligatorio a propósito: sin
-# esa condición, el patrón también capturaba referencias cruzadas dentro
-# del propio texto (p. ej. "de conformidad con el artículo 11 de la Ley
-# General...") y multiplicaba por 3 el número real de artículos. Se
-# comprobó contra el texto real de la Ley Ambiental: con ".-" obligatorio,
-# los 325 números de artículo detectados salen únicos y en orden
-# ascendente; sin esa condición aparecían 1,014 fragmentos con muchos
-# artículos repetidos hasta 46 veces.
+# Cubre variantes reales observadas: "Artículo 1º .- " (con guion),
+# "Artículo 1." (solo punto, sin guion), "ARTÍCULO 12." (mayúsculas).
+# El punto se exige como obligatorio a propósito -- sin esa condición, el
+# patrón también capturaba referencias cruzadas dentro del propio texto
+# (p. ej. "de conformidad con el artículo 11 de la Ley General...") y
+# multiplicaba por 3 el número real de artículos.
+#
+# El guion NO se exige (a diferencia de una versión anterior de este
+# script) porque varios documentos del corpus -- p. ej. la Ley de
+# Responsabilidad Ambiental -- usan "Artículo 1." sin guion en absoluto.
+# Como el guion ya no filtra nada, split_articles() aplica en su lugar una
+# validación de secuencia ascendente (igual que split_fracciones()), para
+# seguir descartando referencias cruzadas que por casualidad terminan en
+# punto -- se encontró un caso real: "...fracción III del artículo 28
+# BIS. Párrafo adicionado..." coincidía con el patrón y rompía la
+# secuencia (31 -> 28 -> 32) antes de agregar este filtro.
 ARTICULO_RE = re.compile(
-    r"Art[íi]culo\s+(\d+)\s*(?:[°ºoO]|[Bb]is|[Tt]er)?\s*\.\s*-\s*"
+    r"Art[íi]culo\s+(\d+)\s*(?:[°ºoO]|[Bb]is|[Tt]er)?\s*\.\s*-?\s*",
+    re.IGNORECASE,
 )
 
 FRACCION_RE = re.compile(r"(?:^|\s)([IVXLCDM]{1,6})\.\s*-?\s*")
@@ -177,8 +185,24 @@ def current_hierarchy_at(markers, position: int) -> dict:
 
 
 def split_articles(text: str):
-    """Devuelve una lista de (numero_articulo, texto_articulo, posicion_inicial)."""
-    matches = list(ARTICULO_RE.finditer(text))
+    """Devuelve una lista de (numero_articulo, texto_articulo, posicion_inicial).
+
+    Solo acepta un artículo si su número es mayor que el último aceptado
+    (permite huecos -- artículos derogados, "Bis" no numerados -- pero no
+    retrocesos), para filtrar referencias cruzadas que por casualidad
+    terminan en punto y calzan con ARTICULO_RE."""
+    raw_matches = list(ARTICULO_RE.finditer(text))
+    matches = []
+    last_num = 0
+    for m in raw_matches:
+        num = int(m.group(1))
+        if not matches or num > last_num:
+            matches.append(m)
+            last_num = num
+        # si no, se descarta como probable referencia cruzada: su texto
+        # queda incluido dentro del artículo anterior, no genera un chunk
+        # aparte.
+
     articles = []
     for i, m in enumerate(matches):
         start = m.end()
@@ -231,8 +255,118 @@ def guess_sujetos_obligados(texto: str, entidades_documento: list):
     return encontrados[:5], bool(encontrados)
 
 
+SECCION_DECIMAL_RE = re.compile(r"(\d+(?:\.\d+){1,4})\.?\s+(?=[A-ZÁÉÍÓÚ])")
+
+
+def _seccion_valida(numero: str) -> bool:
+    """Filtro contra falsos positivos: medidas o cifras con forma decimal
+    (p. ej. "000.00", producto de una cantidad en dinero) que casualmente
+    calzan con el patrón de sección. No elimina todos los falsos positivos
+    -- una cifra como "2.93" (probablemente una medida en m2) puede seguir
+    colándose; es una limitación conocida de esta primera versión, no
+    resuelta del todo."""
+    partes = numero.split(".")
+    if any(p.startswith("0") and len(p) > 1 for p in partes):
+        return False
+    if int(partes[0]) > 30:
+        return False
+    return True
+
+
+def split_sections_pddu(text: str):
+    """Chunking para Programas de Desarrollo Urbano (PDDU/PPCU), que no usan
+    'Artículo N.' sino secciones numeradas con decimales (4.1, 4.2, 4.3.1...).
+    Solo acepta una sección si su número es mayor (jerárquicamente) que el
+    último aceptado -- mismo criterio anti-referencia-cruzada que
+    split_articles(), necesario ahora que el punto final ya no es
+    obligatorio (algunos documentos, como el PDDU de Cuauhtémoc, escriben
+    "4.4.1 Normas..." sin punto).
+    Devuelve una lista de (numero_seccion, titulo_seccion, texto, posicion)."""
+    raw_matches = [m for m in SECCION_DECIMAL_RE.finditer(text) if _seccion_valida(m.group(1))]
+
+    def clave(numero: str):
+        return tuple(int(p) for p in numero.split("."))
+
+    matches = []
+    ultima_clave = ()
+    for m in raw_matches:
+        clave_actual = clave(m.group(1))
+        if not matches or clave_actual > ultima_clave:
+            matches.append(m)
+            ultima_clave = clave_actual
+
+    sections = []
+    for i, m in enumerate(matches):
+        numero = m.group(1)
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        chunk_text = text[start:end].strip()
+        title_match = re.match(r"(.{5,100}?)(?:\.\s+[A-ZÁÉÍÓÚ]|$)", chunk_text)
+        titulo_seccion = title_match.group(1).strip() if title_match else chunk_text[:80]
+        sections.append((numero, titulo_seccion, chunk_text, m.start()))
+    return sections
+
+
+def strip_toc_block(text: str) -> str:
+    """Quita el bloque de índice/tabla de contenidos, si lo hay. Se detecta
+    por la concentración de "puntos guía" (p. ej. "4.4.1 Normas ...........71"),
+    un patrón que no aparece en el cuerpo real del documento. Sin este paso,
+    el índice generaba encabezados de sección duplicados que chocaban con el
+    filtro de secuencia ascendente al llegar al cuerpo real -- se detectó
+    con el PDDU de Cuauhtémoc, cuyo índice interno (48 líneas de puntos
+    guía en un solo bloque) producía solo 2 fragmentos en vez de decenas."""
+    dot_leaders = list(re.finditer(r"\.{5,}\s*\d{1,4}", text))
+    if len(dot_leaders) < 5:
+        return text
+    inicio = dot_leaders[0].start()
+    fin = dot_leaders[-1].end()
+    return text[:inicio] + " " + text[fin:]
+
+
+def process_pddu_document(reviewed_path: str, titulo_completo: str, jurisdiccion: str,
+                           fuente: str, tipo_documento: str):
+    with open(reviewed_path, "r", encoding="utf-8") as f:
+        raw_text = f.read()
+    text = clean_running_noise(raw_text, titulo_completo)
+    text = strip_toc_block(text)
+    sections = split_sections_pddu(text)
+
+    chunks = []
+    for numero, titulo_seccion, texto, _pos in sections:
+        if len(texto) < 15:
+            continue
+        capitulo = numero.split(".")[0]
+        chunk = LegalChunk(
+            chunk_id=hashlib.sha1(f"{titulo_completo}-{numero}".encode()).hexdigest()[:12],
+            tipo_documento=tipo_documento,
+            titulo_completo=titulo_completo,
+            jurisdiccion=jurisdiccion,
+            fecha_publicacion=None,
+            fecha_ultima_reforma=None,
+            estado_vigencia="Vigente",
+            titulo=f"Capítulo {capitulo}",
+            capitulo=None,
+            seccion=numero,
+            articulo=numero,
+            fraccion=None,
+            contexto_superior=titulo_seccion,
+            tema_principal=titulo_seccion,
+            tipo_disposicion=None,
+            sujetos_obligados=[],
+            cita_legal=f"{titulo_completo}, Sección {numero} ({titulo_seccion})",
+            fuente=fuente,
+            texto=texto,
+            needs_review=True,
+        )
+        chunks.append(chunk)
+    return [asdict(c) for c in chunks]
+
+
 def process_document(reviewed_path: str, titulo_completo: str, jurisdiccion: str,
                       fuente: str, tipo_documento: str = "Ley"):
+    if tipo_documento == "Programa de Desarrollo Urbano":
+        return process_pddu_document(reviewed_path, titulo_completo, jurisdiccion, fuente, tipo_documento)
+
     with open(reviewed_path, "r", encoding="utf-8") as f:
         raw_text = f.read()
 
@@ -364,4 +498,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

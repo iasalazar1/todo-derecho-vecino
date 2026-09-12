@@ -13522,7 +13522,32 @@
     ],
     "cita_legal": "Ley Ambiental de la Ciudad de México, Art. 158",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
-    "texto": "Las limitaciones y regulación sobre el manejo de recursos naturales y la realización de actividades establecidas en las áreas comunitarias de conservación ecológica, se considerarán de utilidad pública y serán obligatorias para los propietarios o poseedores de los terrenos y los bienes localizados en las mismas. CAPÍTULO VII EL AGUA COMO BIEN PÚBLICO DE LA CIUDAD DE MÉXICO Artículo 159 . En la Ciudad de México está prohibida la privatización del agua en cualquier modalidad; así como los servicios que derivan de su suministro y cobro, por lo que la gestión del agua es pública y sin fines de lucro. CAPÍTULO VIII. DE LA CONSERVACIÓN Y APROVECHAMIENTO SUSTENTABLE DEL AGUA.",
+    "texto": "Las limitaciones y regulación sobre el manejo de recursos naturales y la realización de actividades establecidas en las áreas comunitarias de conservación ecológica, se considerarán de utilidad pública y serán obligatorias para los propietarios o poseedores de los terrenos y los bienes localizados en las mismas. CAPÍTULO VII EL AGUA COMO BIEN PÚBLICO DE LA CIUDAD DE MÉXICO",
+    "needs_review": true
+  },
+  {
+    "chunk_id": "be2fd48893cd",
+    "tipo_documento": "Ley",
+    "titulo_completo": "Ley Ambiental de la Ciudad de México",
+    "jurisdiccion": "Ciudad de México",
+    "fecha_publicacion": "2024-07-18",
+    "fecha_ultima_reforma": "2025-12-24",
+    "estado_vigencia": "Vigente",
+    "titulo": "título gratuito",
+    "capitulo": "CAPÍTULO VII",
+    "seccion": null,
+    "articulo": "159",
+    "fraccion": null,
+    "contexto_superior": "título gratuito / CAPÍTULO VII",
+    "tema_principal": null,
+    "tipo_disposicion": null,
+    "sujetos_obligados": [
+      "Ciudad de México",
+      "Ciudad"
+    ],
+    "cita_legal": "Ley Ambiental de la Ciudad de México, Art. 159",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "texto": "En la Ciudad de México está prohibida la privatización del agua en cualquier modalidad; así como los servicios que derivan de su suministro y cobro, por lo que la gestión del agua es pública y sin fines de lucro. CAPÍTULO VIII. DE LA CONSERVACIÓN Y APROVECHAMIENTO SUSTENTABLE DEL AGUA.",
     "needs_review": true
   },
   {

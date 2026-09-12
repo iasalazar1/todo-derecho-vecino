@@ -30,13 +30,13 @@
     "tipo_documento": "Ley"
   },
   {
-    "reviewed_path": "leyes_cdmx/LEY_ORGANICA_DE_ALCALDIAS_DE_LA_CDMX_6.1_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/LEY_ORGANICA_DE_ALCALDIAS_DE_LA_CDMX_6.4_reviewed.txt",
     "titulo": "Ley Orgánica de Alcaldías de la Ciudad de México",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Ley"
   },
   {
-    "reviewed_path": "leyes_cdmx/LEY_ORGANICA_DE_LA_PAOT_DE_LA_CDMX_3.2_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/LEY_ORGANICA_DE_LA_PAOT_DE_LA_CDMX_3_2_reviewed.txt",
     "titulo": "Ley Orgánica de la Procuraduría Ambiental y del Ordenamiento Territorial de la Ciudad de México",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Ley"
@@ -54,38 +54,68 @@
     "tipo_documento": "Programa de Desarrollo Urbano"
   },
   {
-    "reviewed_path": "leyes_cdmx/REGLAMENTODELALEYAMBIENTALDELDISTRITOFEDERAL_3_reviewed.txt",
-    "titulo": "Reglamento de la Ley Ambiental del Distrito Federal",
+    "reviewed_path": "leyes_cdmx/REGLAMENTO_DE_LA_LEY_AMBIENTAL_DE_LA_CIUDAD_DE_MEXICO_1_1_reviewed.txt",
+    "titulo": "Reglamento de la Ley Ambiental de la Ciudad de México",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Reglamento"
   },
   {
-    "reviewed_path": "leyes_cdmx/REGLAMENTO_DE_LA_LEY_DE_CULTURA_CIVICA_DE_LA_CDMX_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/REGLAMENTO_DE_LA_LEY_DE_CULTURA_CIVICA_DE_LA_CDMX_1_reviewed.txt",
     "titulo": "Reglamento de la Ley de Cultura Cívica de la Ciudad de México",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Reglamento"
   },
   {
-    "reviewed_path": "leyes_cdmx/REGLAMENTO_DE_LA_LEY_DE_ESTABLECIMIENTOS_MERCANTILES_PARA_LA_CIUDAD_DE_MEXICO_2_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/REGLAMENTO_DE_LA_LEY_DE_ESTABLECIMIENTOS_MERCANTILES_PARA_LA_CIUDAD_DE_MEXICO_1_reviewed.txt",
     "titulo": "Reglamento de la Ley de Establecimientos Mercantiles para la Ciudad de México",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Reglamento"
   },
   {
-    "reviewed_path": "leyes_cdmx/RGTO_DE_CONSTRUCCIONES_DEL_DISTRITO_FEDERAL_8.1_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/RGTO_DE_CONSTRUCCIONES_DEL_DISTRITO_FEDERAL_8_1_reviewed.txt",
     "titulo": "Reglamento de Construcciones del Distrito Federal",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Reglamento"
   },
   {
-    "reviewed_path": "leyes_cdmx/RGTO_DE_LA_LEY_DE_DESA_URBANO_DEL_DF_4.2_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/RGTO_DE_LA_LEY_DE_DESA_URBANO_DEL_DF_4_2_reviewed.txt",
     "titulo": "Reglamento de la Ley de Desarrollo Urbano del Distrito Federal",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Reglamento"
   },
   {
-    "reviewed_path": "leyes_cdmx/RGTO_IMPACTO_AMB_Y_RIESGO_ CDMX_1.1_reviewed.txt",
+    "reviewed_path": "leyes_cdmx/RGTO_IMPACTO_AMB_Y_RIESGO_ CDMX_1_1_reviewed.txt",
     "titulo": "Reglamento de Impacto Ambiental y Riesgo de la Ciudad de México",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "tipo_documento": "Reglamento"
+  },
+  {
+    "reviewed_path": "leyes_cdmx/REGLAMENTO_LEY_AMBIENTAL_CDMX_AUTORREGULACION_Y_AUDITORIAS_AMBIENTALES_1_reviewed.txt",
+    "titulo": "Reglamento de la Ley Ambiental de la Ciudad de México en Materia de Autorregulación y Auditorías Ambientales",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "tipo_documento": "Reglamento"
+  },
+  {
+    "reviewed_path": "leyes_cdmx/REGLAMENTO_PARA_EL_ORDENAMIENTO_DEL_PAISAJE_URBANO_DEL_DF_1_reviewed.txt",
+    "titulo": "Reglamento para el Ordenamiento del Paisaje Urbano del Distrito Federal",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "tipo_documento": "Reglamento"
+  },
+  {
+    "reviewed_path": "leyes_cdmx/REGTO_DE_VERIFICACION_ADMIN_DF4_reviewed.txt",
+    "titulo": "Reglamento de Verificación Administrativa del Distrito Federal",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "tipo_documento": "Reglamento"
+  },
+  {
+    "reviewed_path": "leyes_cdmx/RGTO_LEY_AMB_CDMX_EN_MATERIA_DE_MANIFESTACION_AMBIENTAL_UNICA_1_1_reviewed.txt",
+    "titulo": "Reglamento de la Ley Ambiental de la Ciudad de México en Materia de Manifestación Ambiental Única",
+    "fuente": "PENDIENTE: URL de la Gaceta Oficial",
+    "tipo_documento": "Reglamento"
+  },
+  {
+    "reviewed_path": "leyes_cdmx/RGTO_LEY_ORG_PAOT_2_reviewed.txt",
+    "titulo": "Reglamento de la Ley Orgánica de la Procuraduría Ambiental y del Ordenamiento Territorial de la Ciudad de México",
     "fuente": "PENDIENTE: URL de la Gaceta Oficial",
     "tipo_documento": "Reglamento"
   }
