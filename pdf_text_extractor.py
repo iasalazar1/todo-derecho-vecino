@@ -49,7 +49,7 @@ def prepare_reviewed_text(pdf_path):
 
 
 if __name__ == '__main__':
-    pdf_path = '/home/ismael/todo-derecho-vecino/leyes_cdmx/PPCU_Hipodromo.pdf'
+    pdf_path = 'ESCRIBIR URL ENTRE COMILLAS DOBLES'
     print(f'Processing PDF: {pdf_path}')
     reviewed_text_path = prepare_reviewed_text(pdf_path)
     if reviewed_text_path:
