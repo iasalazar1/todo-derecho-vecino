@@ -1,6 +1,10 @@
 resource "aws_s3_bucket" "legal_documents" {
   bucket = "todo-derecho-vecino-${data.aws_caller_identity.current.account_id}-${var.aws_region}"
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = {
     Name    = "todo-derecho-vecino-legal-documents"
     Project = "todo-derecho-vecino"

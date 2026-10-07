@@ -416,3 +416,650 @@ Antes de modificar Aurora o crear nuevas tablas:
 9. sólo después incorporar las estructuras validadas a Aurora.
 
 **No modificar infraestructura ni esquema de Aurora hasta completar esta validación.**
+
+# Bitácora — Todo Derecho Vecino
+
+## Semana 3 — Segunda parte
+
+### Base de datos, acceso, validación, versionamiento y cierre de evidencia
+
+**Rama:** `mvp-estancia`
+**Periodo:** 30 de septiembre – 3 de octubre de 2026
+
+---
+
+## 1. Contexto
+
+Esta bitácora corresponde a la **segunda parte de la Semana 3** de desarrollo de Todo Derecho Vecino.
+
+La primera parte de la semana estuvo orientada principalmente a la preparación y despliegue de la infraestructura de base de datos mediante Terraform, así como a la actualización y validación del corpus jurídico MVP.
+
+En esta segunda parte se cerró la validación de la base de datos, se recuperaron las credenciales necesarias para acceder a Aurora, se estableció nuevamente el acceso mediante AWS Systems Manager, se verificó el esquema directamente con `psql`, se documentó la ausencia de datos de prueba y finalmente se versionaron y publicaron los cambios de infraestructura en GitHub.
+
+El objetivo de Semana 3, de acuerdo con el alcance del proyecto, es disponer de **Aurora PostgreSQL Serverless v2 en modo Single-AZ con `pgvector` y un esquema de datos diseñado para los documentos que serán ingeridos**, dejando una base accesible desde el entorno de prueba.
+
+---
+
+# 2. Actividades realizadas
+
+## 2.1. Recuperación de las credenciales de Aurora
+
+Al intentar continuar con las pruebas de `psql`, se identificó que no se tenía disponible la contraseña del usuario administrativo de PostgreSQL.
+
+Se revisó la configuración de Aurora y se confirmó que el recurso fue definido mediante Terraform utilizando:
+
+```text
+manage_master_user_password = true
+```
+
+Por lo tanto, la contraseña no se encontraba escrita en `aurora.tf`, sino que AWS la administra mediante **AWS Secrets Manager**.
+
+Se obtuvo primero el ARN del secreto asociado al cluster:
+
+```text
+arn:aws:secretsmanager:us-east-1:857385469837:secret:rds!cluster-4c3fc386-d1da-4de9-ade5-3849f8b22f21-Tfw3dM
+```
+
+Posteriormente se recuperó el contenido del secreto mediante AWS CLI.
+
+La contraseña se utilizó únicamente para establecer la conexión de prueba y **no se incorporó al repositorio ni a los archivos de Terraform**.
+
+**Estado: RESUELTO.**
+
+---
+
+## 2.2. Reactivación de la sesión de acceso mediante SSM
+
+Se detectó que la sesión de AWS Systems Manager necesaria para acceder a Aurora no se encontraba activa.
+
+Se restableció el port forwarding mediante:
+
+```bash
+aws ssm start-session \
+  --target i-04a1bd28964bbf829 \
+  --document-name AWS-StartPortForwardingSessionToRemoteHost \
+  --parameters '{"host":["todo-derecho-vecino-aurora.cluster-cmh6wme8kwix.us-east-1.rds.amazonaws.com"],"portNumber":["5432"],"localPortNumber":["5432"]}'
+```
+
+Esto permitió establecer desde el equipo local una conexión a PostgreSQL a través del puerto local `5432`.
+
+Posteriormente se utilizó:
+
+```bash
+psql -h localhost -p 5432 -U tdv_admin -d tododerechovecino
+```
+
+La conexión fue exitosa.
+
+**Estado: RESUELTO.**
+
+---
+
+# 3. Validación de la base de datos
+
+Una vez dentro de `psql`, se realizaron consultas exclusivamente de lectura para obtener evidencia del estado real de Aurora.
+
+## 3.1. Base de datos y usuario
+
+Se confirmó:
+
+```text
+current_database
+-------------------
+tododerechovecino
+```
+
+y:
+
+```text
+current_user
+--------------
+tdv_admin
+```
+
+## 3.2. Versión de PostgreSQL
+
+La instancia reportó:
+
+```text
+PostgreSQL 16.15 on aarch64-linux, compiled by gcc-10.5.0, 64-bit
+```
+
+## 3.3. Extensión pgvector
+
+Se verificó:
+
+```sql
+SELECT extname, extversion
+FROM pg_extension
+WHERE extname = 'vector';
+```
+
+Resultado:
+
+```text
+extname | extversion
+---------+-----------
+vector  | 0.8.2
+```
+
+Con esto quedó comprobado que la extensión requerida para el almacén vectorial se encuentra instalada.
+
+**Estado: RESUELTO.**
+
+---
+
+# 4. Validación del esquema
+
+La consulta:
+
+```text
+\dt
+```
+
+confirmó la existencia de:
+
+```text
+public | legal_chunks
+public | legal_documents
+```
+
+Posteriormente se inspeccionó la estructura de ambas tablas.
+
+## 4.1. `legal_documents`
+
+La tabla contiene campos para:
+
+* identificación del documento;
+* nombre;
+* tipo documental;
+* autoridad;
+* fuente;
+* fecha de publicación;
+* fecha de reforma;
+* versión;
+* referencia al objeto almacenado en S3;
+* hash del documento;
+* fechas de creación y actualización.
+
+## 4.2. `legal_chunks`
+
+La tabla contiene campos para:
+
+* identificación del fragmento;
+* documento al que pertenece;
+* índice del fragmento;
+* título;
+* capítulo;
+* sección;
+* artículo;
+* fracción;
+* cita legal;
+* texto;
+* metadatos `JSONB`;
+* fecha de creación.
+
+## 4.3. Relación entre documentos y fragmentos
+
+Se confirmó la existencia de la relación:
+
+```text
+legal_chunks.document_id
+        ↓
+legal_documents.id
+```
+
+mediante una llave foránea con:
+
+```text
+ON DELETE CASCADE
+```
+
+También se confirmó la restricción:
+
+```text
+UNIQUE (document_id, chunk_index)
+```
+
+Esto evita que un mismo documento tenga dos fragmentos con el mismo índice.
+
+**Estado: RESUELTO.**
+
+---
+
+# 5. Comprobación de datos de prueba
+
+Durante la construcción del esquema se habían utilizado datos ficticios para probar las relaciones y restricciones de la base.
+
+Antes de cerrar la Semana 3 se verificó que esos datos hubieran sido eliminados.
+
+Se ejecutó:
+
+```sql
+SELECT
+    (SELECT COUNT(*) FROM legal_documents) AS documentos,
+    (SELECT COUNT(*) FROM legal_chunks) AS fragmentos;
+```
+
+Resultado:
+
+```text
+documentos | fragmentos
+-----------+-----------
+0          | 0
+```
+
+Por lo tanto, la base queda preparada para recibir posteriormente los datos reales del corpus jurídico.
+
+**Estado: RESUELTO.**
+
+---
+
+# 6. Validación de Terraform
+
+Después del despliegue se ejecutó:
+
+```bash
+terraform plan
+```
+
+Terraform respondió:
+
+```text
+No changes. Your infrastructure matches the configuration.
+```
+
+Esto confirmó que no había diferencias pendientes entre la infraestructura declarada y los recursos desplegados.
+
+La infraestructura de esta etapa quedó incorporada al repositorio mediante:
+
+```text
+terraform/access.tf
+terraform/aurora.tf
+terraform/plan-semana3.txt
+```
+
+**Estado: RESUELTO.**
+
+---
+
+# 7. Versionamiento y publicación en GitHub
+
+Al intentar publicar los cambios mediante:
+
+```bash
+git push origin mvp-estancia
+```
+
+Git rechazó inicialmente la operación porque GitHub contenía un commit que no se encontraba en la copia local.
+
+Se ejecutó:
+
+```bash
+git fetch origin
+```
+
+y se comprobó que el cambio remoto correspondía únicamente a:
+
+```text
+f2da9fe Revise README description for clarity on legal tool
+```
+
+El cambio afectaba solamente:
+
+```text
+README.md
+```
+
+Para evitar sobrescribir trabajo remoto se utilizó:
+
+```bash
+git pull --rebase origin mvp-estancia
+```
+
+El rebase integró correctamente el cambio remoto y reaplicó los tres commits locales de esta etapa.
+
+Posteriormente se realizó nuevamente:
+
+```bash
+git push origin mvp-estancia
+```
+
+El envío terminó correctamente:
+
+```text
+f2da9fe..38284e3  mvp-estancia -> mvp-estancia
+```
+
+La rama `mvp-estancia` quedó publicada y sincronizada con GitHub.
+
+El commit principal de infraestructura de Semana 3 quedó como:
+
+```text
+38284e3 feat(terraform): semana 3 infraestructura de base de datos
+```
+
+**Estado: RESUELTO.**
+
+---
+
+# 8. Estado de los temas principales
+
+| Tema                                          | Estado                                  |
+| --------------------------------------------- | --------------------------------------- |
+| Aurora PostgreSQL Serverless v2               | ✅ Resuelto                              |
+| Configuración Single-AZ                       | ✅ Resuelto                              |
+| PostgreSQL 16.15                              | ✅ Verificado                            |
+| `pgvector`                                    | ✅ Instalado y verificado, versión 0.8.2 |
+| Base `tododerechovecino`                      | ✅ Verificada                            |
+| Usuario `tdv_admin`                           | ✅ Verificado                            |
+| Recuperación de contraseña                    | ✅ Resuelto mediante Secrets Manager     |
+| Acceso mediante SSM                           | ✅ Resuelto                              |
+| Conexión mediante `psql`                      | ✅ Verificada                            |
+| Tabla `legal_documents`                       | ✅ Creada y verificada                   |
+| Tabla `legal_chunks`                          | ✅ Creada y verificada                   |
+| Relación documento → fragmentos               | ✅ Verificada                            |
+| Restricción de índices de fragmentos          | ✅ Verificada                            |
+| Datos ficticios residuales                    | ✅ Eliminados                            |
+| Terraform                                     | ✅ Validado sin cambios pendientes       |
+| Infraestructura versionada                    | ✅                                       |
+| GitHub actualizado                            | ✅                                       |
+| Corpus jurídico MVP actualizado a versión 2.9 | ✅                                       |
+| Ingesta real del corpus                       | ⏳ Pendiente, corresponde a Semana 4     |
+| Generación de embeddings                      | ⏳ Pendiente, corresponde a Semana 4     |
+| Carga de embeddings en `pgvector`             | ⏳ Pendiente, corresponde a Semana 4     |
+| Consultas de similitud                        | ⏳ Pendiente, corresponde a Semana 4     |
+| Evaluación del retriever                      | ⏳ Pendiente, corresponde a Semana 5     |
+
+---
+
+# 9. Pendientes que se dejan abiertos
+
+Los siguientes asuntos quedan deliberadamente pendientes y **no se consideran fallas de la Semana 3**.
+
+## 9.1. Ingesta del corpus jurídico
+
+La base está preparada, pero todavía no se ha realizado la carga definitiva de los 1,235 fragmentos del corpus MVP.
+
+Esto corresponde a la Semana 4.
+
+## 9.2. Generación de embeddings
+
+Todavía no se ha realizado la vectorización definitiva del corpus.
+
+También corresponde a la Semana 4.
+
+## 9.3. Pruebas de similitud vectorial
+
+La extensión `pgvector` está instalada, pero todavía no se ha realizado la prueba completa de recuperación semántica sobre el corpus real.
+
+Queda para la siguiente etapa de desarrollo.
+
+## 9.4. Evaluación formal del retriever
+
+La evaluación mediante preguntas de prueba, criterio de corrección y métrica corresponde a la Semana 5.
+
+No debe adelantarse como requisito de cierre de Semana 3.
+
+---
+
+# 10. Pendiente especial: control de costos de AWS
+
+Durante esta segunda parte surgió una necesidad operativa importante: **evitar que los recursos de AWS permanezcan generando cargos cuando no se esté trabajando activamente en el proyecto**.
+
+Este tema se identificó, pero deliberadamente **no se modificó todavía la infraestructura de Semana 3** para resolverlo.
+
+La razón es mantener separado el entregable de la semana de una estrategia posterior de operación y ahorro.
+
+Queda pendiente diseñar y documentar un procedimiento seguro que permita:
+
+1. trabajar con los recursos de AWS cuando sean necesarios;
+2. detener o eliminar los recursos que generen cargos cuando no se utilicen;
+3. conservar los datos necesarios para poder continuar posteriormente;
+4. evitar borrar accidentalmente infraestructura o información requerida por el proyecto;
+5. definir qué recursos pueden detenerse, cuáles deben conservarse y cuáles conviene recrear mediante Terraform;
+6. determinar qué componentes pueden continuar generando costos aunque una parte de la infraestructura se encuentre detenida.
+
+Este punto será tratado **después de cerrar formalmente el reporte de Semana 3**, como una actividad adicional de operación y control de costos.
+
+**Estado: PENDIENTE.**
+
+---
+
+# 11. Pendientes operativos para continuar el proyecto
+
+Al retomar el proyecto, la secuencia prevista es:
+
+### Primero
+
+Cerrar y entregar el reporte de Semana 3.
+
+### Después
+
+Resolver la estrategia de operación de AWS para evitar cargos innecesarios durante los periodos en que no se trabaje en el proyecto.
+
+### Posteriormente
+
+Iniciar la Semana 4:
+
+**Ingesta y vectorización del corpus jurídico.**
+
+El objetivo será cargar el corpus seleccionado, generar sus embeddings e incorporarlos a `pgvector`, dejando funcionando consultas de similitud en las pruebas correspondientes.
+
+---
+
+# 12. Estado de cierre de esta segunda parte
+
+La segunda parte de la Semana 3 queda **cerrada técnicamente**.
+
+La infraestructura está desplegada, la base de datos es accesible, PostgreSQL y `pgvector` fueron verificados, el esquema fue inspeccionado directamente mediante `psql`, los datos de prueba fueron eliminados, Terraform no presenta cambios pendientes y los commits fueron publicados correctamente en GitHub.
+
+Lo que queda pendiente ya no corresponde a problemas abiertos de la infraestructura de Semana 3, sino a:
+
+* la preparación del reporte formal;
+* el control operativo de costos de AWS;
+* y las actividades de ingesta y vectorización correspondientes a la Semana 4.
+
+La infraestructura queda, por tanto, en condiciones de ser utilizada como base para la siguiente etapa del proyecto.
+
+## Cierre operativo de la infraestructura DEV — Semana 3
+
+### Decisión de arquitectura
+
+Durante la semana 3 se completó la separación de la infraestructura Terraform en dos ambientes con responsabilidades diferentes:
+
+* `terraform/base`: infraestructura persistente.
+* `terraform/dev`: infraestructura efímera para desarrollo y pruebas.
+
+La separación se realizó para que el ambiente de desarrollo pueda destruirse completamente cuando no se esté utilizando, sin afectar los recursos que deben permanecer disponibles, principalmente el almacenamiento S3 de los documentos jurídicos y el rol IAM utilizado para despliegues.
+
+La decisión es consistente con el alcance del proyecto, que establece que la infraestructura utilizada debe quedar definida en Terraform y que el sistema debe poder reconstruirse a partir del código.
+
+### Migración del estado Terraform
+
+Antes de modificar el estado se realizaron respaldos del estado original.
+
+Posteriormente se migraron los recursos correspondientes a los estados independientes de `terraform/base` y `terraform/dev`.
+
+Después de la migración se verificó que:
+
+```text
+terraform/base plan → No changes
+terraform/dev plan  → No changes
+```
+
+El estado Terraform de la raíz quedó vacío, mientras que los recursos fueron administrados desde sus respectivos directorios.
+
+### Protección de infraestructura persistente
+
+Se agregó `prevent_destroy = true` al bucket S3 de documentos jurídicos y al rol IAM de despliegue.
+
+La intención es evitar que una operación destinada al ambiente DEV pueda destruir accidentalmente infraestructura persistente.
+
+El bucket S3 se mantiene como almacenamiento de los documentos fuente del corpus jurídico. Aurora no debe considerarse el almacenamiento permanente de esos documentos.
+
+### Validación del ciclo de vida DEV
+
+Se implementaron scripts operativos para controlar el ambiente:
+
+```text
+./terraform/dev-up.sh
+./terraform/dev-status.sh
+./terraform/dev-down.sh
+```
+
+Se ejecutó el ciclo completo de operación.
+
+Primero se destruyó el ambiente DEV y se verificó la eliminación de sus recursos. Posteriormente se reconstruyó desde Terraform y se verificó nuevamente su funcionamiento.
+
+La reconstrucción creó nuevamente:
+
+* Aurora PostgreSQL Serverless v2;
+* instancia Aurora;
+* VPC y subredes privadas;
+* Security Groups;
+* EC2 temporal `admin_test`;
+* roles e instance profile necesarios para administración;
+* VPC endpoints de Systems Manager.
+
+Después de las pruebas se volvió a ejecutar `dev-down`.
+
+En la última ejecución se destruyeron los 20 recursos administrados por `terraform/dev`.
+
+Posteriormente se verificó:
+
+```text
+terraform/base plan → No changes
+```
+
+Esto confirmó que la destrucción completa de DEV no afecta la infraestructura persistente.
+
+### Pruebas de Aurora
+
+La instancia reconstruida utilizó:
+
+```text
+Aurora PostgreSQL Serverless v2
+PostgreSQL 16.15
+Single-AZ
+min_capacity = 0.5 ACU
+max_capacity = 2 ACU
+Puerto = 5432
+Acceso público = No
+Cifrado = Habilitado
+```
+
+Se verificó el acceso mediante una instancia EC2 temporal y AWS Systems Manager.
+
+La conectividad TCP desde `admin_test` hacia Aurora fue comprobada satisfactoriamente.
+
+Posteriormente se estableció un túnel SSM desde el equipo local y se realizó una conexión mediante `psql`.
+
+Se verificó:
+
+* nombre de la base de datos;
+* usuario actual;
+* versión de PostgreSQL;
+* conectividad con Aurora.
+
+### Gestión de credenciales
+
+Se confirmó que Aurora utiliza:
+
+```hcl
+manage_master_user_password = true
+```
+
+Por lo tanto, la contraseña maestra no se almacena directamente en Terraform.
+
+AWS Secrets Manager administra la credencial de Aurora.
+
+No fue necesario modificar Terraform para permitir la reconstrucción del ambiente. La intervención manual solamente es necesaria cuando se requiere acceder administrativamente a PostgreSQL.
+
+Esto establece una distinción importante entre:
+
+```text
+Reconstrucción de infraestructura
+        ↓
+Automatizada mediante Terraform
+
+Acceso administrativo a PostgreSQL
+        ↓
+Requiere recuperar el secreto vigente de AWS Secrets Manager
+```
+
+Después de destruir y reconstruir Aurora no debe suponerse que una contraseña utilizada anteriormente continúa vigente.
+
+### Verificación de pgvector
+
+Después de la reconstrucción de Aurora se creó la extensión PostgreSQL:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS vector;
+```
+
+La extensión quedó verificada con versión:
+
+```text
+vector | 0.8.2
+```
+
+La base de datos todavía no contiene el esquema definitivo ni las tablas del corpus, por lo que `\dt` no mostró relaciones.
+
+Esto se considera normal en esta etapa.
+
+La inicialización del esquema, chunking, embeddings y carga del corpus quedan como trabajo posterior de la etapa de ingesta y vectorización.
+
+### Problema identificado y solución
+
+El principal problema operativo detectado fue que Aurora, al ser parte de la infraestructura efímera, pierde su estado de base de datos al ser destruida.
+
+La solución arquitectónica adoptada es no depender de Aurora como repositorio permanente de los documentos fuente.
+
+La estrategia será:
+
+```text
+S3
+ ↓
+documentos jurídicos fuente
+ ↓
+chunking
+ ↓
+embeddings
+ ↓
+Aurora + pgvector
+```
+
+De esta forma, Aurora puede reconstruirse y posteriormente volver a poblarse a partir del corpus almacenado en S3.
+
+### Resultado
+
+Se considera validada la separación entre infraestructura persistente y efímera.
+
+El ambiente DEV puede:
+
+```text
+crear → probar → destruir → reconstruir
+```
+
+sin afectar los recursos persistentes de BASE.
+
+El ambiente queda apagado al finalizar esta etapa para evitar mantener recursos AWS innecesarios mientras no se desarrolla.
+
+### Estado frente al cronograma
+
+La infraestructura correspondiente a la semana 3 quedó desplegable y accesible desde el entorno de prueba, incluyendo Aurora PostgreSQL Serverless v2 y pgvector.
+
+La infraestructura puede reconstruirse desde Terraform.
+
+Queda pendiente para la siguiente etapa:
+
+* definición/implementación del esquema de datos;
+* extracción y chunking del corpus;
+* generación de embeddings;
+* carga de documentos en pgvector;
+* pruebas de consultas de similitud.
+
+Esto corresponde al objetivo de ingesta y vectorización previsto para la siguiente etapa del cronograma.
+
+

@@ -69,3 +69,34 @@ resource "aws_rds_cluster_instance" "aurora" {
     Project = "todo-derecho-vecino"
   }
 }
+
+output "aurora_cluster_endpoint" {
+  description = "Endpoint del cluster Aurora PostgreSQL"
+  value       = aws_rds_cluster.aurora.endpoint
+}
+
+output "aurora_reader_endpoint" {
+  description = "Endpoint de lectura del cluster Aurora PostgreSQL"
+  value       = aws_rds_cluster.aurora.reader_endpoint
+}
+
+output "aurora_port" {
+  description = "Puerto PostgreSQL de Aurora"
+  value       = aws_rds_cluster.aurora.port
+}
+
+output "aurora_database_name" {
+  description = "Nombre de la base de datos Aurora"
+  value       = aws_rds_cluster.aurora.database_name
+}
+
+output "admin_test_instance_id" {
+  description = "ID de la instancia EC2 temporal de administración"
+  value       = aws_instance.admin_test.id
+}
+
+output "vpc_id" {
+  description = "ID de la VPC temporal"
+  value       = aws_vpc.main.id
+}
+
