@@ -4,3 +4,16 @@
 *.tfstate.*
 crash.log
 crash.*.log
+
+# Entorno virtual de Python
+.venv/
+
+# Cachés y archivos compilados de Python
+**pycache**/
+*.py[cod]
+
+# Archivos temporales de editores ofimáticos
+.~lock.*#
+
+# Resultados locales de embeddings
+salida/
