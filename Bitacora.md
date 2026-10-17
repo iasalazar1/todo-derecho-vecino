@@ -1062,6 +1062,106 @@ Queda pendiente para la siguiente etapa:
 
 Esto corresponde al objetivo de ingesta y vectorización previsto para la siguiente etapa del cronograma.
 
-## Actualización de seguimiento — 10 de octubre de 2026 
+## Actualización de seguimiento — 12 de octubre de 2026
+
+### Preparación local del cargador de embeddings
+
+Esta actualización registra los avances posteriores a la preparación del esquema. El usuario confirma que DEV fue verificado y que Aurora se apagó nuevamente al terminar; por tanto, el estado operativo actual es DEV apagado intencionalmente. No se encendió AWS ni se escribieron datos en Aurora durante esta sesión.
+
+#### Trabajo realizado y archivos
+
+- Se añadió `scripts/load_embeddings.py`, cuyo propósito es validar e ingerir en Aurora los documentos, los chunks existentes y los embeddings ya generados. No vuelve a generar vectores ni introduce otro proceso de chunking.
+- El cargador identifica documentos mediante la ruta del JSON de chunks y vincula cada embedding usando el archivo fuente, `chunk_id` y la posición determinista del chunk. Conserva los metadatos jurídicos y `needs_review`.
+- Antes de cualquier conexión valida que cada embedding corresponda a un segmento del corpus configurado, que el texto coincida con el segmento, que el modelo sea `amazon.titan-embed-text-v2:0`, que existan 1024 valores numéricos finitos y que no haya registros duplicados.
+- Por defecto el cargador solo valida y muestra conteos. Para ejecutar escrituras exige `--apply`; usa `psql`, `PGPASSFILE`/`.pgpass` con permisos restringidos y no acepta contraseñas como argumentos.
+- El modo piloto se habilita explícitamente con `--allow-incomplete`; es incremental, no elimina embeddings existentes y aborta si detecta que el corpus fuente ya cargado tiene contenido distinto. La carga completa rechaza segmentos faltantes y sincroniza chunks/embeddings de los documentos incluidos en la configuración, dentro de una transacción.
+- Se actualizó `README.md` con los comandos para validar/cargar el piloto y generar, validar y cargar el JSONL completo. También recuerda que los datos de Aurora DEV se pierden al destruir el entorno y que deben conservarse los artefactos fuente.
+- Se generó `salida/embeddings_piloto_25bc7c1d8a1e.jsonl`, artefacto local ignorado por Git, con un embedding del chunk `25bc7c1d8a1e` (Ley de Desarrollo Urbano, artículo 12). Su propósito es probar el formato y el camino de ingesta con un solo segmento sin generar el corpus completo.
+
+#### Validaciones locales
+
+- El `dry-run` de `generar_embeddings_persistente.py --limit 0 --dry-run` encontró los cinco documentos configurados, 1,235 chunks y 1,369 segmentos estimados; no llamó a Bedrock ni creó vectores.
+- El piloto generó correctamente un vector de 1024 dimensiones. El cargador lo validó localmente con `--allow-incomplete`: encontró 1 embedding y 1,368 segmentos todavía faltantes. Sin `--allow-incomplete`, rechazó el archivo parcial, como medida para impedir una carga piloto accidental como carga completa.
+- El cargador no se conectó a PostgreSQL, no ejecutó `--apply` y no modificó Aurora. `problems` no reportó errores en `scripts/load_embeddings.py` y `git diff --check` pasó.
+- Se confirmó que los 1,235 chunks actuales están marcados `needs_review=true`. El procesador usa esa marca para metadatos inferidos que requieren confirmación humana; por decisión del usuario se conservarán las marcas y se incluirán los registros durante esta etapa, no se filtrarán automáticamente.
+- Existen dos vectores locales anteriores con modelo/dimensión correctos, pero corresponden a chunks de solo 10 caracteres; no se usarán como evidencia de una prueba semántica útil. Se mantuvieron sin cambios.
+
+#### Pendiente — secuencia para completar la prueba de similitud
+
+1. Mantener Aurora apagada mientras se termina de preparar el JSONL completo con `generar_embeddings_persistente.py --limit 0 --output salida/embeddings_mvp_completos.jsonl`; revisar el resultado antes de cargarlo. El corpus completo requiere hasta 1,369 llamadas de generación; el piloto ya realizado fue una llamada adicional independiente.
+2. Validar el archivo completo con `scripts/load_embeddings.py` sin `--allow-incomplete` y sin `--apply`; exigir cero segmentos faltantes.
+3. Cuando el usuario decida trabajar en AWS, encender DEV mediante `terraform/dev-up.sh`, revisar el plan y confirmar la conectividad. El usuario informa que el esquema fue creado/verificado previamente; como DEV se apagó después, volver a comprobar el esquema tras el próximo encendido, aplicándolo con el inicializador solo si hace falta.
+4. Abrir el túnel SSM y cargar primero el piloto con `--allow-incomplete --apply`; revisar los conteos y el resultado de una consulta de cercanía antes de iniciar una carga completa.
+5. Para la carga completa, ejecutar el cargador sobre `embeddings_mvp_completos.jsonl` sin `--allow-incomplete` y con `--apply`; registrar conteos de documentos, chunks y segmentos. La prueba de similitud debe usar un embedding de consulta generado por el mismo modelo y dimensión, y mostrar resultados con citas legales.
+6. Antes de apagar DEV, conservar el JSONL completo y registrar evidencia sin secretos. El cargador se preparó localmente; la escritura real y la búsqueda vectorial continúan pendientes.
+
+## Actualización de seguimiento — 10 de octubre de 2026
 ### Esquema SQL, inicializador y preparación de la prueba de despliegue 
 Esta nota distingue los cambios locales de las pruebas que siguen pendientes. Al cierre de esta actualización, Aurora no existe porque `terraform/dev` está apagado intencionalmente; este estado es esperado y no debe registrarse como fallo de infraestructura. ### Trabajo realizado - Se definió `sql/001_initial_schema.sql` con `legal_documents`, `legal_chunks` y `legal_embeddings`. - Se conserva `legal_chunks` como tabla de fragmentos del procesador existente; no se crea un sistema paralelo de chunking. - `legal_embeddings` relaciona embedding, chunk y documento mediante una clave foránea compuesta; `embedding` se define como `VECTOR(1024)`. - Se conserva `UNIQUE(document_id, chunk_index)` y `UNIQUE(legal_chunk_id, segment_index)`. No se presupone que `chunk_id` sea único por documento. - Se añadieron índices B-tree/GIN para consulta de documento y metadatos. HNSW queda pospuesto hasta después de la carga y de evaluar recursos en Aurora Serverless v2 con máximo configurado de 2 ACU. - Se preparó `scripts/init_db.sh` para consultar Aurora, obtener `admin_test_instance_id` desde Terraform, comprobar SSM, recuperar credenciales desde Secrets Manager, abrir túnel privado, ejecutar SQL y verificar extensión/tablas/tipo vectorial. - `bash -n scripts/init_db.sh` pasó; `git diff --check` no reportó errores; el archivo tiene permisos `700`. - El paso de contraseña a Python se cambió para evitar incluirla en los argumentos del proceso. Sigue siendo información sensible: no imprimirla ni guardarla en Git. - Los outputs necesarios ya están declarados en `terraform/dev/aurora.tf`: `aurora_cluster_endpoint`, `aurora_reader_endpoint`, `aurora_port`, `aurora_database_name`, `admin_test_instance_id` y `vpc_id`. No crear un `outputs.tf` duplicado. - Se inspeccionó `terraform/dev-up.sh`: `init`, `plan`, solicitud explícita de `APPLY`, `apply -auto-approve` y outputs. No se ejecutó en esta actualización. ### Decisiones vigentes 1. `terraform/base` es persistente; `terraform/dev` es efímero. No destruir ni modificar `base` durante pruebas de DEV. 2. Aurora puede estar destruido cuando DEV está apagado. Es un estado intencional y no un incidente por sí mismo. 3. S3 es la fuente persistente para reconstruir documentos y artefactos; los datos dentro de Aurora se pierden al destruir DEV. 4. La inicialización del esquema no equivale a ingesta: no carga ni regenera documentos, chunks o embeddings. 5. Modelo de embeddings acordado: `amazon.titan-embed-text-v2:0`, 1024 dimensiones. Los artefactos existentes en S3 no deben regenerarse para resolver problemas de esquema. 6. La ingesta y consultas de similitud corresponden a Semana 4; evaluación del retriever a Semana 5. 7. PPCU Tabla 20 y PDDU Cuadros 15/16 requieren revisión separada. No agregar aún `legal_tables`. ### Estado: comprobado y pendiente **Comprobado localmente:** el SQL existe; el inicializador existe y es ejecutable; `bash -n` y `git diff --check` pasan; los outputs de Terraform están declarados. **Pendiente de prueba real:** DEV sigue apagado intencionalmente y Aurora no existe al cierre de esta actualización; no se ejecutó el encendido de prueba; no se ejecutó el SQL en una instancia nueva; no se reconfirmó `vector` tras reconstrucción; no se probó el túnel SSM + `psql`; no se cargaron los 1,235 chunks ni los 1,369 segmentos; no se ejecutó búsqueda semántica; no se hizo commit ni push de los archivos locales nuevos. ### Matriz de fuentes de fallo | Punto | Posible fallo | Respuesta de diagnóstico | |---|---|---| | Git | Rama equivocada o cambios no identificados | Revisar rama y `git status`; no hacer `git add .` automáticamente | | Terraform | Estado ausente, obsoleto o de otro backend/workspace | Confirmar directorio/workspace/backend y outputs; nunca editar JSON de state manualmente | | Plan | Cambios inesperados o afectación a `base` | No escribir `APPLY`; revisar recursos y acciones del plan | | Aurora | Cluster ausente o no `available` | Diferenciar DEV apagado de fallo de despliegue; revisar estado y outputs | | Secrets Manager | `MasterUserSecret` ausente o permisos insuficientes | Revisar configuración/IAM sin mostrar el secreto | | SSM | Instancia no `Online` | Revisar perfil IAM, SSM Agent, endpoints, DNS, rutas y SG | | Red | EC2 no alcanza Aurora por TCP 5432 | Revisar rutas privadas y regla de entrada entre SGs | | Herramientas | Falta AWS CLI, Terraform, `psql`, `pg_isready`, Python o plugin SSM | Validar dependencias antes de abrir túnel | | Túnel | Puerto 15432 ocupado o sesión termina | Identificar proceso y revisar `/tmp/tdv-init-db-ssm.log` | | pgvector | Extensión no disponible/autorizada tras reconstrucción | Verificar compatibilidad con la versión desplegada; no asumir resultados históricos | | SQL | Tablas previas incompatibles | `IF NOT EXISTS` no migra; inspeccionar catálogo antes de modificar/borrar | | Embeddings | Modelo o dimensión no coincide | Confirmar modelo, 1024 dimensiones y correspondencia segmento/chunk/documento | | Credenciales | Secretos expuestos en terminal/logs | No imprimir valores sensibles ni compartir `SecretString` | | Costos | DEV queda encendido | Registrar encendido/apagado y comprobar estado final | | Git | Se incluyen scripts temporales o archivos sensibles | Revisar `.gitignore` y los dos scripts de generación antes de stage/commit | ### Pendientes inmediatos 1. Revisar el diff de `.gitignore`. 2. Inspeccionar `generar_embeddings.py` y `generar_embeddings_persistente.py` antes de decidir si se versionan. 3. Revisar archivos de `sql/` y `scripts/`; no hacer commit/push todavía. 4. Preparar y ejecutar la prueba controlada solo después de revisar el plan y recibir autorización explícita. 5. Registrar outputs, estado de Aurora/SSM, versión de `vector`, tablas y tipo `vector(1024)`. 6. Decidir el apagado de DEV con autorización y confirmar que `terraform/base` permanece intacto. 7. Revisar las tablas normativas especiales antes de cerrar la preparación de ingesta. ### Evaluación del cronograma El diseño y la preparación local están avanzados, pero la Semana 3 no se considera completada por validar la sintaxis únicamente. Se requiere una prueba real de base desplegada y accesible con `pgvector` y esquema verificados. La ingesta permanece en Semana 4. 
+
+## Semana 4. Ingesta, vectorización y consultas de similitud
+
+**Fecha de cierre:** 16 de octubre de 2026
+**Estado:** Entregable técnico de la semana completado.
+
+### Objetivo
+
+Cargar el corpus jurídico preparado en Aurora PostgreSQL con pgvector y comprobar que se pueden recuperar fragmentos mediante consultas de similitud ejecutadas desde el entorno local.
+
+### Trabajo realizado
+
+- Se validó el conjunto de cinco instrumentos jurídicos del MVP.
+- Se validaron 1,235 chunks fuente y 1,369 segmentos de embeddings.
+- Se comprobó que no faltaban segmentos esperados en el archivo de embeddings.
+- Se inicializó el esquema de la base de datos: `legal_documents`, `legal_chunks` y `legal_embeddings`.
+- Se cargaron los cinco documentos, los 1,235 chunks y los 1,369 embeddings en Aurora PostgreSQL.
+- Se verificó que todos los vectores tienen 1,024 dimensiones.
+- Se comprobó que los 1,369 registros de embeddings y los 1,235 chunks conservan `needs_review = true`.
+- Se ejecutaron consultas de similitud desde el entorno local, generando el vector de la pregunta con `amazon.titan-embed-text-v2:0` y consultando Aurora a través de un túnel privado de AWS Systems Manager (SSM).
+
+### Resultados de las pruebas
+
+La búsqueda independiente sobre el Programa Parcial de Desarrollo Urbano de la colonia Hipódromo recuperó, entre otros resultados, la sección 29.90, relacionada con condiciones de convivencia y permisos provisionales para ocupar la vía pública, y la sección 6.3, con antecedentes del desarrollo urbano de la colonia.
+
+La búsqueda independiente sobre la Ley de Establecimientos Mercantiles para la Ciudad de México recuperó disposiciones vinculadas con:
+
+- Artículo 10, fracción XV: ruido al exterior que afecte los derechos de terceros.
+- Artículo 30: límites de emisiones sonoras dentro de los establecimientos.
+- Artículo 10, fracción IX: exhibición del horario de servicio y otra información.
+- Artículo 15: restricciones para la colocación de enseres en determinados espacios.
+- Artículo 29: prohibición de la modalidad de barra libre y promociones similares.
+
+Los resultados muestran que pgvector ordena fragmentos por similitud semántica. Sin embargo, la cercanía vectorial no demuestra por sí sola la pertinencia jurídica ni la aplicabilidad de una disposición a un predio o establecimiento concreto. La consulta amplia sobre uso de suelo, horarios, ruido y molestias vecinales tampoco garantizó que aparecieran resultados de todos los instrumentos solicitados en una sola lista.
+
+### Estado de los datos
+
+| Elemento | Resultado |
+|---|---:|
+| Instrumentos cargados | 5 |
+| Chunks fuente | 1,235 |
+| Segmentos de embeddings | 1,369 |
+| Dimensión mínima y máxima de los vectores | 1,024 |
+| Embeddings pendientes de revisión jurídica | 1,369 |
+| Chunks pendientes de revisión jurídica | 1,235 |
+
+### Limitaciones conocidas
+
+- La carga realizada se alimentó desde el archivo local `salida/embeddings_mvp.jsonl`. Aunque los artefactos también están almacenados en S3, el cargador utilizado no implementa todavía una ingesta directa desde S3.
+- Las consultas ejecutadas fueron pruebas técnicas de similitud; todavía no existe un retriever evaluado formalmente con un conjunto fijo de preguntas.
+- No se ha calculado precisión, recall ni una calificación manual de recuperación correcta.
+- Los resultados jurídicos siguen pendientes de revisión; no se modificó el indicador `needs_review`.
+- No se modificó el modelo de embeddings ni se regeneraron los vectores.
+
+### Criterio de cierre
+
+Se considera cumplido el entregable de la Semana 4: el corpus está cargado e indexado en Aurora PostgreSQL con pgvector y se verificaron consultas de similitud desde el entorno local.
+
+Este cierre acredita el funcionamiento técnico inicial de la búsqueda vectorial, no la calidad jurídica definitiva de las respuestas.
+
+### Siguiente etapa: Semana 5. Motor de recuperación (retriever)
+
+- Implementar una función reutilizable de recuperación sobre el corpus indexado.
+- Definir un conjunto fijo de preguntas de prueba y los fragmentos o fundamentos esperados para cada pregunta.
+- Establecer un criterio explícito para considerar correcta una recuperación.
+- Ejecutar las pruebas y documentar una métrica real, mediante precisión/recall o calificación manual.
+- Registrar los errores de recuperación y las limitaciones identificadas.
