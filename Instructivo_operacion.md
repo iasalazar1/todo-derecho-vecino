@@ -837,3 +837,154 @@ Los registros con `needs_review = true` continúan pendientes de revisión. No d
 ## Continuidad: Semana 5
 
 La siguiente etapa debe implementar un retriever reutilizable, definir un conjunto fijo de preguntas de prueba, establecer qué se considera una recuperación correcta y evaluar los resultados con una métrica documentada. No se debe declarar validada la calidad jurídica hasta completar esa evaluación.
+
+
+# 22. Reconstruir DEV y volver a poblar Aurora después de una destrucción
+
+## 22.1 Principio fundamental
+
+`terraform/dev` es efímero. **`./terraform/dev-up.sh` reconstruye infraestructura, no restaura el contenido de PostgreSQL.** Al ejecutar `./terraform/dev-down.sh` se pierden las tablas y los datos que existían dentro de Aurora, incluidos documentos, chunks, embeddings y la tabla estructurada `land_use_compatibility`.
+
+Los documentos y artefactos fuente deben mantenerse fuera de Aurora. El bucket de `terraform/base` es persistente. El archivo de embeddings que se usó para la carga completa se ha almacenado en S3 como `mvp/embeddings/embeddings_mvp.jsonl`; confirmar el nombre exacto del bucket mediante Terraform/AWS antes de copiarlo. No asumir que un archivo local dentro de `salida/` sobrevivirá a una limpieza del equipo.
+
+## 22.2 Orden recomendado de reconstrucción
+
+Realizar estos pasos desde la raíz del repositorio y en la rama `mvp-estancia`:
+
+1. Activar el entorno virtual local y comprobar que están presentes los archivos de corpus, configuración, scripts de carga y el artefacto de embeddings esperado.
+2. Ejecutar `./terraform/dev-up.sh`. Revisar el plan y escribir `APPLY` solo si los recursos corresponden a `terraform/dev`; no aceptar un plan que modifique o destruya `terraform/base`.
+3. Ejecutar `./terraform/dev-status.sh` y comprobar que Aurora esté `available` y que `admin_test` esté registrada `Online` en SSM.
+4. Inicializar o verificar el esquema mediante `scripts/init_db.sh`. Este paso crea/verifica la extensión `vector` y las tablas base `legal_documents`, `legal_chunks` y `legal_embeddings`; **no carga el corpus ni los embeddings**.
+5. Obtener el archivo de embeddings persistido en S3 si no está disponible localmente. El nombre de objeto utilizado en esta etapa fue `mvp/embeddings/embeddings_mvp.jsonl`. Consultar el bucket actual de `terraform/base`; no copiar desde un bucket o endpoint supuesto.
+6. Activar `.venv`, definir `PGPASSFILE` y establecer el túnel SSM según las secciones anteriores. Mantener el túnel abierto mientras se ejecutan las cargas y pruebas.
+7. Ejecutar primero el modo de validación del cargador `scripts/load_embeddings.py`, siguiendo la sintaxis vigente de `README.md`. Revisar que no falten segmentos, que el modelo sea `amazon.titan-embed-text-v2:0`, que la dimensión sea 1024 y que los conteos correspondan al corpus esperado.
+8. Solo después de que la validación sea satisfactoria, ejecutar la carga real con `--apply` usando la sintaxis documentada en `README.md`. El cargador inserta documentos, chunks y segmentos vectoriales en las tablas correspondientes. No usar `--allow-incomplete` para una carga completa; esa opción se reservó para el piloto parcial.
+9. Volver a cargar la Tabla 22 en `land_use_compatibility` con `scripts/load_land_use_compatibility.py`, después de verificar que el JSON fuente correcto está presente. Ejecutar primero la validación sin `--apply`; aplicar solo después de revisar el resultado. La importación de esa tabla es independiente de la carga de embeddings.
+10. Ejecutar las pruebas del recuperador de la sección 23 y comprobar los conteos de documentos, chunks, embeddings y celdas estructuradas antes de continuar.
+
+No regenerar embeddings por el solo hecho de reconstruir Aurora. Primero recuperar el artefacto persistido y validar su correspondencia con los chunks y el modelo acordados. Si falta o no coincide, detenerse y diagnosticar antes de generar nuevos vectores.
+
+## 22.3 Credenciales y entorno virtual
+
+El cargador y las consultas deben ejecutarse con el entorno virtual activo. Desde una terminal local:
+
+```bash
+cd ~/todo-derecho-vecino
+source .venv/bin/activate
+export PGPASSFILE="$HOME/.pgpass-todo-derecho-vecino"
+```
+
+`PGPASSFILE` debe apuntar a un archivo local protegido que contenga la credencial vigente del entorno reconstruido. Después de destruir/recrear Aurora, no asumir que una contraseña anterior sigue siendo válida. Recuperar la credencial actual desde AWS Secrets Manager siguiendo la sección 7. No imprimir `SecretString`, contraseñas ni contenido de archivos de credenciales. Si el archivo de credenciales aún no se ha recreado, resolver eso antes de iniciar la carga.
+
+El puerto local `15432` debe estar libre y el túnel SSM debe seguir activo. El `dev-up.sh` no mantiene abierto el túnel ni prepara por sí mismo `PGPASSFILE`.
+
+## 22.4 Qué debe existir después de reconstruir y cargar
+
+La última carga completa verificada contenía:
+
+- 5 documentos jurídicos;
+- 1,235 chunks fuente;
+- 1,369 segmentos de embeddings;
+- vectores de 1,024 dimensiones;
+- `needs_review = true` en los chunks y embeddings.
+
+Estos conteos son referencias para comparar, no sustituyen la consulta de verificación real. La tabla `land_use_compatibility` contiene 357 celdas correspondientes a 51 actividades y siete zonificaciones; las 357 permanecen con `needs_review = true`. Si la tabla fue destruida junto con DEV, debe volver a importarse desde el JSON fuente preservado.
+
+## 22.5 Apagado
+
+Antes de apagar DEV, registrar evidencia de las pruebas y comprobar que los artefactos necesarios estén preservados fuera de Aurora. Pedir/obtener autorización explícita para ejecutar `./terraform/dev-down.sh`. No apagar automáticamente al final de una prueba si el usuario no lo ha autorizado. Después verificar DEV apagado y `terraform/base plan` sin cambios.
+
+---
+
+# 23. Pruebas interactivas del recuperador
+
+Se dispone de `scripts/probar_retriever.py` como pequeño ejecutor interactivo. Con DEV reconstruido y cargado, el túnel SSM activo y `.venv` habilitado, ejecutar:
+
+```bash
+python scripts/probar_retriever.py
+```
+
+El script permite elegir entre:
+
+- **Búsqueda semántica:** el usuario escribe libremente una pregunta y se recuperan los fragmentos más similares.
+- **Consulta estructurada de la Tabla 22:** el usuario introduce la actividad y la zonificación (`H`, `HC`, `HO`, `HM`, `HCS`, `E` o `EA`).
+
+La salida se presenta como JSON y conserva el indicador de revisión. La búsqueda semántica necesita permisos de AWS Bedrock para generar el embedding de la pregunta; ambas modalidades necesitan acceso a Aurora mediante el túnel y las credenciales vigentes.
+
+Pruebas rápidas desde la CLI también están disponibles:
+
+```bash
+python retriever.py "¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido afecte a terceros?" --top-k 5
+python retriever.py --activity "Centros nocturnos y discotecas" --zonification H
+```
+
+Resultados semánticos no equivalen a validación jurídica. `pendiente_revision: true` debe conservarse hasta completar la revisión correspondiente.
+
+
+# 24. Evaluación del retriever — Semana 5
+
+## 24.1 Alcance de las pruebas registradas
+
+La evaluación de Semana 5 separa dos vías que no deben confundirse:
+
+- **Consulta estructurada de la Tabla 22:** consulta `land_use_compatibility` por actividad y zonificación. La tabla documentada contiene 357 celdas (51 actividades × 7 zonificaciones); todas conservan `needs_review = true`. Los estados `permitido`, `por validar` y `prohibido` se deben presentar literalmente, con referencia y página.
+- **Recuperación semántica:** recupera fragmentos del corpus a partir de una pregunta y de embeddings. La cercanía vectorial o la posición en el ranking no demuestra que un fragmento sea jurídicamente aplicable.
+
+No se deben combinar los resultados de ambas vías en una sola métrica sin definir previamente qué unidad se evalúa y qué se considera correcto.
+
+## 24.2 Archivos de evaluación
+
+El registro de trabajo de Semana 5 identifica estos archivos locales, cuya presencia debe comprobarse en el repositorio antes de ejecutarlos o versionarlos:
+
+```text
+tests/evaluacion_semana5.json
+scripts/evaluar_semana5.py
+scripts/diagnostico_ranking.py
+```
+
+El ejecutor interactivo se documenta en la sección 23 (`scripts/probar_retriever.py`). Para cualquier prueba semántica se requiere el entorno virtual, permisos de AWS Bedrock para generar el embedding de la consulta, conexión a Aurora por el túnel SSM y credenciales vigentes. La consulta estructurada requiere conexión a Aurora, pero no necesita generar un embedding.
+
+Antes de una ejecución formal, el archivo de casos debe definir por pregunta: texto de entrada, documento o fragmentos esperados y regla de relevancia. Registrar resultados sin cambiar silenciosamente las etiquetas durante la evaluación.
+
+## 24.3 Métrica preliminar y sus límites
+
+Para una pregunta sobre obligaciones de establecimientos mercantiles frente al ruido, se registró una revisión preliminar de los primeros cinco resultados. Se consideraron relevantes dos de los cinco, lo que da `Precision@5 = 2/5 = 0.40` (40 %) **solo para esa pregunta**. No es la métrica global del retriever y no permite afirmar que el sistema alcance 40 % de precisión para el conjunto del corpus.
+
+Se comparó la búsqueda vectorial con el ranking híbrido, cuyo peso textual es 0.08. En esa consulta, los primeros cinco resultados no cambiaron. También se diagnosticó una variante textual OR sobre los mismos 20 candidatos vectoriales; mejoró la posición de algunos candidatos, pero no se incorporó como estrategia general. No cambiar el algoritmo de ranking sin repetir la evaluación sobre el conjunto fijo de preguntas.
+
+Las referencias esperadas para la consulta de ruido fueron el artículo 10, fracción XV, y el artículo 30 de la Ley de Establecimientos Mercantiles para la Ciudad de México. La correspondencia debe verificarse contra el texto fuente antes de utilizarla como fundamento legal definitivo.
+
+## 24.4 Criterio mínimo para cerrar la evaluación
+
+Antes de declarar completa la evaluación de Semana 5:
+
+1. Confirmar que el conjunto de preguntas y resultados esperados está versionado y no cambia durante la corrida evaluada.
+2. Definir de antemano si la unidad relevante es el fragmento, artículo, disposición o documento.
+3. Ejecutar todas las preguntas y conservar la salida sin secretos ni credenciales.
+4. Calcular una métrica sobre el conjunto completo o documentar una calificación manual con el criterio aplicado a cada resultado.
+5. Reportar fallos representativos y límites conocidos.
+6. Mantener `needs_review = true` / `pendiente_revision: true`; la evaluación técnica no sustituye la revisión jurídica.
+
+# 25. Lista de comprobación antes de apagar o destruir DEV/Aurora
+
+`terraform/dev-down.sh` destruye recursos efímeros y puede borrar las tablas y los datos almacenados en Aurora. No ejecutar el apagado final hasta comprobar los puntos siguientes.
+
+## 25.1 Antes del apagado
+
+- [ ] Confirmar que no quedan pruebas que requieran Aurora activa.
+- [ ] Confirmar que los cinco documentos fuente y los JSON de chunks revisados están disponibles localmente y/o en S3.
+- [ ] Confirmar la existencia y legibilidad del archivo completo de embeddings (`salida/embeddings_mvp.jsonl`) y de los JSON/archivos usados para cargar `land_use_compatibility`. No regenerar embeddings si el artefacto existente es el correcto.
+- [ ] Verificar el contenido de S3 con `aws s3api list-objects-v2 --bucket todo-derecho-vecino-857385469837-us-east-1 --output table`. La evidencia disponible enumera los chunks, los textos revisados y `mvp/embeddings/embeddings_mvp.jsonl`; verificar el resultado actual antes de asumir que nada ha cambiado.
+- [ ] Registrar los conteos finales de `legal_documents`, `legal_chunks`, `legal_embeddings` y `land_use_compatibility`, sin guardar credenciales ni imprimir secretos.
+- [ ] Guardar las salidas de evaluación y revisar que los scripts y casos de prueba estén en el árbol de trabajo correcto.
+- [ ] Comprobar que el esquema, las cargas y la tabla estructurada pueden reconstruirse con los scripts documentados. La infraestructura `dev-up.sh` no repuebla la base por sí sola.
+
+## 25.2 Ejecución y verificación
+
+1. Revisar el estado real de Terraform y AWS antes de ejecutar cambios.
+2. Si el usuario autoriza el cierre, seguir el procedimiento ya documentado en las secciones 12 y 17 para destruir DEV. No utilizar un comando de destrucción como método para resolver errores de conexión o credenciales.
+3. Confirmar el resultado de Terraform y verificar que Aurora y los recursos DEV se hayan eliminado.
+4. Verificar por separado que los recursos persistentes de `terraform/base`, incluido el bucket S3, continúan existiendo. No ejecutar `terraform destroy` sobre BASE.
+5. Registrar fecha, salida de comandos y recursos confirmados; no registrar contraseñas, secretos ni valores sensibles.
+
+**Estado en esta edición del instructivo:** se documenta el procedimiento, pero no se afirma que Aurora ya esté apagada o destruida. El estado real debe comprobarse justo antes y después de la operación.

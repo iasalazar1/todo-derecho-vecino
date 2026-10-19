@@ -1165,3 +1165,63 @@ Este cierre acredita el funcionamiento técnico inicial de la búsqueda vectoria
 - Establecer un criterio explícito para considerar correcta una recuperación.
 - Ejecutar las pruebas y documentar una métrica real, mediante precisión/recall o calificación manual.
 - Registrar los errores de recuperación y las limitaciones identificadas.
+
+
+## Actualización de seguimiento — 18 de octubre de 2026
+### Recuperador híbrido, consulta estructurada de la Tabla 22 y preparación de operación reproducible
+
+#### Trabajo realizado
+
+- Se incorporó `retrieve_land_use()` en `retriever.py` para consultar `land_use_compatibility` por actividad y zonificación, sin sustituir la búsqueda semántica existente.
+- Se añadieron las opciones de CLI `--activity` y `--zonification`; la modalidad semántica conserva la forma de uso anterior: `python retriever.py "pregunta" --top-k 5`.
+- Se comprobó que la consulta estructurada devuelve los estados originales de la Tabla 22, la referencia del archivo y las páginas, y conserva `pendiente_revision: true`.
+- Se probaron la coincidencia exacta de «Vivienda» en H (`permitido`) y E (`prohibido`), el alias «inhumación» (`por validar`), una actividad inexistente, una zonificación inválida y una actividad vacía.
+- Se consultó «Centros nocturnos y discotecas» en H, HC, HO, HM, HCS, E y EA. Las siete consultas devolvieron `prohibido`, con referencia a `PPCU_Hipodromo-80-81.pdf`, página 81, y `pendiente_revision: true`.
+- Se ejecutó una prueba de regresión en una sola ejecución: la consulta estructurada y la búsqueda semántica devolvieron resultados, y todos los fragmentos semánticos mantuvieron `pendiente_revision: true`.
+- La búsqueda semántica sobre obligaciones por ruido devolvió fragmentos pertinentes —incluidos los artículos 10, fracción XV, y 30 de la Ley de Establecimientos Mercantiles—, pero también resultados secundarios o irrelevantes. La consulta sobre uso de suelo para un bar no recuperó la celda de compatibilidad específica en sus primeros cinco resultados.
+
+#### Evaluación técnica
+
+La integración básica funciona. La similitud vectorial es útil para encontrar texto normativo, pero no debe sustituir la consulta de datos tabulares cuando la respuesta depende de una actividad y una zonificación concretas. La consulta estructurada responde el estado registrado en la Tabla 22, pero no determina automáticamente la zonificación real de un predio ni demuestra por sí sola que exista autorización definitiva para abrir un establecimiento.
+
+Todos los datos jurídicos siguen pendientes de revisión. No se modificó `needs_review`/`pendiente_revision`, no se regeneraron embeddings y no se sustituyeron las fuentes originales.
+
+#### Notas de arquitectura que deben conservarse para una fase posterior
+
+1. Primero mantener operativo y verificable el MVP; no ampliar ahora el procesamiento de todas las tablas ni rediseñar la arquitectura prematuramente.
+2. Después evaluar si la arquitectura actual es la más adecuada, no solo si funciona. En particular, revisar el tratamiento de las múltiples tablas de `PPCU_Hipodromo` y del `PDU_Cuauhtemoc`.
+3. Revisar los JSON estructurados y los scripts de extracción/preprocesamiento: conservar las matrices tabulares, los rótulos originales, las páginas y los estados literales. No inferir que una celda ausente significa permitido o prohibido y no convertir `por validar` en una decisión definitiva.
+4. Evitar duplicar el sistema de chunking ya existente. Las tablas especiales deben integrarse como representación estructurada complementaria del procesamiento actual, no como una segunda extracción paralela sin necesidad.
+5. Revisar la precisión de los metadatos documentales: los programas urbanos usan secciones, cuadros, planos y tablas que no siempre equivalen a artículos de una ley. No etiquetar automáticamente una sección decimal como artículo jurídico tradicional.
+6. La tabla `land_use_compatibility` actual representa la Tabla 22 de Hipódromo; no debe asumirse que ya resuelve las tablas/cuadros del PDU de Cuauhtémoc ni otras tablas del PPCU.
+
+#### Operación reproducible y riesgo de pérdida de datos
+
+Aurora en `terraform/dev` es efímera. `./terraform/dev-down.sh` destruye los recursos DEV y los datos almacenados dentro de Aurora, incluidas las tablas y los embeddings cargados. Antes de apagar, conservar los artefactos fuente y de embeddings fuera de Aurora, preferentemente en S3 y/o en el repositorio/entorno local según corresponda. Al reconstruir DEV hay que recrear o verificar el esquema y volver a cargar los documentos, chunks y embeddings; `dev-up.sh` por sí solo no restaura los datos.
+
+La secuencia completa queda documentada en `Instructivo_operacion.md`. El cargador de embeddings debe ejecutarse desde el entorno virtual activo `.venv`. Inicializar el esquema no es lo mismo que poblarlo: los embeddings deben insertarse en `legal_embeddings` y asociarse a sus documentos/chunks mediante el cargador existente. Antes de una escritura, ejecutar primero el modo de validación documentado y revisar sus conteos; no regenerar los embeddings si el artefacto correcto ya existe.
+
+#### Pendiente
+
+- El ejecutor interactivo `scripts/probar_retriever.py` ya está documentado y disponible en el paquete de documentación; verificar que también esté presente en el árbol de trabajo del repositorio antes de versionar.
+- Completar la evaluación semántica con un conjunto fijo de preguntas, fragmentos esperados y un criterio consistente de corrección. El resultado de Precision@5 descrito abajo es preliminar y corresponde a una sola pregunta; no representa la métrica global del retriever.
+- Validar manualmente las citas y la vigencia jurídica antes de tratar los resultados como fundamentos confirmados.
+- Antes de apagar/destruir DEV, verificar y conservar fuera de Aurora los archivos fuente, chunks, embeddings y datos estructurados necesarios para reconstruir el ambiente. Seguir la lista de comprobación del `Instructivo_operacion.md`.
+- No se realizó commit ni push como parte de esta actualización. La actualización documental aún debe revisarse en el árbol de trabajo y después versionarse con autorización explícita.
+
+#### Ampliación de evaluación semántica — 18 de octubre de 2026
+
+- Se revisó la pregunta «¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido afecte a terceros?». Como referencias esperadas se identificaron los artículos 10, fracción XV, y 30 de la Ley de Establecimientos Mercantiles para la Ciudad de México. La evaluación es técnica y no constituye dictamen jurídico.
+- Se comparó el ranking vectorial con un ranking híbrido que resta al valor de distancia una contribución textual limitada por `LEAST(relevancia_textual, 1.0) * 0.08`. Para esta consulta, el ajuste no cambió los primeros cinco resultados.
+- Se diagnosticó el comportamiento de `plainto_tsquery('spanish', ...)`, que exige coincidencia de todos los términos normalizados. Se comparó de forma diagnóstica con una consulta OR sobre los mismos 20 candidatos vectoriales. La alternativa OR mejoró la posición de algunos candidatos —por ejemplo, una referencia al artículo 2, fracción XIV, pasó de la posición 19 a la 13—, pero no entró en los primeros cinco. Esta variante fue un diagnóstico específico, no una implementación general del retriever.
+- Para esta única pregunta y bajo una etiqueta preliminar estricta de relevancia, se observaron dos resultados relevantes en los primeros cinco: Precision@5 = 2/5 = 40 %. No debe extrapolarse a otras preguntas ni presentarse como métrica final del sistema. Hace falta fijar etiquetas esperadas y repetir el procedimiento sobre el conjunto completo.
+- Archivos locales de trabajo mencionados durante la evaluación: `tests/evaluacion_semana5.json`, `scripts/evaluar_semana5.py` y `scripts/diagnostico_ranking.py`. Confirmar que existan y revisar `git status` en el repositorio real antes de afirmar que están incluidos en el paquete de entrega.
+- No se modificó el retriever para incorporar la variante OR; no se regeneraron embeddings ni se alteró `retrieve_land_use()`. Los resultados semánticos continúan marcados para revisión (`needs_review = true` / `pendiente_revision: true`).
+
+#### Registro de Tabla 22 — datos estructurados
+
+La Tabla 22 del `PPCU_Hipodromo-80-81.pdf` (páginas 80–81) se incorporó a `land_use_compatibility` como 357 celdas únicas: 51 actividades por siete zonificaciones (H, HC, HO, HM, HCS, E y EA). El conteo registrado fue de 31 estados `permitido`, 198 `por validar` y 128 `prohibido`. Las 357 celdas mantienen `needs_review = true`; se reportaron cero celdas incorrectas en la verificación efectuada, pero esto no equivale a validación jurídica definitiva. Los estados originales, las páginas y la procedencia deben conservarse. La cobertura no debe extrapolarse a otras tablas del PPCU ni a los cuadros del PDDU de Cuauhtémoc.
+
+#### Estado de cierre AWS y control de versiones
+
+Esta actualización documental no demuestra que Aurora se haya apagado ni que los cambios se hayan publicado en GitHub. Antes de ejecutar el apagado/destrucción de DEV, comprobar el estado real de AWS, conservar los artefactos de reconstrucción y confirmar que no se necesitan más pruebas en Aurora. Después, revisar `git diff --check`, `git status` y los cambios completos; solo realizar `git add`, `commit` y `push` cuando el usuario lo autorice expresamente.

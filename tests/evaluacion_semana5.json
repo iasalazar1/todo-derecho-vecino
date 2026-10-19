@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "proposito": "Evaluación reproducible del retriever para el MVP de Todo Derecho Vecino",
+  "nota": "Los casos estructurados reutilizan resultados históricos ya comprobados. Los casos semánticos requieren anotación de relevancia antes de calcular métricas.",
+  "semanticos": [
+    {
+      "id": "SEM-001",
+      "pregunta": "¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido afecte a terceros?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Establecimientos Mercantiles para la Ciudad de México"
+      ],
+      "referencias_relevantes": [
+        {
+          "articulo": "10",
+          "cita_legal_contiene": "XV"
+        },
+        {
+          "articulo": "30",
+          "cita_legal_contiene": "30"
+        }
+      ],
+      "anotacion": "Referencia inicial basada en resultados observados anteriormente. Revisar manualmente cada fragmento recuperado antes de asignar relevancia."
+    }
+  ],
+  "estructurados": [
+    {
+      "id": "EST-001",
+      "actividad": "Vivienda",
+      "zonificacion": "H",
+      "estado_esperado": "permitido"
+    },
+    {
+      "id": "EST-002",
+      "actividad": "Vivienda",
+      "zonificacion": "E",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-003",
+      "actividad": "Agencias funerarias",
+      "zonificacion": "H",
+      "estado_esperado": "por validar"
+    },
+    {
+      "id": "EST-004",
+      "actividad": "inhumación",
+      "zonificacion": "H",
+      "estado_esperado": "por validar",
+      "nota": "Alias probado; conservar la actividad original devuelta por la base."
+    },
+    {
+      "id": "EST-005",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "H",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-006",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "HC",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-007",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "HO",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-008",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "HM",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-009",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "HCS",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-010",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "E",
+      "estado_esperado": "prohibido"
+    },
+    {
+      "id": "EST-011",
+      "actividad": "Centros nocturnos y discotecas",
+      "zonificacion": "EA",
+      "estado_esperado": "prohibido"
+    }
+  ],
+  "validaciones_ya_realizadas_no_repetir": [
+    "Rechazo de zonificación inválida XYZ",
+    "Rechazo de actividad vacía",
+    "Sin coincidencia inventada para actividad inexistente",
+    "357 celdas importadas y 357 únicas",
+    "Todas las celdas conservan needs_review=true"
+  ]
+}
