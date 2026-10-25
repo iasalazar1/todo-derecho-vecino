@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "project": "Todo Derecho Vecino",
+  "purpose": "Registro incremental e inmutable por ejecución para evaluar recuperación semántica de fragmentos legales.",
+  "protocol": {
+    "relevance_labels": {
+      "2": "Relevante para responder la pregunta",
+      "1": "Parcialmente relevante",
+      "0": "Irrelevante para responder la pregunta",
+      "R": "Requiere revisión humana; no se incluye en métricas definitivas"
+    },
+    "primary_metric": "precision_at_k",
+    "metric_policy": "Precision@k binaria cuenta como relevante únicamente la etiqueta 2. Las etiquetas 1, 0 y R se conservan por separado; las etiquetas R y null bloquean la métrica definitiva de una ejecución.",
+    "append_only": "No sobrescribir ejecuciones anteriores. Cada nueva ejecución se agrega a runs con un run_id único.",
+    "source_coverage": "Comparar las fuentes recuperadas con fuentes esperadas anotadas antes de evaluar; las fuentes esperadas provisionales deben validarse jurídicamente."
+  },
+  "queries": [
+    {
+      "id": "SEM-001",
+      "question": "¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido afecte a terceros?",
+      "top_k": 5,
+      "topic": "Ruido y afectaciones a terceros",
+      "expected_sources": [
+        {
+          "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+          "status": "provisional",
+          "basis": "La ejecución inicial recuperó los artículos 10, fracción XV, y 30."
+        },
+        {
+          "source": "Ley de Cultura Cívica de la CDMX",
+          "status": "provisional_pending_legal_review",
+          "basis": "Fuente que se debe revisar por su posible pertinencia respecto de ruido y afectaciones a terceros; identificar el artículo aplicable antes de fijar la referencia como definitiva."
+        }
+      ],
+      "runs": [
+        {
+          "run_id": "SEM-001-RUN-2026-10-25-BASELINE-01",
+          "run_date": "2026-10-25",
+          "run_type": "baseline_observed",
+          "retriever_version": "mvp-estancia; commit exacto no registrado en esta ejecución",
+          "corpus_version": "MVP; 5 documentos, 1235 chunks, 1369 embeddings de 1024 dimensiones",
+          "command": "python scripts/evaluar_semana5.py",
+          "top_k_requested": 5,
+          "results_count": 5,
+          "results": [
+            {
+              "rank": 1,
+              "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+              "article": "30",
+              "legal_citation": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 30",
+              "cosine_distance": 0.582322,
+              "pending_review": true,
+              "fragment_excerpt": "Los límites máximos permisibles para las emisiones sonoras dentro de establecimientos mercantiles se determinan en función de decibeles ponderados en A (dB(A)). Dentro de los establecimientos mercantiles los límites máximos de emisiones sonoras, sin importar su fuente, se llevará a cabo dentro del rango y horarios que se indican a continuación: a) De las 6:00 a 22:00 horas 85 dB (A), y b) De",
+              "relevance": null,
+              "annotation_status": "pending"
+            },
+            {
+              "rank": 2,
+              "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+              "article": "10",
+              "legal_citation": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. XV",
+              "cosine_distance": 0.611013,
+              "pending_review": true,
+              "fragment_excerpt": "No generar ruido al exterior que afecte el derecho de terceros. La omisión a esta fracción se atenderá conforme a la Ley de Cultura Cívica y la Ley Ambiental de Protección a la Tierra, ambas vigentes en la Ciudad de México. Apartado B: Además de lo señalado en el Apartado A, los titulares de los establecimientos mercantiles de giros de impacto vecinal e impacto zonal respectivamente, deberán: I. Exhibir en lugar visible los números de sitios de taxis debidamente autorizados por la Secretaría de",
+              "relevance": null,
+              "annotation_status": "pending"
+            },
+            {
+              "rank": 3,
+              "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+              "article": "81",
+              "legal_citation": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 81",
+              "cosine_distance": 0.615384,
+              "pending_review": true,
+              "fragment_excerpt": "Los afectados por actos y/o resoluciones de la autoridad, podrán a su elección interponer el Recurso de Inconformidad previsto en la Ley de Procedimiento Administrativo de la Ciudad de México, o intentar el juicio de nulidad ante el Tribunal de Justicia Administrativa de la Ciudad de México. TRANSITORIOS Primero. - Esta Ley entrará en vigor a los treinta días hábiles siguiente al de su publicación en la Gaceta Oficial del Distrito Federal, asimismo la Secretaría de Desarrollo Económico en coordi",
+              "relevance": null,
+              "annotation_status": "pending"
+            },
+            {
+              "rank": 4,
+              "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+              "article": "10",
+              "legal_citation": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. IX",
+              "cosine_distance": 0.617625,
+              "pending_review": true,
+              "fragment_excerpt": "Exhibir y/o señalar en un lugar visible al público y con caracteres legibles: a) El horario en el que se prestarán los servicios ofrecidos; b) Un croquis que ubique claramente las rutas de evacuación, sólo cuando así lo disponga la normatividad en gestión integral de riesgos y protección civil; c) La prohibición de fumar en el establecimiento; y d) La capacidad de aforo manifestada en el Aviso o Solicitud de Permiso.",
+              "relevance": null,
+              "annotation_status": "pending"
+            },
+            {
+              "rank": 5,
+              "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+              "article": "12",
+              "legal_citation": "Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 12",
+              "cosine_distance": 0.618096,
+              "pending_review": true,
+              "fragment_excerpt": "Queda prohibido fumar en todos los establecimientos mercantiles que se encuentren sujetos al cumplimiento de las disposiciones de la presente ley. En los establecimientos mercantiles que cuenten con áreas de servicio al aire libre se podrá fumar sin restricción alguna, siempre y cuando el humo derivado del tabaco no invada los espacios cerrados de acceso al público.",
+              "relevance": null,
+              "annotation_status": "pending"
+            }
+          ],
+          "metrics": {
+            "precision_at_5": null,
+            "ndcg_at_5": null,
+            "recall_at_5": null,
+            "source_coverage": null,
+            "metric_status": "pending_manual_annotation"
+          },
+          "observations": [
+            "Los cinco resultados recuperados pertenecen a la Ley de Establecimientos Mercantiles.",
+            "La salida no demuestra que otras leyes estén excluidas de la búsqueda; el ranking puede haber colocado estos fragmentos por encima de los demás.",
+            "Debe inspeccionarse la recuperación de candidatos de la Ley de Cultura Cívica y validar jurídicamente si debe considerarse fuente esperada para esta pregunta."
+          ]
+        }
+      ]
+    }
+  ]
+}
