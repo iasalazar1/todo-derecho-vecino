@@ -4,15 +4,17 @@
   "purpose": "Registro incremental e inmutable por ejecución para evaluar recuperación semántica de fragmentos legales.",
   "protocol": {
     "relevance_labels": {
-      "2": "Relevante para responder la pregunta",
-      "1": "Parcialmente relevante",
       "0": "Irrelevante para responder la pregunta",
+      "1": "Parcialmente relevante",
+      "2": "Relevante para responder la pregunta",
       "R": "Requiere revisión humana; no se incluye en métricas definitivas"
     },
     "primary_metric": "precision_at_k",
     "metric_policy": "Precision@k binaria cuenta como relevante únicamente la etiqueta 2. Las etiquetas 1, 0 y R se conservan por separado; las etiquetas R y null bloquean la métrica definitiva de una ejecución.",
     "append_only": "No sobrescribir ejecuciones anteriores. Cada nueva ejecución se agrega a runs con un run_id único.",
-    "source_coverage": "Comparar las fuentes recuperadas con fuentes esperadas anotadas antes de evaluar; las fuentes esperadas provisionales deben validarse jurídicamente."
+    "source_coverage": "Comparar las fuentes recuperadas con fuentes esperadas anotadas antes de evaluar; las fuentes esperadas provisionales deben validarse jurídicamente.",
+    "scope_note": "El inventario local contiene documentos adicionales a los cinco instrumentos del MVP. Esta batería se centra en los cinco instrumentos autorizados; fuentes complementarias pueden registrarse como hallazgos, pero no se incorporan automáticamente al alcance ni se consideran errores de recuperación sin revisión.",
+    "annotation_note": "No asignar artículos ni fuentes secundarias definitivas por suposición. Durante la primera ejecución registrar los resultados observados, anotar relevancia humana (2, 1, 0 o R) y dejar métricas en null mientras haya anotaciones pendientes o dudas jurídicas."
   },
   "queries": [
     {
@@ -113,6 +115,246 @@
           ]
         }
       ]
+    },
+    {
+      "id": "HIP-SEM-001",
+      "question": "¿Cómo puedo saber qué usos de suelo están permitidos en un inmueble de la colonia Hipódromo y qué restricciones específicas debo revisar antes de abrir un negocio?",
+      "top_k": 5,
+      "topic": "Uso de suelo en colonia Hipódromo",
+      "expected_sources": [
+        {
+          "source": "Programa Parcial de Desarrollo Urbano de la colonia Hipódromo",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "HIP-SEM-002",
+      "question": "¿Puedo cambiar el uso de un inmueble habitacional a uno comercial si el negocio que quiero instalar parece compatible con la zona?",
+      "top_k": 5,
+      "topic": "Cambio de uso habitacional a comercial",
+      "expected_sources": [
+        {
+          "source": "Programa Parcial de Desarrollo Urbano de la colonia Hipódromo",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "HIP-SEM-003",
+      "question": "Se ha ingresado una iniciativa ciudadana para cambiar el uso de suelo de una casa en la calle de Amsterdam 155, actualmente es habitacional y lo quieren volver mixto. ¿Cuáles son los pasos para hacer ese cambio y en qué se deben fundamentar?",
+      "top_k": 5,
+      "topic": "Iniciativa ciudadana y cambio de uso de suelo",
+      "expected_sources": [
+        {
+          "source": "Programa Parcial de Desarrollo Urbano de la colonia Hipódromo",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "CUA-SEM-001",
+      "question": "¿Qué criterios establece el programa de desarrollo urbano para determinar si una actividad comercial es compatible con el uso de suelo de un predio?",
+      "top_k": 5,
+      "topic": "Compatibilidad de actividad y uso de suelo",
+      "expected_sources": [
+        {
+          "source": "Programa de Desarrollo Urbano de la Alcaldía Cuauhtémoc",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "CUA-SEM-002",
+      "question": "¿Qué restricciones de construcción o aprovechamiento del inmueble pueden limitar un proyecto comercial, aunque el uso de suelo sea compatible?",
+      "top_k": 5,
+      "topic": "Restricciones de construcción y aprovechamiento",
+      "expected_sources": [
+        {
+          "source": "Programa de Desarrollo Urbano de la Alcaldía Cuauhtémoc",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "CUA-SEM-003",
+      "question": "Se quiere cambiar el uso de suelo del predio del Junior Club y pasarlo de infraestructura a uso mixto, con el objetivo de poder construir una torre comercial. ¿Qué limitaciones o requisitos mencionan las leyes y programas de desarrollo urbano para poder realizar dicho cambio?",
+      "top_k": 5,
+      "topic": "Junior Club: cambio de infraestructura a uso mixto",
+      "expected_sources": [
+        {
+          "source": "Programa de Desarrollo Urbano de la Alcaldía Cuauhtémoc",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LEM-SEM-001",
+      "question": "¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido de sus actividades afecte a los vecinos?",
+      "top_k": 5,
+      "topic": "Ruido generado por establecimientos mercantiles",
+      "expected_sources": [
+        {
+          "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LEM-SEM-002",
+      "question": "¿Qué avisos, permisos o trámites se necesitan para que un negocio como una cafetería, un restaurante o un bar pueda operar legalmente y qué condiciones debe cumplir según el tipo de establecimiento?",
+      "top_k": 5,
+      "topic": "Avisos, permisos y operación de establecimientos",
+      "expected_sources": [
+        {
+          "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LEM-SEM-003",
+      "question": "¿Qué puede hacer la autoridad si se sospecha que un establecimiento opera incumpliendo sus obligaciones y qué medidas o sanciones contempla la ley?",
+      "top_k": 5,
+      "topic": "Verificación y sanciones a establecimientos",
+      "expected_sources": [
+        {
+          "source": "Ley de Establecimientos Mercantiles para la Ciudad de México",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LDU-SEM-001",
+      "question": "¿Qué documento oficial permite comprobar el uso de suelo autorizado para un inmueble y qué información debe verificarse antes de instalar un negocio?",
+      "top_k": 5,
+      "topic": "Documento para acreditar uso de suelo",
+      "expected_sources": [
+        {
+          "source": "Ley de Desarrollo Urbano del Distrito Federal",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LDU-SEM-002",
+      "question": "¿Qué procedimiento legal se debe seguir si se pretende modificar el uso de suelo y el número de pisos permitido para construir en un predio?",
+      "top_k": 5,
+      "topic": "Modificación de uso de suelo y niveles",
+      "expected_sources": [
+        {
+          "source": "Ley de Desarrollo Urbano del Distrito Federal",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LDU-SEM-003",
+      "question": "¿Qué facultades tienen las autoridades de desarrollo urbano para verificar un posible uso de suelo irregular y cuál es el procedimiento para iniciar dicha verificación?",
+      "top_k": 5,
+      "topic": "Verificación de uso de suelo irregular",
+      "expected_sources": [
+        {
+          "source": "Ley de Desarrollo Urbano del Distrito Federal",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LCC-SEM-001",
+      "question": "¿Qué puedo hacer si un negocio genera ruido excesivo, genera basura en la calle y, en general, altera la tranquilidad de quienes vivimos cerca?",
+      "top_k": 5,
+      "topic": "Ruido, basura y tranquilidad vecinal",
+      "expected_sources": [
+        {
+          "source": "Ley de Cultura Cívica de la Ciudad de México",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LCC-SEM-002",
+      "question": "¿Qué infracciones cívicas podrían cometerse cuando un establecimiento utiliza las banquetas para poner mesas o impide el libre paso de los peatones?",
+      "top_k": 5,
+      "topic": "Banquetas ocupadas y libre tránsito peatonal",
+      "expected_sources": [
+        {
+          "source": "Ley de Cultura Cívica de la Ciudad de México",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
+    },
+    {
+      "id": "LCC-SEM-003",
+      "question": "¿Cómo se tramita una queja o denuncia por una conducta que afecta la convivencia entre vecinos y qué autoridades intervienen?",
+      "top_k": 5,
+      "topic": "Queja por afectaciones a la convivencia vecinal",
+      "expected_sources": [
+        {
+          "source": "Ley de Cultura Cívica de la Ciudad de México",
+          "status": "provisional",
+          "basis": "Fuente principal sugerida por el tema de la consulta; confirmar pertinencia y disposición aplicable mediante anotación jurídica. No se presuponen artículos."
+        }
+      ],
+      "secondary_sources_to_check": [],
+      "validation_status": "draft_pending_first_run",
+      "runs": []
     }
   ]
 }
