@@ -21,6 +21,156 @@
         }
       ],
       "anotacion": "Referencia inicial basada en resultados observados anteriormente. Revisar manualmente cada fragmento recuperado antes de asignar relevancia."
+    },
+    {
+      "id": "HIP-SEM-001",
+      "pregunta": "¿Cómo puedo saber qué usos de suelo están permitidos en un inmueble de la colonia Hipódromo y qué restricciones específicas debo revisar antes de abrir un negocio?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Programa Parcial de Desarrollo Urbano de la colonia Hipódromo"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "HIP-SEM-002",
+      "pregunta": "¿Puedo cambiar el uso de un inmueble habitacional a uno comercial si el negocio que quiero instalar parece compatible con la zona?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Programa Parcial de Desarrollo Urbano de la colonia Hipódromo"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "HIP-SEM-003",
+      "pregunta": "Se ha ingresado una iniciativa ciudadana para cambiar el uso de suelo de una casa en la calle de Amsterdam 155, actualmente es habitacional y lo quieren volver mixto. ¿Cuáles son los pasos para hacer ese cambio y en qué se deben fundamentar?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Programa Parcial de Desarrollo Urbano de la colonia Hipódromo"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "CUA-SEM-001",
+      "pregunta": "¿Qué criterios establece el programa de desarrollo urbano para determinar si una actividad comercial es compatible con el uso de suelo de un predio?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Programa de Desarrollo Urbano de la Alcaldía Cuauhtémoc"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "CUA-SEM-002",
+      "pregunta": "¿Qué restricciones de construcción o aprovechamiento del inmueble pueden limitar un proyecto comercial, aunque el uso de suelo sea compatible?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Programa de Desarrollo Urbano de la Alcaldía Cuauhtémoc"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "CUA-SEM-003",
+      "pregunta": "Se quiere cambiar el uso de suelo del predio del Junior Club y pasarlo de infraestructura a uso mixto, con el objetivo de poder construir una torre comercial. ¿Qué limitaciones o requisitos mencionan las leyes y programas de desarrollo urbano para poder realizar dicho cambio?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Programa de Desarrollo Urbano de la Alcaldía Cuauhtémoc"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LEM-SEM-001",
+      "pregunta": "¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido de sus actividades afecte a los vecinos?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Establecimientos Mercantiles para la Ciudad de México"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LEM-SEM-002",
+      "pregunta": "¿Qué avisos, permisos o trámites se necesitan para que un negocio como una cafetería, un restaurante o un bar pueda operar legalmente y qué condiciones debe cumplir según el tipo de establecimiento?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Establecimientos Mercantiles para la Ciudad de México"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LEM-SEM-003",
+      "pregunta": "¿Qué puede hacer la autoridad si se sospecha que un establecimiento opera incumpliendo sus obligaciones y qué medidas o sanciones contempla la ley?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Establecimientos Mercantiles para la Ciudad de México"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LDU-SEM-001",
+      "pregunta": "¿Qué documento oficial permite comprobar el uso de suelo autorizado para un inmueble y qué información debe verificarse antes de instalar un negocio?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Desarrollo Urbano del Distrito Federal"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LDU-SEM-002",
+      "pregunta": "¿Qué procedimiento legal se debe seguir si se pretende modificar el uso de suelo y el número de pisos permitido para construir en un predio?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Desarrollo Urbano del Distrito Federal"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LDU-SEM-003",
+      "pregunta": "¿Qué facultades tienen las autoridades de desarrollo urbano para verificar un posible uso de suelo irregular y cuál es el procedimiento para iniciar dicha verificación?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Desarrollo Urbano del Distrito Federal"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LCC-SEM-001",
+      "pregunta": "¿Qué puedo hacer si un negocio genera ruido excesivo, genera basura en la calle y, en general, altera la tranquilidad de quienes vivimos cerca?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Cultura Cívica de la Ciudad de México"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LCC-SEM-002",
+      "pregunta": "¿Qué infracciones cívicas podrían cometerse cuando un establecimiento utiliza las banquetas para poner mesas o impide el libre paso de los peatones?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Cultura Cívica de la Ciudad de México"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
+    },
+    {
+      "id": "LCC-SEM-003",
+      "pregunta": "¿Cómo se tramita una queja o denuncia por una conducta que afecta la convivencia entre vecinos y qué autoridades intervienen?",
+      "top_k": 5,
+      "documentos_esperados": [
+        "Ley de Cultura Cívica de la Ciudad de México"
+      ],
+      "referencias_relevantes": [],
+      "anotacion": "Caso inicial de diagnóstico. La fuente indicada es una hipótesis de fuente principal, no un criterio exclusivo ni una validación jurídica. Revisar los cinco resultados, registrar fragmentos y etiquetar relevancia manualmente; no calcular métricas definitivas hasta resolver anotaciones."
     }
   ],
   "estructurados": [
