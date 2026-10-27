@@ -1225,3 +1225,41 @@ La Tabla 22 del `PPCU_Hipodromo-80-81.pdf` (páginas 80–81) se incorporó a `l
 #### Estado de cierre AWS y control de versiones
 
 Esta actualización documental no demuestra que Aurora se haya apagado ni que los cambios se hayan publicado en GitHub. Antes de ejecutar el apagado/destrucción de DEV, comprobar el estado real de AWS, conservar los artefactos de reconstrucción y confirmar que no se necesitan más pruebas en Aurora. Después, revisar `git diff --check`, `git status` y los cambios completos; solo realizar `git add`, `commit` y `push` cuando el usuario lo autorice expresamente.
+
+Evaluación semántica del recuperador — 26 de octubre de 2026
+Objetivo y alcance
+Se ejecutó la batería de evaluación de la Semana 5 para observar el comportamiento del recuperador semántico sobre consultas relacionadas con los cinco instrumentos jurídicos del MVP. La ejecución incluyó 11 casos estructurados y 16 consultas semánticas, con un máximo previsto de cinco resultados por consulta.
+La evaluación técnica no equivale a una validación jurídica. La pertinencia de un fragmento para una pregunta tampoco demuestra, por sí sola, que la norma esté vigente, que la cita sea exacta o que la respuesta jurídica derivada sea correcta.
+Resultados estructurados
+La ejecución registrada reportó 11 de 11 pruebas estructuradas aprobadas. Este resultado acredita que los casos incluidos satisficieron las comprobaciones implementadas por el ejecutor. No demuestra la corrección de todos los usos de suelo posibles ni la cobertura completa de las tablas y zonificaciones del corpus.
+Resultados semánticos anotados manualmente
+Se revisaron 16 consultas y 80 posiciones de resultados. Las etiquetas utilizadas fueron:
+    • 2: relevancia directa.
+    • 1: relevancia parcial.
+    • 0: resultado irrelevante para la consulta.
+Conteo de las anotaciones revisadas:
+    • Relevancia directa (2): 21 de 80 resultados (26.25 %).
+    • Relevancia parcial (1): 24 de 80 (30 %).
+    • Irrelevantes (0): 35 de 80 (43.75 %).
+    • Resultados con relevancia directa o parcial (1 o 2): 45 de 80 (56.25 %).
+Si se consideran relevantes tanto los resultados directos como los parciales, la precisión provisional agregada entre los resultados anotados es 45/80 = 56.25 %. Este valor se puede interpretar como una Precision@5 agregada únicamente bajo estas condiciones: las 16 consultas tienen cinco resultados anotados cada una, y las etiquetas corresponden al orden de recuperación de la ejecución revisada. No debe confundirse con una métrica de calidad jurídica ni con una evaluación independiente de todas las consultas posibles.
+Una consulta, HIP-SEM-002, no recuperó ningún resultado marcado como relevante entre sus cinco posiciones. Las anotaciones identificaron problemas de extracción de tablas, fragmentos incompletos, referencias normativas pertinentes que no aparecieron en el ranking y resultados que no respondían al aspecto específico de la pregunta.
+Limitaciones de la evidencia
+El ejecutor scripts/evaluar_semana5.py muestra solamente los primeros 500 caracteres de cada fragmento (fragmento[:500]). Por tanto, algunas observaciones de texto cortado pueden deberse a la presentación del registro y no necesariamente al contenido completo almacenado en la base de datos. Antes de atribuir el problema al chunking, hay que exportar y revisar el fragmento completo, su identificador y sus metadatos.
+Las anotaciones también describen problemas que no se explican únicamente por el límite de presentación: extracción o representación deficiente de tablas, pérdida de contexto, fragmentos que combinan contenido discontinuo, referencias de artículo inadecuadas y ausencia de resultados pertinentes en algunas consultas.
+El inventario registrado previamente contiene 1,235 chunks y 1,369 embeddings de 1,024 dimensiones. La diferencia de conteos requiere una auditoría de relaciones, identificadores, duplicados y reglas de asociación. La dimensión vectorial por sí sola no identifica el modelo de embeddings ni demuestra que exista un error. No debe modificarse el modelo ni regenerarse el conjunto de embeddings hasta verificar su procedencia y consistencia.
+Decisiones y siguientes pasos
+    1. Conservar la salida original de la ejecución y las anotaciones revisadas como evidencia histórica, sin sobrescribirlas.
+    2. Mejorar el ejecutor para guardar, por ejecución, las consultas, los resultados completos, el orden, los identificadores estables de chunks, los metadatos, las distancias o puntuaciones, los errores y la configuración relevante.
+    3. Persistir las anotaciones manuales en un archivo versionado que identifique de forma inequívoca la ejecución y cada resultado evaluado.
+    4. Auditar extracción, chunking y metadatos. Diferenciar artículos legales de secciones, cuadros y tablas de programas urbanos; conservar el contexto necesario para interpretar cada fragmento.
+    5. Auditar la asociación entre chunks y embeddings, el modelo y su versión, la dimensión, la normalización, la métrica de distancia y la coherencia entre el modelo usado para documentos y consultas.
+    6. Comparar cambios de extracción, chunking, contexto o solapamiento mediante evaluaciones controladas contra una línea base. No cambiar simultáneamente varias etapas sin poder atribuir el efecto.
+    7. Evaluar después, y por separado, alternativas de recuperación híbrida, expansión de sinónimos, filtros y reranking. No asumir que mejorarán los resultados sin medirlos.
+    8. Repetir la batería estructurada y semántica después de cada cambio relevante, registrar regresiones y validar las citas y la vigencia normativa antes de usar los resultados como fundamento jurídico confirmado.
+Estado de infraestructura y validación
+Aurora PostgreSQL fue detenida por el usuario después de la ejecución evaluada. Los resultados del 26 de octubre son evidencia histórica; no representan una nueva ejecución posterior al apagado. Las pruebas de integración que dependan de Aurora deberán esperar a que exista una base de pruebas disponible y se haya verificado el procedimiento seguro de reconstrucción.
+No se debe modificar la infraestructura terraform/base, cambiar needs_review = true ni pendiente_revision = true, ni reemplazar fuentes originales como parte de esta fase de diagnóstico.
+Conclusión
+La evaluación estructurada de la Semana 5 pasó los 11 casos incluidos, pero la evaluación semántica revela una calidad de recuperación insuficiente para considerar el recuperador validado: 56.25 % de los resultados anotados fueron directos o parcialmente pertinentes, y una consulta no recuperó resultados pertinentes en el top 5. La prioridad es mejorar la trazabilidad y diagnosticar extracción, chunking, metadatos y embeddings antes de modificar la estrategia de recuperación.
+La aceptación del recuperador deberá basarse en un protocolo versionado, un conjunto fijo de consultas, anotaciones reproducibles, métricas explícitas, ausencia de regresiones críticas y revisión de las citas. El criterio formal de éxito se documentará en docs/protocolo_evaluacion_retriever.md y deberá aplicarse sobre una nueva ejecución reproducible; los resultados actuales constituyen la línea base inicial, no una aprobación final.

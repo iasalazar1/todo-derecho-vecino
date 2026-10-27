@@ -305,7 +305,7 @@ Ejemplo:
 aws ssm start-session \
   --target <INSTANCE_ID> \
   --document-name AWS-StartPortForwardingSessionToRemoteHost \
-  --parameters '{"host":["<AURORA_ENDPOINT>"],"portNumber":["5432"],"localPortNumber":["5432"]}'
+  --parameters '{"host":["<AURORA_ENDPOINT>"],"portNumber":["5432"],"localPortNumber":["15432"]}'
 ```
 
 El endpoint y el ID de la instancia deben obtenerse del estado actual de Terraform:
@@ -323,7 +323,7 @@ No deben reutilizarse endpoints o IDs obtenidos de una ejecución anterior si DE
 Con el túnel SSM activo, abrir otra terminal local y ejecutar:
 
 ```bash
-psql -h localhost -p 5432 -U tdv_admin -d tododerechovecino
+psql -h localhost -p 15432 -U tdv_admin -d tododerechovecino
 ```
 
 La contraseña debe obtenerse del secreto actual administrado por AWS Secrets Manager.
