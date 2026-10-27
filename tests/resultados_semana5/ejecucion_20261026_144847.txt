@@ -1,0 +1,107 @@
+Fecha de ejecución: 2026-10-26T14:48:47-06:00
+Rama: mvp-estancia
+Commit: 86ed2d108bf35251e7fe1e6805a7073401670c69
+
+Evaluación de Semana 5 — Todo Derecho Vecino
+Archivo de casos: tests/evaluacion_semana5.json
+Modo de ejecución: solo lectura; no modifica datos.
+
+=== EVALUACIÓN ESTRUCTURADA ===
+FALLO EST-001: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-002: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-003: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-004: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-005: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-006: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-007: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-008: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-009: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-010: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+FALLO EST-011: RuntimeError: Falló la consulta estructurada. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Resultado estructurado: 0/11 aprobados (0.0 %); fallidos: 11.
+
+=== EVALUACIÓN SEMÁNTICA ===
+
+Caso SEM-001: ¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido afecte a terceros?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso HIP-SEM-001: ¿Cómo puedo saber qué usos de suelo están permitidos en un inmueble de la colonia Hipódromo y qué restricciones específicas debo revisar antes de abrir un negocio?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso HIP-SEM-002: ¿Puedo cambiar el uso de un inmueble habitacional a uno comercial si el negocio que quiero instalar parece compatible con la zona?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso HIP-SEM-003: Se ha ingresado una iniciativa ciudadana para cambiar el uso de suelo de una casa en la calle de Amsterdam 155, actualmente es habitacional y lo quieren volver mixto. ¿Cuáles son los pasos para hacer ese cambio y en qué se deben fundamentar?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso CUA-SEM-001: ¿Qué criterios establece el programa de desarrollo urbano para determinar si una actividad comercial es compatible con el uso de suelo de un predio?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso CUA-SEM-002: ¿Qué restricciones de construcción o aprovechamiento del inmueble pueden limitar un proyecto comercial, aunque el uso de suelo sea compatible?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso CUA-SEM-003: Se quiere cambiar el uso de suelo del predio del Junior Club y pasarlo de infraestructura a uso mixto, con el objetivo de poder construir una torre comercial. ¿Qué limitaciones o requisitos mencionan las leyes y programas de desarrollo urbano para poder realizar dicho cambio?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LEM-SEM-001: ¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido de sus actividades afecte a los vecinos?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LEM-SEM-002: ¿Qué avisos, permisos o trámites se necesitan para que un negocio como una cafetería, un restaurante o un bar pueda operar legalmente y qué condiciones debe cumplir según el tipo de establecimiento?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LEM-SEM-003: ¿Qué puede hacer la autoridad si se sospecha que un establecimiento opera incumpliendo sus obligaciones y qué medidas o sanciones contempla la ley?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LDU-SEM-001: ¿Qué documento oficial permite comprobar el uso de suelo autorizado para un inmueble y qué información debe verificarse antes de instalar un negocio?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LDU-SEM-002: ¿Qué procedimiento legal se debe seguir si se pretende modificar el uso de suelo y el número de pisos permitido para construir en un predio?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LDU-SEM-003: ¿Qué facultades tienen las autoridades de desarrollo urbano para verificar un posible uso de suelo irregular y cuál es el procedimiento para iniciar dicha verificación?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LCC-SEM-001: ¿Qué puedo hacer si un negocio genera ruido excesivo, genera basura en la calle y, en general, altera la tranquilidad de quienes vivimos cerca?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LCC-SEM-002: ¿Qué infracciones cívicas podrían cometerse cuando un establecimiento utiliza las banquetas para poner mesas o impide el libre paso de los peatones?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Caso LCC-SEM-003: ¿Cómo se tramita una queja o denuncia por una conducta que afecta la convivencia entre vecinos y qué autoridades intervienen?
+ERROR: RuntimeError: Falló la consulta al retriever. Detalle de PostgreSQL: psql: error: connection to server at "127.0.0.1", port 15432 failed: Conexión rehusada
+	Is the server running on that host and accepting TCP/IP connections?
+
+Resultados semánticos mostrados: 0. La cantidad recuperada no representa por sí sola la calidad.
+
+=== RESUMEN ===
+Pruebas estructuradas aprobadas: 0
+Pruebas estructuradas fallidas: 11
+Evaluación semántica: requiere revisión humana.
+Revisión jurídica y vigencia normativa: pendientes.

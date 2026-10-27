@@ -1,0 +1,656 @@
+Fecha de ejecución: 2026-10-26T14:49:50-06:00
+Rama: mvp-estancia
+Commit: 86ed2d108bf35251e7fe1e6805a7073401670c69
+
+Evaluación de Semana 5 — Todo Derecho Vecino
+Archivo de casos: tests/evaluacion_semana5.json
+Modo de ejecución: solo lectura; no modifica datos.
+
+=== EVALUACIÓN ESTRUCTURADA ===
+OK EST-001: actividad='Vivienda', zona=H, esperado='permitido', devuelto=['permitido'], resultados=1
+OK EST-002: actividad='Vivienda', zona=E, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-003: actividad='Agencias funerarias', zona=H, esperado='por validar', devuelto=['por validar'], resultados=1
+OK EST-004: actividad='inhumación', zona=H, esperado='por validar', devuelto=['por validar'], resultados=1
+OK EST-005: actividad='Centros nocturnos y discotecas', zona=H, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-006: actividad='Centros nocturnos y discotecas', zona=HC, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-007: actividad='Centros nocturnos y discotecas', zona=HO, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-008: actividad='Centros nocturnos y discotecas', zona=HM, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-009: actividad='Centros nocturnos y discotecas', zona=HCS, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-010: actividad='Centros nocturnos y discotecas', zona=E, esperado='prohibido', devuelto=['prohibido'], resultados=1
+OK EST-011: actividad='Centros nocturnos y discotecas', zona=EA, esperado='prohibido', devuelto=['prohibido'], resultados=1
+
+Resultado estructurado: 11/11 aprobados (100.0 %); fallidos: 0.
+
+=== EVALUACIÓN SEMÁNTICA ===
+
+Caso SEM-001: ¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido afecte a terceros?
+
+[1] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 30
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 30
+Distancia: 0.582322
+Pendiente de revisión: True
+Fragmento: Los límites máximos permisibles para las emisiones sonoras dentro de establecimientos mercantiles se determinan en función de decibeles ponderados en A (dB(A)). Dentro de los establecimientos mercantiles los límites máximos de emisiones sonoras, sin importar su fuente, se llevará a cabo dentro del rango y horarios que se indican a continuación, sin perjuicio de las obligaciones específicas que en materia de horarios establezcan estas y otras leyes: a) De las 6:00 a 22:00 horas 85 dB (A), y b) De
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 10
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. XV
+Distancia: 0.611013
+Pendiente de revisión: True
+Fragmento: No generar ruido al exterior que afecte el derecho de terceros. La omisión a esta fracción se atenderá conforme a la Ley de Cultura Cívica y la Ley Ambiental de Protección a la Tierra, ambas vigentes en la Ciudad de México. Apartado B: Además de lo señalado en el Apartado A, los titulares de los establecimientos mercantiles de giros de impacto vecinal e impacto zonal respectivamente, deberán: I. Exhibir en lugar visible los números de sitios de taxis debidamente autorizados por la Secretaría de 
+
+[3] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 81
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 81
+Distancia: 0.615384
+Pendiente de revisión: True
+Fragmento: Los afectados por actos y/o resoluciones de la autoridad, podrán a su elección interponer el Recurso de Inconformidad previsto en la Ley de Procedimiento Administrativo de la Ciudad de México, o intentar el juicio de nulidad ante el Tribunal de Justicia Administrativa de la Ciudad de México. TRANSITORIOS Primero. - Esta Ley entrará en vigor a los treinta días hábiles siguiente al de su publicación en la Gaceta Oficial del Distrito Federal, asimismo la Secretaría de Desarrollo Económico en coordi
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 10
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. IX
+Distancia: 0.617625
+Pendiente de revisión: True
+Fragmento: Exhibir y/o señalar en un lugar visible al público y con caracteres legibles: a) El horario en el que se prestarán los servicios ofrecidos; b) Un croquis que ubique claramente las rutas de evacuación, sólo cuando así lo disponga la normatividad en gestión integral de riesgos y protección civil; c) La prohibición de fumar en el establecimiento; y d) La capacidad de aforo manifestada en el Aviso o Solicitud de Permiso.
+
+[5] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 12
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 12
+Distancia: 0.618096
+Pendiente de revisión: True
+Fragmento: Queda prohibido fumar en todos los establecimientos mercantiles que se encuentren sujetos al cumplimiento de las disposiciones de la presente ley. En los establecimientos mercantiles que cuenten con áreas de servicio al aire libre se podrá fumar sin restricción alguna, siempre y cuando el humo derivado del tabaco no invada los espacios cerrados de acceso al público.
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso HIP-SEM-001: ¿Cómo puedo saber qué usos de suelo están permitidos en un inmueble de la colonia Hipódromo y qué restricciones específicas debo revisar antes de abrir un negocio?
+
+[1] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.435854
+Pendiente de revisión: True
+Fragmento: corredor comercial de Insurgentes. El polígono de esta zona se delimita por: Insurgentes, Nuevo León, Bajío, Culiacán, Quintana Roo, Villahermosa, Baja California, Chilpancingo y Campeche. Los usos específicos permitidos en esta zona, se pueden apreciar en la tabla de usos de suelo. La intensidad máxima permitida para la construcción es de 8 niveles, con un 40% de área libre mínima y, 90 m2 de área mínima de vivienda. Finalmente, el Programa Delegacional a nivel de zonificación secundaria declar
+
+[2] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.436127
+Pendiente de revisión: True
+Fragmento: de las colonias Condesa e Hipódromo-Condesa, el Presidente de la Asociación de Residentes de la Colonia Hipódromo-Condesa, y la Asociación de Amigos de Los Parques México y España, conjuntamente con la Asociación de Restauranteros y Comerciantes del Corazón de la Condesa, A.C. En dicho convenio se definen las condiciones mínimas de convivencia, que deben garantizar y cumplir los establecimientos mercantiles, para el otorgamiento de permisos provisionales de uso de vía pública. Los acuerdos se el
+
+[3] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 6.3
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 6.3 (Proyectos Urbanos Específicos ==================================================)
+Distancia: 0.485189
+Pendiente de revisión: True
+Fragmento: visitantes recibió, después de Chapultepec, desde principios de los años 30. El fuerte incremento en los valores del suelo de la colonia Hipódromo, así como el perfeccionamiento de tecnologías para edificar en terrenos altamente compresibles y, la popularización de los elevadores automáticos, propiciaron que a partir de 1944 se construyeran edificios altos, principalmente de departamentos. Otro factor importante que contribuyó a su proliferación, fue la ausencia hasta los sismos de 1985, de rest
+
+[4] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.498627
+Pendiente de revisión: True
+Fragmento: el 11% Art Decó. Tiene un grado de conservación bueno. Distrito III. Delimitado por las calles de: Nuevo León, Aguascalientes e Insurgentes. Predominan las manzanas de 80 x 95 m y los lotes de 12 x 32 m. En esta zona, gran parte de las manzanas tienen edificios de oficinas de mayor altura que el resto de la colonia, en especial sobre la Av. Insurgentes. Hay una mezcla de edificios construidos durante las décadas de los años 70's y 80's, con sólo un 2% de casas y edificios estilo Art Decó, y algu
+
+[5] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.509866
+Pendiente de revisión: True
+Fragmento: hubieran resultado dañadas. Aunque en la colonia Hipódromo prácticamente no hubo decesos como consecuencia directa de los sismos, los daños materiales, y los efectos psicológicos, dieron origen a algunos de los conflictos actuales. ================================================================================ PÁGINA 58 ================================================================================ El tener que desalojar los edificios dañados y el temor a pasar nuevamente por una experiencia s
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso HIP-SEM-002: ¿Puedo cambiar el uso de un inmueble habitacional a uno comercial si el negocio que quiero instalar parece compatible con la zona?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.621163
+Pendiente de revisión: True
+Fragmento: Habitacional Mixto 6.6% Centro de Barrio 0.4% Programas Parciales 35.6% Espacios Abiertos 2.9% Equipamiento 5.5% Fuente: Cálculos elaborados en Gabinete sobre la base de la Estrategia de Zonificación de Usos del Suelo, julio de 2006. Programa Delegacional de Desarrollo Urbano en Cuauhtémoc 60 60 Programa Delegacional de Desarrollo Urbano de Cuauhtémoc Cuadro 15. Tabla de Usos del Suelo en Suelo Urbano SIMBOLOGÍA Uso Permitido Uso Prohibido Notas 1. Los usos que no están señalados en esta tabla, 
+
+[2] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.661958
+Pendiente de revisión: True
+Fragmento: la Calle Fresno; finalmente de este punto en dirección sur hasta el cruce con Cerrada Sabino donde se ubica el punto de inicio. Polígono 3.- Inicia en el cruce de la Calle Naranjos y el Eje 2 Norte Avenida Eulalia Guzmán ; de este punto continúa en dirección suroriente hasta llegar al cruce con la Calle Ciprés; de este punto continúa en dirección sur hasta llegar al cruce con la Calle Jazmín; de este punto continúa en dirección poniente hasta llegar al cruce con la Calle Naranjos y; finalmente d
+
+[3] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.671191
+Pendiente de revisión: True
+Fragmento: anterior, previo dictamen de la Secretaría de Desarrollo Urbano y Vivienda, en el que se especifiquen claramente las alturas y áreas libres autorizadas. 2. Terrenos con Pendiente Natural en Suelo Urbano a) En pendiente descendente, en relación con la ubicación de la banqueta: El número de niveles que señala la zonificación, deberá respetarse en toda la superficie del terreno a partir del nivel de desplante. En los terrenos con pendiente natural mayor al 65%, se podrán construir muros de contenci
+
+[4] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.699535
+Pendiente de revisión: True
+Fragmento: en las zonificaciones HO, HM, E e I, siempre y cuando no se contradigan con el Programa Delegacional de Desarrollo Urbano vigente, sean compatibles con los usos colindantes y previo Dictamen del Estudio de Impacto Urbano. 4.4.3 Normas de Ordenación Particulares Norma de Ordenación Particular para el incremento de Alturas y Porcentaje de Área Libre Esta norma es aplicable en Suelo Urbano , exceptuando aquellos ubicados en zonas restringidas que indique el Programa de Desarrollo Urbano. Programa D
+
+[5] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 6.3
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 6.3 (Proyectos Urbanos Específicos ==================================================)
+Distancia: 0.702485
+Pendiente de revisión: True
+Fragmento: calle se encuentran también distintos comercios, y en los pisos superiores habitación. SONORA. Su orientación es este-oeste de Insurgentes a Av. México, donde cambia a sudeste-noroeste. Tiene doble sentido de circulación con camellón central; su uso predominante es, al nivel de calle, comercio y habitación, y en los pisos altos habitación. Aunado a la importancia del paso que constituye entre las colonias del oriente y la zona del metro Chapultepec, la sección vial de esta arteria la hace propen
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso HIP-SEM-003: Se ha ingresado una iniciativa ciudadana para cambiar el uso de suelo de una casa en la calle de Amsterdam 155, actualmente es habitacional y lo quieren volver mixto. ¿Cuáles son los pasos para hacer ese cambio y en qué se deben fundamentar?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.742329
+Pendiente de revisión: True
+Fragmento: anterior, previo dictamen de la Secretaría de Desarrollo Urbano y Vivienda, en el que se especifiquen claramente las alturas y áreas libres autorizadas. 2. Terrenos con Pendiente Natural en Suelo Urbano a) En pendiente descendente, en relación con la ubicación de la banqueta: El número de niveles que señala la zonificación, deberá respetarse en toda la superficie del terreno a partir del nivel de desplante. En los terrenos con pendiente natural mayor al 65%, se podrán construir muros de contenci
+
+[2] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.745688
+Pendiente de revisión: True
+Fragmento: Habitacional Mixto 6.6% Centro de Barrio 0.4% Programas Parciales 35.6% Espacios Abiertos 2.9% Equipamiento 5.5% Fuente: Cálculos elaborados en Gabinete sobre la base de la Estrategia de Zonificación de Usos del Suelo, julio de 2006. Programa Delegacional de Desarrollo Urbano en Cuauhtémoc 60 60 Programa Delegacional de Desarrollo Urbano de Cuauhtémoc Cuadro 15. Tabla de Usos del Suelo en Suelo Urbano SIMBOLOGÍA Uso Permitido Uso Prohibido Notas 1. Los usos que no están señalados en esta tabla, 
+
+[3] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.750418
+Pendiente de revisión: True
+Fragmento: la Calle Fresno; finalmente de este punto en dirección sur hasta el cruce con Cerrada Sabino donde se ubica el punto de inicio. Polígono 3.- Inicia en el cruce de la Calle Naranjos y el Eje 2 Norte Avenida Eulalia Guzmán ; de este punto continúa en dirección suroriente hasta llegar al cruce con la Calle Ciprés; de este punto continúa en dirección sur hasta llegar al cruce con la Calle Jazmín; de este punto continúa en dirección poniente hasta llegar al cruce con la Calle Naranjos y; finalmente d
+
+[4] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.768538
+Pendiente de revisión: True
+Fragmento: almacenamiento y tratamiento. 3.3. Estrategia Demográfica Para revertir el proceso de despoblamiento y de cambios de uso del suelo, se deberá actuar sobre los factores que más han influido en estos fenómenos, alentando la recuperación de espacios para ser ocupados por población residente, mediante un programa que: a) Estimule la construcción de vivienda en lotes baldíos y predios construidos que, con la actual normatividad, sólo son rentables si se destinan para otros usos. b) En virtud de una m
+
+[5] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 42
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 42, Fracc. XXII
+Distancia: 0.771659
+Pendiente de revisión: True
+Fragmento: Los decretos que en materia de Programas sean aprobados por el Pleno de la Asamblea, surtirán sus efectos en la fecha que dispongan los artículos transitorios de los mismos, con tal de que su publicación en la Gaceta Oficial del Distrito Federal sea anterior, sin necesidad de que tales decretos sean inscritos en el Registro de los Planes y Programas de Desarrollo Urbano, ni en el Registro Público de la Propiedad y de Comercio. Artículo 42 Bis. Cuando la Asamblea reciba una iniciativa de decreto 
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso CUA-SEM-001: ¿Qué criterios establece el programa de desarrollo urbano para determinar si una actividad comercial es compatible con el uso de suelo de un predio?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.503636
+Pendiente de revisión: True
+Fragmento: en las zonificaciones HO, HM, E e I, siempre y cuando no se contradigan con el Programa Delegacional de Desarrollo Urbano vigente, sean compatibles con los usos colindantes y previo Dictamen del Estudio de Impacto Urbano. 4.4.3 Normas de Ordenación Particulares Norma de Ordenación Particular para el incremento de Alturas y Porcentaje de Área Libre Esta norma es aplicable en Suelo Urbano , exceptuando aquellos ubicados en zonas restringidas que indique el Programa de Desarrollo Urbano. Programa D
+
+[2] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.512447
+Pendiente de revisión: True
+Fragmento: Habitacional Mixto 6.6% Centro de Barrio 0.4% Programas Parciales 35.6% Espacios Abiertos 2.9% Equipamiento 5.5% Fuente: Cálculos elaborados en Gabinete sobre la base de la Estrategia de Zonificación de Usos del Suelo, julio de 2006. Programa Delegacional de Desarrollo Urbano en Cuauhtémoc 60 60 Programa Delegacional de Desarrollo Urbano de Cuauhtémoc Cuadro 15. Tabla de Usos del Suelo en Suelo Urbano SIMBOLOGÍA Uso Permitido Uso Prohibido Notas 1. Los usos que no están señalados en esta tabla, 
+
+[3] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.534983
+Pendiente de revisión: True
+Fragmento: Programa Delegacional de Desarrollo Urbano, que acorde con los lineamientos del Programa General de Desarrollo Urbano del Distrito Federal, versión 2003, establece las particularidades dentro de la demarcación mediante el plano “E-3 Zonificación y Normas de Ordenación”. En los Programas Parciales de Desarrollo Urbano vigentes, se precisan y detallan las zonificaciones, de áreas especificas de la Delegación. En ambos instrumentos, se señalan las zonificaciones correspondientes a suelo urbano, pre
+
+[4] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.558022
+Pendiente de revisión: True
+Fragmento: permitidos se contará a partir del nivel resultante arriba del nivel medio de banqueta. Este último podrá tener una altura máxima de 1.80 m sobre el nivel medio de banqueta. d) Todas las edificaciones de más de 6 niveles, deberán observar una restricción mínima en la colindancia posterior de un 15% de su altura y una separación que no podrá ser menor a 4 metros, debiendo cumplir con lo establecido en el Reglamento de Construcciones para el Distrito Federal, con respecto a patios de iluminación y
+
+[5] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.563068
+Pendiente de revisión: True
+Fragmento: anterior, previo dictamen de la Secretaría de Desarrollo Urbano y Vivienda, en el que se especifiquen claramente las alturas y áreas libres autorizadas. 2. Terrenos con Pendiente Natural en Suelo Urbano a) En pendiente descendente, en relación con la ubicación de la banqueta: El número de niveles que señala la zonificación, deberá respetarse en toda la superficie del terreno a partir del nivel de desplante. En los terrenos con pendiente natural mayor al 65%, se podrán construir muros de contenci
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso CUA-SEM-002: ¿Qué restricciones de construcción o aprovechamiento del inmueble pueden limitar un proyecto comercial, aunque el uso de suelo sea compatible?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.628191
+Pendiente de revisión: True
+Fragmento: Habitacional Mixto 6.6% Centro de Barrio 0.4% Programas Parciales 35.6% Espacios Abiertos 2.9% Equipamiento 5.5% Fuente: Cálculos elaborados en Gabinete sobre la base de la Estrategia de Zonificación de Usos del Suelo, julio de 2006. Programa Delegacional de Desarrollo Urbano en Cuauhtémoc 60 60 Programa Delegacional de Desarrollo Urbano de Cuauhtémoc Cuadro 15. Tabla de Usos del Suelo en Suelo Urbano SIMBOLOGÍA Uso Permitido Uso Prohibido Notas 1. Los usos que no están señalados en esta tabla, 
+
+[2] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.631951
+Pendiente de revisión: True
+Fragmento: corredor comercial de Insurgentes. El polígono de esta zona se delimita por: Insurgentes, Nuevo León, Bajío, Culiacán, Quintana Roo, Villahermosa, Baja California, Chilpancingo y Campeche. Los usos específicos permitidos en esta zona, se pueden apreciar en la tabla de usos de suelo. La intensidad máxima permitida para la construcción es de 8 niveles, con un 40% de área libre mínima y, 90 m2 de área mínima de vivienda. Finalmente, el Programa Delegacional a nivel de zonificación secundaria declar
+
+[3] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 15
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 15, Fracc. III
+Distancia: 0.634547
+Pendiente de revisión: True
+Fragmento: No podrán colocarse enseres en los siguientes espacios: a) Arroyo vehicular de vías primarias; b) Arroyo vehicular que cuente con ciclovía contigua a la banqueta; c) Áreas verdes; d) Zonas que impidan u obstruyan elementos de accesibilidad para personas con discapacidad; e) Zonas prohibidas para estacionarse; f) Zonas de parquímetro no autorizada; g) Vías de acceso controlado; h) Carriles exclusivos para la circulación de transporte público; i) Bahías de ascenso y descenso; j) Recepción de valet
+
+[4] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.641117
+Pendiente de revisión: True
+Fragmento: anterior, previo dictamen de la Secretaría de Desarrollo Urbano y Vivienda, en el que se especifiquen claramente las alturas y áreas libres autorizadas. 2. Terrenos con Pendiente Natural en Suelo Urbano a) En pendiente descendente, en relación con la ubicación de la banqueta: El número de niveles que señala la zonificación, deberá respetarse en toda la superficie del terreno a partir del nivel de desplante. En los terrenos con pendiente natural mayor al 65%, se podrán construir muros de contenci
+
+[5] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.651791
+Pendiente de revisión: True
+Fragmento: en las zonificaciones HO, HM, E e I, siempre y cuando no se contradigan con el Programa Delegacional de Desarrollo Urbano vigente, sean compatibles con los usos colindantes y previo Dictamen del Estudio de Impacto Urbano. 4.4.3 Normas de Ordenación Particulares Norma de Ordenación Particular para el incremento de Alturas y Porcentaje de Área Libre Esta norma es aplicable en Suelo Urbano , exceptuando aquellos ubicados en zonas restringidas que indique el Programa de Desarrollo Urbano. Programa D
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso CUA-SEM-003: Se quiere cambiar el uso de suelo del predio del Junior Club y pasarlo de infraestructura a uso mixto, con el objetivo de poder construir una torre comercial. ¿Qué limitaciones o requisitos mencionan las leyes y programas de desarrollo urbano para poder realizar dicho cambio?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.619628
+Pendiente de revisión: True
+Fragmento: en las zonificaciones HO, HM, E e I, siempre y cuando no se contradigan con el Programa Delegacional de Desarrollo Urbano vigente, sean compatibles con los usos colindantes y previo Dictamen del Estudio de Impacto Urbano. 4.4.3 Normas de Ordenación Particulares Norma de Ordenación Particular para el incremento de Alturas y Porcentaje de Área Libre Esta norma es aplicable en Suelo Urbano , exceptuando aquellos ubicados en zonas restringidas que indique el Programa de Desarrollo Urbano. Programa D
+
+[2] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 29.90
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 29.90 (Oficinas, 69, 15.87 Comercio, 15, 3.45 Equipamiento, 17, 3.91 Restaurante, 13, 2)
+Distancia: 0.622668
+Pendiente de revisión: True
+Fragmento: almacenamiento y tratamiento. 3.3. Estrategia Demográfica Para revertir el proceso de despoblamiento y de cambios de uso del suelo, se deberá actuar sobre los factores que más han influido en estos fenómenos, alentando la recuperación de espacios para ser ocupados por población residente, mediante un programa que: a) Estimule la construcción de vivienda en lotes baldíos y predios construidos que, con la actual normatividad, sólo son rentables si se destinan para otros usos. b) En virtud de una m
+
+[3] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.623299
+Pendiente de revisión: True
+Fragmento: Habitacional Mixto 6.6% Centro de Barrio 0.4% Programas Parciales 35.6% Espacios Abiertos 2.9% Equipamiento 5.5% Fuente: Cálculos elaborados en Gabinete sobre la base de la Estrategia de Zonificación de Usos del Suelo, julio de 2006. Programa Delegacional de Desarrollo Urbano en Cuauhtémoc 60 60 Programa Delegacional de Desarrollo Urbano de Cuauhtémoc Cuadro 15. Tabla de Usos del Suelo en Suelo Urbano SIMBOLOGÍA Uso Permitido Uso Prohibido Notas 1. Los usos que no están señalados en esta tabla, 
+
+[4] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.629259
+Pendiente de revisión: True
+Fragmento: anterior, previo dictamen de la Secretaría de Desarrollo Urbano y Vivienda, en el que se especifiquen claramente las alturas y áreas libres autorizadas. 2. Terrenos con Pendiente Natural en Suelo Urbano a) En pendiente descendente, en relación con la ubicación de la banqueta: El número de niveles que señala la zonificación, deberá respetarse en toda la superficie del terreno a partir del nivel de desplante. En los terrenos con pendiente natural mayor al 65%, se podrán construir muros de contenci
+
+[5] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 42
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 42, Fracc. XXII
+Distancia: 0.645121
+Pendiente de revisión: True
+Fragmento: La solicitud deberá referirse a cambios del uso del suelo para instalar: a) Comercio, servicios, administración y oficinas de bajo impacto urbano, en locales de hasta 250 m² de superficie construida y, en inmuebles afectos al patrimonio cultural urbano de hasta 750 m², previa opinión del Director del Patrimonio Cultural Urbano de la Secretaría. En ambos casos, los usos de gasolinerías, verificentros, rastros, frigoríficos, mudanzas y paquetería, no podrán autorizarse. Se entenderá por uso de baj
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LEM-SEM-001: ¿Qué obligaciones tienen los establecimientos mercantiles para evitar que el ruido de sus actividades afecte a los vecinos?
+
+[1] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 30
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 30
+Distancia: 0.582155
+Pendiente de revisión: True
+Fragmento: Los límites máximos permisibles para las emisiones sonoras dentro de establecimientos mercantiles se determinan en función de decibeles ponderados en A (dB(A)). Dentro de los establecimientos mercantiles los límites máximos de emisiones sonoras, sin importar su fuente, se llevará a cabo dentro del rango y horarios que se indican a continuación, sin perjuicio de las obligaciones específicas que en materia de horarios establezcan estas y otras leyes: a) De las 6:00 a 22:00 horas 85 dB (A), y b) De
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 10
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. XV
+Distancia: 0.622838
+Pendiente de revisión: True
+Fragmento: No generar ruido al exterior que afecte el derecho de terceros. La omisión a esta fracción se atenderá conforme a la Ley de Cultura Cívica y la Ley Ambiental de Protección a la Tierra, ambas vigentes en la Ciudad de México. Apartado B: Además de lo señalado en el Apartado A, los titulares de los establecimientos mercantiles de giros de impacto vecinal e impacto zonal respectivamente, deberán: I. Exhibir en lugar visible los números de sitios de taxis debidamente autorizados por la Secretaría de 
+
+[3] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 81
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 81
+Distancia: 0.627349
+Pendiente de revisión: True
+Fragmento: Los afectados por actos y/o resoluciones de la autoridad, podrán a su elección interponer el Recurso de Inconformidad previsto en la Ley de Procedimiento Administrativo de la Ciudad de México, o intentar el juicio de nulidad ante el Tribunal de Justicia Administrativa de la Ciudad de México. TRANSITORIOS Primero. - Esta Ley entrará en vigor a los treinta días hábiles siguiente al de su publicación en la Gaceta Oficial del Distrito Federal, asimismo la Secretaría de Desarrollo Económico en coordi
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 71
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 71, Fracc. IX
+Distancia: 0.641402
+Pendiente de revisión: True
+Fragmento: Por utilizar aislantes de sonido que pongan en riesgo la seguridad de los usuarios; Cuando exista oposición a la ejecución de la clausura, el Instituto podrá hacer uso de la fuerza pública en términos de la Ley de Procedimiento Administrativo de la Ciudad de México. Artículo 71 Bis. - El incumplimiento a las siguientes obligaciones normativas consideradas no graves en principio no será motivo de clausura: I. Cuando se detecten en verificación modificaciones a las condiciones originalmente manife
+
+[5] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 2
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 2, Fracc. XIV
+Distancia: 0.642995
+Pendiente de revisión: True
+Fragmento: Giro de Impacto Zonal: Las actividades desarrolladas en un establecimiento mercantil que por sus características inciden en las condiciones viales y por los niveles de ruido en la tranquilidad de las áreas cercanas, en los términos del artículo 26 de la presente Ley;
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LEM-SEM-002: ¿Qué avisos, permisos o trámites se necesitan para que un negocio como una cafetería, un restaurante o un bar pueda operar legalmente y qué condiciones debe cumplir según el tipo de establecimiento?
+
+[1] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 29
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 29
+Distancia: 0.657102
+Pendiente de revisión: True
+Fragmento: En todos los giros en los que se vendan bebidas alcohólicas, queda estrictamente prohibida la modalidad de barra libre o cualquier promoción similar. Asimismo, en los lugares donde exista cuota de admisión general o se cobre el pago por derecho de ad misión o entrada no se podrá exentar el pago del mismo ni hacer distinción en el precio, en atención al género. Para efectos de esta Ley, se entenderá por barra libre la modalidad comercial a través de la cual los usuarios, por medio de un pago únic
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 2
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 2, Fracc. IV
+Distancia: 0.658879
+Pendiente de revisión: True
+Fragmento: Aviso: trámite administrativo mediante el cual las personas físicas o morales por conducto de su representante legal, a través del Sistema manifiestan bajo protesta de decir verdad que cumplen con los requisitos previstos en la Ley, para los siguientes avisos: a) Apertura de un establecimiento mercantil con giro de bajo impacto; b) Apertura de un establecimiento mercantil con giro de impacto vecinal y su revalidación; c) Modificación del domicilio de establecimiento mercantil con motivo de cambi
+
+[3] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 10
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. IX
+Distancia: 0.670533
+Pendiente de revisión: True
+Fragmento: Exhibir y/o señalar en un lugar visible al público y con caracteres legibles: a) El horario en el que se prestarán los servicios ofrecidos; b) Un croquis que ubique claramente las rutas de evacuación, sólo cuando así lo disponga la normatividad en gestión integral de riesgos y protección civil; c) La prohibición de fumar en el establecimiento; y d) La capacidad de aforo manifestada en el Aviso o Solicitud de Permiso.
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 32
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 32, Fracc. II
+Distancia: 0.671712
+Pendiente de revisión: True
+Fragmento: Pago de derechos efectuado y datos de la oficina receptora Lo anterior, en el entendido que el Aviso y el Permiso se deberán presentar por medio del sistema, manifestando bajo protesta de decir verdad que las condiciones originales para el funcionamiento no han variado. En el caso de la revalidación de impacto zonal, la autorización, prevención o rechazo se notificarán para que el interesado las reciba en la Ventanilla Única. En ambos casos, el Aviso o Solicitud de revalidación deberá presentars
+
+[5] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 31
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 31, Fracc. XII
+Distancia: 0.676487
+Pendiente de revisión: True
+Fragmento: Pago de derechos efectuado y datos de la oficina receptora. Tratándose de establecimientos mercantiles que presten servicios de hospedaje, deberán cumplir con lo dispuesto en los artículos 2, fracción XXV, y 23 de la presente Ley. Párrafo adicionado G.O. CDMX 19/12/25 Una vez cubiertos los requisitos señalados en el presente artículo y en los demás que indique la presente Ley, así como las disposiciones en materia de protección civil y el correspondiente programa de seguridad, después de haber c
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LEM-SEM-003: ¿Qué puede hacer la autoridad si se sospecha que un establecimiento opera incumpliendo sus obligaciones y qué medidas o sanciones contempla la ley?
+
+[1] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 71
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 71, Fracc. IX
+Distancia: 0.626761
+Pendiente de revisión: True
+Fragmento: Por utilizar aislantes de sonido que pongan en riesgo la seguridad de los usuarios; Cuando exista oposición a la ejecución de la clausura, el Instituto podrá hacer uso de la fuerza pública en términos de la Ley de Procedimiento Administrativo de la Ciudad de México. Artículo 71 Bis. - El incumplimiento a las siguientes obligaciones normativas consideradas no graves en principio no será motivo de clausura: I. Cuando se detecten en verificación modificaciones a las condiciones originalmente manife
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 66
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 66
+Distancia: 0.652473
+Pendiente de revisión: True
+Fragmento: Se sancionará con el equivalente de 351 a 2500 veces la Unidad de Cuenta de la Ciudad de México vigente, el incumplimiento de las obligaciones contempladas o el incurrir en las prohibiciones que señalan los artículos 10 apartado A fracciones I, II, IV, V, VI, VII párrafo segundo, X I, XII, XIII y XIV; 10 apartado B fracciones V, VI y VIII; 11 fracciones I, II, V, VI, IX, X; 13; 18; 20; 22 fracción XI segundo y tercer párrafo; 24; 25 párrafo tercero; 26 párrafo cuarto; 27; 28 párrafo tercero; 29;
+
+[3] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 67
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 67
+Distancia: 0.652849
+Pendiente de revisión: True
+Fragmento: Se sancionará con el equivalente de 1000 a 3000 veces la Unidad de Cuenta de la Ciudad de México vigente y con clausura permanente , a los titulares de establecimientos de bajo impacto que en el Aviso correspondiente hubieren proporcionado información falsa, no cuenten con los documentos cuyos datos hubieren ingresado al Sistema o éstos fueren falsos . En caso de que se detectare falsedad en los términos de este artículo, la Alcaldía o el Instituto de Verificación Administrativa de la Ciudad de 
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 68
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 68
+Distancia: 0.656844
+Pendiente de revisión: True
+Fragmento: Se sancionará a los titulares de establecimientos de impacto vecinal y zonal que hubieren proporcionado información falsa, no cuenten con los documentos cuyos datos hubieren ingresado al Sistema o éstos fueren falsos, no cuenten con programa interno de protección civil en los términos de la normatividad de gestión integral de riesgos y protección civil, o no cuenten con el visto bueno de la Secretaría de Gobierno a que se refiere el artículo 27 Bis de esta Ley, de la siguiente forma: a) Para los
+
+[5] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 61
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 61
+Distancia: 0.657574
+Pendiente de revisión: True
+Fragmento: La contravención a las disposiciones de la Ley dará lugar, dependiendo de la gravedad, a la imposición de cualquiera de las siguientes sanciones y medidas de seguridad: imposición de sanciones económicas, clausura o suspensión temporal de actividades de los establecimientos mercantiles y la revocación de los Avisos y /o Permisos. En caso de la imposición de sanciones económicas a que se refieren los artículos 64, 65, 66, 67, 68 y 69 de la presente Ley, el Titular así como el o los dependientes d
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LDU-SEM-001: ¿Qué documento oficial permite comprobar el uso de suelo autorizado para un inmueble y qué información debe verificarse antes de instalar un negocio?
+
+[1] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 59
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 59
+Distancia: 0.572175
+Pendiente de revisión: True
+Fragmento: La Alcaldía ordenará a personal autorizado por el Instituto para realizar visitas de verificación y así vigilar que los establecimientos mercantiles cumplan con las obligaciones contenidas en la presente Ley, conforme a la Ley de Instituto de Verificación Administrativa, la Ley de Procedimiento Administrativo y el Reglamento de Verificación Administrativa, todos vigente s en la Ciudad de México y aplicarán las sanciones que se establecen en este ordenamiento, sin perjuicio de las demás sanciones
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 2
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 2, Fracc. XXVIII
+Distancia: 0.572323
+Pendiente de revisión: True
+Fragmento: Verificación: El acto administrativo por medio del cual, la autoridad, a través de los servidores públicos autorizados para tales efectos, comprueba el cumplimiento de las disposiciones jurídicas aplicables para el funcionamiento de los establecimientos mercantiles.
+
+[3] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 10
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. IV
+Distancia: 0.576687
+Pendiente de revisión: True
+Fragmento: Permitir el acceso al establecimiento mercantil al personal autorizado por el Instituto para que , en el ámbito de su competencia, realice las funciones de verificación. Dicho personal deberá estar debidamente identificado y mostrar la orden de verificación correspondiente. Los integrantes de corporaciones policíacas que se encuentren cumpliendo una comisión legalmente ordenada, podrán tener acceso únicamente el tiempo necesario para llevar a cabo dicha comisión; en caso de atender la denuncia d
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 33
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 33, Fracc. V
+Distancia: 0.57795
+Pendiente de revisión: True
+Fragmento: Si el solicitante es extranjero, los datos de la Autorización expedida por la Secretaría de Gobernación, conforme a la cual se le permita llevar a cabo la actividad d e que se trate.
+
+[5] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 8
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 8, Fracc. V
+Distancia: 0.57806
+Pendiente de revisión: True
+Fragmento: Informar de manera oficial y pública del resultado de las verificaciones realizadas sobre el funcionamiento de establecimientos mercantiles asentados en la demarcación correspondiente de acuerdo a la Ley de Transparencia, Acceso a la Información Pública y Rendición de Cuentas de la Ciudad de México y a la Ley de Protección de Datos Personales en Posesión de Sujetos Obligados de la Ciudad de México;
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LDU-SEM-002: ¿Qué procedimiento legal se debe seguir si se pretende modificar el uso de suelo y el número de pisos permitido para construir en un predio?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.606674
+Pendiente de revisión: True
+Fragmento: permitidos se contará a partir del nivel resultante arriba del nivel medio de banqueta. Este último podrá tener una altura máxima de 1.80 m sobre el nivel medio de banqueta. d) Todas las edificaciones de más de 6 niveles, deberán observar una restricción mínima en la colindancia posterior de un 15% de su altura y una separación que no podrá ser menor a 4 metros, debiendo cumplir con lo establecido en el Reglamento de Construcciones para el Distrito Federal, con respecto a patios de iluminación y
+
+[2] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.610158
+Pendiente de revisión: True
+Fragmento: anterior, previo dictamen de la Secretaría de Desarrollo Urbano y Vivienda, en el que se especifiquen claramente las alturas y áreas libres autorizadas. 2. Terrenos con Pendiente Natural en Suelo Urbano a) En pendiente descendente, en relación con la ubicación de la banqueta: El número de niveles que señala la zonificación, deberá respetarse en toda la superficie del terreno a partir del nivel de desplante. En los terrenos con pendiente natural mayor al 65%, se podrán construir muros de contenci
+
+[3] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.657844
+Pendiente de revisión: True
+Fragmento: en las zonificaciones HO, HM, E e I, siempre y cuando no se contradigan con el Programa Delegacional de Desarrollo Urbano vigente, sean compatibles con los usos colindantes y previo Dictamen del Estudio de Impacto Urbano. 4.4.3 Normas de Ordenación Particulares Norma de Ordenación Particular para el incremento de Alturas y Porcentaje de Área Libre Esta norma es aplicable en Suelo Urbano , exceptuando aquellos ubicados en zonas restringidas que indique el Programa de Desarrollo Urbano. Programa D
+
+[4] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 42
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 42, Fracc. XXII
+Distancia: 0.660744
+Pendiente de revisión: True
+Fragmento: La solicitud deberá referirse a cambios del uso del suelo para instalar: a) Comercio, servicios, administración y oficinas de bajo impacto urbano, en locales de hasta 250 m² de superficie construida y, en inmuebles afectos al patrimonio cultural urbano de hasta 750 m², previa opinión del Director del Patrimonio Cultural Urbano de la Secretaría. En ambos casos, los usos de gasolinerías, verificentros, rastros, frigoríficos, mudanzas y paquetería, no podrán autorizarse. Se entenderá por uso de baj
+
+[5] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.669776
+Pendiente de revisión: True
+Fragmento: Habitacional Mixto 6.6% Centro de Barrio 0.4% Programas Parciales 35.6% Espacios Abiertos 2.9% Equipamiento 5.5% Fuente: Cálculos elaborados en Gabinete sobre la base de la Estrategia de Zonificación de Usos del Suelo, julio de 2006. Programa Delegacional de Desarrollo Urbano en Cuauhtémoc 60 60 Programa Delegacional de Desarrollo Urbano de Cuauhtémoc Cuadro 15. Tabla de Usos del Suelo en Suelo Urbano SIMBOLOGÍA Uso Permitido Uso Prohibido Notas 1. Los usos que no están señalados en esta tabla, 
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LDU-SEM-003: ¿Qué facultades tienen las autoridades de desarrollo urbano para verificar un posible uso de suelo irregular y cuál es el procedimiento para iniciar dicha verificación?
+
+[1] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 92
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 92
+Distancia: 0.607384
+Pendiente de revisión: True
+Fragmento: El Registro de Planes y Programas expedirá los certificados únicos de zonificación de uso del suelo; Certificados Únicos de Zonificación de Uso del Suelo Digitales, y en su caso, los de acreditación de uso del suelo por derechos adquiridos. Se entenderá por Certificado Único de Zonificación de Uso del Suelo Digital el documento público en el que se hacen constar las disposiciones específicas que para un predio o inmueble determinado establecen los instrumentos de planeación del desarrollo urbano
+
+[2] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 45
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 45
+Distancia: 0.609808
+Pendiente de revisión: True
+Fragmento: Los usos del suelo que se establezcan en los programas o en las determinaciones administrativas que se dicten en aplicación de esta Ley, respetarán los derechos adquiridos por los propietarios o poseedores de predios, o sus causahabientes, que de man era continua y legítima hayan aprovechado esos usos, en su totalidad o en unidades identificables, en los supuestos que se establezcan en el reglamento. Los derechos adquiridos prescribirán al término de un año en que se deje de ejercer el uso de qu
+
+[3] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 7
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 7, Fracc. XXII
+Distancia: 0.610676
+Pendiente de revisión: True
+Fragmento: Ordenar y realizar visitas de verificación, así como calificar las actas correspondientes, en obras que requieran dictamen de impacto urbano, explotación de minas, canteras y/o yacimientos pétreos, mobiliario urbano con o sin publicidad integrada, publicidad exterior y anuncios en general instalados o visibles desde vías primarias, e imponer las sanciones que correspondan. La Secretaría ejercerá las atribuciones previstas en esta fracción, siempre que no se encuentren atribuidas a otra dependenc
+
+[4] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 3
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 3, Fracc. XXXV
+Distancia: 0.617689
+Pendiente de revisión: True
+Fragmento: Suelo urbano: Las zonas a las que el Programa General clasifique como tales, por contar con infraestructura, equipamiento y servicios y que no se encuentren clasificadas como suelo de conservación de acuerdo con el Programa General de Ordenamiento Ecológico del Distrito Federal, salvo los cascos urbanos de los poblados rurales;
+
+[5] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 24
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 24, Fracc. XIII
+Distancia: 0.618833
+Pendiente de revisión: True
+Fragmento: La Comisión determinará el destino y prioridad de los recursos aportados al Fideicomiso al que se refiere el artículo 24 Sexies de la presente Le y. Artículo 24 Sexies. La Secretaría de Finanzas constituirá un Fideicomiso de Asentamientos Humanos Irregulares de la Ciudad de México, cuyo objeto será destinar los fondos aportados, a la ejecución de las siguientes acciones, en orden de prelación: a la restauración ambiental del suelo afectado; a la adquisición de predios ubicados en Suelo Urbano, d
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LCC-SEM-001: ¿Qué puedo hacer si un negocio genera ruido excesivo, genera basura en la calle y, en general, altera la tranquilidad de quienes vivimos cerca?
+
+[1] Documento: Ley de Cultura Cívica de la Ciudad de México
+Artículo: 27
+Cita: Ley de Cultura Cívica de la Ciudad de México, Art. 27, Fracc. III
+Distancia: 0.756753
+Pendiente de revisión: True
+Fragmento: Producir o causar ruidos por cualquier medio que notoriamente atenten contra la tranquilidad o represente un posible riesgo a la salud;
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 30
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 30
+Distancia: 0.773503
+Pendiente de revisión: True
+Fragmento: Los límites máximos permisibles para las emisiones sonoras dentro de establecimientos mercantiles se determinan en función de decibeles ponderados en A (dB(A)). Dentro de los establecimientos mercantiles los límites máximos de emisiones sonoras, sin importar su fuente, se llevará a cabo dentro del rango y horarios que se indican a continuación, sin perjuicio de las obligaciones específicas que en materia de horarios establezcan estas y otras leyes: a) De las 6:00 a 22:00 horas 85 dB (A), y b) De
+
+[3] Documento: Programa Parcial de Desarrollo Urbano Hipódromo
+Artículo: 6.3
+Cita: Programa Parcial de Desarrollo Urbano Hipódromo, Sección 6.3 (Proyectos Urbanos Específicos ==================================================)
+Distancia: 0.796878
+Pendiente de revisión: True
+Fragmento: registró una temperatura media de 14.9ºC y un promedio de precipitación de 785.4 mm. En general el régimen térmico se encuentra dentro de los límites ideales de confort ambiental 15-16ºC de temperatura media anual. Las temperaturas mínimas, cercanas a 0ºC, se registran durante los meses de enero y diciembre, aunque es notorio que los días de heladas en la zona han disminuido en los últimos años, hasta su evidente desaparición. Esto se debe al fenómeno de "isla de calor" que se presenta en la ciu
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 10
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 10, Fracc. XV
+Distancia: 0.803312
+Pendiente de revisión: True
+Fragmento: No generar ruido al exterior que afecte el derecho de terceros. La omisión a esta fracción se atenderá conforme a la Ley de Cultura Cívica y la Ley Ambiental de Protección a la Tierra, ambas vigentes en la Ciudad de México. Apartado B: Además de lo señalado en el Apartado A, los titulares de los establecimientos mercantiles de giros de impacto vecinal e impacto zonal respectivamente, deberán: I. Exhibir en lugar visible los números de sitios de taxis debidamente autorizados por la Secretaría de 
+
+[5] Documento: Ley de Cultura Cívica de la Ciudad de México
+Artículo: 15
+Cita: Ley de Cultura Cívica de la Ciudad de México, Art. 15, Fracc. XVIII
+Distancia: 0.807364
+Pendiente de revisión: True
+Fragmento: Contribuir a generar un ambiente libre de contaminación auditiva que altere la tranquilidad o represente un posible riesgo a la salud de terceros, trátese de vivienda de interés social, popular o residencial;
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LCC-SEM-002: ¿Qué infracciones cívicas podrían cometerse cuando un establecimiento utiliza las banquetas para poner mesas o impide el libre paso de los peatones?
+
+[1] Documento: Ley de Cultura Cívica de la Ciudad de México
+Artículo: 28
+Cita: Ley de Cultura Cívica de la Ciudad de México, Art. 28, Fracc. XIX
+Distancia: 0.675875
+Pendiente de revisión: True
+Fragmento: Llevar los conductores del servicio de transporte público al interior del vehículo, a personas que los acompañen y que no sean usuarios, que los auxilien en el cobro del pasaje o a invitar a subirse a los usuarios o a distribuirse en la unidad, que obstaculicen el paso a los usuarios. Artículo 28 BIS. Son infracciones especiales contra la seguridad ciudadana relacionadas con la ocupación de la vía y el espacio público: I. Apartar con cualquier objeto lugares de estacionamiento en la vía y espaci
+
+[2] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 15
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 15, Fracc. III
+Distancia: 0.725617
+Pendiente de revisión: True
+Fragmento: No podrán colocarse enseres en los siguientes espacios: a) Arroyo vehicular de vías primarias; b) Arroyo vehicular que cuente con ciclovía contigua a la banqueta; c) Áreas verdes; d) Zonas que impidan u obstruyan elementos de accesibilidad para personas con discapacidad; e) Zonas prohibidas para estacionarse; f) Zonas de parquímetro no autorizada; g) Vías de acceso controlado; h) Carriles exclusivos para la circulación de transporte público; i) Bahías de ascenso y descenso; j) Recepción de valet
+
+[3] Documento: Ley de Cultura Cívica de la Ciudad de México
+Artículo: 33
+Cita: Ley de Cultura Cívica de la Ciudad de México, Art. 33
+Distancia: 0.726173
+Pendiente de revisión: True
+Fragmento: Sin perjuicio de la obligación de reparar el daño causado que determine la autoridad civil competente, la persona que sea declarada responsable de la conducta prevista en la fracción XVII, del artículo 28 y se negare a repararlo, será sancionado como infracción tipo D, o bien por multa cuya cuantificación deberá estar relacionada con el monto del daño, de la siguiente manera: a) Multa por el equivalente de 50 a 110 veces la Unidad de Medida, cuando el monto del daño causado no exceda de 110 vece
+
+[4] Documento: Ley de Establecimientos Mercantiles para la Ciudad de México
+Artículo: 15
+Cita: Ley de Establecimientos Mercantiles para la Ciudad de México, Art. 15, Fracc. IX
+Distancia: 0.730911
+Pendiente de revisión: True
+Fragmento: Las demás que se establezcan en la normativa aplicable. La Alcaldía ordenará el retiro inmediato de los enseres en los casos que se constate a través de visita de verificación, que su colocación o instalación contraviene lo dispuesto por la Ley. El retiro lo hará el titular y ante su negativa u omisión, lo ordenará la Alcaldía a costa de aquél en los términos de la Ley de Procedimiento Administrativo de la Ciudad de México. Artículo 15 bis. Los establecimientos mercantiles que no cuenten con fac
+
+[5] Documento: Ley de Cultura Cívica de la Ciudad de México
+Artículo: 28
+Cita: Ley de Cultura Cívica de la Ciudad de México, Art. 28, Fracc. XVII
+Distancia: 0.733211
+Pendiente de revisión: True
+Fragmento: Causar daño a un bien mueble o inmueble ajeno, en forma culposa y con motivo del tránsito de vehículos. Obra culposamente la persona que produce el daño, que no previó siendo previsible o previó confiado en que no se produciría, en virtud de la violación de un deber de cuidado que objetivamente era necesario observar. Si con los elementos de prueba ofrecidos por las partes a la Persona Juzgadora no es posible determinar quién es el responsable del daño causado, no se aplicará multa alguna y en e
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Caso LCC-SEM-003: ¿Cómo se tramita una queja o denuncia por una conducta que afecta la convivencia entre vecinos y qué autoridades intervienen?
+
+[1] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.783031
+Pendiente de revisión: True
+Fragmento: los actuales acuerdos de gestión. Con el propósito de reforzar la interacción de la Delegación con los diferentes organismos y dependencias tanto del Gobierno Local, como del Estatal y/o del Federal, se plantean distintos instrumentos de coordinación, a fin de realizar el ejercicio óptimo de las funcione s que tiene a su cargo la Delegación, por lo que pueden establecerse comisiones de trabajo a través de las cueles, la Delegación puede apoyar, elaborar, y/o emitir opiniones a las autoridades, o
+
+[2] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 47
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 47, Fracc. XVIII
+Distancia: 0.793792
+Pendiente de revisión: True
+Fragmento: Para la determinación de la ejecución de las obras derivadas de los dictámenes técnicos descritos en la fracción XVII de este artículo, y previo a la ocupación, la Comisión para el Mejoramiento de la Infraestructura y el Equipamiento del Distrito Federal, en coordinación con el Órgano Político Administrativo correspondiente, determinará los calendarios de obra, presupuestos de las obras a ejecutar y, asimismo, otorgará el visto bueno al cumplimiento de dichas obras y acciones. Artículo 47 Quinqu
+
+[3] Documento: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc
+Artículo: 30.356
+Cita: Programa Delegacional de Desarrollo Urbano de Cuauhtémoc, Sección 30.356 (Cuauhtémoc 516.255 515.123 526.662 542.346 560.190 569.332 54.209 Miguel Hidalgo)
+Distancia: 0.798056
+Pendiente de revisión: True
+Fragmento: públicos. Servicios Urbanos Regulación del uso y ocupación del espacio aéreo e instalación de estaciones repetidoras de telefonía celular. Territorio delegacional Corto, Mediano y Largo. Medio Ambiente Incrementar los viajes de recolección de basura, principalmente en la s zonas de intensa actividad comercial. Restringir el tránsito de vehículos de carga así como maniobras de carga y descarga en horarios pico. Mejorar la dotación de áreas verdes y compensar la escasez de parques y jardines, medi
+
+[4] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 110
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 110
+Distancia: 0.799301
+Pendiente de revisión: True
+Fragmento: Se le impondrán de tres meses a cinco años de prisión y de 500 a 2000 días multa, a quien para instalar, modificar o ampliar la exposición visual de un anuncio, pode, desmoche o tale uno o más arboles sin autorización, permiso o licencia de la autoridad competente para otorgarla. Las penas previstas en este artículo se duplicaran cuando una o más de las conductas descritas en el párrafo anterior se desarrolle en una área natural protegida o área de valor ambiental, de conformidad con las disposi
+
+[5] Documento: Ley de Desarrollo Urbano del Distrito Federal
+Artículo: 106
+Cita: Ley de Desarrollo Urbano del Distrito Federal, Art. 106
+Distancia: 0.804023
+Pendiente de revisión: True
+Fragmento: La acción pública es el instrumento jurídico por medio del cual el Tribunal, conoce de manera directa las situaciones fácticas o jurídicas contra los que se inconformen las personas físicas o morales que acrediten tener interés legítimo o los órganos de representación ciudadana, que se consideren afectados en su patrimonio o en su esfera jurídica, que incida directamente en la armonía de la comunidad del accionante, por construcciones, cambios de uso del suelo o cambios del destino del suelo u o
+
+Anotación manual pendiente: identificar cuáles resultados son pertinentes para la pregunta. No se calcula Precision@5 definitiva con referencias incompletas.
+
+Resultados semánticos mostrados: 80. La cantidad recuperada no representa por sí sola la calidad.
+
+=== RESUMEN ===
+Pruebas estructuradas aprobadas: 11
+Pruebas estructuradas fallidas: 0
+Evaluación semántica: requiere revisión humana.
+Revisión jurídica y vigencia normativa: pendientes.
