@@ -1263,3 +1263,147 @@ No se debe modificar la infraestructura terraform/base, cambiar needs_review = t
 Conclusión
 La evaluación estructurada de la Semana 5 pasó los 11 casos incluidos, pero la evaluación semántica revela una calidad de recuperación insuficiente para considerar el recuperador validado: 56.25 % de los resultados anotados fueron directos o parcialmente pertinentes, y una consulta no recuperó resultados pertinentes en el top 5. La prioridad es mejorar la trazabilidad y diagnosticar extracción, chunking, metadatos y embeddings antes de modificar la estrategia de recuperación.
 La aceptación del recuperador deberá basarse en un protocolo versionado, un conjunto fijo de consultas, anotaciones reproducibles, métricas explícitas, ausencia de regresiones críticas y revisión de las citas. El criterio formal de éxito se documentará en docs/protocolo_evaluacion_retriever.md y deberá aplicarse sobre una nueva ejecución reproducible; los resultados actuales constituyen la línea base inicial, no una aprobación final.
+
+
+## Semana 6 — Generación de respuestas con citas
+### Cierre técnico — 29 de octubre de 2026
+
+### Objetivo
+
+Implementar una función que reciba una pregunta en español y devuelva una respuesta generada con un único modelo de lenguaje y referencias a los fragmentos recuperados. La función debe poder ejecutarse y probarse desde la consola mediante una interfaz CLI.
+
+El alcance de esta semana se limitó a resolver la arquitectura y comprobar la ejecución técnica del flujo. No se realizó una evaluación de calidad del recuperador ni una validación de la corrección jurídica de las respuestas.
+
+### Implementación
+
+Se incorporaron los siguientes archivos locales:
+
+- `generar_respuesta.py`: función `answer_question()`, responsable de coordinar la recuperación de información, construir el contexto, invocar el modelo generativo y estructurar el resultado.
+- `prompts/respuesta_legal.txt`: instrucciones utilizadas para generar respuestas en el contexto jurídico del proyecto.
+- `scripts/responder_cli.py`: interfaz de terminal que recibe una pregunta y presenta el resultado en formato JSON.
+- `tests/test_generar_respuesta.py`: pruebas unitarias de la función utilizando dependencias simuladas.
+
+La función recibe una pregunta y admite parámetros para limitar el número de fragmentos recuperados y especificar el identificador del modelo. También permite inyectar dependencias para facilitar las pruebas.
+
+La respuesta se estructura en campos como `status`, `question`, `answer`, `citations`, `limitations` y `model_id`.
+
+Los fragmentos recuperados reciben identificadores temporales (`F1`, `F2`, etc.). La validación implementada comprueba que las referencias emitidas por el modelo correspondan a fragmentos que efectivamente se proporcionaron en el contexto. Esta comprobación no demuestra que la interpretación jurídica de cada cita sea correcta.
+
+### Flujo de ejecución
+
+La arquitectura implementada para esta prueba es:
+
+Pregunta del usuario
+  ↓
+scripts/responder_cli.py
+  ↓
+answer_question()
+  ↓
+Retriever existente
+  ↓
+Amazon Bedrock — generación de embedding
+  ↓
+Aurora PostgreSQL + pgvector
+  ↓
+Fragmentos recuperados
+  ↓
+Construcción del contexto y del prompt
+  ↓
+Amazon Bedrock Converse — Claude Sonnet 4.6
+  ↓
+Validación de identificadores de cita
+  ↓
+Respuesta estructurada en JSON
+
+Se reutilizó el recuperador existente. No se modificaron el esquema de Aurora, los embeddings, el proceso de ingesta ni la infraestructura Terraform.
+
+### Configuración y conectividad verificadas
+
+Para ejecutar la prueba integrada se comprobó lo siguiente:
+
+- Aurora PostgreSQL Serverless v2 se encontraba en estado `available`.
+- La instancia administrativa utilizada para el acceso mediante AWS Systems Manager aparecía como `Online`.
+- Se abrió un túnel SSM desde el puerto local `15432` hacia el puerto PostgreSQL `5432` de Aurora.
+- La prueba de conectividad TCP al puerto `127.0.0.1:15432` terminó correctamente.
+- Se verificó la conexión mediante `psql` a la base `tododerechovecino`, con el usuario `tdv_admin`.
+- El motor respondió como PostgreSQL 16.15.
+- Se configuró la variable de entorno `BEDROCK_MODEL_ID` con el perfil `us.anthropic.claude-sonnet-4-6`.
+- Se verificó que el perfil de inferencia de Claude Sonnet 4.6 estuviera en estado `ACTIVE` en `us-east-1`.
+
+### Incidencias y resolución
+
+**1. Variable de entorno del modelo**
+
+La primera ejecución de la CLI devolvió el mensaje:
+
+`Falta configurar la variable de entorno BEDROCK_MODEL_ID.`
+
+Se resolvió configurando la variable en la terminal:
+
+`export BEDROCK_MODEL_ID="us.anthropic.claude-sonnet-4-6"`
+
+**2. Acceso a Anthropic en Amazon Bedrock**
+
+La siguiente ejecución devolvió `ResourceNotFoundException`. La prueba directa mediante Bedrock Runtime permitió identificar que faltaba presentar los datos de uso de Anthropic para la cuenta.
+
+Se completó el formulario correspondiente en AWS. Posteriormente, la invocación directa de Claude mediante la operación Converse respondió:
+
+`OK`
+
+Con ello se confirmó que el modelo podía ser invocado desde la cuenta y región utilizadas.
+
+**3. Prueba de integración**
+
+Una vez habilitado el modelo, se volvió a ejecutar la CLI con una pregunta sobre las disposiciones que regulan los establecimientos mercantiles en la colonia Hipódromo.
+
+La ejecución devolvió una estructura JSON con información de la pregunta, referencias a fragmentos recuperados, metadatos de las fuentes y el identificador del modelo.
+
+La salida compartida incluyó el fragmento `F3`, procedente del Programa Parcial de Desarrollo Urbano Hipódromo, sección 6.3.
+
+La respuesta también incluyó la advertencia:
+
+`Al menos una fuente citada está marcada como pendiente de revisión; su contenido requiere validación jurídica.`
+
+### Comando de ejecución
+
+La interfaz puede ejecutarse desde la raíz del repositorio con:
+
+`PYTHONPATH=. python scripts/responder_cli.py "¿Qué disposiciones regulan el funcionamiento de establecimientos mercantiles en la colonia Hipódromo?"`
+
+La ejecución requiere:
+
+- Entorno virtual Python activo.
+- Variable `BEDROCK_MODEL_ID` configurada.
+- Credenciales AWS y permisos para invocar los modelos necesarios.
+- Acceso a Aurora mediante el túnel SSM.
+- Variable `PGPASSFILE` configurada para la conexión PostgreSQL.
+
+### Resultado y criterio de cierre
+
+Se completó la prueba técnica de la función generadora mediante consola/CLI, utilizando el recuperador existente, Aurora PostgreSQL con pgvector y un único modelo generativo en Amazon Bedrock.
+
+El flujo llegó a la generación y devolvió una respuesta estructurada con referencias a fragmentos recuperados.
+
+Por tanto, se considera cumplido el objetivo técnico de la Semana 6: disponer de una función que recibe una pregunta y devuelve una respuesta con citas, probada mediante CLI.
+
+Este resultado acredita la integración técnica ejecutada. No acredita la pertinencia jurídica de los fragmentos recuperados, la vigencia de las disposiciones ni la corrección de las conclusiones generadas.
+
+### Limitaciones que se conservan
+
+- Los identificadores de cita `F1`, `F2`, etc. son temporales.
+- La validación de citas comprueba la existencia de los identificadores entre las fuentes proporcionadas al modelo, no la correspondencia jurídica entre cada afirmación y su fundamento.
+- Los fragmentos mantienen el indicador `pendiente_revision`; no se modificó su estado.
+- No se evaluó la calidad de recuperación ni se calcularon métricas nuevas.
+- No se integró todavía la consulta estructurada `retrieve_land_use()` en el flujo de generación.
+- La prueba se realizó desde el entorno local mediante CLI. No representa todavía una integración con API Gateway, Lambda o frontend.
+
+### Archivos de la entrega
+
+- `generar_respuesta.py`
+- `prompts/respuesta_legal.txt`
+- `scripts/responder_cli.py`
+- `tests/test_generar_respuesta.py`
+
+### Siguiente etapa
+
+La siguiente etapa se definirá conforme al cronograma de la estancia. La implementación actual queda como base para continuar la integración del MVP, sin ampliar en este cierre el alcance de la evaluación jurídica ni modificar la arquitectura acordada.
