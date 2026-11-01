@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import Mock
+from unittest.mock import patch
 
 from generar_respuesta import answer_question
 
@@ -85,12 +86,13 @@ class TestGenerarRespuesta(unittest.TestCase):
         self.cliente.converse.assert_not_called()
 
     def test_sin_modelo_configurado(self):
-        resultado = answer_question(
-            "¿Qué establece la norma?",
-            model_id="",
-            retriever_fn=lambda pregunta, top_k: self.resultados,
-            bedrock_client=self.cliente,
-        )
+        with patch.dict("os.environ", {}, clear=True):
+            resultado = answer_question(
+                "¿Qué establece la norma?",
+                model_id="",
+                retriever_fn=lambda pregunta, top_k: self.resultados,
+                bedrock_client=self.cliente,
+            )
 
         self.assertEqual(resultado["status"], "error")
         self.assertIsNone(resultado["model_id"])
