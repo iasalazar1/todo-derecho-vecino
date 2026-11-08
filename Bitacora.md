@@ -1407,3 +1407,137 @@ Este resultado acredita la integración técnica ejecutada. No acredita la perti
 ### Siguiente etapa
 
 La siguiente etapa se definirá conforme al cronograma de la estancia. La implementación actual queda como base para continuar la integración del MVP, sin ampliar en este cierre el alcance de la evaluación jurídica ni modificar la arquitectura acordada.
+
+## Semana 7 — Backend serverless y publicación de la API
+
+### Fecha de cierre
+8 de noviembre de 2026.
+
+### Objetivo
+Integrar el flujo RAG en un backend serverless desplegado en AWS y exponerlo mediante un endpoint HTTPS para recibir consultas sobre uso de suelo en la Ciudad de México.
+
+### Arquitectura implementada
+
+```text
+Cliente HTTP
+    |
+    | POST /consulta
+    v
+Amazon API Gateway (HTTP API)
+    |
+    v
+AWS Lambda: todo-derecho-vecino-api
+    |
+    +--> Amazon Titan Embed Text V2
+    |
+    +--> Aurora PostgreSQL + pgvector
+    |       recuperación de fragmentos
+    |
+    +--> Prompt jurídico
+    |
+    +--> Amazon Bedrock / Claude Sonnet 4.6
+    |
+    v
+Respuesta JSON con respuesta y fuentes
+```
+
+### Trabajo realizado
+
+#### 1. Función Lambda
+
+Se desplegó la función `todo-derecho-vecino-api` con runtime Python 3.12, arquitectura x86_64, memoria de 512 MB y timeout de 28 segundos. La función se ejecuta en subredes privadas y utiliza un grupo de seguridad dedicado. Se configuraron las variables de entorno para la conexión con Aurora y la lectura del secreto administrado por AWS Secrets Manager.
+
+El paquete `build/lambda-deployment.zip` incorpora `lambda_function.py`, `generar_respuesta.py`, `retriever.py`, `generar_embeddings.py`, `prompts/respuesta_legal.txt` y las dependencias de ejecución. El paquete se validó antes del despliegue. La actualización del código de Lambda mediante Terraform terminó con un recurso modificado y sin altas ni destrucciones.
+
+#### 2. Conectividad privada y permisos
+
+Se configuraron endpoints de interfaz para `bedrock-runtime`, `secretsmanager` y `logs`, desplegados en la subred privada A. El grupo de seguridad de Lambda permite salida hacia Aurora por el puerto 5432 y hacia los endpoints por HTTPS/443; el grupo de seguridad de los endpoints permite entrada HTTPS/443 desde Lambda.
+
+Se creó el rol de ejecución `TodoDerechoVecino-Lambda-Execution`, con permisos para ejecución dentro de VPC, invocación de los modelos de Bedrock y lectura del secreto de Aurora. La configuración evita incorporar una salida general a Internet mediante NAT Gateway.
+
+#### 3. Prueba directa de Lambda
+
+Antes de publicar la API se invocó directamente la función con una consulta sobre las actividades reguladas por la Ley de Establecimientos Mercantiles de la Ciudad de México. La invocación devolvió `StatusCode: 200` y una respuesta en español con `status: answered`, modelo `us.anthropic.claude-sonnet-4-6` y fuentes `[F1]` a `[F5]`.
+
+Esta prueba confirmó el funcionamiento integrado de Lambda, Secrets Manager, Aurora, pgvector, Titan y Claude antes de incorporar API Gateway.
+
+#### 4. API Gateway
+
+Se creó mediante Terraform una API HTTP con integración proxy AWS hacia Lambda, ruta `POST /consulta`, formato de payload `2.0` y etapa `$default` con despliegue automático. Se añadió el permiso para que API Gateway invoque la función Lambda.
+
+La etapa quedó configurada con throttling de 5 solicitudes por segundo y ráfaga de 10. El despliegue concluyó con:
+
+```text
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+```
+
+Endpoint HTTPS:
+
+`https://1zhgtujka8.execute-api.us-east-1.amazonaws.com`
+
+Ruta:
+
+`POST https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta`
+
+La API quedó sin autenticación (`authorization_type = "NONE"`). Esta configuración permite realizar las pruebas del MVP, pero cualquier persona que conozca la URL puede intentar invocarla; no debe considerarse apta para producción.
+
+### Pruebas HTTP y resultados
+
+Las pruebas se realizaron desde el equipo local mediante `curl` contra el endpoint publicado.
+
+| Prueba | Solicitud | Resultado observado | Evaluación |
+|---|---|---|---|
+| Consulta válida | `POST /consulta` con `question` | HTTP 200; JSON con `status: answered`, respuesta y cinco fuentes `[F1]`–`[F5]` | Aprobada |
+| Campo obligatorio ausente | `POST /consulta` con `{}` | HTTP 400; `El campo question es obligatorio.` | Aprobada |
+| Método no definido | `GET /consulta` | HTTP 404; `Not Found` | Aprobada |
+
+La consulta válida fue: «¿Qué actividades regula la Ley de Establecimientos Mercantiles de la Ciudad de México?». La respuesta describió, con base en los fragmentos recuperados, la definición de establecimiento y giro mercantil, centros o plazas comerciales, salones de fiesta y establecimientos de hospedaje. Incluyó referencias a los artículos 2, 20 y 23 de la Ley.
+
+### Resultados técnicos
+
+Las pruebas confirman el recorrido de extremo a extremo: el cliente envía una petición HTTPS; API Gateway la entrega a Lambda; Lambda valida la solicitud; Titan genera el embedding; el recuperador consulta Aurora/pgvector; el generador construye el prompt e invoca Claude mediante Bedrock; finalmente Lambda devuelve JSON con respuesta, fuentes y limitaciones.
+
+**Resultado: integración técnica del backend serverless y publicación de la API completadas y probadas mediante solicitudes HTTP reales.**
+
+### Limitaciones y asuntos pendientes
+
+#### Revisión jurídica
+
+Las cinco fuentes de la respuesta de prueba conservaron el indicador `pendiente_revision: true`. Las pruebas demuestran que el sistema recupera fragmentos y los presenta como fuentes, pero no acreditan su validación jurídica ni que cada fragmento respalde semánticamente todas las afirmaciones.
+
+Se requiere revisar manualmente la vigencia de las disposiciones y reformas, la correspondencia del texto con la fuente normativa, la exactitud de artículos y fracciones, la pertinencia de cada fragmento y la suficiencia de la evidencia para responder cada consulta.
+
+#### Seguridad de la API
+
+La API se encuentra publicada sin autenticación. Antes de cualquier uso con usuarios externos o información sensible deberá incorporarse un mecanismo de control de acceso y revisarse la protección contra abuso, los límites de consumo y los costos. El throttling configurado es una medida básica de control de solicitudes y no sustituye la autenticación.
+
+#### Alcance de las pruebas
+
+La prueba realizada acredita una consulta de extremo a extremo y dos comportamientos de validación HTTP. No representa una evaluación exhaustiva de la calidad del RAG, cobertura del corpus, precisión jurídica o comportamiento bajo carga.
+
+### Estado frente al cronograma
+
+**Semana 7 completada en su componente de backend serverless e integración HTTP.**
+
+Entregables técnicos verificados:
+- Lambda desplegada y ejecutable.
+- Conexión funcional con Aurora PostgreSQL y pgvector.
+- Integración con Titan Embed Text V2 y Claude Sonnet 4.6.
+- API Gateway HTTP desplegado mediante Terraform.
+- Endpoint HTTPS con ruta `POST /consulta`.
+- Respuesta JSON con citas.
+- Validación HTTP de consulta correcta, cuerpo incompleto y método no definido.
+
+Pendientes:
+1. Revisión jurídica y de vigencia del corpus y de las citas.
+2. Evaluación semántica de respuestas con preguntas representativas.
+3. Incorporación de autenticación antes de considerar el endpoint apto para producción.
+4. Documentación de operación y reconstrucción del ambiente, incluyendo API Gateway y Lambda.
+5. Revisión de costos y monitoreo de la infraestructura desplegada.
+
+### Evidencia de despliegue y control de versiones
+
+Los resultados de Terraform y las respuestas HTTP obtenidas el 8 de noviembre de 2026 constituyen la evidencia de esta etapa. El endpoint publicado fue `https://1zhgtujka8.execute-api.us-east-1.amazonaws.com`.
+
+La actualización de esta bitácora no modifica infraestructura AWS, configuración de puertos ni archivos de código. El registro se incorpora a la rama `mvp-estancia` mediante el commit de documentación correspondiente.
+
