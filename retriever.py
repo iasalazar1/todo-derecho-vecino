@@ -126,8 +126,15 @@ def _get_aurora_credentials(
         )
 
     credentials = {
-        "host": secret.get("host"),
-        "port": secret.get("port", 5432),
+        "host": (
+            secret.get("host")
+            or os.environ.get("DB_HOST")
+        ),
+        "port": (
+            secret.get("port")
+            or os.environ.get("DB_PORT")
+            or 5432
+        ),
         "dbname": (
             secret.get("dbname")
             or secret.get("database")

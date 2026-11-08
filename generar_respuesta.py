@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import logging
 from pathlib import Path
 from typing import Any, Callable
 
@@ -212,7 +213,11 @@ def answer_question(
             "limitations": limitations,
             "model_id": chosen_model,
         }
+
     except CitationIntegrityError as exc:
+        logging.getLogger(__name__).exception(
+            "Error de integridad de citas: %s", exc
+        )
         return {
             "status": "error",
             "question": question.strip(),
@@ -221,13 +226,18 @@ def answer_question(
             "limitations": [str(exc)],
             "model_id": chosen_model,
         }
+
     except Exception as exc:
-        # La API devuelve un estado controlado; el detalle técnico no se expone como fundamento legal.
+        logging.getLogger(__name__).exception(
+            "Error al recuperar información o generar respuesta"
+        )
         return {
             "status": "error",
             "question": question.strip(),
             "answer": "",
             "citations": [],
-            "limitations": [f"No fue posible completar la generación ({type(exc).__name__})."],
+            "limitations": [
+                f"No fue posible completar la generación ({type(exc).__name__})."
+            ],
             "model_id": chosen_model,
         }

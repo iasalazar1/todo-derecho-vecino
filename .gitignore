@@ -17,3 +17,10 @@ crash.*.log
 
 # Resultados locales de embeddings
 salida/
+
+# Artefactos locales de despliegue
+build/
+respuesta_lambda.json
+
+# Respaldos locales
+*.backup-*
