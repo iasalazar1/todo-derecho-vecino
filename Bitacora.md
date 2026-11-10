@@ -1541,3 +1541,56 @@ Los resultados de Terraform y las respuestas HTTP obtenidas el 8 de noviembre de
 
 La actualización de esta bitácora no modifica infraestructura AWS, configuración de puertos ni archivos de código. El registro se incorpora a la rama `mvp-estancia` mediante el commit de documentación correspondiente.
 
+## Semana 8 — Frontend web estático y publicación en CloudFront
+
+### Fecha de cierre
+9 de noviembre de 2026.
+
+### Objetivo
+Construir una interfaz web estática, conectarla con `POST /consulta` y entregar un MVP accesible desde un dominio HTTPS público.
+
+### Trabajo realizado
+
+#### 1. Frontend estático
+Se publicaron `index.html`, `styles.css`, `script.js` y `config.js` en S3. El frontend se implementó con HTML, CSS y JavaScript, sin incorporar un framework.
+
+#### 2. S3 y CloudFront
+Se creó y desplegó la infraestructura del frontend en `terraform/base`: bucket S3 privado, distribución CloudFront, Origin Access Control (OAC) y política que permite a CloudFront leer el contenido del bucket.
+
+- Bucket: `todo-derecho-vecino-frontend-857385469837-us-east-1`.
+- Distribución: `E34XFAO1L3C0JJ`.
+- Dominio: `d3oqt1m39hvkdh.cloudfront.net`.
+- URL: https://d3oqt1m39hvkdh.cloudfront.net
+- Estado observado: `Deployed`; distribución habilitada.
+
+El despliegue Terraform de `base` concluyó con `Apply complete! Resources: 8 added, 1 changed, 0 destroyed.`
+
+#### 3. CORS de API Gateway
+Se actualizó `terraform/dev/api_gateway.tf` para incluir el origen HTTPS de CloudFront y conservar `http://localhost:5500`. Se mantuvieron `POST`, `OPTIONS`, `content-type` y `max_age = 300`. Se ejecutaron `terraform fmt`, `terraform validate` y `terraform plan`; el plan reportó un único recurso modificado y cero recursos creados o destruidos. Tras la aprobación del usuario, el apply concluyó con `Apply complete! Resources: 0 added, 1 changed, 0 destroyed.`
+
+#### 4. Prueba pública
+El usuario abrió el frontend de CloudFront, envió una consulta y confirmó que la respuesta fue correcta y similar a la obtenida desde el servidor local. Esto acredita la integración técnica del caso probado, no la calidad global del RAG ni la validez jurídica de las citas.
+
+### Evidencia
+- Frontend público: https://d3oqt1m39hvkdh.cloudfront.net
+- API: `https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta`.
+- CloudFront `E34XFAO1L3C0JJ`, estado `Deployed`.
+- Bucket S3 `todo-derecho-vecino-frontend-857385469837-us-east-1`.
+- CORS aplicado con un recurso modificado y sin altas ni destrucciones.
+- Confirmación del usuario de respuesta correcta desde el frontend público.
+
+### Limitaciones y pendientes
+- La API sigue sin autenticación; es una limitación del MVP y no debe considerarse apta para producción.
+- La prueba pública no es una medición de Precision@k, Recall@k ni una evaluación jurídica.
+- No está confirmado que las preguntas y respuestas espontáneas queden almacenadas como dataset de evaluación. Inspeccionar código y CloudWatch durante Semana 9.
+- Conservar `needs_review = true` / `pendiente_revision: true` hasta revisión jurídica.
+- El estado de apagado de DEV no se infiere de este despliegue; verificarlo con `./terraform/dev-status.sh` antes de cualquier operación de apagado. `terraform/dev-down.sh` no elimina los recursos de frontend de `terraform/base`.
+
+### Estado frente al cronograma
+**Semana 8 completada.** El frontend está publicado y la integración pública con la API fue aceptada por el usuario en el caso probado.
+
+### Siguiente etapa
+Semana 9: pruebas E2E, revisión IAM, CloudWatch básico, throttling, decisión de autenticación y medición diferenciada de calidad operativa, recuperación y generación/citas.
+
+### Control de versiones
+Este registro se incorpora a la rama `mvp-estancia` mediante el commit documental de cierre de Semana 8.
