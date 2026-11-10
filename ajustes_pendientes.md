@@ -1,6 +1,6 @@
 # ajustes_pendientes.md
 # Proyecto: Todo Derecho Vecino — MVP de estancia
-# Última actualización: 9 de noviembre de 2026 — registro de mediciones de calidad para Semana 9
+# Última actualización: 10 de noviembre de 2026 — normalización documental previa a Semana 9
 # Mantenedor: Agente de IA (bajo validación del usuario)
 
 ## 0. Propósito y reglas de uso de este archivo
@@ -29,13 +29,13 @@ deba recordarse entre sesiones debe quedar registrado aquí:
 
 | ID | Descripción | Origen | Estado | Notas |
 |---|---|---|---|---|
-| B8-01 | Verificar que `scripts/probar_retriever.py` exista en el árbol de trabajo real del repo (fue mencionado en la bitácora del 18-oct pero no se confirmó su presencia). | Bitácora 18-oct, sección "Pendiente" | ⬜ Abierto | Si no existe, reconstruirlo antes de S9. |
-| B8-02 | Confirmar estado operativo de AWS: ¿DEV está apagado o encendido? Verificar con `./terraform/dev-status.sh`. | Bitácora S7 y control de costos | ⬜ Abierto | Apagar si no se usará; recordar que Aurora es efímera. |
-| B8-03 | Confirmar que el endpoint responde correctamente desde el frontend público. | Bitácora S7–S8 | ✅ Cerrado — 9-nov-2026 | El usuario confirmó una respuesta correcta desde CloudFront, similar a la prueba local. |
-| B8-04 | Definir estructura del frontend. | Arquitectura MVP + alcance S8 | ✅ Cerrado — 9-nov-2026 | Se implementó frontend estático HTML/CSS/JavaScript, sin framework. |
-| B8-05 | Definir con el usuario cómo se mostrarán las citas `[F1]`–`[F5]` en la UI: ¿inline en el texto, panel lateral, tooltip, lista al final? | Alcance S8 | ⬜ Abierto — requiere decisión del usuario | Recomendación: lista al final + referencias inline clickeables. |
-| B8-06 | Definir si el frontend mostrará al usuario final el indicador `pendiente_revision: true` de cada fuente, o si se ocultará. | Bitácora S5, S7 | ⬜ Abierto — requiere decisión del usuario | Recomendación: mostrar aviso discreto de "fuente preliminar". |
-| B8-07 | Definir si el frontend tendrá algún control de acceso básico (API key, header) o si se dejará abierto como el endpoint actual. | Bitácora S7 (limitación conocida) | ⬜ Abierto — requiere decisión del usuario | Si se deja abierto, registrar como limitación conocida del MVP. |
+| B8-01 | Verificar que `scripts/probar_retriever.py` exista en el árbol de trabajo real del repo. | Bitácora 18-oct | ⬜ Abierto — trasladado a S9 | Confirmar junto con los scripts de evaluación antes de ejecutarlos o versionarlos. |
+| B8-02 | Confirmar estado operativo de AWS: ¿DEV está apagado o encendido? Verificar con `./terraform/dev-status.sh`. | Bitácora S7 y control de costos | ⬜ Abierto — trasladado a S9 | No se infiere el estado de DEV a partir del despliegue del frontend. Verificar antes de pruebas o apagado. |
+| B8-03 | Confirmar que el endpoint `POST https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta` responde correctamente desde el frontend público. | Bitácora S7–S8 | ✅ Cerrado — 9-nov-2026 | El usuario confirmó una respuesta correcta desde CloudFront, similar a la prueba local. |
+| B8-04 | Definir estructura del frontend. | Arquitectura MVP + alcance S8 | ✅ Cerrado — 9-nov-2026 | Se implementó frontend estático con HTML/CSS/JavaScript, sin framework. |
+| B8-05 | Definir y verificar la presentación de citas `[F1]`–`[F5]` con respuestas JSON reales. | Alcance S8 | 🟡 Parcial — revisar en S9 | El frontend ya recibe y presenta respuesta y fuentes; falta revisar casos variados y la interpretación jurídica de cada estado. |
+| B8-06 | Confirmar cómo se presenta al usuario final el indicador `pendiente_revision: true` de cada fuente. | Bitácora S5, S7 | ⬜ Pendiente de verificación en S9 | No asumir que el indicador se muestra correctamente sin revisar el frontend y una respuesta JSON real. |
+| B8-07 | Decidir si se agrega autenticación o se mantiene la API abierta durante el MVP. | Bitácora S7 | ⬜ Requiere decisión del usuario en S9 | La API continúa sin autenticación; está documentada como limitación y no es apta para producción. |
 
 ---
 
@@ -48,10 +48,10 @@ deba recordarse entre sesiones debe quedar registrado aquí:
 | S8-01 | Construir interfaz de chat responsiva. | ✅ Completado — 9-nov-2026 | Frontend estático HTML/CSS/JS publicado en CloudFront. |
 | S8-02 | Conectar frontend al endpoint `/consulta`. | ✅ Completado — 9-nov-2026 | Prueba pública desde CloudFront confirmada por el usuario. |
 | S8-03 | Renderizar respuesta + citas `[F1]`–`[F5]`. | ✅ Completado técnicamente — 9-nov-2026 | La UI presenta respuesta y fuentes; revisión de escenarios y estados jurídicos pasa a S9. |
-| S8-04 | Manejar errores HTTP (400, 404, 5xx) en la UI. | ⬜ Pendiente | — |
-| S8-05 | Añadir indicador de carga mientras se espera respuesta. | ⬜ Pendiente | El timeout de Lambda es 28s. |
-| S8-06 | Documentar el despliegue del frontend en `Instructivo_operacion.md`. | ✅ Completado — 9-nov-2026 | Sección 26: S3, CloudFront, CORS, verificación y distinción BASE/DEV. |
-| S8-07 | Revisar y mejorar la interpretación y presentación de las respuestas de la API en el frontend, sin modificar inicialmente el contrato del backend. | ⬜ Pendiente — después de completar el flujo técnico | Validar con respuestas JSON reales los casos de respuesta con evidencia, citas pendientes de revisión, evidencia insuficiente y error técnico. Ver detalle abajo. |
+| S8-04 | Manejar errores HTTP (400, 404, 5xx) en la UI. | 🟡 Verificación pendiente | Confirmar con pruebas específicas durante E2E de S9. |
+| S8-05 | Añadir indicador de carga mientras se espera respuesta. | 🟡 Verificación pendiente | Confirmar mediante inspección del frontend y prueba de latencia en S9. |
+| S8-06 | Documentar el despliegue del frontend en `Instructivo_operacion.md`. | ✅ Completado — 9-nov-2026 | Nueva sección 26: S3, CloudFront, CORS, verificación y distinción BASE/DEV. |
+| S8-07 | Revisar la interpretación y presentación de respuestas de la API con distintos JSON reales, sin modificar inicialmente el contrato del backend. | ⬜ Trasladado a S9 | Revisar evidencia suficiente, citas pendientes, evidencia insuficiente y error técnico. No cambiar backend/corpus ni marcas de revisión sin autorización. |
 
 #### Criterios pendientes para presentación jurídica de respuestas (S8-07)
 
@@ -160,6 +160,17 @@ Separar tres niveles de medición:
 
 ## 5. Pendientes de documentación y control de versiones
 
+### Fuente maestra y sincronización documental (regla vigente desde 10-nov-2026)
+
+- `Contexto/Bitacora.md` es la fuente maestra de la bitácora.
+- `Contexto/Instructivo_operacion.md` es la fuente maestra del instructivo.
+- `Agente/AGENTS.md` y `Agente/ajustes_pendientes.md` son los documentos maestros de operación del agente y pendientes.
+- Los cuatro archivos homónimos en la raíz de la rama `mvp-estancia` de GitHub deben contener la misma versión que los documentos maestros de la Biblioteca.
+- Actualizar primero la copia de la carpeta de control correspondiente y sincronizar después GitHub. Conservar exactamente los nombres `Bitacora.md`, `Instructivo_operacion.md`, `AGENTS.md` y `ajustes_pendientes.md`.
+- No crear ni mantener como documentos activos variantes con sufijos como `_actualizada`, `_actualizado`, `(1)` o `(2)`. Antes de retirar una copia duplicada, integrar cualquier información exclusiva en la fuente maestra.
+- No hacer commit/push desde un entorno local sin autorización expresa; la sincronización solicitada para esta normalización se realizará en la rama `mvp-estancia`.
+
+
 | ID | Descripción | Origen | Estado |
 |---|---|---|---|
 | D-01 | Revisar el diff de `.gitignore` antes de versionar. | Bitácora 10-oct | ⬜ Abierto |
@@ -242,15 +253,18 @@ Este apartado documenta los datos que faltaron y que se preguntaron al usuario, 
 | — | Retriever híbrido + `land_use_compatibility` (Tabla 22) | Semana 5 | 357 celdas cargadas, pruebas documentadas |
 | — | Generación de respuestas con citas | Semana 6 | Commit `85d7377`, 6 pruebas offline |
 | — | Backend serverless + API Gateway | Semana 7 | Endpoint `https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta` |
+| — | Frontend web estático, S3 privado, CloudFront y CORS de API Gateway | Semana 8 | URL `https://d3oqt1m39hvkdh.cloudfront.net`; distribución `E34XFAO1L3C0JJ`; prueba pública confirmada por el usuario |
 
 ---
 
 ## 10. Próxima acción
 
-Al iniciar la Sesión de Semana 8, el Agente debe:
+Al iniciar la Semana 9, el agente debe:
 
-1. **Presentar un plan de trabajo estructurado** para la Semana 8 (ver `AGENTS.md`, sección 13).
-2. **Esperar validación del usuario** antes de ejecutar cada paso.
-3. **Resolver primero los BLOQUEANTES B8-01 a B8-07**, que requieren decisiones del usuario.
-4. **No avanzar a Semana 9** sin que el usuario dé por cerrada la Semana 8.
-5. **Al cierre de Semana 8:** preguntar al usuario si se da por terminada, generar `Reporte_Semanal_08.md`, actualizar `Bitacora.md` y `ajustes_pendientes.md`.
+1. Leer `AGENTS.md`, la bitácora, `Instructivo_operacion.md` y este archivo.
+2. Verificar rama `mvp-estancia`, `git status` y `git diff --check`.
+3. Verificar estado real de AWS con `./terraform/dev-status.sh`, si aplica.
+4. Inspeccionar código de Lambda y logs existentes para determinar qué datos de consultas se registran (S9-07).
+5. Proponer y validar un conjunto fijo de evaluación y sus criterios antes de medir (S9-08 a S9-10).
+6. Definir límites de telemetría y privacidad antes de conservar consultas reales (S9-11).
+7. Ejecutar un paso a la vez y esperar validación del usuario. No asumir que el cierre de Semana 8 autoriza comenzar Semana 9 sin indicación explícita.
