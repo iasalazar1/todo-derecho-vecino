@@ -7,6 +7,13 @@ resource "aws_apigatewayv2_api" "http" {
     Name    = "todo-derecho-vecino-http-api"
     Project = "todo-derecho-vecino"
   }
+
+  cors_configuration {
+    allow_origins = ["http://localhost:5500"]
+    allow_methods = ["POST", "OPTIONS"]
+    allow_headers = ["content-type"]
+    max_age       = 300
+  }
 }
 
 resource "aws_apigatewayv2_integration" "lambda" {

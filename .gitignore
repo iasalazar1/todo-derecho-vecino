@@ -24,3 +24,6 @@ respuesta_lambda.json
 
 # Respaldos locales
 *.backup-*
+
+# Respaldo local del instructivo; no versionar
+Instructivo_operacion_2.md

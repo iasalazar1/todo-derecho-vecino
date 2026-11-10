@@ -1,147 +1,246 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo derecho vecino</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Todo Derecho Vecino: orientación sobre uso de suelo y normatividad en la Ciudad de México."
+  >
+  <meta name="theme-color" content="#0e2a41">
+
+  <title>Todo Derecho Vecino | Orientación legal</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
+
 <body>
+  <div class="app">
 
-    <h1>Todo derecho vecino</h1>
-    <p class="subtitle">
-        Una herramienta de acompañamiento legal para 
-        ciudadanos afectados por temas vecinales.
-    </p>
+    <!-- Encabezado -->
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Todo Derecho Vecino, inicio">
+        TODO DERECHO VECINO
+      </a>
 
-    <div class="divider"></div>
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mainMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-    <p class="instruction">
-        Elije el problema que tienes para ofrecerte una ruta de solución:
-    </p>
+      <nav class="main-menu" id="mainMenu" hidden>
+        <a href="#inicio">Inicio</a>
+        <a href="#acerca">Acerca del proyecto</a>
+      </nav>
+    </header>
 
-    <div class="button-container">
-        <button id="btnProblema" class="oval-btn">Soy un vecino afectado por un antro irregular sin uso de suelo aprobado</button>
-    </div>
+    <!-- Pantalla de bienvenida -->
+    <main id="inicio" class="welcome-screen">
 
-    <div id="infoBox" class="info-box hidden">
-        <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Plan jurídico para un vecino afectado</title>
-    <style>
-        body {font-family: Arial, sans-serif; line-height: 1.6; margin: 20px;}
-        h1, h2, h3, h4 {margin-top: 1.5em;}
-        .emoji {font-size: 1.2em; vertical-align: middle;}
-        .warning {color: #b71c1c; font-weight: bold;}
-    </style>
-</head>
-<body>
-    <h1><strong>1. Definir claramente el conflicto (Análisis inicial del caso)</strong></h1>
+      <section class="welcome-content" aria-labelledby="welcomeTitle">
 
-<h3>Acciones:</h3>
-<ol>
-    <li><strong>Identificar el hecho generador del conflicto:</strong>– Funcionamiento de un establecimiento irregular (“antro”) sin autorización. – Afectaciones: ruido, riesgos, seguridad, movilidad, violencia, etc.</li>
-    <li><strong>Determinar la consecuencia jurídica relevante:</strong>– Violación a normas administrativas de uso de suelo.  – Posible omisión de la autoridad. </li>
-    <li><strong>Redactar una “teoría preliminar del caso”:</strong>– Qué ocurre. – Por qué es ilegal. – A quién afecta. – Qué quieres lograr: clausura, verificación, sanción, suspensión de actividades.</li>
-</ol>
+        <p class="eyebrow">ORIENTACIÓN LEGAL</p>
 
-<h1><strong>2. Recolección metódica de la prueba</strong></h1>
+        <h1 id="welcomeTitle">
+          Tu derecho a la ciudad,
+          <span>con información.</span>
+        </h1>
 
-<h3>Reúne:</h3>
-<ol>
-    <li><strong>Prueba documental:</strong>– Fotografías del local operando. – Videos mostrando horarios, ruido, aglomeraciones. – Copia del certificado de uso de suelo de tu edificio (para mostrar contraste). – Búsqueda del uso de suelo permitido para el predio del antro. </li>
-    <li><strong>Prueba testimonial:</strong>– Declaraciones de vecinos afectados. – Recopilación de incidentes específicos: fechas, horas, afectaciones.</li>
-    <li><strong>Pruebas periciales posibles:</strong>– Medición de ruido con app calibrada o perito en acústica. – Informe técnico sobre impacto vecinal.</li>
-    <li><strong>Bitácora diaria de afectaciones:</strong>– Fecha – Hora – Descripción del hecho – Evidencia asociada</li>
-</ol>
+        <p class="welcome-description">
+          Consulta dudas sobre uso de suelo y normatividad en la CDMX.
+        </p>
 
-<h1><strong>3. Identificar vías de acción paralelas</strong></h1>
+        <!-- Ilustración: balanza de justicia y diálogo -->
+        <div class="hero-illustration">
+          <svg
+            class="justice-illustration"
+            viewBox="0 0 360 300"
+            role="img"
+            aria-labelledby="illustrationTitle illustrationDescription"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title id="illustrationTitle">
+              Balanza de justicia y burbuja de diálogo
+            </title>
 
-<p>Se trabaja por dos caminos simultáneos:</p>
+            <desc id="illustrationDescription">
+              Ilustración lineal de una balanza de justicia integrada
+              con una burbuja de conversación.
+            </desc>
 
-<h2>A. Vía administrativa (rápida, práctica y de bajo costo)</h2>
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <!-- Eje central -->
+              <path d="M180 58 V235" />
 
-<h3>1. Denuncia ante la alcaldía o municipio</h3>
-<p>Se solicita:</p>
-<ul>
-    <li>Verificación de uso de suelo</li>
-    <li>Inspección de protección civil</li>
-    <li>Revisión de licencia de funcionamiento</li>
-    <li>Clausura temporal o definitiva</li>
-</ul>
-<h3>Documentos necesarios:</h3>
-<ul>
-    <li>Identificación</li>
-    <li>Relato de hechos (ya preparado en tu teoría del caso)</li>
-    <li>Evidencias</li>
-    <li>Firmas de más vecinos (si es posible)</li>
-</ul>
+              <!-- Remate superior -->
+              <path d="M168 58 H192" />
+              <path d="M180 48 V58" />
+              <circle cx="180" cy="43" r="5" />
 
-<h2>B. Vía civil/penal si existe afectación grave</h2>
+              <!-- Brazo de la balanza -->
+              <path d="M105 91 H255" />
+              <circle cx="180" cy="91" r="5" />
 
-<h3>En materia civil:</h3>
-<ul>
-    <li>Demanda por afectaciones a la propiedad y perturbación del derecho de uso y disfrute.</li>
-    <li>Solicitud de <strong>medidas cautelares</strong> para suspender actividades molestas.</li>
-</ul>
-<h3>En materia penal (solo si aplica):</h3>
-<ul>
-    <li>Denuncia por ruido extremo o actividades peligrosas (según leyes locales).</li>
-</ul>
+              <!-- Soporte izquierdo -->
+              <path d="M120 91 L120 145" />
+              <path d="M80 145 H160" />
+              <path d="M80 145 L90 160 H150 L160 145" />
 
-<h1><strong>4. Construcción de la estrategia procesal (núcleo metodológico de litigación)</strong></h1>
-<p>Aquí se refina la <strong>teoría final del caso</strong>:</p>
-<ol>
-    <li><strong>Hechos no controvertidos:</strong>– El local opera. – Es contiguo a tu edificio.</li>
-    <li><strong>Hechos controvertidos:</strong>– Si tiene o no tiene uso de suelo. – Nivel real de afectación.</li>
-    <li><strong>Puntos de derecho relevantes:</strong>– Facultades de verificación de la autoridad. – Derecho a la tranquilidad del hogar. </li>
-    <li><strong>Narrativa persuasiva:</strong>– Mostrar que el problema es continuo y documentado. – Exhibir que afectó a varios vecinos, no solo a uno. – Demostrar que la autoridad debe intervenir.</li>
-</ol>
+              <!-- Soporte derecho -->
+              <path d="M240 91 L240 145" />
+              <path d="M200 145 H280" />
+              <path d="M200 145 L210 160 H270 L280 145" />
 
-<h1><strong>5. Ejecución de acciones frente a la autoridad</strong></h1>
-<ol>
-    <li>Presentar denuncias administrativas → Entregas tu expediente completo ya ordenado.</li>
-    <li>Aportar pruebas desde el inicio → Esto acelera la verificación.</li>
-    <li>Solicitar por escrito copia del folio → Permite dar seguimiento.</li>
-    <li>Dar seguimiento continuo → Visitas presenciales a la oficina correspondiente. → Peticiones de “pronta respuesta”.</li>
-</ol>
+              <!-- Base -->
+              <path d="M145 235 H215" />
+              <path d="M155 225 H205" />
+              <path d="M180 225 V235" />
 
-<h1><strong>6. Preparar caso judicial si la autoridad no actúa</strong></h1>
+              <!-- Burbuja de diálogo -->
+              <path
+                d="M215 178
+                   H292
+                   Q305 178 305 191
+                   V226
+                   Q305 239 292 239
+                   H260
+                   L244 254
+                   V239
+                   H215
+                   Q202 239 202 226
+                   V191
+                   Q202 178 215 178 Z"
+              />
 
-<h3>Posible siguiente paso:</h3>
-<ul>
-    <li><strong>Juicio de amparo por omisión de la autoridad</strong> (si no atienden tus denuncias administrativas). </li>
-</ul>
-<h3>Elementos necesarios:</h3>
-<ul>
-    <li>Copias selladas de tus denuncias.</li>
-    <li>Evidencias de la afectación.</li>
-    <li>Mapa del predio y uso de suelo oficial.</li>
-    <li>Fechas de no actuación de la autoridad.</li>
-</ul>
+              <!-- Líneas de conversación -->
+              <path d="M220 199 H286" />
+              <path d="M220 215 H270" />
 
-<h1><strong>7. Negociación y medidas comunitarias en paralelo</strong></h1>
+              <!-- Detalle de equilibrio -->
+              <path d="M105 91 L95 91" />
+              <path d="M255 91 H265" />
+            </g>
+          </svg>
+        </div>
 
-<ol>
-    <li>Recolectar firmas de vecinos.</li>
-    <li>Enviar carta conjunta a la alcaldía/municipio.</li>
-    <li>Pedir reunión con la jefatura de unidad de verificación.</li>
-    <li>Pedir intervención de policía preventiva en horarios clandestinos. </li>
-</ol>
+        <!-- Acción principal -->
+        <button
+          class="primary-button"
+          id="startConsultation"
+          type="button"
+        >
+          INICIAR CONSULTA
+        </button>
 
-<h1><strong>8. Revisión periódica y ajuste de la estrategia</strong></h1>
+      </section>
+    </main>
 
-<ul>
-    <li>Evaluar qué autoridad respondió y cuál no.</li>
-    <li>Ajustar las pruebas faltantes.</li>
-    <li>Preparar el expediente por si hay que judicializar.</li>
-</ul>
+    <!-- Información del proyecto -->
+    <section
+      id="acerca"
+      class="welcome-screen"
+      aria-labelledby="aboutTitle"
+      hidden
+    >
+      <div class="welcome-content">
 
-    </div>
+        <p class="eyebrow">TODO DERECHO VECINO</p>
 
-    <script src="script.js"></script>
+        <h1 id="aboutTitle">
+          Información para ejercer
+          <span>tu derecho a la ciudad.</span>
+        </h1>
+
+        <p class="welcome-description">
+          Todo Derecho Vecino es un proyecto de orientación
+          que busca facilitar la consulta de fundamentos legales
+          relacionados con el uso de suelo y la normatividad
+          aplicable en la Ciudad de México.
+        </p>
+
+        <p class="welcome-description">
+          El sistema utiliza herramientas de inteligencia artificial
+          para localizar información normativa y presentar referencias
+          que permitan orientar las consultas ciudadanas.
+        </p>
+
+        <p class="legal-notice">
+          La información es orientativa y no constituye un dictamen
+          jurídico. Las disposiciones y referencias requieren
+          verificación de vigencia y aplicabilidad.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- Contenedor de la conversación.
+         Permanecerá oculto hasta iniciar la consulta. -->
+    <main id="consultationScreen" class="consultation-screen" hidden>
+
+      <section class="chat-container" aria-label="Consulta legal">
+
+        <div class="chat-header">
+          <h2>ORIENTACIÓN LEGAL</h2>
+          <p>
+            Describe tu duda sobre uso de suelo o normatividad en la CDMX.
+          </p>
+        </div>
+
+        <div
+          id="chatMessages"
+          class="chat-messages"
+          aria-live="polite"
+          aria-relevant="additions"
+        >
+        </div>
+
+        <form id="consultationForm" class="consultation-form">
+          <label class="visually-hidden" for="questionInput">
+            Escribe tu consulta
+          </label>
+
+          <textarea
+            id="questionInput"
+            name="question"
+            rows="2"
+            maxlength="3000"
+            placeholder="Escribe aquí tu consulta..."
+            required
+          ></textarea>
+
+          <button type="submit" id="sendQuestion">
+            ENVIAR
+          </button>
+        </form>
+
+        <p class="legal-notice">
+          La información proporcionada es orientativa y no constituye
+          un dictamen jurídico. Las disposiciones y citas requieren
+          verificación de vigencia y aplicabilidad.
+        </p>
+
+      </section>
+    </main>
+
+  </div>
 </body>
 </html>
-
