@@ -99,6 +99,55 @@ resource "aws_iam_role_policy" "terraform_deploy" {
         ]
 
         Resource = "arn:aws:s3:::todo-derecho-vecino-*"
+      },
+      {
+        Sid    = "ManageFrontendBucketPolicyAndOwnershipControls"
+        Effect = "Allow"
+
+        Action = [
+          "s3:GetBucketPolicy",
+          "s3:PutBucketPolicy",
+          "s3:DeleteBucketPolicy",
+          "s3:GetBucketOwnershipControls",
+          "s3:PutBucketOwnershipControls",
+          "s3:DeleteBucketOwnershipControls"
+        ]
+
+        Resource = "arn:aws:s3:::todo-derecho-vecino-frontend-${data.aws_caller_identity.current.account_id}-${var.aws_region}"
+      },
+      {
+        Sid    = "ManageCloudFrontDistributionAndOAC"
+        Effect = "Allow"
+
+        Action = [
+          "cloudfront:CreateDistribution",
+          "cloudfront:GetDistribution",
+          "cloudfront:GetDistributionConfig",
+          "cloudfront:UpdateDistribution",
+          "cloudfront:DeleteDistribution",
+          "cloudfront:ListDistributions",
+          "cloudfront:CreateOriginAccessControl",
+          "cloudfront:GetOriginAccessControl",
+          "cloudfront:GetOriginAccessControlConfig",
+          "cloudfront:UpdateOriginAccessControl",
+          "cloudfront:DeleteOriginAccessControl",
+          "cloudfront:ListOriginAccessControls",
+          "cloudfront:TagResource",
+          "cloudfront:UntagResource",
+          "cloudfront:ListTagsForResource"
+        ]
+
+        Resource = "*"
+      },
+      {
+        Sid    = "CreateCloudFrontInvalidations"
+        Effect = "Allow"
+
+        Action = [
+          "cloudfront:CreateInvalidation"
+        ]
+
+        Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/*"
       }
     ]
   })

@@ -9,7 +9,10 @@ resource "aws_apigatewayv2_api" "http" {
   }
 
   cors_configuration {
-    allow_origins = ["http://localhost:5500"]
+    allow_origins = [
+      "http://localhost:5500",
+      "https://d3oqt1m39hvkdh.cloudfront.net"
+    ]
     allow_methods = ["POST", "OPTIONS"]
     allow_headers = ["content-type"]
     max_age       = 300

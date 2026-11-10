@@ -27,3 +27,6 @@ respuesta_lambda.json
 
 # Respaldo local del instructivo; no versionar
 Instructivo_operacion_2.md
+
+# Planes temporales de Terraform
+*.tfplan
