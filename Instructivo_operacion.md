@@ -373,3 +373,84 @@ El siguiente objetivo del proyecto es **Backend serverless**:
 El entregable será un endpoint de prueba que reciba una consulta y devuelva una respuesta con citas. La CLI documentada aquí seguirá siendo una referencia de prueba local del flujo implementado en Semana 6.
 
 No se considera implementado Lambda ni API Gateway hasta que se complete y pruebe la Semana 7.
+
+# 26. Frontend estático en S3 y CloudFront — Semana 8
+
+## 26.1 Arquitectura y recursos
+
+El frontend se publica como sitio estático en S3 y se distribuye mediante CloudFront. El bucket permanece privado; CloudFront utiliza Origin Access Control (OAC) para leer los objetos. El usuario accede por HTTPS.
+
+Recursos desplegados y verificados el 9 de noviembre de 2026:
+
+- Bucket: `todo-derecho-vecino-frontend-857385469837-us-east-1`.
+- Distribución CloudFront: `E34XFAO1L3C0JJ`.
+- Dominio: `d3oqt1m39hvkdh.cloudfront.net`.
+- URL pública: `https://d3oqt1m39hvkdh.cloudfront.net`.
+- Archivos: `index.html`, `styles.css`, `script.js`, `config.js`.
+
+La infraestructura del bucket, OAC, distribución y política de lectura está declarada en `terraform/base`. Estos recursos son persistentes y no forman parte del ciclo de destrucción de `terraform/dev`. No ejecutar `terraform destroy` en `base`.
+
+## 26.2 Publicación o actualización de archivos
+
+Desde la raíz del repositorio, verificar primero el nombre del bucket y que los cuatro archivos correspondan a la versión que se desea publicar. La carga se realiza con AWS CLI:
+
+```bash
+BUCKET="todo-derecho-vecino-frontend-857385469837-us-east-1"
+
+aws s3 cp index.html "s3://${BUCKET}/index.html" --content-type "text/html; charset=utf-8"
+aws s3 cp styles.css "s3://${BUCKET}/styles.css" --content-type "text/css; charset=utf-8"
+aws s3 cp script.js "s3://${BUCKET}/script.js" --content-type "application/javascript; charset=utf-8"
+aws s3 cp config.js "s3://${BUCKET}/config.js" --content-type "application/javascript; charset=utf-8"
+
+aws s3 ls "s3://${BUCKET}/"
+```
+
+Después de publicar, abrir la URL HTTPS y realizar una recarga forzada (`Ctrl + Shift + R`). Si CloudFront sigue entregando contenido anterior, revisar la configuración de caché y decidir si se necesita una invalidación explícita; no afirmar que se hizo una invalidación si no se ejecutó.
+
+## 26.3 Configuración CORS de API Gateway
+
+La API HTTP permite los siguientes orígenes en `terraform/dev/api_gateway.tf`:
+
+```hcl
+cors_configuration {
+  allow_origins = [
+    "http://localhost:5500",
+    "https://d3oqt1m39hvkdh.cloudfront.net"
+  ]
+  allow_methods = ["POST", "OPTIONS"]
+  allow_headers = ["content-type"]
+  max_age       = 300
+}
+```
+
+Si cambia el dominio de CloudFront, actualizar `allow_origins` y revisar el plan antes de aplicar:
+
+```bash
+terraform -chdir=terraform/dev fmt
+terraform -chdir=terraform/dev validate
+terraform -chdir=terraform/dev plan
+```
+
+Revisar que el plan afecte únicamente la configuración esperada de API Gateway. Aplicar solo con autorización explícita mediante `terraform -chdir=terraform/dev apply`.
+
+El cambio aplicado el 9 de noviembre de 2026 reportó `Apply complete! Resources: 0 added, 1 changed, 0 destroyed.`.
+
+## 26.4 Verificación de CloudFront
+
+```bash
+aws cloudfront get-distribution \
+  --id E34XFAO1L3C0JJ \
+  --query 'Distribution.{Estado:Status,Dominio:DomainName,Habilitada:DistributionConfig.Enabled}' \
+  --output table
+```
+
+El estado `Deployed` y `Habilitada: True` confirma que la distribución terminó su despliegue y está habilitada. Después, probar la URL desde un navegador y enviar una consulta. La respuesta correcta de una consulta confirma el funcionamiento técnico de ese caso, no la calidad global del recuperador ni la validez jurídica de las citas.
+
+## 26.5 Reconstrucción y apagado: distinción BASE/DEV
+
+- `terraform/base` contiene el bucket y la distribución del frontend; se conserva entre sprints y no debe destruirse para apagar el entorno de desarrollo.
+- `terraform/dev` contiene API Gateway, Lambda, VPC, Aurora y recursos de apoyo. `./terraform/dev-down.sh` destruye los recursos efímeros de DEV y los datos de Aurora, pero no elimina el bucket ni la distribución de CloudFront declarados en BASE.
+- Al reconstruir DEV, revisar el plan de `dev-up.sh`, confirmar que el origen CloudFront permanece en la configuración CORS de `terraform/dev/api_gateway.tf` y volver a probar `POST /consulta` desde el dominio público una vez que Lambda y Aurora estén operativas.
+- La infraestructura base del frontend y la configuración CORS de DEV son estados Terraform separados. No asumir que reconstruir uno actualiza automáticamente el otro.
+
+**Nota de costos:** CloudFront y el bucket S3 permanecen activos mientras se conserve `terraform/base`. Apagar DEV no apaga ni elimina esos recursos persistentes. Cualquier decisión de retirar CloudFront debe tratarse como un cambio independiente de BASE, con revisión de plan y autorización explícita.
