@@ -1226,187 +1226,97 @@ La Tabla 22 del `PPCU_Hipodromo-80-81.pdf` (páginas 80–81) se incorporó a `l
 
 Esta actualización documental no demuestra que Aurora se haya apagado ni que los cambios se hayan publicado en GitHub. Antes de ejecutar el apagado/destrucción de DEV, comprobar el estado real de AWS, conservar los artefactos de reconstrucción y confirmar que no se necesitan más pruebas en Aurora. Después, revisar `git diff --check`, `git status` y los cambios completos; solo realizar `git add`, `commit` y `push` cuando el usuario lo autorice expresamente.
 
-Evaluación semántica del recuperador — 26 de octubre de 2026
-Objetivo y alcance
-Se ejecutó la batería de evaluación de la Semana 5 para observar el comportamiento del recuperador semántico sobre consultas relacionadas con los cinco instrumentos jurídicos del MVP. La ejecución incluyó 11 casos estructurados y 16 consultas semánticas, con un máximo previsto de cinco resultados por consulta.
-La evaluación técnica no equivale a una validación jurídica. La pertinencia de un fragmento para una pregunta tampoco demuestra, por sí sola, que la norma esté vigente, que la cita sea exacta o que la respuesta jurídica derivada sea correcta.
-Resultados estructurados
-La ejecución registrada reportó 11 de 11 pruebas estructuradas aprobadas. Este resultado acredita que los casos incluidos satisficieron las comprobaciones implementadas por el ejecutor. No demuestra la corrección de todos los usos de suelo posibles ni la cobertura completa de las tablas y zonificaciones del corpus.
-Resultados semánticos anotados manualmente
-Se revisaron 16 consultas y 80 posiciones de resultados. Las etiquetas utilizadas fueron:
-    • 2: relevancia directa.
-    • 1: relevancia parcial.
-    • 0: resultado irrelevante para la consulta.
-Conteo de las anotaciones revisadas:
-    • Relevancia directa (2): 21 de 80 resultados (26.25 %).
-    • Relevancia parcial (1): 24 de 80 (30 %).
-    • Irrelevantes (0): 35 de 80 (43.75 %).
-    • Resultados con relevancia directa o parcial (1 o 2): 45 de 80 (56.25 %).
-Si se consideran relevantes tanto los resultados directos como los parciales, la precisión provisional agregada entre los resultados anotados es 45/80 = 56.25 %. Este valor se puede interpretar como una Precision@5 agregada únicamente bajo estas condiciones: las 16 consultas tienen cinco resultados anotados cada una, y las etiquetas corresponden al orden de recuperación de la ejecución revisada. No debe confundirse con una métrica de calidad jurídica ni con una evaluación independiente de todas las consultas posibles.
-Una consulta, HIP-SEM-002, no recuperó ningún resultado marcado como relevante entre sus cinco posiciones. Las anotaciones identificaron problemas de extracción de tablas, fragmentos incompletos, referencias normativas pertinentes que no aparecieron en el ranking y resultados que no respondían al aspecto específico de la pregunta.
-Limitaciones de la evidencia
-El ejecutor scripts/evaluar_semana5.py muestra solamente los primeros 500 caracteres de cada fragmento (fragmento[:500]). Por tanto, algunas observaciones de texto cortado pueden deberse a la presentación del registro y no necesariamente al contenido completo almacenado en la base de datos. Antes de atribuir el problema al chunking, hay que exportar y revisar el fragmento completo, su identificador y sus metadatos.
-Las anotaciones también describen problemas que no se explican únicamente por el límite de presentación: extracción o representación deficiente de tablas, pérdida de contexto, fragmentos que combinan contenido discontinuo, referencias de artículo inadecuadas y ausencia de resultados pertinentes en algunas consultas.
-El inventario registrado previamente contiene 1,235 chunks y 1,369 embeddings de 1,024 dimensiones. La diferencia de conteos requiere una auditoría de relaciones, identificadores, duplicados y reglas de asociación. La dimensión vectorial por sí sola no identifica el modelo de embeddings ni demuestra que exista un error. No debe modificarse el modelo ni regenerarse el conjunto de embeddings hasta verificar su procedencia y consistencia.
-Decisiones y siguientes pasos
-    1. Conservar la salida original de la ejecución y las anotaciones revisadas como evidencia histórica, sin sobrescribirlas.
-    2. Mejorar el ejecutor para guardar, por ejecución, las consultas, los resultados completos, el orden, los identificadores estables de chunks, los metadatos, las distancias o puntuaciones, los errores y la configuración relevante.
-    3. Persistir las anotaciones manuales en un archivo versionado que identifique de forma inequívoca la ejecución y cada resultado evaluado.
-    4. Auditar extracción, chunking y metadatos. Diferenciar artículos legales de secciones, cuadros y tablas de programas urbanos; conservar el contexto necesario para interpretar cada fragmento.
-    5. Auditar la asociación entre chunks y embeddings, el modelo y su versión, la dimensión, la normalización, la métrica de distancia y la coherencia entre el modelo usado para documentos y consultas.
-    6. Comparar cambios de extracción, chunking, contexto o solapamiento mediante evaluaciones controladas contra una línea base. No cambiar simultáneamente varias etapas sin poder atribuir el efecto.
-    7. Evaluar después, y por separado, alternativas de recuperación híbrida, expansión de sinónimos, filtros y reranking. No asumir que mejorarán los resultados sin medirlos.
-    8. Repetir la batería estructurada y semántica después de cada cambio relevante, registrar regresiones y validar las citas y la vigencia normativa antes de usar los resultados como fundamento jurídico confirmado.
-Estado de infraestructura y validación
-Aurora PostgreSQL fue detenida por el usuario después de la ejecución evaluada. Los resultados del 26 de octubre son evidencia histórica; no representan una nueva ejecución posterior al apagado. Las pruebas de integración que dependan de Aurora deberán esperar a que exista una base de pruebas disponible y se haya verificado el procedimiento seguro de reconstrucción.
-No se debe modificar la infraestructura terraform/base, cambiar needs_review = true ni pendiente_revision = true, ni reemplazar fuentes originales como parte de esta fase de diagnóstico.
-Conclusión
-La evaluación estructurada de la Semana 5 pasó los 11 casos incluidos, pero la evaluación semántica revela una calidad de recuperación insuficiente para considerar el recuperador validado: 56.25 % de los resultados anotados fueron directos o parcialmente pertinentes, y una consulta no recuperó resultados pertinentes en el top 5. La prioridad es mejorar la trazabilidad y diagnosticar extracción, chunking, metadatos y embeddings antes de modificar la estrategia de recuperación.
-La aceptación del recuperador deberá basarse en un protocolo versionado, un conjunto fijo de consultas, anotaciones reproducibles, métricas explícitas, ausencia de regresiones críticas y revisión de las citas. El criterio formal de éxito se documentará en docs/protocolo_evaluacion_retriever.md y deberá aplicarse sobre una nueva ejecución reproducible; los resultados actuales constituyen la línea base inicial, no una aprobación final.
 
+## Evaluación semántica del recuperador — 26 de octubre de 2026
+
+### Objetivo y alcance
+
+Se ejecutó la batería de evaluación de la Semana 5 para observar el comportamiento del recuperador semántico sobre consultas relacionadas con los cinco instrumentos jurídicos del MVP. La ejecución incluyó 11 casos estructurados y 16 consultas semánticas, con un máximo previsto de cinco resultados por consulta.
+
+La evaluación técnica no equivale a una validación jurídica. La pertinencia de un fragmento para una pregunta tampoco demuestra, por sí sola, que la norma esté vigente, que la cita sea exacta o que la respuesta jurídica derivada sea correcta.
+
+### Resultados estructurados
+
+La ejecución registrada reportó 11 de 11 pruebas estructuradas aprobadas. Este resultado acredita que los casos incluidos satisficieron las comprobaciones implementadas por el ejecutor. No demuestra la corrección de todos los usos de suelo posibles ni la cobertura completa de las tablas y zonificaciones del corpus.
+
+### Resultados semánticos anotados manualmente
+
+Se revisaron 16 consultas y 80 posiciones de resultados. Las etiquetas utilizadas fueron:
+
+- 2: relevancia directa.
+- 1: relevancia parcial.
+- 0: resultado irrelevante para la consulta.
+
+Conteo de las anotaciones revisadas:
+
+- Relevancia directa (2): 21 de 80 resultados (26.25 %).
+- Relevancia parcial (1): 24 de 80 (30 %).
+- Irrelevantes (0): 35 de 80 (43.75 %).
+- Resultados con relevancia directa o parcial (1 o 2): 45 de 80 (56.25 %).
+
+Si se consideran relevantes tanto los resultados directos como los parciales, la precisión provisional agregada entre los resultados anotados es 45/80 = 56.25 %. Este valor se puede interpretar como una Precision@5 agregada únicamente bajo estas condiciones: las 16 consultas tienen cinco resultados anotados cada una, y las etiquetas corresponden al orden de recuperación de la ejecución revisada. No debe confundirse con una métrica de calidad jurídica ni con una evaluación independiente de todas las consultas posibles.
+
+Una consulta, HIP-SEM-002, no recuperó ningún resultado marcado como relevante entre sus cinco posiciones. Las anotaciones identificaron problemas de extracción de tablas, fragmentos incompletos, referencias normativas pertinentes que no aparecieron en el ranking y resultados que no respondían al aspecto específico de la pregunta.
+
+### Limitaciones de la evidencia
+
+El ejecutor `scripts/evaluar_semana5.py` muestra solamente los primeros 500 caracteres de cada fragmento (`fragmento[:500]`). Por tanto, algunas observaciones de texto cortado pueden deberse a la presentación del registro y no necesariamente al contenido completo almacenado en la base de datos. Antes de atribuir el problema al chunking, hay que exportar y revisar el fragmento completo, su identificador y sus metadatos.
+
+Las anotaciones también describen problemas que no se explican únicamente por el límite de presentación: extracción o representación deficiente de tablas, pérdida de contexto, fragmentos que combinan contenido discontinuo, referencias de artículo inadecuadas y ausencia de resultados pertinentes en algunas consultas.
+
+El inventario registrado previamente contiene 1,235 chunks y 1,369 embeddings de 1,024 dimensiones. La diferencia de conteos requiere una auditoría de relaciones, identificadores, duplicados y reglas de asociación. La dimensión vectorial por sí sola no identifica el modelo de embeddings ni demuestra que exista un error. No debe modificarse el modelo ni regenerarse el conjunto de embeddings hasta verificar su procedencia y consistencia.
+
+### Decisiones y siguientes pasos
+
+1. Conservar la salida original de la ejecución y las anotaciones revisadas como evidencia histórica, sin sobrescribirlas.
+2. Mejorar el ejecutor para guardar, por ejecución, las consultas, los resultados completos, el orden, los identificadores estables de chunks, los metadatos, las distancias o puntuaciones, los errores y la configuración relevante.
+3. Persistir las anotaciones manuales en un archivo versionado que identifique de forma inequívoca la ejecución y cada resultado evaluado.
+4. Auditar extracción, chunking y metadatos. Diferenciar artículos legales de secciones, cuadros y tablas de programas urbanos; conservar el contexto necesario para interpretar cada fragmento.
+5. Auditar la asociación entre chunks y embeddings, el modelo y su versión, la dimensión, la normalización, la métrica de distancia y la coherencia entre el modelo usado para documentos y consultas.
+6. Comparar cambios de extracción, chunking, contexto o solapamiento mediante evaluaciones controladas contra una línea base. No cambiar simultáneamente varias etapas sin poder atribuir el efecto.
+7. Evaluar después, y por separado, alternativas de recuperación híbrida, expansión de sinónimos, filtros y reranking. No asumir que mejorarán los resultados sin medirlos.
+8. Repetir la batería estructurada y semántica después de cada cambio relevante, registrar regresiones y validar las citas y la vigencia normativa antes de usar los resultados como fundamento jurídico confirmado.
+
+### Estado de infraestructura y validación
+
+Aurora PostgreSQL fue detenida por el usuario después de la ejecución evaluada. Los resultados del 26 de octubre son evidencia histórica; no representan una nueva ejecución posterior al apagado. Las pruebas de integración que dependan de Aurora deberán esperar a que exista una base de pruebas disponible y se haya verificado el procedimiento seguro de reconstrucción.
+
+No se debe modificar la infraestructura `terraform/base`, cambiar `needs_review = true` ni `pendiente_revision = true`, ni reemplazar fuentes originales como parte de esta fase de diagnóstico.
+
+### Conclusión
+
+La evaluación estructurada de la Semana 5 pasó los 11 casos incluidos, pero la evaluación semántica revela una calidad de recuperación insuficiente para considerar el recuperador validado: 56.25 % de los resultados anotados fueron directos o parcialmente pertinentes, y una consulta no recuperó resultados pertinentes en el top 5. La prioridad es mejorar la trazabilidad y diagnosticar extracción, chunking, metadatos y embeddings antes de modificar la estrategia de recuperación.
+
+La aceptación del recuperador deberá basarse en un protocolo versionado, un conjunto fijo de consultas, anotaciones reproducibles, métricas explícitas, ausencia de regresiones críticas y revisión de las citas. El criterio formal de éxito se documentará en `docs/protocolo_evaluacion_retriever.md` y deberá aplicarse sobre una nueva ejecución reproducible; los resultados actuales constituyen la línea base inicial, no una aprobación final.
 
 ## Semana 6 — Generación de respuestas con citas
-### Cierre técnico — 29 de octubre de 2026
 
 ### Objetivo
+Integrar la recuperación del corpus con un único modelo de lenguaje para generar respuestas en español, fundamentadas en los fragmentos recuperados y acompañadas de referencias identificables a sus fuentes.
 
-Implementar una función que reciba una pregunta en español y devuelva una respuesta generada con un único modelo de lenguaje y referencias a los fragmentos recuperados. La función debe poder ejecutarse y probarse desde la consola mediante una interfaz CLI.
+### Trabajo realizado
+- Se integró `generar_respuesta.py` como módulo reutilizable para construir el contexto, invocar el modelo generativo y estructurar la respuesta.
+- Se definió el prompt jurídico en `prompts/respuesta_legal.txt`, con instrucciones para responder con base en la evidencia recuperada, incluir citas y reconocer cuando la información disponible sea insuficiente.
+- Se utilizó un único modelo generativo: Claude Sonnet 4.6 mediante Amazon Bedrock, con identificador `us.anthropic.claude-sonnet-4-6` en `us-east-1`.
+- Se mantuvo Amazon Titan Embed Text V2 (`amazon.titan-embed-text-v2:0`) para generar embeddings de consulta de 1024 dimensiones.
+- Se incorporó `answer_question()` como punto de entrada reutilizable del flujo de pregunta, recuperación, generación y estructuración de respuesta.
+- Se incorporó la identificación de fuentes mediante etiquetas `[F1]`, `[F2]`, etc., vinculadas con los fragmentos recuperados.
+- Se mantuvo la separación entre los modos de recuperación local y Aurora en `retriever.py`.
+- Se añadieron `scripts/responder_cli.py` y pruebas unitarias offline.
 
-El alcance de esta semana se limitó a resolver la arquitectura y comprobar la ejecución técnica del flujo. No se realizó una evaluación de calidad del recuperador ni una validación de la corrección jurídica de las respuestas.
+### Validaciones y resultados
+- Las seis pruebas offline implementadas para esta etapa fueron aprobadas.
+- Se verificó la generación de respuestas y la inclusión de identificadores de fuentes.
+- Se conservaron controles para reconocer evidencia insuficiente.
+- La integración quedó incorporada en el repositorio mediante el commit `85d7377`, publicado en la rama `mvp-estancia`.
 
-### Implementación
+### Limitaciones
+- Las pruebas unitarias offline no demuestran por sí solas la conectividad ni el funcionamiento integral con Aurora.
+- La validación automatizada comprueba la correspondencia de los identificadores de fuente, pero no determina si cada fragmento respalda semánticamente todas las afirmaciones.
+- Los fragmentos del corpus continúan marcados como pendientes de revisión jurídica.
 
-Se incorporaron los siguientes archivos locales:
-
-- `generar_respuesta.py`: función `answer_question()`, responsable de coordinar la recuperación de información, construir el contexto, invocar el modelo generativo y estructurar el resultado.
-- `prompts/respuesta_legal.txt`: instrucciones utilizadas para generar respuestas en el contexto jurídico del proyecto.
-- `scripts/responder_cli.py`: interfaz de terminal que recibe una pregunta y presenta el resultado en formato JSON.
-- `tests/test_generar_respuesta.py`: pruebas unitarias de la función utilizando dependencias simuladas.
-
-La función recibe una pregunta y admite parámetros para limitar el número de fragmentos recuperados y especificar el identificador del modelo. También permite inyectar dependencias para facilitar las pruebas.
-
-La respuesta se estructura en campos como `status`, `question`, `answer`, `citations`, `limitations` y `model_id`.
-
-Los fragmentos recuperados reciben identificadores temporales (`F1`, `F2`, etc.). La validación implementada comprueba que las referencias emitidas por el modelo correspondan a fragmentos que efectivamente se proporcionaron en el contexto. Esta comprobación no demuestra que la interpretación jurídica de cada cita sea correcta.
-
-### Flujo de ejecución
-
-La arquitectura implementada para esta prueba es:
-
-Pregunta del usuario
-  ↓
-scripts/responder_cli.py
-  ↓
-answer_question()
-  ↓
-Retriever existente
-  ↓
-Amazon Bedrock — generación de embedding
-  ↓
-Aurora PostgreSQL + pgvector
-  ↓
-Fragmentos recuperados
-  ↓
-Construcción del contexto y del prompt
-  ↓
-Amazon Bedrock Converse — Claude Sonnet 4.6
-  ↓
-Validación de identificadores de cita
-  ↓
-Respuesta estructurada en JSON
-
-Se reutilizó el recuperador existente. No se modificaron el esquema de Aurora, los embeddings, el proceso de ingesta ni la infraestructura Terraform.
-
-### Configuración y conectividad verificadas
-
-Para ejecutar la prueba integrada se comprobó lo siguiente:
-
-- Aurora PostgreSQL Serverless v2 se encontraba en estado `available`.
-- La instancia administrativa utilizada para el acceso mediante AWS Systems Manager aparecía como `Online`.
-- Se abrió un túnel SSM desde el puerto local `15432` hacia el puerto PostgreSQL `5432` de Aurora.
-- La prueba de conectividad TCP al puerto `127.0.0.1:15432` terminó correctamente.
-- Se verificó la conexión mediante `psql` a la base `tododerechovecino`, con el usuario `tdv_admin`.
-- El motor respondió como PostgreSQL 16.15.
-- Se configuró la variable de entorno `BEDROCK_MODEL_ID` con el perfil `us.anthropic.claude-sonnet-4-6`.
-- Se verificó que el perfil de inferencia de Claude Sonnet 4.6 estuviera en estado `ACTIVE` en `us-east-1`.
-
-### Incidencias y resolución
-
-**1. Variable de entorno del modelo**
-
-La primera ejecución de la CLI devolvió el mensaje:
-
-`Falta configurar la variable de entorno BEDROCK_MODEL_ID.`
-
-Se resolvió configurando la variable en la terminal:
-
-`export BEDROCK_MODEL_ID="us.anthropic.claude-sonnet-4-6"`
-
-**2. Acceso a Anthropic en Amazon Bedrock**
-
-La siguiente ejecución devolvió `ResourceNotFoundException`. La prueba directa mediante Bedrock Runtime permitió identificar que faltaba presentar los datos de uso de Anthropic para la cuenta.
-
-Se completó el formulario correspondiente en AWS. Posteriormente, la invocación directa de Claude mediante la operación Converse respondió:
-
-`OK`
-
-Con ello se confirmó que el modelo podía ser invocado desde la cuenta y región utilizadas.
-
-**3. Prueba de integración**
-
-Una vez habilitado el modelo, se volvió a ejecutar la CLI con una pregunta sobre las disposiciones que regulan los establecimientos mercantiles en la colonia Hipódromo.
-
-La ejecución devolvió una estructura JSON con información de la pregunta, referencias a fragmentos recuperados, metadatos de las fuentes y el identificador del modelo.
-
-La salida compartida incluyó el fragmento `F3`, procedente del Programa Parcial de Desarrollo Urbano Hipódromo, sección 6.3.
-
-La respuesta también incluyó la advertencia:
-
-`Al menos una fuente citada está marcada como pendiente de revisión; su contenido requiere validación jurídica.`
-
-### Comando de ejecución
-
-La interfaz puede ejecutarse desde la raíz del repositorio con:
-
-`PYTHONPATH=. python scripts/responder_cli.py "¿Qué disposiciones regulan el funcionamiento de establecimientos mercantiles en la colonia Hipódromo?"`
-
-La ejecución requiere:
-
-- Entorno virtual Python activo.
-- Variable `BEDROCK_MODEL_ID` configurada.
-- Credenciales AWS y permisos para invocar los modelos necesarios.
-- Acceso a Aurora mediante el túnel SSM.
-- Variable `PGPASSFILE` configurada para la conexión PostgreSQL.
-
-### Resultado y criterio de cierre
-
-Se completó la prueba técnica de la función generadora mediante consola/CLI, utilizando el recuperador existente, Aurora PostgreSQL con pgvector y un único modelo generativo en Amazon Bedrock.
-
-El flujo llegó a la generación y devolvió una respuesta estructurada con referencias a fragmentos recuperados.
-
-Por tanto, se considera cumplido el objetivo técnico de la Semana 6: disponer de una función que recibe una pregunta y devuelve una respuesta con citas, probada mediante CLI.
-
-Este resultado acredita la integración técnica ejecutada. No acredita la pertinencia jurídica de los fragmentos recuperados, la vigencia de las disposiciones ni la corrección de las conclusiones generadas.
-
-### Limitaciones que se conservan
-
-- Los identificadores de cita `F1`, `F2`, etc. son temporales.
-- La validación de citas comprueba la existencia de los identificadores entre las fuentes proporcionadas al modelo, no la correspondencia jurídica entre cada afirmación y su fundamento.
-- Los fragmentos mantienen el indicador `pendiente_revision`; no se modificó su estado.
-- No se evaluó la calidad de recuperación ni se calcularon métricas nuevas.
-- No se integró todavía la consulta estructurada `retrieve_land_use()` en el flujo de generación.
-- La prueba se realizó desde el entorno local mediante CLI. No representa todavía una integración con API Gateway, Lambda o frontend.
-
-### Archivos de la entrega
-
-- `generar_respuesta.py`
-- `prompts/respuesta_legal.txt`
-- `scripts/responder_cli.py`
-- `tests/test_generar_respuesta.py`
-
-### Siguiente etapa
-
-La siguiente etapa se definirá conforme al cronograma de la estancia. La implementación actual queda como base para continuar la integración del MVP, sin ampliar en este cierre el alcance de la evaluación jurídica ni modificar la arquitectura acordada.
+### Estado
+**Semana 6 completada en su componente de generación y pruebas offline.** La validación jurídica de las fuentes permanece pendiente.
 
 ## Semana 7 — Backend serverless y publicación de la API
 
@@ -1444,25 +1354,21 @@ Respuesta JSON con respuesta y fuentes
 ### Trabajo realizado
 
 #### 1. Función Lambda
-
-Se desplegó la función `todo-derecho-vecino-api` con runtime Python 3.12, arquitectura x86_64, memoria de 512 MB y timeout de 28 segundos. La función se ejecuta en subredes privadas y utiliza un grupo de seguridad dedicado. Se configuraron las variables de entorno para la conexión con Aurora y la lectura del secreto administrado por AWS Secrets Manager.
+Se desplegó `todo-derecho-vecino-api` con runtime Python 3.12, arquitectura x86_64, memoria de 512 MB y timeout de 28 segundos. La función se ejecuta en subredes privadas y utiliza un grupo de seguridad dedicado. Se configuraron las variables de entorno para la conexión con Aurora y la lectura del secreto administrado por AWS Secrets Manager.
 
 El paquete `build/lambda-deployment.zip` incorpora `lambda_function.py`, `generar_respuesta.py`, `retriever.py`, `generar_embeddings.py`, `prompts/respuesta_legal.txt` y las dependencias de ejecución. El paquete se validó antes del despliegue. La actualización del código de Lambda mediante Terraform terminó con un recurso modificado y sin altas ni destrucciones.
 
 #### 2. Conectividad privada y permisos
-
 Se configuraron endpoints de interfaz para `bedrock-runtime`, `secretsmanager` y `logs`, desplegados en la subred privada A. El grupo de seguridad de Lambda permite salida hacia Aurora por el puerto 5432 y hacia los endpoints por HTTPS/443; el grupo de seguridad de los endpoints permite entrada HTTPS/443 desde Lambda.
 
 Se creó el rol de ejecución `TodoDerechoVecino-Lambda-Execution`, con permisos para ejecución dentro de VPC, invocación de los modelos de Bedrock y lectura del secreto de Aurora. La configuración evita incorporar una salida general a Internet mediante NAT Gateway.
 
 #### 3. Prueba directa de Lambda
-
 Antes de publicar la API se invocó directamente la función con una consulta sobre las actividades reguladas por la Ley de Establecimientos Mercantiles de la Ciudad de México. La invocación devolvió `StatusCode: 200` y una respuesta en español con `status: answered`, modelo `us.anthropic.claude-sonnet-4-6` y fuentes `[F1]` a `[F5]`.
 
 Esta prueba confirmó el funcionamiento integrado de Lambda, Secrets Manager, Aurora, pgvector, Titan y Claude antes de incorporar API Gateway.
 
 #### 4. API Gateway
-
 Se creó mediante Terraform una API HTTP con integración proxy AWS hacia Lambda, ruta `POST /consulta`, formato de payload `2.0` y etapa `$default` con despliegue automático. Se añadió el permiso para que API Gateway invoque la función Lambda.
 
 La etapa quedó configurada con throttling de 5 solicitudes por segundo y ráfaga de 10. El despliegue concluyó con:
@@ -1494,7 +1400,6 @@ Las pruebas se realizaron desde el equipo local mediante `curl` contra el endpoi
 La consulta válida fue: «¿Qué actividades regula la Ley de Establecimientos Mercantiles de la Ciudad de México?». La respuesta describió, con base en los fragmentos recuperados, la definición de establecimiento y giro mercantil, centros o plazas comerciales, salones de fiesta y establecimientos de hospedaje. Incluyó referencias a los artículos 2, 20 y 23 de la Ley.
 
 ### Resultados técnicos
-
 Las pruebas confirman el recorrido de extremo a extremo: el cliente envía una petición HTTPS; API Gateway la entrega a Lambda; Lambda valida la solicitud; Titan genera el embedding; el recuperador consulta Aurora/pgvector; el generador construye el prompt e invoca Claude mediante Bedrock; finalmente Lambda devuelve JSON con respuesta, fuentes y limitaciones.
 
 **Resultado: integración técnica del backend serverless y publicación de la API completadas y probadas mediante solicitudes HTTP reales.**
@@ -1502,17 +1407,14 @@ Las pruebas confirman el recorrido de extremo a extremo: el cliente envía una p
 ### Limitaciones y asuntos pendientes
 
 #### Revisión jurídica
-
 Las cinco fuentes de la respuesta de prueba conservaron el indicador `pendiente_revision: true`. Las pruebas demuestran que el sistema recupera fragmentos y los presenta como fuentes, pero no acreditan su validación jurídica ni que cada fragmento respalde semánticamente todas las afirmaciones.
 
 Se requiere revisar manualmente la vigencia de las disposiciones y reformas, la correspondencia del texto con la fuente normativa, la exactitud de artículos y fracciones, la pertinencia de cada fragmento y la suficiencia de la evidencia para responder cada consulta.
 
 #### Seguridad de la API
-
 La API se encuentra publicada sin autenticación. Antes de cualquier uso con usuarios externos o información sensible deberá incorporarse un mecanismo de control de acceso y revisarse la protección contra abuso, los límites de consumo y los costos. El throttling configurado es una medida básica de control de solicitudes y no sustituye la autenticación.
 
 #### Alcance de las pruebas
-
 La prueba realizada acredita una consulta de extremo a extremo y dos comportamientos de validación HTTP. No representa una evaluación exhaustiva de la calidad del RAG, cobertura del corpus, precisión jurídica o comportamiento bajo carga.
 
 ### Estado frente al cronograma
@@ -1536,10 +1438,10 @@ Pendientes:
 5. Revisión de costos y monitoreo de la infraestructura desplegada.
 
 ### Evidencia de despliegue y control de versiones
-
 Los resultados de Terraform y las respuestas HTTP obtenidas el 8 de noviembre de 2026 constituyen la evidencia de esta etapa. El endpoint publicado fue `https://1zhgtujka8.execute-api.us-east-1.amazonaws.com`.
 
-La actualización de esta bitácora no modifica infraestructura AWS, configuración de puertos ni archivos de código. El registro se incorpora a la rama `mvp-estancia` mediante el commit de documentación correspondiente.
+No se realizó en esta actualización ningún `terraform destroy`, cambio de puertos, commit ni push. Este archivo es una copia de trabajo actualizada; su incorporación al repositorio deberá realizarse después de revisar el diff y con autorización expresa.
+
 
 ## Semana 8 — Frontend web estático y publicación en CloudFront
 
@@ -1594,3 +1496,40 @@ Semana 9: pruebas E2E, revisión IAM, CloudWatch básico, throttling, decisión 
 
 ### Control de versiones
 Este registro se incorpora a la rama `mvp-estancia` mediante el commit documental de cierre de Semana 8.
+
+
+## Actualización — Gobierno y sincronización de documentos de control
+
+**Fecha:** 10 de noviembre de 2026.
+
+Se compararon las versiones disponibles en la Biblioteca del proyecto, las copias de las carpetas `Contexto` y `Agente`, los archivos de la raíz de la Biblioteca y la rama `mvp-estancia` de GitHub. Se identificaron variantes con sufijos (`_actualizada`, `_actualizado` y `(2)`) y copias anteriores que no reflejaban el cierre de Semana 8.
+
+Se establece como fuente maestra documental la carpeta `Contexto` para `Bitacora.md` e `Instructivo_operacion.md`, y la carpeta `Agente` para `AGENTS.md` y `ajustes_pendientes.md`. Los archivos de la raíz del repositorio en GitHub, con esos mismos nombres, son el espejo versionado que debe mantenerse sincronizado con las versiones maestras de la Biblioteca.
+
+A partir de esta fecha, las actualizaciones se realizan primero en la carpeta de control correspondiente, conservan el nombre original y luego se reflejan en la rama `mvp-estancia`. No se crean archivos activos con nombres alternativos como `Bitacora_actualizada.md`, `ajustes_pendientes_actualizado.md` o `Instructivo_operacion(2).md`. Antes de sustituir una versión se comparan sus diferencias y se integran los datos únicos; no se sobrescribe información histórica sin revisión.
+
+Esta actualización es documental: no modifica código, infraestructura AWS, datos de Aurora ni configuración de puertos.
+
+
+## Complemento de evidencia de GitHub — Semanas 6 y 7
+
+Durante la comparación con la versión de `Bitacora.md` que ya estaba en GitHub se localizaron detalles de ejecución que no aparecían en la copia de `Contexto`. Se integran aquí para conservar la evidencia histórica sin reemplazar los registros existentes.
+
+### Semana 6 — Prueba integrada de generación
+
+- La CLI `scripts/responder_cli.py` ejecutó el flujo de pregunta, recuperación, construcción del contexto, invocación de Claude Sonnet 4.6 y respuesta JSON.
+- Para la prueba se verificó Aurora disponible, conectividad mediante SSM, acceso con `psql`, PostgreSQL 16.15 y disponibilidad del perfil de inferencia de Claude Sonnet 4.6 en `us-east-1`.
+- Se registró una incidencia inicial por falta de `BEDROCK_MODEL_ID`; después se configuró la variable de entorno. También se resolvió un `ResourceNotFoundException` asociado a la habilitación de uso de Anthropic en Bedrock.
+- La salida de prueba incluyó el fragmento `F3`, procedente del PPCU Hipódromo, sección 6.3, y advirtió que la fuente requería revisión jurídica.
+- La respuesta se estructuró con campos como `status`, `question`, `answer`, `citations`, `limitations` y `model_id`. La validación de identificadores de cita solo comprueba que las referencias correspondan a fragmentos suministrados al modelo; no demuestra corrección jurídica.
+
+### Semana 7 — Detalles de despliegue del backend
+
+- Lambda `todo-derecho-vecino-api`: runtime Python 3.12, arquitectura x86_64, memoria 512 MB y timeout de 28 segundos; ejecución en subredes privadas.
+- El rol de ejecución `TodoDerechoVecino-Lambda-Execution` incluye permisos para VPC, invocación de Bedrock y lectura del secreto de Aurora. Se documentaron endpoints privados para `bedrock-runtime`, `secretsmanager` y `logs`.
+- API Gateway se desplegó como HTTP API con ruta `POST /consulta`, payload 2.0, etapa `$default` y despliegue automático. El throttling quedó configurado en 5 solicitudes por segundo y ráfaga de 10.
+- La API permanece sin autenticación (`authorization_type = NONE`); el throttling no sustituye un control de acceso y el endpoint no es apto para producción.
+- Las pruebas HTTP registradas fueron: consulta válida (200), cuerpo sin `question` (400) y método `GET` no definido (404). La consulta válida devolvió respuesta JSON con cinco fuentes.
+- Estas pruebas acreditan el funcionamiento técnico del caso probado, no la calidad global del RAG, la cobertura del corpus ni la validez jurídica de las fuentes.
+
+La información anterior se conserva como evidencia histórica recuperada de GitHub. No implica que esos estados de infraestructura sigan vigentes hoy; el estado actual debe comprobarse antes de operar AWS.
