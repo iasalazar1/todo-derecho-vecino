@@ -1,6 +1,6 @@
 # ajustes_pendientes.md
 # Proyecto: Todo Derecho Vecino — MVP de estancia
-# Última actualización: 10 de noviembre de 2026 — acuerdos de Semana 9–10 y requisitos de producción
+# Última actualización: 11 de noviembre de 2026 — auditoría de fuentes PPCU/PDDU y pendientes S9–S10
 # Mantenedor: Agente de IA (bajo validación del usuario)
 
 ## 0. Propósito y reglas de uso de este archivo
@@ -130,18 +130,28 @@ Separar tres niveles de medición:
 |---|---|---|---|---|---|
 | J-01 | Completar las URLs reales de la Gaceta Oficial en `documentos_config.json` (20 documentos con `"fuente": "PENDIENTE: URL..."`). Buscar en `data.consejeria.cdmx.gob.mx`. | Bitácora fase 1 | Media | Post-MVP o S9 | ⬜ Abierto |
 | J-02 | Limpiar manualmente bloques de índice duplicados en PPCU Hipódromo (numeración 1.1 a 8.4 repetida en 3 pasadas). | Bitácora fase 1 | Media | Post-MVP | ⬜ Abierto |
-| J-03 | Regenerar JSON de PDDU-Cuauhtémoc con el título correcto. Actualmente dice "Programa Parcial de Desarrollo Urbano Hipódromo". Corregir en `legal_document_processor.py` y regenerar. | Bitácora S3 | Alta | S8–S9 | ⬜ Abierto |
+| J-03 | Verificar que la corrección del título de PDDU-Cuauhtémoc quede aplicada en el procesador y en todos los artefactos derivados. El JSON de `mvp-estancia` ya identifica el documento como “Programa Delegacional de Desarrollo Urbano de Cuauhtémoc”; la copia de `main` conserva el título incorrecto de Hipódromo. | Bitácora S3 + comparación de ramas 11-nov-2026 | Alta | S9 | 🟡 Parcial — corregido en JSON de `mvp-estancia`; falta verificar el procesador y la regeneración |
 | J-04 | Confirmar que las versiones de dos documentos son correctas: Ley Orgánica de Alcaldías (v6.1 config vs v6.4 archivo) y Reglamento LEM (v2 config vs v1 archivo). | Bitácora fase 1 | Media | Post-MVP | ⬜ Abierto |
 | J-05 | Validar `autoridad_ner.py` (spaCy + `es_core_news_sm`) en entorno local; confirmar que `sujetos_obligados` se llena correctamente. | Bitácora fase 1 | Media | Post-MVP | ⬜ Abierto |
 | J-06 | Afinar heurística de `tipo_disposicion`: casi el 100% de fragmentos quedan `needs_review: true`. | Bitácora fase 1 | Baja | Post-MVP | ⬜ Abierto |
-| J-07 | Revisión manual de calidad de chunks contra PDF original, prioridad PDDU/PPCU. | Bitácora fase 1 | Alta | Post-MVP | ⬜ Abierto |
+| J-07 | Auditar la extracción y los chunks de PPCU Hipódromo y PDDU Cuauhtémoc contra los PDF originales, comenzando por índice, jerarquía, continuidad, tablas/cuadros, páginas y procedencia. No regenerar embeddings antes de aprobar la corrección de fuentes y JSON. | Bitácora fase 1 + auditoría estática 11-nov-2026 | Bloqueante para regenerar corpus | S9 | ⬜ Abierto — auditoría inicial de JSON completada; falta cotejo visual con PDF |
 | J-08 | Validar manualmente citas y vigencia jurídica de los fragmentos recuperados antes de tratarlos como fundamentos confirmados. | Bitácora S4, S5, S6, S7 | Alta | Post-MVP | ⬜ Abierto |
 | J-09 | Completar evaluación semántica formal del retriever con conjunto fijo de preguntas, fragmentos esperados y criterio explícito de corrección. El Precision@5 = 40% actual es preliminar y de una sola pregunta. | Bitácora S5 | Alta | S9 si hay tiempo; si no, post-MVP | ⬜ Abierto |
-| J-10 | Revisar tablas y cuadros normativos especiales: Tabla 20 PPCU ("Normatividad por vialidad"), Cuadro 15 PDDU ("Tabla de Usos del Suelo"), Cuadro 16 PDDU ("Normas de Ordenación sobre Vialidad"). Actualmente solo la Tabla 22 PPCU está en `land_use_compatibility`. | Bitácora S3, S5 | Alta | Post-MVP | ⬜ Abierto |
+| J-10 | Inventariar y clasificar todas las tablas/cuadros de los dos programas urbanos. En PPCU, la extracción textual identifica las Tablas 1–22 y 24 (no aparece Tabla 23); además de la Tabla 22, quedan 22 rótulos numerados por cotejar e integrar según su función. En PDDU, la extracción identifica Cuadros 1–17; priorizar Cuadro 15 (usos del suelo) y Cuadro 16 (normas sobre vialidad), sin omitir el inventario de los demás. Actualmente solo Tabla 22 PPCU está estructurada en `land_use_compatibility`. | Bitácora S3, S5 + inventario preliminar de extracción 11-nov-2026 | Alta | S9 | ⬜ Abierto — inventario preliminar; pendiente cotejo visual y clasificación |
 | J-11 | No inferir permisos, prohibiciones ni condiciones en `land_use_compatibility`. Conservar estados literales (`permitido`, `prohibido`, `por validar`) y procedencia (archivo, páginas). | Bitácora S5 | Regla permanente | — | ✅ Activa |
 | J-12 | Conservar `needs_review = true` y `pendiente_revision: true` en los 1,235 chunks y 1,369 embeddings. No filtrar automáticamente. | Bitácora S4, S5 | Regla permanente | — | ✅ Activa |
 | J-13 | Revisar precisión de metadatos documentales: los programas urbanos usan secciones decimales (4.3.1) que no equivalen a artículos jurídicos tradicionales. No etiquetar automáticamente como artículo. | Bitácora S5, nota de arquitectura | Media | Post-MVP | ⬜ Abierto |
 | J-14 | Revisar si la arquitectura actual de tablas es la más adecuada (múltiples tablas en PPCU y PDU Cuauhtémoc). No rediseñar ahora; solo evaluar después del MVP. | Bitácora S5, nota de arquitectura | Baja | Post-MVP | ⬜ Abierto |
+| J-15 | Validar los documentos fuente y su procedencia antes de corregir derivados. Usar como referencia de trabajo la rama `mvp-estancia`; registrar SHA, versión, páginas y correspondencia entre PDF, texto extraído, texto revisado y JSON. Los PDF y archivos `*_extracted.txt` tienen el mismo contenido/identificadores en `main` y `mvp-estancia`, pero los JSON difieren entre ramas. | Auditoría GitHub 11-nov-2026 | Alta | S9 | ⬜ Abierto — archivos identificados; falta cotejo visual de PDF |
+| J-16 | Corregir el JSON de chunks del PPCU Hipódromo desde el documento fuente. El archivo de `mvp-estancia` contiene 52 registros: 49 tienen menos de 120 caracteres (principalmente encabezados sin desarrollo); dos concentran 118,611 y 231,134 caracteres. El índice del original contiene apartados ausentes del JSON, entre ellos 1.8 Usos del Suelo, 1.14 Vivienda, 1.22.1, 1.22.2, 3.4.1, 3.6, 3.10 y 4.2. El registro `29.90` parece provenir de un porcentaje de la Tabla 19, no de una sección. | PPCU PDF/extracción y `PPCU_Hipodromo_reviewed_chunks.json`, auditoría 11-nov-2026 | Bloqueante para embeddings PPCU | S9 | ⬜ Abierto |
+| J-17 | Auditar visual y jurídicamente la Tabla 22 PPCU antes de modificar `land_use_compatibility`. El JSON tiene 51 actividades y 357 celdas: 31 permitido, 128 prohibido y 198 por validar; 30 actividades tienen al menos una celda por validar y 28 tienen las siete zonificaciones por validar. Los 51 registros mantienen `needs_review=true`. Verificar correspondencia de columnas, símbolos, notas y páginas 80–81 del PDF; no inferir ni completar estados. | `PPCU_Hipodromo_tabla_22.json` en `mvp-estancia` + extracción, auditoría 11-nov-2026 | Bloqueante para afirmar compatibilidad | S9 | ⬜ Abierto — conteo JSON confirmado; falta cotejo visual y jurídico |
+| J-18 | Extraer, inventariar y estructurar las demás tablas del PPCU Hipódromo. La extracción textual identifica rótulos Tabla 1–22 y Tabla 24; no se localizó Tabla 23 mediante búsqueda literal. Este inventario es preliminar: cotejar visualmente numeración, títulos, páginas y continuidad en el PDF antes de concluir cuántas tablas existen o cuántas faltan por integrar. No asumir que todas deben convertirse en tablas de compatibilidad. | PPCU PDF/extracción, auditoría 11-nov-2026 | Alta | S9 | ⬜ Abierto |
+| J-19 | Inventariar y estructurar los cuadros del PDDU Cuauhtémoc. La extracción identifica Cuadros 1–17; no existe actualmente un JSON estructurado de cuadros en `leyes_cdmx` en la rama `mvp-estancia`. Clasificar cada cuadro por función y priorizar Cuadro 15 (usos del suelo) y Cuadro 16 (normas de ordenación sobre vialidad). | PDDU PDF/extracción + árbol Git de `mvp-estancia`, auditoría 11-nov-2026 | Alta | S9 | ⬜ Abierto |
+| J-20 | Corregir la extracción/chunking del PDDU Cuauhtémoc. El índice original incluye 1.2.3–1.2.11, 1.3 Pronóstico, 1.4, 1.5, 4.1–4.5 y 6.1–6.2.7, ausentes del JSON actual. El JSON contiene solo 13 registros; tres superan 8,000 caracteres y el máximo alcanza 594,660. La etiqueta `1.43` no aparece como apartado en el índice: coincide con el valor estadístico `-1.43` de la página 19 y parece un falso encabezado. La sección 1.3 sí existe en el original. | PDDU PDF/extracción y `PDDU-CUAUHTÉMOC_reviewed_chunks.json`, auditoría 11-nov-2026 | Bloqueante para embeddings PDDU | S9 | ⬜ Abierto |
+| J-21 | Rediseñar la segmentación de programas urbanos para respetar su jerarquía documental y unidades de sentido: título, capítulo, apartado, sección, disposición, tabla/cuadro, fila, nota y zonificación. Separar el registro fuente de la unidad vectorial; cualquier división por longitud debe conservar contexto y no cortar relaciones entre encabezados, reglas, condiciones o celdas. | Hallazgos de `legal_document_processor.py` y `generar_embeddings.py` + auditoría 11-nov-2026 | Alta | S9 | ⬜ Abierto |
+| J-22 | Integrar la recuperación estructurada de tablas al flujo de consulta. `retrieve_land_use()` existe de forma independiente y consulta Tabla 22, pero no está conectada al flujo `lambda_handler` → `answer_question()`. Definir extracción de actividad/zonificación, evidencia estructurada y su presentación/citación, sin tratar la tabla como embeddings. | Auditoría estática de Lambda/retriever 11-nov-2026 | Alta | S9 | ⬜ Abierto |
+| J-23 | Verificar cobertura y diversidad del retriever sobre los cinco instrumentos. La búsqueda vectorial es global, pero limita candidatos antes del reranking y no garantiza cuota ni cobertura por documento. Crear pruebas por fuente y consultas que requieran una o varias fuentes; distinguir búsqueda global de cobertura demostrada. | Auditoría estática de `retriever.py` y pruebas 11-nov-2026 | Alta | S9 | ⬜ Abierto |
+| J-24 | Mantener separadas las métricas de recuperación semántica, consulta estructurada de tablas y generación de respuestas. Definir preguntas esperadas, fuentes/disposiciones correctas y revisión jurídica humana; incluir regresión para tablas y continuidad de secciones. | Protocolo de evaluación S5 + auditoría 11-nov-2026 | Alta | S9 | ⬜ Abierto |
 
 ---
 
@@ -291,15 +301,32 @@ Este apartado documenta los datos que faltaron y que se preguntaron al usuario, 
 
 ## 10. Próxima acción
 
-Al continuar la Semana 9, el agente debe:
+La siguiente tarea se realizará con un agente de programación en VS Code (Kilo Code o GitHub Copilot), con AWS apagado. El agente trabajará primero sobre el PPCU Hipódromo y no pasará al PDDU hasta cerrar y validar esta auditoría inicial.
 
-1. Leer `AGENTS.md`, la bitácora, `Instructivo_operacion.md` y este archivo.
-2. Verificar rama `mvp-estancia`, `git status` y `git diff --check`.
-3. Verificar estado real de AWS con `./terraform/dev-status.sh`, si aplica.
-4. Inspeccionar código de Lambda y logs existentes para determinar qué datos de consultas se registran (S9-07).
-5. Proponer y validar un conjunto fijo de evaluación y sus criterios antes de medir (S9-08 a S9-10).
-6. Definir límites de telemetría y privacidad antes de conservar consultas reales (S9-11).
-7. Mantener la autenticación de la API como pendiente de Semana 10 (S10-08); no reabrir la decisión salvo que el usuario cambie el alcance.
-8. Usar 5 req/s y burst 10 como referencia inicial de throttling para pruebas, verificando primero la configuración real.
-9. Diseñar el conjunto inicial de evaluación para los cinco instrumentos sin perder de vista la ampliación futura a más de 20 instrumentos; no presentar resultados del MVP como representativos del corpus completo.
-10. Ejecutar un paso a la vez y esperar validación del usuario. No asumir que el cierre de Semana 8 autoriza comenzar Semana 9 sin indicación explícita.
+1. Confirmar rama `mvp-estancia`, consultar `git status` y `git diff`; no descartar, sobrescribir ni incluir cambios locales ajenos a esta tarea. No ejecutar Terraform ni comandos que activen AWS.
+2. Identificar y registrar SHA, tamaño, páginas y procedencia de `leyes_cdmx/PPCU_Hipodromo.pdf`, `PPCU_Hipodromo_extracted.txt`, `PPCU_Hipodromo_reviewed.txt` (si existe), `PPCU_Hipodromo_reviewed_chunks.json` y `PPCU_Hipodromo_tabla_22.json`. No usar `main` como fuente de trabajo ni mezclar archivos entre ramas.
+3. Abrir el PDF original y cotejar visualmente el índice (inicialmente páginas 2–3, verificando la numeración real del visor) con los encabezados del texto extraído, texto revisado y JSON. Crear una matriz de correspondencia con: número de sección, título literal, página impresa, página PDF, presencia en cada derivado y observaciones.
+4. Identificar y clasificar todos los rótulos de tablas/cuadros que aparezcan en el PDF. Registrar número, título literal, página(s), continuidad, notas, encabezados y si el contenido es tabla, figura, mapa o cuadro. Investigar expresamente la aparente ausencia de Tabla 23 y cualquier diferencia con el inventario preliminar de extracción; no dar por confirmado el total hasta recorrer el documento.
+5. Entregar un informe de auditoría PPCU con evidencia de página y una lista priorizada de defectos. Distinguir errores confirmados, sospechas y puntos que requieren criterio jurídico. No corregir ni completar valores normativos por inferencia.
+6. En esta primera fase no modificar el PDF original, el JSON de chunks, el JSON de Tabla 22, los embeddings, SQL ni el procesador. Primero presentar la matriz e informe para validación del usuario. Después de esa validación, proponer correcciones concretas y aplicarlas únicamente con autorización.
+7. Una vez aprobado el inventario, cotejar la Tabla 22 página por página, incluidas filas, columnas, símbolos, notas y zonificaciones; mantener `por validar` y `needs_review=true` donde no exista evidencia inequívoca.
+8. Solo después de cerrar el PPCU, repetir el mismo método para el PDDU Cuauhtémoc; luego corregir extracción/JSON, rediseñar chunking, regenerar embeddings e integrar recuperación estructurada, siguiendo los pendientes J-19 a J-24.
+
+El agente debe trabajar paso a paso, mostrar archivos y diferencias antes de editar, y esperar aprobación humana para cambios de contenido legal. No hacer commit/push desde VS Code salvo autorización expresa; la actualización documental de este archivo se realiza por la sincronización maestra aprobada por el usuario.
+
+### Criterios de aceptación de la auditoría de fuentes
+
+- Cada PDF tiene versión, SHA, número de páginas y procedencia identificados.
+- El índice y la secuencia de secciones de cada programa están cotejados contra el original.
+- Cada tabla/cuadro tiene número, título, páginas y clasificación funcional.
+- Cada celda estructurada conserva el valor literal del original, su nota y su página; las dudas permanecen como `por validar`.
+- No existen chunks vacíos o de solo encabezado usados como evidencia, ni chunks gigantes sin segmentación semántica.
+- No se generan embeddings a partir de fuentes o JSON cuya integridad no haya sido validada.
+- La auditoría no equivale a validación jurídica de vigencia o aplicabilidad; esta requiere revisión especializada.
+
+### Estado de ejecución
+
+- Pruebas unitarias offline: 35 aprobadas, 1 warning de compatibilidad de pytest; sin fallos.
+- DEV/AWS: apagado y sin recursos DEV registrados según `dev-status.sh`.
+- Auditoría estática inicial de JSON: realizada el 11-nov-2026; los hallazgos J-16, J-17 y J-20 siguen abiertos hasta cotejo visual con los PDF.
+- No regenerar embeddings, modificar SQL, cargar datos ni levantar AWS antes de completar los pasos previos y recibir autorización.
