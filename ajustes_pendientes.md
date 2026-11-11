@@ -1,6 +1,6 @@
 # ajustes_pendientes.md
 # Proyecto: Todo Derecho Vecino — MVP de estancia
-# Última actualización: 10 de noviembre de 2026 — normalización documental previa a Semana 9
+# Última actualización: 10 de noviembre de 2026 — acuerdos de Semana 9–10 y requisitos de producción
 # Mantenedor: Agente de IA (bajo validación del usuario)
 
 ## 0. Propósito y reglas de uso de este archivo
@@ -35,7 +35,7 @@ deba recordarse entre sesiones debe quedar registrado aquí:
 | B8-04 | Definir estructura del frontend. | Arquitectura MVP + alcance S8 | ✅ Cerrado — 9-nov-2026 | Se implementó frontend estático con HTML/CSS/JavaScript, sin framework. |
 | B8-05 | Definir y verificar la presentación de citas `[F1]`–`[F5]` con respuestas JSON reales. | Alcance S8 | 🟡 Parcial — revisar en S9 | El frontend ya recibe y presenta respuesta y fuentes; falta revisar casos variados y la interpretación jurídica de cada estado. |
 | B8-06 | Confirmar cómo se presenta al usuario final el indicador `pendiente_revision: true` de cada fuente. | Bitácora S5, S7 | ⬜ Pendiente de verificación en S9 | No asumir que el indicador se muestra correctamente sin revisar el frontend y una respuesta JSON real. |
-| B8-07 | Decidir si se agrega autenticación o se mantiene la API abierta durante el MVP. | Bitácora S7 | ⬜ Requiere decisión del usuario en S9 | La API continúa sin autenticación; está documentada como limitación y no es apta para producción. |
+| B8-07 | Decidir si se agrega autenticación o se mantiene la API abierta durante el MVP. | Bitácora S7 + acuerdo del usuario 10-nov-2026 | ✅ Decidido — autenticación programada para S10 | No se implementará como parte de S9. Incorporar autenticación de la API en Semana 10; hasta entonces, la API abierta sigue siendo una limitación del MVP y no es apta para producción. |
 
 ---
 
@@ -82,15 +82,16 @@ La interfaz deberá distinguir, sin confundirlos, estos escenarios:
 |---|---|---|---|
 | S9-01 | Pruebas E2E del flujo completo (usuario → frontend → API → Lambda → Aurora → Bedrock → respuesta). | ⬜ Pendiente | — |
 | S9-02 | Revisión de permisos IAM de mínimo privilegio (Lambda, Terraform, usuario admin). | ⬜ Pendiente | Ver bitácora S2 y S7. |
-| S9-03 | Activar logs básicos en CloudWatch para la Lambda (consultas entrantes, errores). | ⬜ Pendiente | Solo logs básicos, sin conjunto completo de alarmas. |
-| S9-04 | Revisar throttling de API Gateway (5 req/s, burst 10). | ⬜ Pendiente | Ajustar si es necesario. |
-| S9-05 | Decidir con el usuario si se aborda autenticación de la API en S9 o se deja como limitación del MVP. | ⬜ Pendiente — requiere decisión del usuario | Ver S7, "Seguridad de la API". |
+| S9-03 | Activar y verificar logs operativos básicos en CloudWatch para Lambda/API Gateway. | ⬜ Pendiente | Registrar eventos técnicos, errores, códigos de estado y latencias. No registrar el texto completo de consultas ni respuestas por defecto; primero verificar qué registra actualmente el código. |
+| S9-04 | Verificar la configuración de throttling de API Gateway y adoptar 5 req/s con burst 10 como parámetro inicial para las pruebas del MVP. | 🟡 Acordado; falta verificar configuración real | El valor 5/10 se acepta para esta etapa de pruebas. No se considera un dimensionamiento definitivo de producción: después del MVP se observarán rechazos 429, volumen, latencia y errores mediante CloudWatch y se ajustará con pruebas de carga y uso real. |
+| S9-05 | Mantener documentada la ausencia de autenticación durante las pruebas de S9 y preparar el trabajo de autenticación para S10. | ✅ Decidido — 10-nov-2026 | La autenticación no se adelanta a S9; queda programada como pendiente S10. Ver S10-08. |
 | S9-06 | Documentar hallazgos de pruebas en `Bitacora.md` y `Reporte_Semanal_09.md`. | ⬜ Pendiente | — |
 | S9-07 | Determinar y documentar qué datos de cada consulta quedan registrados actualmente en CloudWatch/Lambda/API Gateway; verificarlo en código y logs reales, sin asumir que existe un historial consultable de preguntas. | ⬜ Pendiente | Distinguir logs operativos de un dataset de evaluación. No afirmar que las consultas se almacenan para medir calidad hasta comprobarlo. |
 | S9-08 | Definir un conjunto fijo y versionado de consultas de evaluación, separado de las consultas espontáneas de usuarios. | ⬜ Pendiente | Incluir preguntas representativas de los cinco instrumentos y casos de evidencia insuficiente; conservar pregunta, respuesta esperada, fuentes/disposiciones relevantes y criterio de corrección. |
 | S9-09 | Medir calidad del recuperador sobre el conjunto fijo con `Precision@k` y `Recall@k` (y, si los datos esperados permiten ordenar relevancia, `MRR` o `nDCG@k`). | ⬜ Pendiente | Fijar k y la unidad evaluada (fragmento, disposición o documento) antes de correr la evaluación. El `Precision@5 = 0.40` de una pregunta sigue siendo solo un dato preliminar, no una línea base global. |
 | S9-10 | Evaluar manualmente la calidad de respuestas generadas y sus citas con una rúbrica reproducible. | ⬜ Pendiente | Puntuar por separado: fidelidad a las fuentes recuperadas, exactitud/localización de citas, cobertura de aspectos solicitados, reconocimiento de evidencia insuficiente y ausencia de afirmaciones no sustentadas. Revisión humana; no confundir con métricas del retriever. |
 | S9-11 | Definir una política mínima de telemetría y privacidad antes de registrar consultas reales para análisis. | ⬜ Pendiente | Determinar campos, retención, acceso y anonimización; evitar registrar datos personales o contenido sensible innecesario. No crear una tabla nueva ni persistir preguntas completas sin validar necesidad, consentimiento/aviso y diseño. |
+| S9-12 | Verificar en CloudWatch los logs operativos de una consulta exitosa y de una fallida, y documentar qué puede observarse sobre throttling y errores. | ⬜ Pendiente | Separar métricas operativas (incluidos 429, 4xx/5xx y latencia) del conjunto versionado de evaluación de calidad. No asumir que CloudWatch conserva un historial completo de preguntas. |
 
 #### Consideraciones para medir calidad en Semana 9
 
@@ -106,7 +107,7 @@ Separar tres niveles de medición:
 
 **Regla para datos reales:** no usar consultas espontáneas de usuarios como benchmark sin etiquetarlas y revisar su representatividad. Si se decide conservarlas, minimizar datos, evitar información personal/sensible, definir acceso y retención y documentar el aviso correspondiente. No almacenar el contenido completo de consultas por defecto ni crear tablas nuevas sin decisión y autorización.
 
-**Resultado esperado de S9:** un informe que separe métricas operativas, métricas del retriever y evaluación humana de respuestas; indique tamaño y composición del conjunto, criterios, k, resultados por caso, limitaciones y pendientes jurídicos. Mantener `needs_review = true` / `pendiente_revision = true`.
+**Resultado esperado de S9:** un informe que separe métricas operativas, métricas del retriever y evaluación humana de respuestas; indique tamaño y composición del conjunto, criterios, k, resultados por caso, limitaciones y pendientes jurídicos. El conjunto inicial se limitará al corpus MVP de cinco instrumentos, pero su diseño deberá ser extensible para incorporar posteriormente el corpus legal completo (más de 20 instrumentos), sin cambiar la definición de evaluación en cada ampliación. Mantener `needs_review = true` / `pendiente_revision = true`.
 
 ### 2.3 Semana 10 (cierre y entrega)
 
@@ -119,6 +120,7 @@ Separar tres niveles de medición:
 | S10-05 | Verificar consistencia entre `Bitacora.md`, `Instructivo_operacion.md` y `ajustes_pendientes.md`. | ⬜ Pendiente | — |
 | S10-06 | Confirmar que `terraform/base` y `terraform/dev` reconstruyen el sistema desde cero. | ⬜ Pendiente | — |
 | S10-07 | Apagar DEV y conservar artefactos (embeddings JSONL, chunks, SQL). | ⬜ Pendiente | — |
+| S10-08 | Implementar autenticación para la API y documentar su configuración y operación. | ⬜ Pendiente — acordado 10-nov-2026 | La API sin autenticación se tolera únicamente como limitación temporal del MVP de pruebas. Definir el mecanismo, autorización, gestión de credenciales/tokens y pruebas antes de considerar el sistema apto para usuarios externos o producción. |
 
 ---
 
@@ -205,6 +207,32 @@ Estos pendientes provienen del documento `Alcance_y_limitaciones_Proyecto_Ismael
 | F-12 | Rediseño de arquitectura de tablas/cuadros normativos (múltiples tablas en PPCU y PDU Cuauhtémoc). | Bitácora S5 |
 | F-13 | Migración a `mx-central-1` (región de México). | Bitácora fase 5 |
 | F-14 | Simulacro de failover. | Bitácora fase 5 |
+| F-15 | Ampliar la política de observabilidad y telemetría para producción: conservar logs operativos por un periodo superior a los 14 días del MVP; evaluar 90 días como retención inicial, sujeta a costos, finalidad y obligaciones aplicables. | Decisión del usuario, 10-nov-2026 |
+| F-16 | Diseñar un registro de interacción para analítica de uso y perfilado agregado del usuario principal. En producción se requerirá registrar las preguntas y respuestas, además de metadatos técnicos mínimos (por ejemplo, sistema operativo, navegador y tipo de dispositivo derivados del User-Agent). Separar estos registros de los logs operativos de API Gateway/Lambda. | Decisión del usuario, 10-nov-2026 |
+
+### 6.1 Ajustes de producción: seguridad, operación y calidad
+
+| ID | Descripción | Origen / criterio |
+|---|---|---|
+| P-01 | Revisar y ajustar el throttling de API Gateway con datos de operación real y pruebas de carga. Partir del valor de referencia del MVP (5 req/s, burst 10), sin asumir que será adecuado para producción. | Acuerdo del usuario 10-nov-2026 |
+| P-02 | Instrumentar en CloudWatch el seguimiento operativo del API y sus dependencias: volumen de solicitudes, respuestas 429 por throttling, errores 4xx/5xx, latencia, fallos y señales de saturación/capacidad. Definir métricas, dashboards y alarmas según necesidades y costos. | Acuerdo del usuario 10-nov-2026; ampliar F-09 |
+| P-03 | Diseñar un proceso escalable y versionado de evaluación de calidad para el corpus legal completo (más de 20 instrumentos). Mantener un conjunto de referencia con preguntas por instrumento, materia y tipo de consulta; fuentes y disposiciones esperadas; casos sin evidencia suficiente; criterios de relevancia; y revisión humana de respuestas/citas. Reportar resultados globales y desglosados por instrumento, además de pruebas de regresión cada vez que se incorpore o actualice normativa. | Acuerdo del usuario 10-nov-2026 |
+| P-04 | Definir control de versiones y trazabilidad entre versión del corpus, documentos normativos, chunking, embeddings, configuración del retriever, prompt y conjunto de evaluación, para que las comparaciones de calidad sean reproducibles. | Derivado de P-03 |
+| P-05 | Establecer política de telemetría para operación posterior al MVP: datos recolectados, finalidad, minimización, anonimización, acceso, retención y mecanismo de información/consentimiento cuando corresponda. Mantener separados los logs operativos y los datos etiquetados para evaluación. | S9-11; acuerdo del usuario 10-nov-2026 |
+
+### Requisitos de diseño para F-15 y F-16 (posterior a Semana 10)
+
+- **Retención:** tomar 90 días como hipótesis inicial para logs operativos y telemetría; confirmar el plazo definitivo con un análisis de costos, finalidad y obligaciones legales. La retención de 14 días se mantiene como configuración del MVP, salvo cambio aprobado dentro de su alcance.
+- **Contenido de interacción:** conservar pregunta y respuesta solo en un repositorio de telemetría diseñado para ese propósito; no incorporarlas indiscriminadamente a los access logs de API Gateway ni a los logs generales de Lambda.
+- **Metadatos técnicos:** evaluar captura de sistema operativo, navegador, versión mayor y categoría de dispositivo. Preferir atributos derivados y normalizados del User-Agent; evitar conservar el User-Agent completo si no es necesario. No recolectar huella digital del dispositivo.
+- **Perfilado:** definir qué significa “usuario principal”, qué preguntas de producto se quieren responder y qué decisiones se tomarán con esos datos. Priorizar estadísticas agregadas y cohortes; no inferir atributos personales sensibles.
+- **Minimización y seudonimización:** evitar nombres, correos, teléfonos, direcciones, identificadores publicitarios, IP completa y otros datos personales si no son indispensables. Usar identificadores seudónimos y separar cualquier dato de contacto que eventualmente se requiera.
+- **Transparencia y control:** antes de activar la captura de preguntas/respuestas, revisar el aviso de privacidad, la finalidad, la base de tratamiento/consentimiento que corresponda, los mecanismos para ejercer derechos y el plazo de conservación conforme al marco mexicano aplicable.
+- **Seguridad:** definir cifrado en tránsito y en reposo, acceso por roles y mínimo privilegio, auditoría de accesos, eliminación al vencer la retención y tratamiento de solicitudes de eliminación. No registrar credenciales, tokens, secretos ni encabezados de autorización.
+- **Separación de datos:** mantener diferenciados (a) logs operativos y de seguridad, (b) contenido de conversaciones para analítica y (c) dataset de evaluación jurídica/RAG, que debe ser versionado, controlado y etiquetado por separado. Las conversaciones reales no se convierten automáticamente en benchmark.
+- **Gobernanza:** documentar esquema, responsables, permisos, retención por tipo de dato, anonimización/agregación y procedimiento de respuesta a incidentes antes del despliegue productivo.
+
+**Alcance:** F-15 y F-16 son requisitos de producción posteriores al cierre de Semana 10. No autorizan almacenar preguntas/respuestas durante el MVP ni ampliar ahora los campos de CloudWatch. Su implementación requiere diseño técnico y revisión de privacidad específicos, además de autorización del usuario.
 
 ---
 
@@ -224,7 +252,9 @@ Estos pendientes provienen del documento `Alcance_y_limitaciones_Proyecto_Ismael
 | DEC-10 | No inferir permisos/prohibiciones en tablas de uso de suelo. | Bitácora S5 |
 | DEC-11 | No crear `legal_tables` ni `legal_table_rows` sin validación previa. | Bitácora S3 |
 | DEC-12 | No regenerar embeddings si el artefacto correcto existe. | Bitácora S3 |
-| DEC-13 | API sin autenticación es limitación conocida del MVP, no apta para producción. | Bitácora S7 |
+| DEC-13 | API sin autenticación es limitación conocida del MVP, no apta para producción; la autenticación se programa para Semana 10. | Bitácora S7 + acuerdo 10-nov-2026 |
+| DEC-14 | Throttling inicial de referencia para las pruebas del MVP: 5 solicitudes por segundo y burst 10; no constituye dimensionamiento definitivo para producción. | Acuerdo del usuario 10-nov-2026 |
+| DEC-15 | La evaluación de calidad comienza con el corpus MVP de cinco instrumentos, pero el diseño del proceso debe poder escalar al corpus legal completo (más de 20 instrumentos), con resultados por instrumento y pruebas de regresión. | Acuerdo del usuario 10-nov-2026 |
 
 ---
 
@@ -237,7 +267,9 @@ Este apartado documenta los datos que faltaron y que se preguntaron al usuario, 
 | (por registrar) | Estructura del frontend (vanilla vs framework) | Pendiente de definir en S8 |
 | (por registrar) | Formato de presentación de citas en UI | Pendiente de definir en S8 |
 | (por registrar) | ¿Mostrar `pendiente_revision` al usuario final? | Pendiente de definir en S8 |
-| (por registrar) | ¿Autenticación de la API en S9 o post-MVP? | Pendiente de definir en S9 |
+| 10-nov-2026 | ¿Cuándo abordar autenticación de la API? | Incorporarla en Semana 10; no adelantarla a Semana 9. |
+| 10-nov-2026 | ¿Qué throttling adoptar para pruebas y cómo tratarlo en producción? | Usar 5 req/s y burst 10 como punto de partida del MVP; en producción observar comportamiento mediante CloudWatch y ajustar con datos reales y pruebas de carga. |
+| 10-nov-2026 | ¿Cómo plantear la evaluación de calidad ante la ampliación del corpus? | Recuperar ahora la evaluación con los cinco instrumentos del MVP, diseñándola desde el inicio para escalar a más de 20 instrumentos y permitir análisis por instrumento y regresiones. |
 
 ---
 
@@ -259,7 +291,7 @@ Este apartado documenta los datos que faltaron y que se preguntaron al usuario, 
 
 ## 10. Próxima acción
 
-Al iniciar la Semana 9, el agente debe:
+Al continuar la Semana 9, el agente debe:
 
 1. Leer `AGENTS.md`, la bitácora, `Instructivo_operacion.md` y este archivo.
 2. Verificar rama `mvp-estancia`, `git status` y `git diff --check`.
@@ -267,4 +299,7 @@ Al iniciar la Semana 9, el agente debe:
 4. Inspeccionar código de Lambda y logs existentes para determinar qué datos de consultas se registran (S9-07).
 5. Proponer y validar un conjunto fijo de evaluación y sus criterios antes de medir (S9-08 a S9-10).
 6. Definir límites de telemetría y privacidad antes de conservar consultas reales (S9-11).
-7. Ejecutar un paso a la vez y esperar validación del usuario. No asumir que el cierre de Semana 8 autoriza comenzar Semana 9 sin indicación explícita.
+7. Mantener la autenticación de la API como pendiente de Semana 10 (S10-08); no reabrir la decisión salvo que el usuario cambie el alcance.
+8. Usar 5 req/s y burst 10 como referencia inicial de throttling para pruebas, verificando primero la configuración real.
+9. Diseñar el conjunto inicial de evaluación para los cinco instrumentos sin perder de vista la ampliación futura a más de 20 instrumentos; no presentar resultados del MVP como representativos del corpus completo.
+10. Ejecutar un paso a la vez y esperar validación del usuario. No asumir que el cierre de Semana 8 autoriza comenzar Semana 9 sin indicación explícita.
