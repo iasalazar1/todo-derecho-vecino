@@ -1,0 +1,45 @@
+{
+  "identificador": "tabla_17",
+  "titulo_literal": "Tenencia",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    43
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    null,
+    null,
+    null
+  ],
+  "filas": [
+    [
+      "Propias",
+      "1,919 viviendas",
+      "40.6%"
+    ],
+    [
+      "Rentadas",
+      "2,266 viviendas",
+      "47.9%"
+    ],
+    [
+      "Otra situación",
+      "542 viviendas",
+      "11.5%"
+    ]
+  ],
+  "numero_filas_verificadas": 3,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [
+    "Fuente: IX Censo General de población y vivienda, 1990."
+  ],
+  "observaciones": [
+    "En la misma página el párrafo introductorio menciona el XI Censo General de Población y Vivienda de 1990, mientras que la nota de fuente de la tabla dice IX Censo; discrepancia confirmada.",
+    "La página física 43 no imprime encabezados de columna; se retiraron las etiquetas interpretativas y se conservan tres columnas sin rótulo."
+  ],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 3
+}

@@ -1,0 +1,40 @@
+{
+  "identificador": "tabla_16",
+  "titulo_literal": "Número de cuartos en la vivienda.",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    42
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Número de cuartos",
+    "Porcentaje"
+  ],
+  "filas": [
+    [
+      "Uno",
+      "3.5 %"
+    ],
+    [
+      "2 a 5",
+      "68.1 %"
+    ],
+    [
+      "Otro / no especificado",
+      "28.3 %"
+    ]
+  ],
+  "numero_filas_verificadas": 3,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [
+    "Fuente: XI Censo General de Población y vivienda 1990"
+  ],
+  "observaciones": [
+    "La página física 42 muestra un punto aislado debajo de la nota de fuente; se registra sin unirlo silenciosamente al texto."
+  ],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 3
+}

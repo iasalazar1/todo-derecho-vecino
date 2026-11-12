@@ -1,0 +1,66 @@
+{
+  "identificador": "tabla_10",
+  "titulo_literal": "Equipamiento. Subsistema Servicios Urbanos",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    39
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Elemento",
+    "Dirección",
+    "Se ubica en la zona"
+  ],
+  "filas": [
+    [
+      "Gasolinera",
+      "Insurgentes #541",
+      "Si"
+    ],
+    [
+      "",
+      "Nuevo León #197",
+      "Si"
+    ],
+    [
+      "",
+      "Insurgentes esquina con Tehuantepec",
+      "Si"
+    ],
+    [
+      "",
+      "Insurgentes s/n esq. Campeche",
+      "Si"
+    ],
+    [
+      "",
+      "Av. Sonora #129",
+      "Si"
+    ],
+    [
+      "",
+      "Tamaulipas #146 esq. Alfonso Reyes",
+      "Si"
+    ],
+    [
+      "",
+      "Insurgentes #289 esquina con Popocatépetl",
+      "Si"
+    ]
+  ],
+  "numero_filas_verificadas": 7,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La página física 39 muestra “Gasolinera” en la primera fila de Elemento y celdas vacías en esa columna para las seis filas siguientes."
+  ],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 7,
+  "encabezados_superiores": [
+    "Subsistema: Servicios urbanos",
+    "Equipamiento existente"
+  ]
+}

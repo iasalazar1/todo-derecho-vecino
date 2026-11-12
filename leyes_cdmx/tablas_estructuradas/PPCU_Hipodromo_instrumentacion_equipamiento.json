@@ -1,0 +1,34 @@
+{
+  "identificador": "instrumentacion_equipamiento",
+  "titulo_literal": "Programa: Equipamiento",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    112
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Rehabilitación de Instalaciones Educativas. Reutilización de algunas casas catalogadas, para nuevas instalaciones educativas.",
+      "La Delegación Cuauhtémoc, en coordinación con la Secretaría de Educación, Salud y Desarrollo Social, programarán y ejecutarán las acciones contenidas en el apartado de estrategia de equipamiento del presente Programa Parcial."
+    ],
+    [
+      "Edificios de Estacionamiento en lotes actualmente baldíos",
+      "En materia de estacionamientos, se determina una zonificación que favorece la existencia de este uso del suelo, así como normas de ordenación que disminuyen o eliminen restricciones urbanísticas, para el desarrollo de este tipo de usos. La zonificación se establece para los predios, cuyas características de ubicación y dimensiones los hacen especialmente indicados para este uso. La eliminación de restricciones, permite fomentar la construcción de inmuebles destinados a estacionamientos. Se debe celebrar un convenio de concertación, para la operación eficiente de estacionamientos existentes en la zona del polígono."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "El primer bloque agrupa dos rótulos de subprograma con una instrumentación compartida; la reproducción consultada no permite confirmar si son celdas combinadas o filas separadas."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2
+}

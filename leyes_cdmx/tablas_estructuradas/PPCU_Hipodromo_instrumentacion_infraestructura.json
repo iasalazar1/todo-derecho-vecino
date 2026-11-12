@@ -1,0 +1,38 @@
+{
+  "identificador": "instrumentacion_infraestructura",
+  "titulo_literal": "Programa: Infraestructura",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    114
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Mantenimiento de Red Sanitaria.",
+      "En materia de disponibilidad de recursos hidráulicos, la Administración Pública del Distrito Federal, por conducto de las dependencias competentes (Delegación Cuauhtémoc y Dirección General de Construcción y Operación Hidráulica), programará y erogará los gastos necesarios, para cubrir las acciones que se describen en el apartado correspondiente a la estrategia."
+    ],
+    [
+      "Aprovechamiento de Agua Pluvial.",
+      "En materia de aprovechamiento de recursos hidráulicos, la Administración Pública del Distrito Federal, por conducto de las dependencias competentes (Delegación Cuauhtémoc y Dirección General de Construcción y Operación Hidráulica), programará y erogará los gastos necesarios, para cubrir las acciones que se describen en el apartado correspondiente a la estrategia."
+    ],
+    [
+      "Infiltración de Agua Pluvial.",
+      "En materia de captación de recursos hidráulicos, la Administración Pública del Distrito Federal, por conducto de las dependencias competentes (Delegación Cuauhtémoc y Dirección General de Construcción y Operación Hidráulica), programará y erogará los gastos necesarios, para cubrir las acciones que se describen en el apartado correspondiente a la estrategia."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La última línea de la página física 114 requiere cotejo visual ampliado; la extracción de texto reproduce el segmento legible."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 3
+}

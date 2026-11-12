@@ -1,0 +1,42 @@
+{
+  "identificador": "instrumentacion_imagen_urbana_espacio_publico",
+  "titulo_literal": "Programa: Imagen Urbana y Espacio Público",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    113
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Recuperación y mejoramiento de Imagen Urbana. Mejoramiento de Imagen del Parque México. Mejoramiento de Seguridad.",
+      "En materia de imagen urbana, para las construcciones existentes, la Delegación, en coordinación con la Secretaría de Desarrollo Urbano y Vivienda y la Secretaría de Obras y Servicios, implementará acciones de concertación con los habitantes de la zona, para el cumplimiento de las acciones propuestas por el presente Programa Parcial. Programarán y ejercerán los recursos necesarios, para el financiamiento y apoyo para la realización de las acciones propuestas, por conducto de las dependencias competentes y, promoverán el apoyo financiero del sector privado."
+    ],
+    [
+      "Accesibilidad de Baquetas y Camellones.",
+      "Para las construcciones a desarrollarse, serán aplicables las disposiciones del presente Programa Parcial en materia de ordenamiento territorial, a través de las normas de ordenación aplicables, así como las normas relativas a la Ley para el Funcionamiento de Establecimientos Mercantiles."
+    ],
+    [
+      "Ordenamiento del Uso del Espacio Público.",
+      "Convenio entre los operadores de estacionamientos públicos, restauranteros, comerciantes y oficinistas. Adicionar al convenio de ARCCCO otro relativo a sonidos y ruidos, humos, olores y basura. Los fondos con los recursos provenientes de los permisos para ocupar un área limitada de las banquetas, se destinará para obras en beneficio de la colonia."
+    ],
+    [
+      "Instalación de Parquímetros.",
+      "Para evitar estacionamiento en vía pública y apropiación indebida de la misma, se establece una norma de ordenación, la cual será sometida a consulta vecinal previamente, que dispone la operación y funcionamiento de parquímetros. El programa contempla la creación de un fondo con los recursos provenientes de los parquímetros, para obras en beneficio de la colonia."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "Se conserva literalmente “Baquetas” en el subprograma, tal como aparece en la extracción cotejada; debe verificarse si es errata de la fuente."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 4
+}

@@ -1,0 +1,187 @@
+{
+  "identificador": "tabla_24",
+  "titulo_literal": "Tipo de intervencion segun niveles de protección",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    89
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Tipo de intervención",
+    "Nivel 1",
+    "Nivel 2",
+    "Nivel 3"
+  ],
+  "filas": [
+    {
+      "grupo": "Demoliciones",
+      "tipo_de_intervencion": "Demolición total",
+      "celdas_combinadas": {
+        "columnas": [
+          "Nivel 1",
+          "Nivel 2",
+          "Nivel 3"
+        ],
+        "valor": "Condicionada"
+      }
+    },
+    {
+      "grupo": "Demoliciones",
+      "tipo_de_intervencion": "Demolición total excepto fachada",
+      "celdas_combinadas": {
+        "columnas": [
+          "Nivel 1",
+          "Nivel 2",
+          "Nivel 3"
+        ],
+        "valor": "Prohibida"
+      }
+    },
+    {
+      "grupo": "Demoliciones",
+      "tipo_de_intervencion": "Demolición excepto primera crujía",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Permitida",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Demoliciones",
+      "tipo_de_intervencion": "Demolición parcial de la fachada",
+      "valores_por_nivel": [
+        "Prohibida",
+        "Permitida",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Modificaciones",
+      "tipo_de_intervencion": "De planta, en forma y distribución",
+      "valores_por_nivel": [
+        "Restringida",
+        "Condicionada",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Modificaciones",
+      "tipo_de_intervencion": "De fachada",
+      "valores_por_nivel": [
+        "Restringida",
+        "Permitida",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Modificaciones",
+      "tipo_de_intervencion": "Remetimientos o salientes",
+      "valores_por_nivel": [
+        "Prohibida",
+        "Condicionada",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Sustituciones",
+      "tipo_de_intervencion": "Elementos estructurales",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Permitida",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Sustituciones",
+      "tipo_de_intervencion": "Acabados de herrería y carpintería",
+      "valores_por_nivel": [
+        "Permitida",
+        "Permitida",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Sustituciones",
+      "tipo_de_intervencion": "De color en fachadas",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Condicionada",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Adiciones",
+      "tipo_de_intervencion": "Niveles superiores",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Condicionada",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Adiciones",
+      "tipo_de_intervencion": "Anexos posteriores",
+      "valores_por_nivel": [
+        "Prohibida",
+        "Condicionada",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Adiciones",
+      "tipo_de_intervencion": "Herrería",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Permitida",
+        "Permitida"
+      ]
+    },
+    {
+      "grupo": "Adiciones",
+      "tipo_de_intervencion": "Balcones y volados",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Condicionada",
+        "Condicionada"
+      ]
+    },
+    {
+      "grupo": "Adiciones",
+      "tipo_de_intervencion": "Instalaciones con vista a la calle",
+      "valores_por_nivel": [
+        "Prohibida",
+        "Prohibida",
+        "Prohibida"
+      ]
+    },
+    {
+      "grupo": "Adiciones",
+      "tipo_de_intervencion": "Instalaciones de aire, calefacción, etc.",
+      "valores_por_nivel": [
+        "Condicionada",
+        "Condicionada",
+        "Permitida"
+      ]
+    }
+  ],
+  "numero_filas_verificadas": 16,
+  "numero_columnas_verificadas": 4,
+  "grupos": [
+    "Demoliciones",
+    "Modificaciones",
+    "Sustituciones",
+    "Adiciones"
+  ],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 16,
+  "subencabezados": [
+    null,
+    "Valor relevante sin alterar",
+    "Valor relevante alterado",
+    "Valor ambiental"
+  ]
+}

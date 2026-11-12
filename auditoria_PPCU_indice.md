@@ -1,5 +1,7 @@
 # Auditoría documental del índice — PPCU Hipódromo
 
+**Revisión editorial del informe:** 2026-11-12. Esta revisión corrige afirmaciones de control documental; no vuelve a cotejar el PDF ni modifica chunks.
+
 ## Alcance y método
 
 Este informe compara el índice del documento original con los archivos derivados para verificar si la estructura administrativa y normativa del PPCU está representada sin alterar su jerarquía, numeración ni ubicación.
@@ -22,7 +24,7 @@ No se modificaron archivos originales. La auditoría se basa en:
 
 ## Observaciones de contexto
 
-- No existe `AGENTS.md` en la raíz ni en `Contexto/`. La lectura obligatoria del archivo guía no fue posible por ausencia del mismo.
+- La salida de terminal compartida el 2026-11-12 muestra `AGENTS.md` en la raíz del repositorio. Por tanto, la afirmación anterior de que no existía en la raíz era incorrecta y se retira. Esta revisión no confirma si existe otra copia en `Contexto/` ni acredita que `AGENTS.md` se haya consultado durante la auditoría original.
 - Sí está disponible `ajustes_pendientes.md` y el contenido de la rama confirma la advertencia sobre índices duplicados y numeración sospechosa.
 - La bitácora del proyecto (`Bitacora.md`) menciona explícitamente el problema de “bloques de índice duplicados” y que el PPCU “aparece repetido en al menos tres pasadas distintas” dentro del mismo documento.
 - El PDF original conserva el índice real en su página inicial y en el cuerpo del texto. La revisión de la estructura confirma que la duplicación es documental: el índice se repite como bloque antes del cuerpo y la extracción automática lo reproduce como encabezados independientes.
@@ -140,7 +142,7 @@ La evidencia visible es directa y repetida:
 
 El índice del documento original es consistente en forma y contenido. La discrepancia principal no está en el PDF original, sino en la representación secundaria: la extracción/revisión y, sobre todo, el JSON de chunks, omiten varios encabezados y fusionan otros.
 
-La evidencia confirma que el problema es de representación/documentación secundaria, no de la estructura jurídica del texto original.
+Con base en las comparaciones que documenta esta auditoría, los problemas identificados corresponden a la representación secundaria (extracción, revisión y chunks). Esta conclusión describe la evidencia registrada en el informe original; no equivale a una nueva verificación independiente del PDF en esta revisión editorial ni a una valoración de la estructura jurídica del instrumento.
 
 ## Decisión humana requerida
 

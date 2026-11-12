@@ -1,0 +1,111 @@
+{
+  "identificador": "tabla_18",
+  "titulo_literal": "Vacantes urbanas",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    44
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Distrito",
+    "Baldíos Núm.",
+    "Baldíos M²",
+    "Estacionamientos Núm.",
+    "Estacionamientos M²",
+    "Total Núm.",
+    "Total M²"
+  ],
+  "filas": [
+    [
+      "I",
+      "6",
+      "2756",
+      "6",
+      "2416",
+      "13",
+      "5172"
+    ],
+    [
+      "II",
+      "4",
+      "3956",
+      "11",
+      "4746",
+      "19",
+      "8702"
+    ],
+    [
+      "III",
+      "4",
+      "1179",
+      "12",
+      "6203",
+      "17",
+      "7382"
+    ],
+    [
+      "IV",
+      "1",
+      "226",
+      "1",
+      "571",
+      "2",
+      "797"
+    ],
+    [
+      "V",
+      "2",
+      "557",
+      "1",
+      "0",
+      "1",
+      "557"
+    ],
+    [
+      "VI",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ]
+  ],
+  "numero_filas_verificadas": 6,
+  "numero_columnas_verificadas": 7,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 6,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Vacantes Urbanas",
+      "subgrupos": [
+        {
+          "titulo_literal": "Baldíos",
+          "subcolumnas": [
+            "Núm.",
+            "M²"
+          ]
+        },
+        {
+          "titulo_literal": "Estacionamientos",
+          "subcolumnas": [
+            "Núm.",
+            "M²"
+          ]
+        },
+        {
+          "titulo_literal": "Total",
+          "subcolumnas": [
+            "Núm.",
+            "M²"
+          ]
+        }
+      ]
+    }
+  ]
+}

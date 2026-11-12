@@ -1,0 +1,47 @@
+{
+  "identificador": "instrumentacion_fisico_natural",
+  "titulo_literal": "Programa: Físico Natural",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    111,
+    112
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Infiltración y Captación de Agua Pluvial.",
+      "En materia de infiltración y captación de agua pluvial, la Administración Pública del Distrito Federal, por conducto de las dependencias competentes (Delegación Cuauhtémoc y Dirección General de Construcción y Operación Hidráulica), programará y erogará los gastos necesarios, para cubrir las acciones que se describen en el apartado correspondiente a la estrategia."
+    ],
+    [
+      "Manejo de Reciclaje de Agua.",
+      "Se promoverá un convenio de concertación, entre la Dirección General de Construcción y Operación Hidráulica, la Delegación Cuauhtémoc y por la otra parte los habitantes de la zona y posibles inversionistas, con el objeto de que se apoye el financiamiento y ejecución de las acciones propuestas en el Programa Parcial."
+    ],
+    [
+      "Reciclaje.",
+      "La Secretaría del Medio Ambiente y la Secretaría de Obras y Servicios, se coordinarán con la Delegación Cuauhtémoc para que dentro del programa de separación de desechos y composteo, intervengan inversionistas privados, ya sea que se trate de empresas u organizaciones sin fines de lucro, para la comercialización de los residuos inorgánicos."
+    ],
+    [
+      "Mejoramiento Ambiental, Renovación de Areas Verdes, Manejo y Mantenimiento de Areas Verdes, Manejo y Mantenimiento del Parque México.",
+      "Para la instrumentación de las acciones de estos subprogramas, la Delegación Cuauhtémoc, se coordinará con la Secretaría de Obras y Servicios, así como con la Secretaría del Medio Ambiente y el Area de Sitios Patrimoniales y Monumentos, a efecto de dar cumplimiento a lo dispuesto en el presente Programa Parcial. Asimismo se promoverá la participación activa de vecinos de la zona para el financiamiento y/o ejecución de parte de las acciones."
+    ],
+    [
+      "Mantenimiento de Red Hidráulica.",
+      "En materia de mantenimiento de la red de recursos hidráulicos, la Administración Pública del Distrito Federal, por conducto de las dependencias competentes (Delegación Cuauhtémoc y Dirección General de Construcción y Operación Hidráulica), programará y erogará los gastos necesarios, para cubrir las acciones que se describen en el apartado correspondiente a la estrategia."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La parte superior de la página física 112 muestra además un fragmento de instrumentación sin subprograma legible; no se fusionó con ninguna fila ni se atribuyó a un subprograma."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 5
+}

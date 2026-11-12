@@ -1,0 +1,113 @@
+{
+  "identificador": "tabla_02",
+  "titulo_literal": "Mezcla de usos del suelo en el Distrito II",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    21
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Uso",
+    "Planta Baja M2",
+    "Planta Baja %",
+    "Plantas Altas M2",
+    "Plantas Altas %"
+  ],
+  "filas": [
+    [
+      "Vivienda unifamiliar",
+      "29,643",
+      "15",
+      "34,749",
+      "18"
+    ],
+    [
+      "Vivienda plurifamiliar",
+      "37,462",
+      "20",
+      "81,019",
+      "42"
+    ],
+    [
+      "Oficinas",
+      "31,789",
+      "16",
+      "42,233",
+      "22"
+    ],
+    [
+      "Comercio",
+      "45,551",
+      "24",
+      "12,592",
+      "7"
+    ],
+    [
+      "Restaurante",
+      "10,887",
+      "6",
+      "3,104",
+      "2"
+    ],
+    [
+      "Equipamiento",
+      "7,480",
+      "4",
+      "8,054",
+      "4"
+    ],
+    [
+      "Club nocturno",
+      "288",
+      "0",
+      "288",
+      "0"
+    ],
+    [
+      "Baldío",
+      "3,312",
+      "2",
+      "0",
+      "0"
+    ],
+    [
+      "Estacionamiento",
+      "21,628",
+      "11",
+      "5,122",
+      "3"
+    ],
+    [
+      "Sin uso",
+      "4,331",
+      "2",
+      "4,770",
+      "2"
+    ]
+  ],
+  "numero_filas_verificadas": 10,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 10,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Planta Baja",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    },
+    {
+      "titulo_literal": "Plantas Altas",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    }
+  ]
+}

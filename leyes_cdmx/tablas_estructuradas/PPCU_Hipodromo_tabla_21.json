@@ -1,0 +1,71 @@
+{
+  "identificador": "tabla_21",
+  "titulo_literal": "Tendencias programáticas de población Programa de Desarrollo Urbano Delegacional",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    66
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Zona",
+    "1990",
+    "1995",
+    "TASA",
+    "2010",
+    "TASA",
+    "2020",
+    "TASA"
+  ],
+  "filas": [
+    [
+      "Delegación",
+      "595,960",
+      "540,382",
+      "-1.70%",
+      "501,500",
+      "-0.494%",
+      "580,300",
+      "1.486%"
+    ],
+    [
+      "Zona de Estudio",
+      "15,065",
+      "12,742",
+      "-3.29%",
+      "10,915",
+      "-0.956%",
+      "11,079",
+      "1.5%"
+    ]
+  ],
+  "numero_filas_verificadas": 2,
+  "numero_columnas_verificadas": 8,
+  "grupos": [],
+  "notas": [
+    "Fuente: Programa de Desarrollo Urbano de la Delegación Cuauhtémoc."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Datos historicos",
+      "subcolumnas": [
+        "1990",
+        "1995",
+        "TASA"
+      ]
+    },
+    {
+      "titulo_literal": "Datos programaticos",
+      "subcolumnas": [
+        "2010",
+        "TASA",
+        "2020",
+        "TASA"
+      ]
+    }
+  ]
+}

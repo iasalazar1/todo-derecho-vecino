@@ -1,0 +1,74 @@
+{
+  "identificador": "tabla_11",
+  "titulo_literal": "Equipamiento. Subsistema Administración Pública",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    40
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Nombre",
+    "Dirección",
+    "Se ubica en la zona"
+  ],
+  "filas": [
+    [
+      "Secretaría de Agricultura y Recursos Hidráulicos",
+      "Nuevo León # 210",
+      "Si"
+    ],
+    [
+      "Tribunal Federal Electoral",
+      "Nuevo León #202",
+      "Si"
+    ],
+    [
+      "Dirección General de Reclusorios",
+      "Bajío #362",
+      "Si"
+    ],
+    [
+      "INEGI",
+      "Baja California #272",
+      "Si"
+    ],
+    [
+      "INEA",
+      "Tamaulipas #150",
+      "Si"
+    ],
+    [
+      "SARH",
+      "Campeche #281",
+      "Si"
+    ],
+    [
+      "IMSS",
+      "Popocatépetl #14",
+      "Si"
+    ],
+    [
+      "Subdelegación Roma Condesa",
+      "Conjunto habitacional Presidente Juárez s/n",
+      "No"
+    ],
+    [
+      "DGCOH",
+      "Quintana Roo #143",
+      "Si"
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 9,
+  "encabezados_superiores": [
+    "Subsistema: Administración Pública",
+    "Equipamiento existente en la zona de estudio"
+  ]
+}

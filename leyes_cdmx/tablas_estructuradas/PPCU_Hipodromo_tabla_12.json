@@ -1,0 +1,59 @@
+{
+  "identificador": "tabla_12",
+  "titulo_literal": "Tendencia decreciente de la población",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    41
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Año",
+    "Población Delegación",
+    "Población Zona",
+    "Vivienda Delegación",
+    "Vivienda Zona"
+  ],
+  "filas": [
+    [
+      "1990",
+      "595,900",
+      "15,065",
+      "159,400",
+      "4,727"
+    ],
+    [
+      "1995",
+      "540,400",
+      "12,442",
+      "150100",
+      "4,347"
+    ]
+  ],
+  "numero_filas_verificadas": 2,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "El valor “12,442” se conserva como aparece en la tabla del PDF. En el texto de la misma página y en la Tabla 21 aparece “12,742”; discrepancia confirmada en la fuente."
+  ],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Población",
+      "subcolumnas": [
+        "Delegación",
+        "Zona"
+      ]
+    },
+    {
+      "titulo_literal": "Vivienda",
+      "subcolumnas": [
+        "Delegación",
+        "Zona"
+      ]
+    }
+  ]
+}

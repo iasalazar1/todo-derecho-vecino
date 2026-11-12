@@ -1,0 +1,49 @@
+{
+  "identificador": "tabla_14",
+  "titulo_literal": "Tipo de vivienda",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    42
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Tipo de Vivienda",
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI"
+  ],
+  "filas": [
+    [
+      "Unifamiliar",
+      "22%",
+      "27%",
+      "14%",
+      "30%",
+      "47%",
+      "43%"
+    ],
+    [
+      "Plurifamiliar",
+      "29%",
+      "40%",
+      "26%",
+      "19%",
+      "26%",
+      "19%"
+    ]
+  ],
+  "numero_filas_verificadas": 2,
+  "numero_columnas_verificadas": 7,
+  "grupos": [],
+  "notas": [
+    "Fuente: Levantamiento efectuado en campo."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2
+}

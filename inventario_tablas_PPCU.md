@@ -1,5 +1,7 @@
 # Inventario de tablas, cuadros, figuras y elementos gráficos — PPCU Hipódromo
 
+**Revisión editorial:** 2026-11-12. Se precisó el estado de la Tabla 23 sin modificar el inventario de los demás elementos.
+
 ## Alcance
 
 Este inventario revisa visualmente el documento base y compara los elementos gráficos textualmente citados para determinar si son tablas, cuadros estadísticos, mapas o figuras, y si se han extraído adecuadamente.
@@ -38,7 +40,7 @@ Este inventario revisa visualmente el documento base y compara los elementos gr�
 | 20 | `Normatividad por vialidad` | no confirmada | no confirmada | Tabla normativa / vialidad | Tiene función normativa y se continúa en la siguiente página. | Detectada. |
 | 21 | `Tendencias programáticas de población` | no confirmada | no confirmada | Tabla demográfica / programa | Modelo para estimaciones del programa. | Detectada. |
 | 22 | `TABLA DE COMPATIBILIDAD DE USOS DEL SUELO` | 80 | 81 | Tabla de zonificación y compatibilidad | Es la tabla de compatibilidad que se usa en el JSON `tabla_22.json`. | Detectada en PDF, texto extraído y JSON asociado. |
-| 23 | `Sin referencia visible` | no encontrado | no encontrado | No identificado | No aparece título ni referencia textual con ese número en el PDF extraído. | No encontrada. |
+| 23 | `Tabla 23` | no localizada | no localizada | Elemento no localizado; existencia no determinada | No se encontró una referencia con ese número en el texto extraído consultado. No se documenta una inspección visual exhaustiva de las 122 páginas para resolver su existencia. | No localizada; no se concluye inexistencia. |
 | 24 | `Tipo de intervencion segun niveles de protección` | no confirmada | no confirmada | Tabla de normas / protección | Tablas de intervención por nivel de protección. | Detectada. |
 | — | `Mapa Mental` | no confirmada | no confirmada | Figura / ejercicio participativo | Recurso gráfico no tabular; aparece como ejercicio de consulta ciudadana. | Detectada textual y tipificada como figura. |
 | — | `Gráfica 24. Población residente y flotante en día hábil` | no confirmada | no confirmada | Figura / gráfica | Se distingue de una tabla técnica; la referencia es gráfica, no tabular. | Detectada textual. |
@@ -56,15 +58,15 @@ Las tablas no son homogéneas. El documento mezcla varias funciones:
 - Tablas de programas de acción: `TABLA DE PROGRAMA DE ACCIONES PRIORITARIAS`.
 - Figuras y mapas: `Mapa Mental`, `Gráfica 24`.
 
-### 2) Tabla 23: ausencia real
+### 2) Tabla 23: no localizada (existencia no determinada)
 
-La evidencia del PDF extraído no contiene ninguna referencia a `Tabla 23`. El documento pasa directamente de la `Tabla 22` a la `Tabla 24`. Esto no parece un error de extracción, sino una ausencia real en la secuencia documental.
+En el texto extraído consultado no se encontró una referencia a `Tabla 23`; en esa representación, la numeración pasa de la `Tabla 22` a la `Tabla 24`. Ese salto no demuestra por sí solo que la Tabla 23 no exista en el PDF. La revisión disponible no documenta una inspección visual exhaustiva de las 122 páginas que permita descartar su presencia. Por tanto, el estado correcto es **no localizada**; no debe describirse como ausencia real ni como inexistencia confirmada.
 
 ### 3) Esquema de extracción
 
 La extracción primaria y la revisión del texto detectan tablas, pero no siempre las normalizan como elementos independientes. De manera especial:
 
-- La `Tabla 22` sí existe como elemento separado y específico.
+- La `Tabla 22` está identificada como elemento separado en los materiales descritos por este inventario. Su contenido y estado de revisión se controlan en la auditoría específica de Tabla 22.
 - Las tablas funcionales de diagnóstico (`1-21`) aparecen en el texto extraído y revisado con buena continuidad.
 - El archivo `PPCU_Hipodromo_reviewed_chunks.json` no modela estas tablas como una colección separada; modela secciones y chunks del texto, no el conjunto completo de tablas del documento.
 

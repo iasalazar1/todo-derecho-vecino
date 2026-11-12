@@ -1,0 +1,120 @@
+{
+  "identificador": "tabla_03",
+  "titulo_literal": "Mezcla de usos del suelo en el Distrito III",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    22
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Uso",
+    "Planta Baja M2",
+    "Planta Baja %",
+    "Plantas Altas M2",
+    "Plantas Altas %"
+  ],
+  "filas": [
+    [
+      "Vivienda unifamiliar",
+      "7,506",
+      "5",
+      "8,753",
+      "5"
+    ],
+    [
+      "Vivienda plurifamiliar",
+      "8,074",
+      "5",
+      "24,368",
+      "12"
+    ],
+    [
+      "Oficinas",
+      "67,662",
+      "43",
+      "120,085",
+      "61"
+    ],
+    [
+      "Comercio",
+      "36,487",
+      "23",
+      "16,616",
+      "9"
+    ],
+    [
+      "Restaurante",
+      "5,728",
+      "4",
+      "5,122",
+      "3"
+    ],
+    [
+      "Equipamiento",
+      "7,634",
+      "5",
+      "6,284",
+      "4"
+    ],
+    [
+      "Club nocturno",
+      "490",
+      "0",
+      "490",
+      "0"
+    ],
+    [
+      "Baldío",
+      "1,625",
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "Gasolinera",
+      "1,410",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Estacionamiento",
+      "16,705",
+      "11",
+      "8,038",
+      "4"
+    ],
+    [
+      "Sin uso",
+      "4,731",
+      "3",
+      "3,641",
+      "2"
+    ]
+  ],
+  "numero_filas_verificadas": 11,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 11,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Planta Baja",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    },
+    {
+      "titulo_literal": "Plantas Altas",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    }
+  ]
+}

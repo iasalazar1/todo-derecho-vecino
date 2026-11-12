@@ -1,0 +1,101 @@
+{
+  "identificador": "tabla_20",
+  "titulo_literal": "Normatividad por vialidad",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    60,
+    61
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Calle",
+    "Tramo",
+    "Zona",
+    "Intensidad",
+    "Usos permitidos"
+  ],
+  "filas": [
+    [
+      "Insurgentes",
+      "Toda la zona de estudio",
+      "HM",
+      "12/40(1)",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Nuevo León",
+      "Toda la zona de estudio",
+      "HC",
+      "6/40/90(1)",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Tamaulipas",
+      "Toda la zona de estudio",
+      "HC",
+      "6/40/90(1)",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Diag. Patriotismo",
+      "Toda la zona de estudio",
+      "HO",
+      "12/40(1)",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Benjamín Franklin",
+      "De Baja California a Tamaulipas",
+      "HO",
+      "3/20/90",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Baja California",
+      "Toda la zona de estudio",
+      "HO",
+      "8/40(1)",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Alfonso Reyes",
+      "Toda la zona de estudio",
+      "HC",
+      "3/30/90",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Campeche",
+      "De Insurgentes a Nuevo León",
+      "HO",
+      "4/25/90",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Campeche",
+      "Solo acera sur de Insurgentes a Chilpancingo",
+      "HO",
+      "8/40/90",
+      "Ver tabla de compatibilidad"
+    ],
+    [
+      "Campeche",
+      "De Nuevo León a Tamaulipas",
+      "HO",
+      "3/20/90",
+      "Ver tabla de compatibilidad"
+    ]
+  ],
+  "numero_filas_verificadas": 10,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [
+    "(1) Aplica con un 20% adicional en la demanda reglamentaria de estacionamiento.",
+    "Nomenclatura de intensidad: Ej. 3/25/90 Donde: 3=número de niveles máximos permitidos; 25=porcentaje mínimo de área libre para infiltración; y, 90=área de vivienda mínima (opcional)."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 10
+}

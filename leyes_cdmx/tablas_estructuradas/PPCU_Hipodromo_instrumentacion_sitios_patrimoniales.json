@@ -1,0 +1,34 @@
+{
+  "identificador": "instrumentacion_sitios_patrimoniales",
+  "titulo_literal": "Programa: Sitios Patrimoniales",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    113
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Restauración y Protección de Edificios Catalogados.",
+      "Para la protección del patrimonio cultural y artístico, se establece un polígono de actuación mediante el sistema de cooperación, por el cual, la Secretaría de Desarrollo Urbano y Vivienda y la Delegación Cuauhtémoc, promoverán ante propietarios e inversionistas la realización de acciones de restauración."
+    ],
+    [
+      "Revitalización de la zona de estudio.",
+      "La Secretaría de Desarrollo Urbano y Vivienda a través del Area de Sitios Patrimoniales, en coordinación con las autoridades federales del Instituto Nacional de Bellas Artes y la Delegación, ejercerán las atribuciones de protección del patrimonio artístico, con base en el nuevo catálogo que define los niveles de intervención, a los que, podrán estar sujetos los inmuebles catalogados. Este catalogo sustituye el listado elaborado por el Instituto Nacional de Bellas Artes. Reducción de impuestos para casas catalogadas, habitadas por sus propietarios o rentadas para vivienda, mientras conserven ese uso. Los edificios catalogados como relevantes podrán transferir potencial (Ver capítulo 12.3 Instrumentos de fomento). El 30% de los recursos provenientes de esta transferencia será destinada a un Fideicomiso. Otro 30% se destinará a mejoras del inmueble catalogado."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La instrumentación del segundo subprograma ocupa una celda extensa; cotejo textual completo pendiente a mayor resolución."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2
+}

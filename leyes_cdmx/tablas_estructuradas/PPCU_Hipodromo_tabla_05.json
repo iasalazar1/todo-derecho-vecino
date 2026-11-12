@@ -1,0 +1,129 @@
+{
+  "identificador": "tabla_05",
+  "titulo_literal": "Mezcla de usos del suelo en el Distrito V",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    23
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Uso",
+    "Planta Baja M2",
+    "Planta Baja %",
+    "Plantas Altas M2",
+    "Plantas Altas %"
+  ],
+  "filas": [
+    [
+      "Vivienda unifamiliar",
+      "47,334",
+      "34",
+      "51,781",
+      "37"
+    ],
+    [
+      "Vivienda plurifamiliar",
+      "21,139",
+      "15",
+      "50,142",
+      "36"
+    ],
+    [
+      "Oficinas",
+      "16,862",
+      "12",
+      "17,464",
+      "13"
+    ],
+    [
+      "Comercio",
+      "22,879",
+      "17",
+      "2,191",
+      "2"
+    ],
+    [
+      "Restaurante",
+      "8,571",
+      "6",
+      "1,151",
+      "1"
+    ],
+    [
+      "Equipamiento",
+      "5,941",
+      "4",
+      "5,260",
+      "4"
+    ],
+    [
+      "Club nocturno",
+      "475",
+      "0",
+      "475",
+      "0"
+    ],
+    [
+      "Baldío",
+      "557",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "Estacionamiento",
+      "9,566",
+      "7",
+      "0",
+      "0"
+    ],
+    [
+      "Sin uso",
+      "4,261",
+      "3",
+      "5,245",
+      "4"
+    ],
+    [
+      "Gasolinera",
+      "899",
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "* Otros usos",
+      "825",
+      "1",
+      "3,988",
+      "3"
+    ]
+  ],
+  "numero_filas_verificadas": 12,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [
+    "* Otros usos: Entretenimiento y Recreación social."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 12,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Planta Baja",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    },
+    {
+      "titulo_literal": "Plantas Altas",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    }
+  ]
+}

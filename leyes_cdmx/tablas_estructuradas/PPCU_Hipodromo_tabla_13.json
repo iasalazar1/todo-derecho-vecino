@@ -1,0 +1,37 @@
+{
+  "identificador": "tabla_13",
+  "titulo_literal": "Tabla comparativa de ocupación por vivienda",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    42
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Año",
+    "Delegación",
+    "Zona de estudio"
+  ],
+  "filas": [
+    [
+      "1990",
+      "3.73 hab. /vivienda",
+      "3.18 hab. /vivienda"
+    ],
+    [
+      "1995",
+      "3.62 hab. /vivienda",
+      "2.93 hab. /vivienda"
+    ]
+  ],
+  "numero_filas_verificadas": 2,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [
+    "Fuente: IX Censo General de Población y vivienda 1990 y Conteo de Vivienda 1995, INEGI."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2
+}

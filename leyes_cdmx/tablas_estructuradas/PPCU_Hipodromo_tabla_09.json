@@ -1,0 +1,415 @@
+{
+  "identificador": "tabla_09",
+  "titulo_literal": "Equipamiento. Subsistema Educación",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    36,
+    37
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Establecimiento",
+    "Público/privado",
+    "Nombre",
+    "Dirección",
+    "Se ubica en la zona"
+  ],
+  "filas": [
+    [
+      "Jardín de niños",
+      "Público",
+      "Islandia",
+      "Av. Nuevo León #268",
+      "Sí"
+    ],
+    [
+      "",
+      "Público",
+      "Cuauhtémoc",
+      "Cozumel #55",
+      "No"
+    ],
+    [
+      "",
+      "Público",
+      "Ma. Guadalupe de Alba",
+      "Colima #229",
+      "No"
+    ],
+    [
+      "",
+      "Público",
+      "Centro de Desarrollo Infantil (CENDI) No. 2",
+      "Campeche #81",
+      "Sí"
+    ],
+    [
+      "",
+      "Privado",
+      "Instituto Pedagógico",
+      "Guanajuato #69",
+      "No"
+    ],
+    [
+      "",
+      "Privado",
+      "Montessori",
+      "Aguascalientes #190",
+      "Sí"
+    ],
+    [
+      "",
+      "Privado",
+      "Patitas",
+      "Chilpancingo #31",
+      "Sí"
+    ],
+    [
+      "",
+      "Privado",
+      "Pie pequeño",
+      "Ensenada #89",
+      "Sí"
+    ],
+    [
+      "",
+      "Privado",
+      "Santa Rosa",
+      "Tamaulipas #166",
+      "Sí"
+    ],
+    [
+      "Primaria",
+      "Pública",
+      "Estado de Coahuila",
+      "Chihuahua #54",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Manuel López Cotilla",
+      "Plaza de la Villa Madrid #16",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Alberto Correa",
+      "Colima #291",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "José Ma. Iglesias",
+      "Colima #383",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Ignacio L. Vallarta",
+      "Durango #100",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Cap. Emilio Carranza",
+      "Orizaba #90",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "21 de Marzo",
+      "Monterrey #356",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Valentín Zamora Orozco",
+      "Colima #293",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Francisco Montes de Oca",
+      "Campeche #304",
+      "Sí"
+    ],
+    [
+      "",
+      "Pública",
+      "Alfonso Herrera",
+      "Juan de la Barrera #11",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Alfonso Caso Andrade",
+      "Tehuantepec #244",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Cámara de Comercio",
+      "Guanajuato #69",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Amado Nervo (Institutos Asociados)",
+      "Bajío #307",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Colegio Campeche",
+      "Campeche #144",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Aberdeen",
+      "Av. Nuevo León #134",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "Ollín Yoliztli",
+      "Choapan #29",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "Benjamín Franklin",
+      "Av. B. Franklin #75",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Insituto Avignon",
+      "Av. Nuevo León #113",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "CUMAC",
+      "Amsterdam #155",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "Montessori",
+      "Aguascalientes #190",
+      "Sí"
+    ],
+    [
+      "Secundaria",
+      "Pública",
+      "Soledad Anaya Solorzano",
+      "Córdoba #68",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Sria. De Comercio y Fomento Industrial",
+      "San Luis Potosí #108",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Bernal Díaz del Castillo (Trabajadores No. 8)",
+      "Tehuantepec #240",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "Miguel Ramos Arizpe (Dna. No. 244)",
+      "Tehuantepec #240",
+      "No"
+    ],
+    [
+      "",
+      "Pública",
+      "José Ma. Morelos y Pavón (Dna. No 32)",
+      "Av. Nuevo León #178",
+      "Sí"
+    ],
+    [
+      "",
+      "Pública",
+      "Constitución No. 70 y 71 (Tec y artista No 3)",
+      "José Vasconcelos #115",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Insituto Avignon",
+      "Av. Nuevo León #113",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "CUMAC",
+      "Amsterdam #155",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "Amado Nervo (Institutos Asociados)",
+      "Bajío #307",
+      "No"
+    ],
+    [
+      "Preparatoria",
+      "Privada",
+      "Insituto Avignon (CESEM)",
+      "Av. Nuevo León #113",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "CUMAC",
+      "Amsterdam #155",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "Instituto México de Enseñanza Abierta",
+      "Av. Nuevo León #144",
+      "Sí"
+    ],
+    [
+      "Universidad",
+      "Privada",
+      "Universidad del Distrito Federal",
+      "Aguascalientes #157",
+      "Sí"
+    ],
+    [
+      "",
+      "Privada",
+      "Universidad del Valle de México",
+      "Mérida #33",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Centro de Estudios Universitarios Londres",
+      "Plaza Luis Cabrera #9",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Universidad de la Comunicación",
+      "Zacatecas #120",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Américas Unidas",
+      "Chihuahua #23",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Universidad La Salle",
+      "Benjamín Franklin s/n",
+      "No"
+    ],
+    [
+      "",
+      "Privada",
+      "Xochically",
+      "San Luis Potosí #122",
+      "No"
+    ]
+  ],
+  "numero_filas_verificadas": 48,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "En las páginas físicas 36–37, Cámara de Comercio y Amado Nervo aparecen como dos filas distintas; se separaron y conservaron sus domicilios literales.",
+    "Se conservaron las grafías impresas “Choapan” e “Insituto Avignon” y el domicilio “Bajío #307”.",
+    "La columna Establecimiento contiene celdas combinadas; sus rangos de filas se registran en celdas_combinadas y las celdas subsiguientes quedan vacías.",
+    "El cotejo individual de todas las direcciones permanece parcial."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 48,
+  "celdas_combinadas": [
+    {
+      "columna": "Establecimiento",
+      "filas_inclusivas": [
+        1,
+        9
+      ],
+      "valor_literal": "Jardín de niños"
+    },
+    {
+      "columna": "Establecimiento",
+      "filas_inclusivas": [
+        10,
+        29
+      ],
+      "valor_literal": "Primaria"
+    },
+    {
+      "columna": "Establecimiento",
+      "filas_inclusivas": [
+        30,
+        38
+      ],
+      "valor_literal": "Secundaria"
+    },
+    {
+      "columna": "Establecimiento",
+      "filas_inclusivas": [
+        39,
+        41
+      ],
+      "valor_literal": "Preparatoria"
+    },
+    {
+      "columna": "Establecimiento",
+      "filas_inclusivas": [
+        42,
+        48
+      ],
+      "valor_literal": "Universidad"
+    }
+  ],
+  "encabezados_superiores": [
+    "Subsistema: Educación",
+    "Equipamiento existente"
+  ]
+}

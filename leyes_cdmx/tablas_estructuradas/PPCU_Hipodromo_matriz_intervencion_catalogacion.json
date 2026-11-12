@@ -1,0 +1,27 @@
+{
+  "identificador": "matriz_intervencion_catalogacion",
+  "titulo_literal": "NIVELES DE INTERVENCIÓN POR CALIDAD DE CATALOGACIÓN",
+  "tipo_elemento": "matriz_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    119
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "TIPO DE INTERVENCIÓN",
+    null,
+    null,
+    null
+  ],
+  "filas": [],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 4,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La lámina física 119 es un escaneo de baja resolución. Se reconoce el título y se distinguen cuatro columnas, pero los encabezados completos y las celdas no son legibles con confianza; no se transcribieron valores."
+  ],
+  "estado_cotejo_documental": "pendiente",
+  "needs_review": true,
+  "numero_filas_estructuradas": 0
+}

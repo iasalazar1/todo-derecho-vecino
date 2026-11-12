@@ -1,0 +1,156 @@
+{
+  "identificador": "tabla_08",
+  "titulo_literal": "Equipamiento. Subsistema Salud",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    35
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Nombre",
+    "Dirección",
+    "Se ubica en la zona"
+  ],
+  "filas": [
+    [
+      "Hospital del IMSS No. 26",
+      "Chilpancingo #56, Tlaxcala s/n.",
+      "Si"
+    ],
+    [
+      "Hospital Londres",
+      "Durango #50",
+      "No"
+    ],
+    [
+      "Hospital Centro Médico Quirúrgico",
+      "Av. Chapultepec #500",
+      "No"
+    ],
+    [
+      "Hospital del IMSS clínica No.1",
+      "Orizaba #15",
+      "No"
+    ],
+    [
+      "Hospital del ISSSTE",
+      "Sinaloa #39",
+      "No"
+    ],
+    [
+      "Hospital Laboratorio",
+      "Sinaloa s/Nuevo",
+      "No"
+    ],
+    [
+      "Hospital de Cinematografía",
+      "Cozumel #10",
+      "No"
+    ],
+    [
+      "Hospital Durango",
+      "Durango #296",
+      "No"
+    ],
+    [
+      "Hospital Lourdes",
+      "Alvaro Obregón #101",
+      "No"
+    ],
+    [
+      "Hospital Santa Fe",
+      "San Luis Potosí #143",
+      "No"
+    ],
+    [
+      "Hospital Santa Elena",
+      "Querétaro #58",
+      "No"
+    ],
+    [
+      "Clínica Juárez",
+      "Jalapa #252",
+      "No"
+    ],
+    [
+      "Clínica de especialidades médicas",
+      "Tlacotalpan #59",
+      "No"
+    ],
+    [
+      "Hospital Baja California",
+      "Baja California #126",
+      "No"
+    ],
+    [
+      "Sanatorio Trinidad",
+      "Tlaxcala #90",
+      "No"
+    ],
+    [
+      "Hospital Metropolitano",
+      "Tlaxcala #51",
+      "No"
+    ],
+    [
+      "Centro Médico Dalinde",
+      "Tuxpan esq. Baja California",
+      "No"
+    ],
+    [
+      "Clínica Gastroenterológica",
+      "Aguascalientes #94",
+      "No"
+    ],
+    [
+      "Clínica No. 38 IMSS",
+      "Parque España #9",
+      "No"
+    ],
+    [
+      "Centro de Salud y Sanatorio",
+      "Benjamín Hill #11",
+      "No"
+    ],
+    [
+      "Centro de Salud Angel Brioso Vasconcelos",
+      "Benjamín Hill #14",
+      "No"
+    ],
+    [
+      "D.G.S. Salud Pública del D.F.",
+      "Benjamín Hill s/n",
+      "No"
+    ],
+    [
+      "Clínica del ISSSTE Chapultepec",
+      "José Vasconcelos #10",
+      "No"
+    ],
+    [
+      "Clínica Médico Homeópata",
+      "Atlixco s/n",
+      "No"
+    ],
+    [
+      "Clínica No. 26 IMSS",
+      "Chiapas #56",
+      "No"
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La transcripción incluye literalmente “Sinaloa s/Nuevo” en una dirección; su lectura requiere cotejo ampliado."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 25,
+  "encabezados_superiores": [
+    "Subsistema: Salud",
+    "Equipamiento existente"
+  ]
+}

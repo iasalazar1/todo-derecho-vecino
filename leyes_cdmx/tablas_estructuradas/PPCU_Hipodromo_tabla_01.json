@@ -1,0 +1,122 @@
+{
+  "identificador": "tabla_01",
+  "titulo_literal": "Mezcla de usos del suelo en el Distrito I",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    21
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Uso",
+    "Planta Baja M2",
+    "Planta Baja %",
+    "Plantas Altas M2",
+    "Plantas Altas %"
+  ],
+  "filas": [
+    [
+      "Vivienda unifamiliar",
+      "7,815",
+      "8",
+      "9,462",
+      "10"
+    ],
+    [
+      "Vivienda plurifamiliar",
+      "4,020",
+      "4",
+      "28,773",
+      "31"
+    ],
+    [
+      "Oficinas",
+      "10,984",
+      "11",
+      "33,185",
+      "36"
+    ],
+    [
+      "Comercio",
+      "42,384",
+      "42",
+      "6,298",
+      "6"
+    ],
+    [
+      "Restaurante",
+      "12,478",
+      "13",
+      "4,817",
+      "5"
+    ],
+    [
+      "Equipamiento",
+      "415",
+      "0",
+      "415",
+      "0"
+    ],
+    [
+      "Club nocturno",
+      "1,245",
+      "1",
+      "1,245",
+      "1"
+    ],
+    [
+      "Baldío",
+      "2,756",
+      "3",
+      "0",
+      "0"
+    ],
+    [
+      "Estacionamiento",
+      "11,542",
+      "12",
+      "2,590",
+      "3"
+    ],
+    [
+      "Sin uso",
+      "5,441",
+      "5",
+      "5,358",
+      "6"
+    ],
+    [
+      "* Otros usos",
+      "781",
+      "1",
+      "1,472",
+      "2"
+    ]
+  ],
+  "numero_filas_verificadas": 11,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [
+    "* Otros usos: Entretenimiento, Recreación social y Hotel."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 11,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Planta Baja",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    },
+    {
+      "titulo_literal": "Plantas Altas",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "identificador": "acciones_prioritarias",
+  "titulo_literal": "TABLA DE PROGRAMA DE ACCIONES PRIORITARIAS",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    101,
+    102,
+    103,
+    104
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Programa",
+    "Problema",
+    "Objetivo",
+    "Políticas",
+    "Metas",
+    "Responsable",
+    "Acción",
+    "Plazo",
+    "Ubicación",
+    "Acción relacionada",
+    "Cuánto"
+  ],
+  "filas": [],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 11,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "Se confirmó visualmente el título, la extensión de cuatro páginas físicas y los 11 encabezados de columna. La extracción de texto coloca celdas de varias columnas en orden intercalado; no se estructuraron filas ni valores para evitar atribuciones inventadas."
+  ],
+  "estado_cotejo_documental": "pendiente",
+  "needs_review": true,
+  "numero_filas_estructuradas": 0
+}

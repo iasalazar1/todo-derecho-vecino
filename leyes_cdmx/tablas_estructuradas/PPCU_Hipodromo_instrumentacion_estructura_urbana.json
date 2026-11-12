@@ -1,0 +1,36 @@
+{
+  "identificador": "instrumentacion_estructura_urbana",
+  "titulo_literal": "Programa: Estructura Urbana",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    114
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Conservación de Uso Habitacional. Aprovechamiento de Edificios Subutilizados.",
+      "Mediante la determinación de los usos y destinos correspondientes, se establecerá la normatividad aplicable al polígono del Programa Parcial."
+    ],
+    [
+      "Normativo y de Verificación.",
+      "Convenios de concertación para giros existentes. Normas de ordenación para nuevas obras o actividades en materia de ruidos, olores, estacionamientos y uso del espacio público. Para la compatibilización y regulación de usos distintos a vivienda, se requieren dos tipos de instrumentos para los mismos fines: convenios de concertación para el establecimiento de límites máximos de contaminación por ruido y olores para giros que funcionan actualmente, y norma de ordenación en materia de imagen urbana, con el mismo fin que el convenio, para los giros que entren en funcionamiento una vez aprobado el Programa. En este sentido, se requiere un convenio de concertación para la regulación de las condiciones mínimas que deben de reunir los establecimientos mercantiles en el polígono del Programa Parcial, en el que intervienen la Delegación Cuauhtémoc, los vecinos organizados, los comerciantes y restauranteros, propietarios o poseedores de establecimientos mercantiles en el polígono del Programa Parcial. La Delegación Cuauhtémoc implementará un programa de inspección y vigilancia, con la participación de vecinos, en los términos de la Ley de Procedimiento Administrativo y el Reglamento de Verificación Administrativa, para la verificación de autorizaciones en materia de uso de suelo, para todos los giros comerciales ubicados dentro del Programa Parcial, con el fin de verificar la legalidad de su funcionamiento y, en su caso, aplicar las sanciones correspondientes: multas y/o clausuras."
+    ],
+    [
+      "Fortalecimiento de la estructura urbana.",
+      "La Delegación Cuauhtémoc promoverá la participación de instituciones culturales, para el financiamiento y/o ejecución de las acciones propuestas."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 3
+}

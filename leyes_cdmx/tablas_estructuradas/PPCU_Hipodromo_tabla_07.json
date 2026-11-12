@@ -1,0 +1,64 @@
+{
+  "identificador": "tabla_07",
+  "titulo_literal": "Oferta y demanda por Distritos",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    29
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Distrito",
+    "Oferta",
+    "Demanda",
+    "Diferencia"
+  ],
+  "filas": [
+    [
+      "I",
+      "776",
+      "4903",
+      "-4127"
+    ],
+    [
+      "II",
+      "2272",
+      "6658",
+      "-4007"
+    ],
+    [
+      "III",
+      "1873",
+      "6500",
+      "-4627"
+    ],
+    [
+      "IV",
+      "1000",
+      "954",
+      "+6"
+    ],
+    [
+      "V",
+      "1322",
+      "4358",
+      "-303 6"
+    ],
+    [
+      "VI",
+      "278",
+      "1228",
+      "-950"
+    ]
+  ],
+  "numero_filas_verificadas": 6,
+  "numero_columnas_verificadas": 4,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "La fuente muestra “+6” para el Distrito IV; la transcripción revisada registra “+46”. Se conserva lo visible en el PDF. En el renglón V, la impresión deja separación entre “303” y “6”; se conserva como “-303 6” y requiere criterio sobre su transcripción, sin recomputar."
+  ],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 6
+}

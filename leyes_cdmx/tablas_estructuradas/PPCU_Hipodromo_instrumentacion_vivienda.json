@@ -1,0 +1,28 @@
+{
+  "identificador": "instrumentacion_vivienda",
+  "titulo_literal": "Programa: Vivienda",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    112
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Construcción de Vivienda.",
+      "Mediante la determinación de los usos y destinos correspondientes, se establecerá la normatividad aplicable al polígono del Programa Parcial, que fomente la construcción de vivienda, permitiendo el desarrollo de este uso en densidades e intensidades de construcción económicamente viables."
+    ]
+  ],
+  "numero_filas_verificadas": 1,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 1
+}

@@ -1,0 +1,34 @@
+{
+  "identificador": "instrumentacion_vialidad_transporte",
+  "titulo_literal": "Programa: Vialidad y Transporte",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    112
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Pasaje Ambulante.",
+      "Las Secretarías de Desarrollo Urbano y Vivienda y Obras y Servicios, en coordinación con la Delegación, programarán y ejecutarán las obras a que se refiere el apartado de estrategia correspondiente."
+    ],
+    [
+      "Transporte Colectivo.",
+      "Para la reestructuración de rutas, se requiere una zonificación, que establezca las áreas de equipamiento necesarias. La Delegación Cuauhtémoc, en coordinación con la Secretaría de Transportes y Vialidad, promoverán ante las instancias y grupos correspondientes, la reubicación de paraderos y redefinición de rutas, en los términos que establece el presente Programa Parcial."
+    ]
+  ],
+  "numero_filas_verificadas": null,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [
+    "El cierre de la instrumentación del segundo subprograma está en una línea parcialmente truncada en la extracción de texto; se transcribió el segmento legible, pendiente de validación ampliada."
+  ],
+  "estado_cotejo_documental": "parcial",
+  "needs_review": true,
+  "numero_filas_estructuradas": 2
+}

@@ -1,0 +1,59 @@
+{
+  "identificador": "tabla_15",
+  "titulo_literal": "Materiales utilizados en la construcción de vivienda",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    42
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Elementos",
+    "Materiales",
+    "Porcentaje"
+  ],
+  "filas": [
+    [
+      "Techos",
+      "Losa de concreto",
+      "97 %"
+    ],
+    [
+      "",
+      "Otros",
+      "3 %"
+    ],
+    [
+      "Paredes",
+      "Tabique",
+      "97.1 %"
+    ],
+    [
+      "",
+      "Adobe y otros",
+      "2.9 %"
+    ],
+    [
+      "Pisos",
+      "Cemento",
+      "19.6 %"
+    ],
+    [
+      "",
+      "Mosaico, madera y otros",
+      "80.4%"
+    ]
+  ],
+  "numero_filas_verificadas": 6,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [
+    "Fuente: XI Censo General de Población y vivienda 1990"
+  ],
+  "observaciones": [
+    "En las filas “Otros”, “Adobe y otros” y “Mosaico, madera y otros”, la celda Elementos está vacía en la página física 42."
+  ],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 6
+}

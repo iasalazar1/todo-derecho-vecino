@@ -1,0 +1,91 @@
+{
+  "identificador": "tabla_19",
+  "titulo_literal": "Uso predominante del suelo en edificios catalogados",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    45
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Uso del suelo",
+    "Edificios catalogados núm.",
+    "Edificios catalogados %"
+  ],
+  "filas": [
+    [
+      "Vivienda Unifamiliar",
+      "159",
+      "36.57"
+    ],
+    [
+      "Vivienda Plurifamiliar",
+      "130",
+      "29.90"
+    ],
+    [
+      "Oficinas",
+      "69",
+      "15.87"
+    ],
+    [
+      "Comercio",
+      "15",
+      "3.45"
+    ],
+    [
+      "Equipamiento",
+      "17",
+      "3.91"
+    ],
+    [
+      "Restaurante",
+      "13",
+      "2.99"
+    ],
+    [
+      "Club nocturno",
+      "3",
+      "0.69"
+    ],
+    [
+      "Club social",
+      "1",
+      "0.23"
+    ],
+    [
+      "Sin uso",
+      "17",
+      "3.91"
+    ],
+    [
+      "Estacionamiento",
+      "2",
+      "0.46"
+    ],
+    [
+      "Baldío*",
+      "6",
+      "0.92"
+    ]
+  ],
+  "numero_filas_verificadas": 11,
+  "numero_columnas_verificadas": 3,
+  "grupos": [],
+  "notas": [
+    "* Estos predios estaban incluidos en el catálogo del I.N.B.A.; probablemente fueron demolidos después de la catalogación."
+  ],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 11,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Edificios catalogados",
+      "subcolumnas": [
+        "Núm.",
+        "%"
+      ]
+    }
+  ]
+}

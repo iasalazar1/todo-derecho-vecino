@@ -1,0 +1,28 @@
+{
+  "identificador": "instrumentacion_demografica",
+  "titulo_literal": "Programa: Aspectos Demográficos",
+  "tipo_elemento": "tabla_sin_numeracion",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    111
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Subprograma",
+    "Instrumentación"
+  ],
+  "filas": [
+    [
+      "Recuperación de población residente. Sustitución de población flotante.",
+      "Mediante la zonificación que se consigna en el apartado correspondiente a ordenamiento territorial, se implementa el presente programa (Ver capítulo IV. Ordenamiento Territorial). Uno de los elementos de la zonificación es la determinación del número máximo de niveles de construcción, así como del área libre. Para la instrumentación de las acciones demográficas, se determinarán alturas máximas permitidas para los distintos distritos en que se divide el polígono, atendiendo al análisis económico que justifique la inversión para vivienda media y residencial. La determinación del área mínima por vivienda, en los parámetros idóneos para el mercado que se desea atraer a la colonia, se especifica también como cuarto elemento de la zonificación, en el capítulo sobre Ordenamiento Territorial."
+    ]
+  ],
+  "numero_filas_verificadas": 1,
+  "numero_columnas_verificadas": 2,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 1
+}

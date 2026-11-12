@@ -1,0 +1,730 @@
+{
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "fecha_procesamiento": "2026-11-11",
+  "alcance": "Tablas 1–21 y 24, tabla de Acciones Prioritarias, nueve tablas de Instrumentación y matriz de catalogación de la página física 119.",
+  "exclusiones_confirmadas": [
+    "Tabla 22 y sus archivos",
+    "Tabla 23 (permanece no_localizada)",
+    "Gráficas 1–24",
+    "chunks",
+    "embeddings",
+    "código",
+    "SQL",
+    "infraestructura"
+  ],
+  "total_elementos": 33,
+  "elementos": [
+    {
+      "identificador": "tabla_01",
+      "titulo": "Mezcla de usos del suelo en el Distrito I",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_01.json",
+      "paginas_fisicas_pdf": [
+        21
+      ],
+      "filas_verificadas": 11,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 11,
+      "errores_detectados": [
+        "El encabezado “M²” no reproduce el rótulo impreso “M2”; además, el JSON aplanaba los grupos “Planta Baja” y “Plantas Altas”."
+      ],
+      "correcciones_realizadas": [
+        "Se sustituyó M² por M2 y se registraron los encabezados agrupados."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_02",
+      "titulo": "Mezcla de usos del suelo en el Distrito II",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_02.json",
+      "paginas_fisicas_pdf": [
+        21
+      ],
+      "filas_verificadas": 10,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 10,
+      "errores_detectados": [
+        "El encabezado “M²” no reproduce el rótulo impreso “M2”; además, el JSON aplanaba los grupos “Planta Baja” y “Plantas Altas”."
+      ],
+      "correcciones_realizadas": [
+        "Se sustituyó M² por M2 y se registraron los encabezados agrupados."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_03",
+      "titulo": "Mezcla de usos del suelo en el Distrito III",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_03.json",
+      "paginas_fisicas_pdf": [
+        22
+      ],
+      "filas_verificadas": 11,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 11,
+      "errores_detectados": [
+        "El encabezado “M²” no reproduce el rótulo impreso “M2”; además, el JSON aplanaba los grupos “Planta Baja” y “Plantas Altas”."
+      ],
+      "correcciones_realizadas": [
+        "Se sustituyó M² por M2 y se registraron los encabezados agrupados."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_04",
+      "titulo": "Mezcla de usos del suelo en el Distrito IV",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_04.json",
+      "paginas_fisicas_pdf": [
+        22
+      ],
+      "filas_verificadas": 10,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 10,
+      "errores_detectados": [
+        "El encabezado “M²” no reproduce el rótulo impreso “M2”; además, el JSON aplanaba los grupos “Planta Baja” y “Plantas Altas”."
+      ],
+      "correcciones_realizadas": [
+        "Se sustituyó M² por M2 y se registraron los encabezados agrupados."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_05",
+      "titulo": "Mezcla de usos del suelo en el Distrito V",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_05.json",
+      "paginas_fisicas_pdf": [
+        23
+      ],
+      "filas_verificadas": 12,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 12,
+      "errores_detectados": [
+        "El encabezado “M²” no reproduce el rótulo impreso “M2”; además, el JSON aplanaba los grupos “Planta Baja” y “Plantas Altas”."
+      ],
+      "correcciones_realizadas": [
+        "Se sustituyó M² por M2 y se registraron los encabezados agrupados."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_06",
+      "titulo": "Mezcla de usos del suelo en el Distrito VI",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_06.json",
+      "paginas_fisicas_pdf": [
+        23
+      ],
+      "filas_verificadas": 10,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 10,
+      "errores_detectados": [
+        "El encabezado “M²” no reproduce el rótulo impreso “M2”; además, el JSON aplanaba los grupos “Planta Baja” y “Plantas Altas”."
+      ],
+      "correcciones_realizadas": [
+        "Se sustituyó M² por M2 y se registraron los encabezados agrupados."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_07",
+      "titulo": "Oferta y demanda por Distritos",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_07.json",
+      "paginas_fisicas_pdf": [
+        29
+      ],
+      "filas_verificadas": 6,
+      "columnas_verificadas": 4,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [
+        "La fuente muestra “+6” para el Distrito IV; la transcripción revisada registra “+46”. Se conserva lo visible en el PDF. En el renglón V, la impresión deja separación entre “303” y “6”; se conserva como “-303 6” y requiere criterio sobre su transcripción, sin recomputar."
+      ],
+      "filas_estructuradas": 6,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [
+        "La impresión de la diferencia del Distrito V muestra separación en “-303 6”; se conserva literalmente, sin recalcular ni decidir si corresponde a un único número."
+      ],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_08",
+      "titulo": "Equipamiento. Subsistema Salud",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_08.json",
+      "paginas_fisicas_pdf": [
+        35
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "La transcripción incluye literalmente “Sinaloa s/Nuevo” en una dirección; su lectura requiere cotejo ampliado."
+      ],
+      "filas_estructuradas": 25,
+      "errores_detectados": [
+        "El domicilio del Hospital Lourdes tenía un acento no impreso en “Alvaro”."
+      ],
+      "correcciones_realizadas": [
+        "Se conservó “Alvaro Obregón #101” tal como aparece en la fuente."
+      ],
+      "discrepancias_pendientes": [
+        "La dirección “Sinaloa s/Nuevo” permanece dudosa y requiere cotejo ampliado."
+      ],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_09",
+      "titulo": "Equipamiento. Subsistema Educación",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_09.json",
+      "paginas_fisicas_pdf": [
+        36,
+        37
+      ],
+      "filas_verificadas": 48,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "Se conservan los grupos educativos como una columna para sustituir celdas combinadas; no se verificó individualmente cada dirección con ampliación de alta resolución."
+      ],
+      "filas_estructuradas": 48,
+      "errores_detectados": [
+        "Se fusionaron dos instituciones de primaria en una fila; se registró un domicilio compuesto; tres grafías y un domicilio no coincidían con la fuente."
+      ],
+      "correcciones_realizadas": [
+        "Se separaron Cámara de Comercio y Amado Nervo; se corrigieron “Choapan”, “Insituto Avignon” y “Bajío #307”; se conservaron las celdas combinadas con rangos explícitos."
+      ],
+      "discrepancias_pendientes": [
+        "El cotejo individual de todas las direcciones permanece parcial."
+      ],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_10",
+      "titulo": "Equipamiento. Subsistema Servicios Urbanos",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_10.json",
+      "paginas_fisicas_pdf": [
+        39
+      ],
+      "filas_verificadas": 7,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 7,
+      "errores_detectados": [
+        "“Gasolinera” estaba repetido en seis celdas que aparecen vacías en la página 39."
+      ],
+      "correcciones_realizadas": [
+        "Se dejaron vacías las seis celdas y se verificaron las siete filas visualmente."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_11",
+      "titulo": "Equipamiento. Subsistema Administración Pública",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_11.json",
+      "paginas_fisicas_pdf": [
+        40
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [],
+      "filas_estructuradas": 9,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_12",
+      "titulo": "Tendencia decreciente de la población",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_12.json",
+      "paginas_fisicas_pdf": [
+        41
+      ],
+      "filas_verificadas": 2,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [
+        "El valor “12,442” se conserva como aparece en la tabla del PDF. En el texto de la misma página y en la Tabla 21 aparece “12,742”; discrepancia confirmada en la fuente."
+      ],
+      "filas_estructuradas": 2,
+      "errores_detectados": [
+        "La celda 1995 de Vivienda/Delegación incluía una coma no impresa; el JSON también omitía los encabezados agrupados."
+      ],
+      "correcciones_realizadas": [
+        "Se conservó “150100” y se registraron los grupos Población y Vivienda."
+      ],
+      "discrepancias_pendientes": [
+        "La discrepancia entre “12,442” en Tabla 12 y “12,742” en el texto y Tabla 21 permanece sin armonizar."
+      ],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_13",
+      "titulo": "Tabla comparativa de ocupación por vivienda",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_13.json",
+      "paginas_fisicas_pdf": [
+        42
+      ],
+      "filas_verificadas": 2,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 2,
+      "errores_detectados": [
+        "Las cuatro unidades omitían el espacio impreso antes de “/vivienda”; la nota cambiaba “vivienda” a mayúscula."
+      ],
+      "correcciones_realizadas": [
+        "Se restauró el espacio y la capitalización literal de la nota."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_14",
+      "titulo": "Tipo de vivienda",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_14.json",
+      "paginas_fisicas_pdf": [
+        42
+      ],
+      "filas_verificadas": 2,
+      "columnas_verificadas": 7,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 2,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_15",
+      "titulo": "Materiales utilizados en la construcción de vivienda",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_15.json",
+      "paginas_fisicas_pdf": [
+        42
+      ],
+      "filas_verificadas": 6,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 6,
+      "errores_detectados": [
+        "Se rellenaron tres celdas vacías de Elementos y se alteró la capitalización y puntuación de la nota."
+      ],
+      "correcciones_realizadas": [
+        "Se vaciaron las celdas y se restauró la nota literal."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_16",
+      "titulo": "Número de cuartos en la vivienda",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_16.json",
+      "paginas_fisicas_pdf": [
+        42
+      ],
+      "filas_verificadas": 3,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 3,
+      "errores_detectados": [
+        "El título omitía el punto final; la nota capitalizaba “vivienda” contra la fuente."
+      ],
+      "correcciones_realizadas": [
+        "Se restauró el punto del título y la nota literal; el punto separado se documentó como observación."
+      ],
+      "discrepancias_pendientes": [
+        "La puntuación de fuente aparece separada visualmente en el PDF; no se atribuye al texto de la nota."
+      ],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_17",
+      "titulo": "Tenencia",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_17.json",
+      "paginas_fisicas_pdf": [
+        43
+      ],
+      "filas_verificadas": 3,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [
+        "En la misma página el párrafo introductorio menciona el XI Censo General de Población y Vivienda de 1990, mientras que la nota de fuente de la tabla dice IX Censo; discrepancia confirmada."
+      ],
+      "filas_estructuradas": 3,
+      "errores_detectados": [
+        "Los encabezados “Categoría”, “Cantidad” y “Porcentaje” no aparecen impresos en la fuente."
+      ],
+      "correcciones_realizadas": [
+        "Se retiraron los rótulos inferidos y se conservaron tres columnas sin encabezado."
+      ],
+      "discrepancias_pendientes": [
+        "La fuente presenta una discrepancia entre la referencia al XI Censo del texto introductorio y al IX Censo en la nota de la tabla."
+      ],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_18",
+      "titulo": "Vacantes urbanas",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_18.json",
+      "paginas_fisicas_pdf": [
+        44
+      ],
+      "filas_verificadas": 6,
+      "columnas_verificadas": 7,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 6,
+      "errores_detectados": [
+        "El JSON omitía los grupos de encabezado “Vacantes Urbanas”, “Baldíos”, “Estacionamientos” y “Total”."
+      ],
+      "correcciones_realizadas": [
+        "Se registró la jerarquía de encabezados según la página 44."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_19",
+      "titulo": "Uso predominante del suelo en edificios catalogados",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_19.json",
+      "paginas_fisicas_pdf": [
+        45
+      ],
+      "filas_verificadas": 11,
+      "columnas_verificadas": 3,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 11,
+      "errores_detectados": [
+        "El JSON omitía el encabezado combinado “Edificios catalogados”."
+      ],
+      "correcciones_realizadas": [
+        "Se registró el grupo sobre las columnas Núm. y %."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_20",
+      "titulo": "Normatividad por vialidad",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_20.json",
+      "paginas_fisicas_pdf": [
+        60,
+        61
+      ],
+      "filas_verificadas": 10,
+      "columnas_verificadas": 5,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 10,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_21",
+      "titulo": "Tendencias programáticas de población Programa de Desarrollo Urbano Delegacional",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_21.json",
+      "paginas_fisicas_pdf": [
+        66
+      ],
+      "filas_verificadas": 2,
+      "columnas_verificadas": 8,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 2,
+      "errores_detectados": [
+        "El JSON omitía los grupos de columnas “Datos historicos” y “Datos programaticos”."
+      ],
+      "correcciones_realizadas": [
+        "Se añadieron ambos encabezados agrupados, con los subencabezados literales."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_demografica",
+      "titulo": "Programa: Aspectos Demográficos",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_demografica.json",
+      "paginas_fisicas_pdf": [
+        111
+      ],
+      "filas_verificadas": 1,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 1,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_fisico_natural",
+      "titulo": "Programa: Físico Natural",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_fisico_natural.json",
+      "paginas_fisicas_pdf": [
+        111,
+        112
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "La parte superior de la página física 112 muestra además un fragmento de instrumentación sin subprograma legible; no se fusionó con ninguna fila ni se atribuyó a un subprograma."
+      ],
+      "filas_estructuradas": 5,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_equipamiento",
+      "titulo": "Programa: Equipamiento",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_equipamiento.json",
+      "paginas_fisicas_pdf": [
+        112
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "El primer bloque agrupa dos rótulos de subprograma con una instrumentación compartida; la reproducción consultada no permite confirmar si son celdas combinadas o filas separadas."
+      ],
+      "filas_estructuradas": 2,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_vivienda",
+      "titulo": "Programa: Vivienda",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_vivienda.json",
+      "paginas_fisicas_pdf": [
+        112
+      ],
+      "filas_verificadas": 1,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 1,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_vialidad_transporte",
+      "titulo": "Programa: Vialidad y Transporte",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_vialidad_transporte.json",
+      "paginas_fisicas_pdf": [
+        112
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "El cierre de la instrumentación del segundo subprograma está en una línea parcialmente truncada en la extracción de texto; se transcribió el segmento legible, pendiente de validación ampliada."
+      ],
+      "filas_estructuradas": 2,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_imagen_urbana_espacio_publico",
+      "titulo": "Programa: Imagen Urbana y Espacio Público",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_imagen_urbana_espacio_publico.json",
+      "paginas_fisicas_pdf": [
+        113
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "Se conserva literalmente “Baquetas” en el subprograma, tal como aparece en la extracción cotejada; debe verificarse si es errata de la fuente."
+      ],
+      "filas_estructuradas": 4,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_sitios_patrimoniales",
+      "titulo": "Programa: Sitios Patrimoniales",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_sitios_patrimoniales.json",
+      "paginas_fisicas_pdf": [
+        113
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "La instrumentación del segundo subprograma ocupa una celda extensa; cotejo textual completo pendiente a mayor resolución."
+      ],
+      "filas_estructuradas": 2,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_estructura_urbana",
+      "titulo": "Programa: Estructura Urbana",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_estructura_urbana.json",
+      "paginas_fisicas_pdf": [
+        114
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [],
+      "filas_estructuradas": 3,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "instrumentacion_infraestructura",
+      "titulo": "Programa: Infraestructura",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_instrumentacion_infraestructura.json",
+      "paginas_fisicas_pdf": [
+        114
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 2,
+      "estado_procesamiento": "parcial",
+      "estado_cotejo": "parcial",
+      "incidencias": [
+        "La última línea de la página física 114 requiere cotejo visual ampliado; la extracción de texto reproduce el segmento legible."
+      ],
+      "filas_estructuradas": 3,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "tabla_24",
+      "titulo": "Tipo de intervención según niveles de protección",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_tabla_24.json",
+      "paginas_fisicas_pdf": [
+        89
+      ],
+      "filas_verificadas": 16,
+      "columnas_verificadas": 4,
+      "estado_procesamiento": "procesada",
+      "estado_cotejo": "cotejado",
+      "incidencias": [],
+      "filas_estructuradas": 16,
+      "errores_detectados": [
+        "Los encabezados de nivel estaban fusionados con sus descripciones, agregando dos puntos no impresos y ocultando la jerarquía."
+      ],
+      "correcciones_realizadas": [
+        "Se separaron “Nivel 1/2/3” de sus subencabezados descriptivos; se preservaron las celdas combinadas de datos ya verificadas."
+      ],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "acciones_prioritarias",
+      "titulo": "TABLA DE PROGRAMA DE ACCIONES PRIORITARIAS",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_acciones_prioritarias.json",
+      "paginas_fisicas_pdf": [
+        101,
+        102,
+        103,
+        104
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 11,
+      "estado_procesamiento": "pendiente",
+      "estado_cotejo": "pendiente",
+      "incidencias": [
+        "Se confirmó visualmente el título, la extensión de cuatro páginas físicas y los 11 encabezados de columna. La extracción de texto coloca celdas de varias columnas en orden intercalado; no se estructuraron filas ni valores para evitar atribuciones inventadas."
+      ],
+      "filas_estructuradas": 0,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    },
+    {
+      "identificador": "matriz_intervencion_catalogacion",
+      "titulo": "NIVELES DE INTERVENCIÓN POR CALIDAD DE CATALOGACIÓN",
+      "archivo": "leyes_cdmx/tablas_estructuradas/PPCU_Hipodromo_matriz_intervencion_catalogacion.json",
+      "paginas_fisicas_pdf": [
+        119
+      ],
+      "filas_verificadas": null,
+      "columnas_verificadas": 4,
+      "estado_procesamiento": "pendiente",
+      "estado_cotejo": "pendiente",
+      "incidencias": [
+        "La lámina física 119 es un escaneo de baja resolución. Se reconoce el título y se distinguen cuatro columnas, pero los encabezados completos y las celdas no son legibles con confianza; no se transcribieron valores."
+      ],
+      "filas_estructuradas": 0,
+      "errores_detectados": [],
+      "correcciones_realizadas": [],
+      "discrepancias_pendientes": [],
+      "fecha_auditoria": "2026-11-12"
+    }
+  ],
+  "fecha_ultima_auditoria": "2026-11-12",
+  "informe_auditoria": "leyes_cdmx/auditorias_documentales/auditoria_calidad_json_PPCU_Hipodromo.md"
+}

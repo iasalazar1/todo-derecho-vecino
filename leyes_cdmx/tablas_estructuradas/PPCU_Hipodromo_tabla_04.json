@@ -1,0 +1,113 @@
+{
+  "identificador": "tabla_04",
+  "titulo_literal": "Mezcla de usos del suelo en el Distrito IV",
+  "tipo_elemento": "tabla",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    22
+  ],
+  "pagina_impresa": null,
+  "columnas": [
+    "Uso",
+    "Planta Baja M2",
+    "Planta Baja %",
+    "Plantas Altas M2",
+    "Plantas Altas %"
+  ],
+  "filas": [
+    [
+      "Vivienda unifamiliar",
+      "3,533",
+      "15",
+      "5,189",
+      "23"
+    ],
+    [
+      "Vivienda plurifamiliar",
+      "1,279",
+      "6",
+      "3,178",
+      "14"
+    ],
+    [
+      "Oficinas",
+      "4,940",
+      "21",
+      "5,395",
+      "23"
+    ],
+    [
+      "Comercio",
+      "6,517",
+      "28",
+      "2,676",
+      "12"
+    ],
+    [
+      "Restaurante",
+      "3,219",
+      "14",
+      "459",
+      "2"
+    ],
+    [
+      "Equipamiento",
+      "666",
+      "3",
+      "666",
+      "3"
+    ],
+    [
+      "Baldío",
+      "226",
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "Estacionamiento",
+      "519",
+      "2",
+      "1,244",
+      "5"
+    ],
+    [
+      "Sin uso",
+      "1,035",
+      "4",
+      "2,848",
+      "12"
+    ],
+    [
+      "* Otros usos (Entretenimiento)",
+      "1,487",
+      "6",
+      "1,487",
+      "6"
+    ]
+  ],
+  "numero_filas_verificadas": 10,
+  "numero_columnas_verificadas": 5,
+  "grupos": [],
+  "notas": [],
+  "observaciones": [],
+  "estado_cotejo_documental": "cotejado",
+  "needs_review": true,
+  "numero_filas_estructuradas": 10,
+  "encabezados_superiores": [
+    {
+      "titulo_literal": "Planta Baja",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    },
+    {
+      "titulo_literal": "Plantas Altas",
+      "subcolumnas": [
+        "M2",
+        "%"
+      ]
+    }
+  ]
+}
