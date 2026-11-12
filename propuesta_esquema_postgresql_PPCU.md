@@ -28,6 +28,21 @@ El DDL exige que `needs_review = TRUE`; permite literalmente `permitido`, `prohi
 
 El esquema actual soporta chunks vectorizados y un caso estructurado particular. No alcanza para mantener un catálogo transversal de tablas ni la trazabilidad detallada por fila, columna, texto original, nota y estado de auditoría que requiere el diseño futuro.
 
+### Identificadores actuales y homologación
+
+En el SQL base, `legal_documents.id` es una llave primaria numérica generada internamente y `legal_documents.document_key` es `TEXT NOT NULL UNIQUE`, una clave estable de integración. `legal_chunks.document_id` es numérico y referencia `legal_documents.id`. `legal_embeddings` conserva los IDs numéricos de chunk/documento y usa una llave foránea compuesta para asegurar que corresponden al mismo documento.
+
+El DDL actual de `land_use_compatibility`, por contraste, define `documento_id TEXT` (valor de integración `ppdu_hipodromo`) y `tabla_id TEXT`, sin FK a `legal_documents`. Por ello esos campos son claves textuales externas, no identificadores internos de base. La carga histórica de la tabla no prueba que exista actualmente en Aurora ni cuál sea su estado real: esta propuesta no se conectó a la base.
+
+Convención futura recomendada:
+
+- `id BIGINT` o tipo interno elegido por el esquema como PK numérica.
+- `document_id BIGINT NOT NULL REFERENCES legal_documents(id)` en catálogo estructurado y relaciones internas.
+- `document_key TEXT UNIQUE` en `legal_documents`, conservado en JSON, catálogo externo y exportaciones; no usarlo como sustituto de FK.
+- `table_id TEXT` como clave documental estable (p. ej., `tabla_22`), distinta del `id` numérico de fila SQL y del número original impreso.
+- `row_id`/`cell_id` internos numéricos y `row_key`/`cell_key` textuales deterministas para archivos, auditoría e idempotencia, si la implementación los requiere.
+- Los IDs textuales existentes del cargador deben mapearse a `legal_documents.document_key`; una FK numérica debe resolver internamente la relación sin borrar ni renombrar las claves externas.
+
 ## 3. Alternativas consideradas
 
 | Criterio | A. Una tabla genérica con datos JSONB | B. Tablas especializadas por tipo | C. Híbrido: metadatos comunes y estructuras especializadas |
@@ -67,25 +82,36 @@ Esta recomendación aprovecha el patrón ya existente de `legal_documents` / `le
 ## 5. Modelo relacional conceptual propuesto
 
 ```text
-legal_documents
-  1 ─── N document_tables                 [propuesto, no existe]
-             1 ─── N structured_table_rows [propuesto, no existe]
-             1 ─── N table_notes           [opcional, propuesto, no existe]
-             1 ─── N land_use_compatibility [relación futura; tabla ya definida por loader]
-
-legal_documents
-  1 ─── N legal_chunks
-             1 ─── N legal_embeddings
+legal_documents (id PK numérica, document_key UNIQUE textual)
+  ├─ 1:N legal_chunks (document_id FK numérica) [actual]
+  │      └─ 1:N legal_embeddings (FK numérica compuesta) [actual]
+  └─ 1:N document_tables (document_id FK numérica) [propuesto]
+           ├─ 1:N structured_table_rows (table_id FK numérica) [propuesto]
+           │      └─ 1:N structured_table_cells (row_id FK numérica) [opcional/propuesto]
+           ├─ 1:N table_notes (table_id FK numérica) [opcional/propuesto]
+           └─ 1:N land_use_compatibility (table_id FK futura) [relación propuesta]
 ```
 
 Entidades conceptuales:
 
-- **`document_tables` (propuesta):** identidad y metadatos comunes de una tabla original; única por documento e identificador original, sin renumerar.
-- **`structured_table_rows` (propuesta):** registro/fila conservando orden, página, texto original y `data JSONB`; `data` no reemplaza los campos comunes ni los valores fuente.
-- **`table_notes` (propuesta opcional):** notas con texto literal, página y vínculo a fila/celda o tabla cuando la referencia se pueda verificar.
-- **`land_use_compatibility` (actual, creado por DDL del loader):** celdas estructuradas de la Tabla 22; su relación al catálogo sería una futura mejora, no parte del cambio actual.
+- **`document_tables` (propuesta, no existente en el esquema inspeccionado):** `id` numérico PK; `document_id` numérico FK; `table_id` textual estable; `numero_original` y `titulo_literal`; páginas PDF/impresas; clase de dato; hash/versión fuente y estado de auditoría. Una restricción única futura debe evitar duplicar una clave textual dentro del documento sin renumerar lo impreso.
+- **`structured_table_rows` (propuesta):** `id` numérico PK y `table_id` numérico FK; `row_key` textual estable opcional, orden, página, `texto_original`, `datos JSONB`, revisión y procedencia. Es la forma flexible para tablas cuya estructura no justifica aún columnas especializadas.
+- **`structured_table_cells` (opcional/propuesta):** útil cuando se requiera buscar cada valor y columna por separado. Debe conservar `valor_original`, encabezado/código de columna, unidad y FK a fila; solo se justifica tras validar los casos de consulta.
+- **`table_notes` (opcional/propuesta):** PK numérica, FK a tabla y vínculo opcional a fila/celda; texto literal, página y referencia de nota tal como se verificó.
+- **`land_use_compatibility` (existente en el DDL del loader, no en `001_initial_schema.sql`):** hoy usa claves textuales `documento_id`/`tabla_id` y no FK. En el diseño futuro se recomienda agregar relación numérica a documento/tabla, manteniendo las claves legibles durante una migración compatibilizada.
+- **`legal_chunks` / `legal_embeddings` (actuales en esquema base):** enlazados con FKs numéricas. Un identificador externo legible no reemplaza estas relaciones.
 
-Todos los datos estructurados deben tener una procedencia de documento/table/row y mantener `needs_review` / estado de revisión. Si se agregan valores normalizados, deben coexistir con la representación original y no sustituirla.
+Todos los datos estructurados deben compartir contrato de evidencia, con localizador tipado (`legislativo`, `planeacion_urbana` o `tabla`) y referencias exactas de página/fila/celda cuando estén verificadas. No usar `article` para secciones decimales de programas urbanos. Deben mantener `needs_review` / estado de revisión. Valores normalizados coexisten con el original y nunca lo sustituyen.
+
+### Clases de datos y columnas/payload
+
+La estructura propuesta debe distinguir:
+
+1. **Matriz cualitativa:** celdas con estado original literal, sin inferencias; Tabla 22 conserva su estructura especializada actual y sus flags.
+2. **Parámetro normativo cuantitativo:** valor literal, unidad, zonificación/ámbito, localizador tipado y disposición de origen. No calcular porcentaje, superficie o densidad, ni convertir unidades.
+3. **Estadística/diagnóstico:** valor literal, unidad, periodo, ámbito territorial y fuente. No crear agregados o indicadores derivados sin metodología explícita y autorizada.
+
+Una fila flexible puede guardar los campos específicos en JSONB mientras la consulta no esté estabilizada, pero los atributos con filtros/restricciones recurrentes deben convertirse en columnas tipadas. Para todas las clases, conservar `texto_original`, referencia y revisión por separado de cualquier valor normalizado o interpretación del sistema.
 
 ## 6. Ejemplos SQL ilustrativos
 
@@ -133,10 +159,10 @@ WHERE document_id = :document_id
 ### Una fila de una tabla estadística/diagnóstica (futuro)
 
 ```sql
-SELECT row_id, row_order, page_pdf, original_text, data,
-       footnote_refs, needs_review, audit_status
-FROM structured_table_rows
-WHERE table_id = :table_id
+SELECT r.id AS row_id, r.row_order, r.page_pdf, r.original_text, r.data,
+       r.footnote_refs, r.needs_review, r.audit_status
+FROM structured_table_rows AS r
+WHERE table_id = :table_id_numeric
   AND data ->> 'indicador' = :indicador;
 ```
 
@@ -161,5 +187,29 @@ El proceso actual `scripts/load_land_use_compatibility.py` valida el JSON y solo
 - Confirmar estructura, celdas, unidades, notas y páginas a partir del PDF visualmente.
 - Acordar si se conserva el texto/fila de origen como columnas directas, JSONB o ambas; recomendación: columnas comunes más copia original y datos tipados.
 - Diseñar DDL/migraciones y políticas de actualización en una fase futura, separada de este diseño.
+- Verificar en la base viva las tablas, tipos, constraints, claves, índices, conteos y estado real de `land_use_compatibility`; no se hizo conexión a Aurora.
+- Comprobar colisiones/estabilidad de `document_key`, `documento_id`, `tabla_id` y los IDs del loader antes de proponer una FK o backfill.
+- Confirmar nombres y compatibilidad PostgreSQL/Aurora para cualquier restricción, tipo o índice propuesto.
+- Definir migración gradual: inspección y respaldo; mapeo validado de claves textuales a `legal_documents.id`; agregar FK numérica de forma compatible; validar relación y conteos; migrar consumidores; retirar claves redundantes solo después de autorización y verificación.
+- Revisar por separado el localizador de páginas: los chunks actuales no conservan página exacta por fragmento.
+
+## 9. Estrategia futura de migración de identificadores
+
+No ejecutar hasta que la base viva y sus datos hayan sido inspeccionados y se autorice una migración:
+
+1. Obtener snapshot/verificación aprobada de DDL, índices, constraints, conteos y muestras de claves de la base real; contrastar contra el repositorio y registrar diferencias.
+2. Respaldar artefactos estructurados; verificar correspondencia unívoca entre `land_use_compatibility.documento_id` y `legal_documents.document_key`, sin asumir que todos los valores tienen correspondencia.
+3. Diseñar una transición aditiva: tabla catálogo propuesta con PK numérica y FKs hacia `legal_documents.id`, conservando `document_key`/`table_id` textuales.
+4. Crear/backfill de relaciones internas solo para filas con mapeo inequívoco; filas sin correspondencia se reportan y no reciben una FK ficticia.
+5. Comprobar conteos, unicidad, orfandad, 51 actividades/357 celdas cuando se trate de Tabla 22, flags y valores literales.
+6. Migrar los lectores/cargadores de forma compatible y mantener la referencia textual para integración/archivos externos.
+7. Cambiar o retirar claves heredadas únicamente después de pruebas, aprobación y estrategia de reversión. No eliminar datos ni alterar Tabla 22 en el diseño presente.
 
 La organización JSON se describe en [diseno_modelo_datos_PPCU.md](./diseno_modelo_datos_PPCU.md) y su consumo conceptual en [diseno_retriever_hibrido_PPCU.md](./diseno_retriever_hibrido_PPCU.md).
+
+## Cambios de esta revisión
+
+- Se aclaró la distinción existente y futura entre `id` numérico (PK/FK interna) y `document_key`/`table_id` textuales (identificadores externos estables).
+- Se describieron las relaciones actuales de `legal_documents`, `legal_chunks` y `legal_embeddings`, frente al DDL independiente de `land_use_compatibility`, que hoy usa claves textuales sin FK.
+- Se extendió el modelo híbrido a matrices cualitativas, parámetros normativos cuantitativos y estadísticas; se fijaron restricciones contra conversiones y cálculos derivados.
+- Se incorporaron localizadores tipados y una estrategia de migración futura gradual, con validación de la base viva pendiente. No se creó DDL ni se ejecutó migración.

@@ -169,6 +169,89 @@ Cada registro debe incluir, según corresponda:
 | Protección/restricción | nivel_original, intervención_original, condición_original | No sustituir términos fuente por una interpretación |
 | Programación/acciones | eje_original, acción_original, actor_original, plazo_original, meta_original | Registrar solo campos presentes |
 
+### Tres clases de información y tratamiento
+
+| Clase | Ejemplo | Representación | Operaciones permitidas al recuperar |
+|---|---|---|---|
+| Matriz cualitativa de compatibilidad | Tabla 22 | Actividad y zonificación con `estado_original` literal por celda, evidencia y revisión | Buscar y devolver el estado; no reinterpretarlo ni inferir estados a partir de celdas vacías |
+| Parámetro normativo cuantitativo | Área libre, desplante, niveles, superficie máxima o densidad cuando el instrumento los establezca | `valor_original`, `unidad_original`, `zonificacion_o_ambito_original` y disposición de origen; valor tipado solo como dato paralelo validado | Recuperar el valor fuente y su ámbito. No calcular porcentajes, convertir unidades ni deducir parámetros |
+| Dato estadístico o diagnóstico | Cifras de población, vivienda o equipamiento | `valor_original`, unidad, período, ámbito territorial y fuente/localización | Devolver lo observado en la fuente; no producir indicadores derivados ni cálculos sin metodología explícita y autorizada |
+
+La clase de dato debe ser metadato documental (`clase_dato`), no una conclusión jurídica. En todos los casos se conserva `texto_original` y la referencia a la fuente aunque se almacenen campos normalizados. La normalización numérica debe ser reversible y no alterar el valor publicado. Si unidad, periodo o ámbito faltan, se dejan sin especificar y se marca la limitación; no se completan por inferencia.
+
+### Contrato raíz versionado para la futura Tabla 22
+
+La Tabla 22 puede migrarse a un contrato raíz versionado únicamente cuando termine la depuración manual acordada. El esquema ilustrativo siguiente describe la forma, pero deliberadamente no incorpora actividades, páginas ni estados reales de la Tabla 22:
+
+```json
+{
+  "schema_version": "1.0",
+  "documento": {
+    "document_key": "clave_textual_estable",
+    "titulo_literal": "título del documento verificado",
+    "archivo_origen": "ruta_o_clave_del_PDF",
+    "sha256_origen": null
+  },
+  "tabla": {
+    "tabla_id": "clave_textual_estable_de_tabla",
+    "numero_original": 22,
+    "titulo_literal": "título de tabla verificado",
+    "paginas_pdf": [],
+    "ubicacion_origen": {
+      "pagina_impresa": null,
+      "ancla_visual": null
+    },
+    "clase_dato": "matriz_cualitativa_compatibilidad"
+  },
+  "actividades": [
+    {
+      "actividad_id": "identificador_estable",
+      "orden_original": null,
+      "categoria_original": null,
+      "subcategoria_original": null,
+      "actividad_original": "texto literal pendiente de transcripción/verificación",
+      "zonificaciones": {
+        "clave_de_zonificacion": {
+          "estado_original": "permitido | prohibido | por validar",
+          "needs_review": true,
+          "evidencia": {
+            "texto_original": null,
+            "referencia_normativa": null,
+            "pagina_pdf": null,
+            "fila_original": null,
+            "columna_original": null,
+            "notas_referidas": []
+          }
+        }
+      }
+    }
+  ],
+  "trazabilidad": {
+    "origen_json": null,
+    "hash_origen_json": null,
+    "fecha_transformacion": null,
+    "version_transformador": null,
+    "estado_revision_juridica": "pendiente",
+    "observaciones": []
+  }
+}
+```
+
+Los literales entre barras verticales describen el vocabulario de estados, no un valor que deba asignarse a una celda. La clave zonográfica debe corresponder al símbolo literal verificado. `evidencia` puede ser nula cuando no haya una referencia normativa separada en la fuente; la falta de evidencia no autoriza a inventarla. El objeto raíz mantiene separados: identificación, contenido cualitativo, evidencia, revisión y metadatos de migración. Cada valor tipado futuro debe conservar el dato original del cual deriva.
+
+### Procedimiento futuro de migración de Tabla 22
+
+La migración no se ejecuta en esta tarea y queda condicionada al cierre de la limpieza manual y autorización posterior:
+
+1. Respaldar el JSON original inmutable, registrar ruta, tamaño, SHA-256, fecha y versión y asegurar que la copia de respaldo se pueda recuperar.
+2. Validar que el origen sea JSON válido y que su estructura, identificadores, las 51 actividades, los estados y las siete zonificaciones por actividad cumplan las reglas acordadas.
+3. Transformar al contrato versionado mediante un proceso determinista y documentado; añadir solo trazabilidad verificable. No “corregir” ni completar estados.
+4. Comparar claves y orden de las 51 actividades, y las 357 celdas de la matriz, una por una, incluyendo categoría, subcategoría, alias, zonificación, estado, flags y procedencia.
+5. Comprobar equivalencia exacta: ningún estado, actividad, dato original, alias, página o flag se pierde o altera. Los cambios de forma deben tener comparación reproducible y explicar cualquier diferencia autorizada.
+6. Conservar `needs_review` y estado de revisión jurídica de origen en cada celda; una migración técnica nunca aprueba el contenido.
+7. Registrar diferencias y errores en un reporte; ante discrepancia no explicada, detener la migración y conservar el JSON original como fuente no modificada.
+8. Solo tras aprobación, planear carga transaccional y verificación de conteos en otra fase. No ejecutar carga ni sustituir el archivo fuente como parte de esta propuesta.
+
 ## 6. Catálogo maestro propuesto
 
 Nombre propuesto: `PPCU_Hipodromo_catalogo_tablas.json`.
@@ -195,16 +278,86 @@ Ejemplos de estados según la evidencia actual:
 1. **Original:** transcripción de encabezados, celdas, texto, símbolos y notas con página y posición.
 2. **Normalización:** campos tipados que permiten buscar/filtrar (por ejemplo, valor numérico o zonificación); deben apuntar al valor original.
 3. **Clasificación:** categoría funcional de la tabla y tipo de dato, claramente marcada como metadato de organización.
-4. **Interpretación jurídica:** no se genera en la ingestión. Requiere revisión competente y se mantiene aparte de la evidencia literal.
+4. **Interpretación del sistema:** extracción de intención, candidatos, normalización de alias o explicación producida por el sistema; se etiqueta como interpretación y conserva método/confianza. Nunca se presenta como texto de fuente.
+5. **Conclusión jurídica:** no se genera por la ingestión ni se deduce automáticamente de una categoría. Requiere revisión competente y evidencia normativa aplicable; se mantiene separada de la evidencia literal.
 
 Un estado de compatibilidad no se deduce de un símbolo dudoso, una celda en blanco, una nota ambigua o una extracción OCR incompleta. En esos casos se conserva la fuente disponible y el pendiente de revisión; no se completa por inferencia.
 
-## 8. Decisiones para una futura fase
+## 8. Contrato común de evidencias y localizadores tipados
+
+Una evidencia compartida por chunk semántico, fila estadística, parámetro o celda debe tener metadatos comunes y un localizador tipado. No se debe obligar a un programa urbano a usar jerarquía de artículos, ni almacenar una sección decimal urbana en `articulo`.
+
+Campos comunes propuestos:
+
+- `evidence_id`, `tipo_evidencia` y `clase_dato`.
+- `document_id` numérico interno cuando exista en la base y `document_key` textual estable para referencias externas; nombre y tipo de instrumento.
+- `pagina_pdf_inicio`, `pagina_pdf_fin`, y `pagina_impresa` únicamente si se verifica.
+- `tipo_localizador` + `localizador`.
+- `texto_original` o `valor_original`, referencia de origen y notas.
+- `needs_review`, `estado_revision_juridica` y metadatos de auditoría.
+- `interpretacion_sistema` opcional y separada; no mezclar con `texto_original`.
+
+Variantes del localizador:
+
+```json
+{
+  "tipo_localizador": "legislativo",
+  "localizador": {
+    "titulo": null,
+    "capitulo": null,
+    "seccion": null,
+    "articulo": null,
+    "fraccion": null,
+    "inciso": null
+  }
+}
+```
+
+```json
+{
+  "tipo_localizador": "planeacion_urbana",
+  "localizador": {
+    "capitulo": null,
+    "apartado": null,
+    "seccion": "4.3",
+    "subseccion": "4.3.1",
+    "numeracion_jerarquica": "4.3.1"
+  }
+}
+```
+
+```json
+{
+  "tipo_localizador": "tabla",
+  "localizador": {
+    "tabla_id": "tabla_22",
+    "numero_original": 22,
+    "fila": null,
+    "columna": null,
+    "actividad": null,
+    "zonificacion": null,
+    "celda": null,
+    "valor": null
+  }
+}
+```
+
+Los `null` son campos no identificados, no valores que se puedan completar de forma automática. Los ejemplos no afirman páginas, filas o celdas reales. El procesador actual representa el número decimal de una sección PDDU/PPCU en `articulo`; una implementación futura debería usar `tipo_localizador=planeacion_urbana` y conservar el número en `localizador`, con migración revisada de consumidores. El procesamiento actual tampoco conserva una página exacta por fragmento. Se requiere una estrategia de extracción por página que se valide contra el PDF antes de presentar citas de página. `contexto_superior` y `cita_legal` aportan orientación, pero no sustituyen el localizador y la página comprobables.
+
+## 9. Decisiones para una futura fase
 
 - Validar visualmente todas las tablas y elementos gráficos, incluyendo páginas finales y continuidad.
 - Definir si se almacenan imágenes/crops de tablas como artefactos de auditoría y dónde.
 - Aprobar el esquema común y los esquemas específicos antes de generar JSON por tabla.
 - Resolver la discrepancia observada en procedencia de Tabla 22: los registros JSON indican página `[80]`, mientras el nombre del archivo citado refiere `80-81`; no modificar el archivo hasta que el usuario termine la limpieza manual.
 - Acordar política de versionado del catálogo y los JSON, y cómo se conserva cada hash de fuente.
+- Aprobar campos de localización por tipo de instrumento y estrategia de página exacta antes de modificar el procesador.
 
 La alternativa de almacenamiento y su relación con el retriever se documentan en [propuesta_esquema_postgresql_PPCU.md](./propuesta_esquema_postgresql_PPCU.md) y [diseno_retriever_hibrido_PPCU.md](./diseno_retriever_hibrido_PPCU.md).
+
+## Cambios de esta revisión
+
+- Se añadieron las clases de matrices cualitativas, parámetros normativos cuantitativos y datos estadísticos/diagnósticos con reglas explícitas contra reinterpretación, conversión y cálculos derivados.
+- Se amplió el contrato versionado propuesto para la futura Tabla 22 y se especificó la migración posterior con respaldo, validación, cotejo de 51 actividades/357 celdas, preservación de estados y reporte de diferencias. No se migró el JSON.
+- Se homologó el contrato de evidencia y las variantes de localización legislativa, de planeación urbana y tabular; se documentó que `articulo` no es localizador adecuado para secciones decimales urbanas y que faltan páginas exactas por fragmento.
+- Se mantiene abierta la verificación visual completa del inventario y la situación de Tabla 23 como «no localizada».
