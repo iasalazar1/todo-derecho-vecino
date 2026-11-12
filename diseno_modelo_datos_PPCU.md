@@ -124,17 +124,20 @@ Todos los JSON futuros compartirían metadatos de documento, tabla, fuente y rev
 {
   "schema_version": "propuesta-1",
   "documento": {
-    "documento_id": "ppdu_hipodromo",
+    "document_key": "ppdu_hipodromo",
     "titulo_documental": "Programa Parcial de Desarrollo Urbano Hipódromo",
     "archivo_pdf": "leyes_cdmx/PPCU_Hipodromo.pdf",
     "sha256_pdf": "pendiente_de_registrar_en_ingesta"
   },
   "tabla": {
-    "tabla_id": "tabla_N",
+    "table_key": "tabla_N",
     "numero_original": "N",
     "titulo_literal": "transcripción verificada del rótulo",
     "tipo_funcional": "clasificación documental no jurídica",
-    "paginas_pdf": [],
+    "pagina_pdf_inicio": null,
+    "pagina_pdf_fin": null,
+    "pagina_impresa": null,
+    "estado_verificacion_localizacion": "pendiente",
     "estado_extraccion": "pendiente_revision_visual"
   },
   "revision": {
@@ -146,13 +149,13 @@ Todos los JSON futuros compartirían metadatos de documento, tabla, fuente y rev
 }
 ```
 
-Los valores de ejemplo `N`, páginas, hash y título son marcadores, no datos del PPCU. No deben escribirse como contenido real. Para elementos no numerados, `numero_original` debe indicar explícitamente `null` y el catálogo debe mantener la condición `sin_numero`, no asignarles un número.
+Los valores de ejemplo `N`, páginas, hash, clave y título son marcadores, no datos del PPCU. No deben escribirse como contenido real. `document_key` y `table_key` son claves textuales estables externas; `document_id` y `table_pk` son identificadores numéricos internos cuando existan en PostgreSQL y nunca se guardan en lugar de las claves textuales. Para elementos no numerados, `numero_original` debe indicar explícitamente `null` y el catálogo debe mantener la condición `sin_numero`, no asignarles un número.
 
 Cada registro debe incluir, según corresponda:
 
 - `registro_id` estable dentro del archivo y `orden_original`.
-- `pagina_pdf` (y página impresa solo si se verifica).
-- `fila_original`, `columna_original` o coordenadas equivalentes cuando existan.
+- `pagina_pdf_inicio`, `pagina_pdf_fin` y `pagina_impresa`; usar `null` si no se conocen y registrar por separado si la localización fue verificada.
+- `fila_original`, `columna_original` o coordenadas equivalentes cuando existan; la referencia general a una tabla no equivale a una celda identificada.
 - `texto_original` y `valores_originales`.
 - `notas_referidas` y texto literal de notas disponible.
 - `datos_estructurados`, con esquema dependiente del tipo de tabla.
@@ -193,13 +196,21 @@ La Tabla 22 puede migrarse a un contrato raíz versionado únicamente cuando ter
     "sha256_origen": null
   },
   "tabla": {
-    "tabla_id": "clave_textual_estable_de_tabla",
+    "table_key": "clave_textual_estable_de_tabla",
     "numero_original": 22,
     "titulo_literal": "título de tabla verificado",
-    "paginas_pdf": [],
+    "pagina_pdf_inicio": null,
+    "pagina_pdf_fin": null,
+    "pagina_impresa": null,
+    "estado_verificacion_localizacion": "pendiente",
     "ubicacion_origen": {
-      "pagina_impresa": null,
-      "ancla_visual": null
+      "tipo_localizador": "tabla",
+      "fila": null,
+      "columna": null,
+      "actividad": null,
+      "zonificacion": null,
+      "celda": null,
+      "referencia_visual": null
     },
     "clase_dato": "matriz_cualitativa_compatibilidad"
   },
@@ -217,9 +228,13 @@ La Tabla 22 puede migrarse a un contrato raíz versionado únicamente cuando ter
           "evidencia": {
             "texto_original": null,
             "referencia_normativa": null,
-            "pagina_pdf": null,
+            "pagina_pdf_inicio": null,
+            "pagina_pdf_fin": null,
+            "pagina_impresa": null,
+            "estado_verificacion_localizacion": "pendiente",
             "fila_original": null,
             "columna_original": null,
+            "celda_original": null,
             "notas_referidas": []
           }
         }
@@ -291,11 +306,15 @@ Campos comunes propuestos:
 
 - `evidence_id`, `tipo_evidencia` y `clase_dato`.
 - `document_id` numérico interno cuando exista en la base y `document_key` textual estable para referencias externas; nombre y tipo de instrumento.
-- `pagina_pdf_inicio`, `pagina_pdf_fin`, y `pagina_impresa` únicamente si se verifica.
+- `pagina_pdf_inicio` y `pagina_pdf_fin` para páginas físicas del PDF; `pagina_impresa` solo si se verifica en la fuente. Las páginas desconocidas se conservan como `null`.
+- `estado_verificacion_localizacion`, independiente de `needs_review` y del estado de revisión jurídica, para indicar si la localización fue verificada.
 - `tipo_localizador` + `localizador`.
-- `texto_original` o `valor_original`, referencia de origen y notas.
+- `table_pk` numérico interno cuando exista una fila de catálogo SQL, y `table_key` textual estable para el archivo JSON y las referencias externas. No son intercambiables.
+- `texto_original` o `valor_original`, referencia de origen y notas; para evidencia tabular, conservar tabla, fila, columna y celda cuando estén identificadas.
 - `needs_review`, `estado_revision_juridica` y metadatos de auditoría.
 - `interpretacion_sistema` opcional y separada; no mezclar con `texto_original`.
+
+Los valores propuestos para `estado_verificacion_localizacion` son `pendiente`, `verificada` y `no_disponible`. `verificada` exige cotejo con el PDF; una página impresa no se considera verificada solo por coincidir con la página física. Un localizador estructural puede estar verificado aunque su página impresa no exista o no sea legible.
 
 Variantes del localizador:
 
@@ -330,7 +349,7 @@ Variantes del localizador:
 {
   "tipo_localizador": "tabla",
   "localizador": {
-    "tabla_id": "tabla_22",
+    "table_key": "tabla_22",
     "numero_original": 22,
     "fila": null,
     "columna": null,
@@ -342,7 +361,9 @@ Variantes del localizador:
 }
 ```
 
-Los `null` son campos no identificados, no valores que se puedan completar de forma automática. Los ejemplos no afirman páginas, filas o celdas reales. El procesador actual representa el número decimal de una sección PDDU/PPCU en `articulo`; una implementación futura debería usar `tipo_localizador=planeacion_urbana` y conservar el número en `localizador`, con migración revisada de consumidores. El procesamiento actual tampoco conserva una página exacta por fragmento. Se requiere una estrategia de extracción por página que se valide contra el PDF antes de presentar citas de página. `contexto_superior` y `cita_legal` aportan orientación, pero no sustituyen el localizador y la página comprobables.
+Los `null` son campos no identificados, no valores que se puedan completar de forma automática. Los ejemplos no afirman páginas, filas o celdas reales. Para todas las variantes se conserva la página física del PDF por separado de la página impresa, además del rango de páginas cuando la evidencia abarca más de una. En evidencia tabular, una referencia a la tabla completa no debe presentarse como una celda exacta: fila, columna, actividad, zonificación y celda se informan solo si fueron verificadas. Se conserva `table_key` en los archivos y citas; si existe una fila SQL de catálogo, `table_pk` numérico puede acompañarla, nunca sustituirla.
+
+El procesador actual representa el número decimal de una sección PDDU/PPCU en `articulo`; una implementación futura debería usar `tipo_localizador=planeacion_urbana` y conservar el número en `localizador`, con migración revisada de consumidores. El procesamiento actual tampoco conserva una página exacta por fragmento. Se requiere una estrategia de extracción por página que se valide contra el PDF antes de presentar citas de página. `contexto_superior` y `cita_legal` aportan orientación, pero no sustituyen el localizador y la página comprobables.
 
 ## 9. Decisiones para una futura fase
 
@@ -352,11 +373,15 @@ Los `null` son campos no identificados, no valores que se puedan completar de fo
 - Resolver la discrepancia observada en procedencia de Tabla 22: los registros JSON indican página `[80]`, mientras el nombre del archivo citado refiere `80-81`; no modificar el archivo hasta que el usuario termine la limpieza manual.
 - Acordar política de versionado del catálogo y los JSON, y cómo se conserva cada hash de fuente.
 - Aprobar campos de localización por tipo de instrumento y estrategia de página exacta antes de modificar el procesador.
+- Definir el método de cotejo y quién puede cambiar `estado_verificacion_localizacion`; la verificación de una página no cambia `needs_review` ni valida jurídicamente el contenido.
 
 La alternativa de almacenamiento y su relación con el retriever se documentan en [propuesta_esquema_postgresql_PPCU.md](./propuesta_esquema_postgresql_PPCU.md) y [diseno_retriever_hibrido_PPCU.md](./diseno_retriever_hibrido_PPCU.md).
 
 ## Cambios de esta revisión
 
+- Se homologaron las claves de tabla: `table_pk` es la PK numérica interna propuesta y `table_key` la clave textual estable externa. Los JSON conservan la clave textual y no dependen de IDs de base de datos.
+- Se separaron página física del PDF, página impresa y estado de verificación del localizador; se precisó la ubicación de tabla/fila/columna/celda sin convertir referencias generales en citas de celda.
+- Se aclaró cómo preservar localizadores y páginas en evidencia verificable, sin confundir verificación documental con revisión jurídica.
 - Se añadieron las clases de matrices cualitativas, parámetros normativos cuantitativos y datos estadísticos/diagnósticos con reglas explícitas contra reinterpretación, conversión y cálculos derivados.
 - Se amplió el contrato versionado propuesto para la futura Tabla 22 y se especificó la migración posterior con respaldo, validación, cotejo de 51 actividades/357 celdas, preservación de estados y reporte de diferencias. No se migró el JSON.
 - Se homologó el contrato de evidencia y las variantes de localización legislativa, de planeación urbana y tabular; se documentó que `articulo` no es localizador adecuado para secciones decimales urbanas y que faltan páginas exactas por fragmento.

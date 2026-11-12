@@ -36,12 +36,13 @@ El DDL actual de `land_use_compatibility`, por contraste, define `documento_id T
 
 Convención futura recomendada:
 
-- `id BIGINT` o tipo interno elegido por el esquema como PK numérica.
+- `legal_documents.id` y `document_id BIGINT` como identidad numérica interna y FK, respectivamente; conservar `legal_documents.document_key` como clave textual externa estable.
 - `document_id BIGINT NOT NULL REFERENCES legal_documents(id)` en catálogo estructurado y relaciones internas.
 - `document_key TEXT UNIQUE` en `legal_documents`, conservado en JSON, catálogo externo y exportaciones; no usarlo como sustituto de FK.
-- `table_id TEXT` como clave documental estable (p. ej., `tabla_22`), distinta del `id` numérico de fila SQL y del número original impreso.
+- `document_tables.table_pk BIGINT` como PK numérica interna y `document_tables.table_key TEXT` como clave textual estable (p. ej., `tabla_22`), distinta del número original impreso.
+- Las tablas de filas/celdas y las relaciones futuras usan `table_pk` como FK; los archivos JSON, catálogo externo y referencias de integración usan `table_key`. Una consulta puede resolver la clave externa al PK dentro de la base.
 - `row_id`/`cell_id` internos numéricos y `row_key`/`cell_key` textuales deterministas para archivos, auditoría e idempotencia, si la implementación los requiere.
-- Los IDs textuales existentes del cargador deben mapearse a `legal_documents.document_key`; una FK numérica debe resolver internamente la relación sin borrar ni renombrar las claves externas.
+- El DDL heredado usa `documento_id TEXT` y `tabla_id TEXT` en `land_use_compatibility`; son claves de integración textuales. Durante una transición, mapearlas respectivamente a `document_key` y `table_key`, y añadir la relación numérica solo tras validar el mapeo. No renombrar ni borrar esos campos como parte de esta propuesta.
 
 ## 3. Alternativas consideradas
 
@@ -57,7 +58,7 @@ Convención futura recomendada:
 
 ### A. Tabla genérica completamente JSONB
 
-Una tabla puede almacenar `table_id`, número de fila, fuente, flags de revisión y `data JSONB`. Esto es simple para tablas cambiantes y contenido aún exploratorio. Sin embargo, consultas como “valor para zonificación X y actividad Y” dependen de rutas JSON, coerciones, estructura homogénea y sus índices. Cambios silenciosos en claves pueden romper consultas sin invalidar el dato. La trazabilidad también se vuelve vulnerable a diferencias entre objetos.
+Una tabla puede almacenar `table_key`, número de fila, fuente, flags de revisión y `data JSONB`. Esto es simple para tablas cambiantes y contenido aún exploratorio. Sin embargo, consultas como “valor para zonificación X y actividad Y” dependen de rutas JSON, coerciones, estructura homogénea y sus índices. Cambios silenciosos en claves pueden romper consultas sin invalidar el dato. La trazabilidad también se vuelve vulnerable a diferencias entre objetos.
 
 ### B. Tablas SQL especializadas para cada familia
 
@@ -85,20 +86,20 @@ Esta recomendación aprovecha el patrón ya existente de `legal_documents` / `le
 legal_documents (id PK numérica, document_key UNIQUE textual)
   ├─ 1:N legal_chunks (document_id FK numérica) [actual]
   │      └─ 1:N legal_embeddings (FK numérica compuesta) [actual]
-  └─ 1:N document_tables (document_id FK numérica) [propuesto]
-           ├─ 1:N structured_table_rows (table_id FK numérica) [propuesto]
+  └─ 1:N document_tables (table_pk PK, document_id FK, table_key UNIQUE por documento) [propuesto]
+           ├─ 1:N structured_table_rows (table_pk FK numérica) [propuesto]
            │      └─ 1:N structured_table_cells (row_id FK numérica) [opcional/propuesto]
-           ├─ 1:N table_notes (table_id FK numérica) [opcional/propuesto]
-           └─ 1:N land_use_compatibility (table_id FK futura) [relación propuesta]
+           ├─ 1:N table_notes (table_pk FK numérica) [opcional/propuesto]
+           └─ 1:N land_use_compatibility (table_pk FK futura) [relación propuesta]
 ```
 
 Entidades conceptuales:
 
-- **`document_tables` (propuesta, no existente en el esquema inspeccionado):** `id` numérico PK; `document_id` numérico FK; `table_id` textual estable; `numero_original` y `titulo_literal`; páginas PDF/impresas; clase de dato; hash/versión fuente y estado de auditoría. Una restricción única futura debe evitar duplicar una clave textual dentro del documento sin renumerar lo impreso.
-- **`structured_table_rows` (propuesta):** `id` numérico PK y `table_id` numérico FK; `row_key` textual estable opcional, orden, página, `texto_original`, `datos JSONB`, revisión y procedencia. Es la forma flexible para tablas cuya estructura no justifica aún columnas especializadas.
+- **`document_tables` (propuesta, no existente en el esquema inspeccionado):** `table_pk BIGINT` PK; `document_id BIGINT` FK a `legal_documents.id`; `table_key TEXT` textual estable, con unicidad propuesta `(document_id, table_key)`; `numero_original` y `titulo_literal`; página física inicial/final, página impresa, estado de verificación de localización; clase de dato; hash/versión fuente y estado de auditoría. La clave no debe sustituir ni renumerar el número original impreso.
+- **`structured_table_rows` (propuesta):** `id` numérico PK y `table_pk BIGINT` FK a `document_tables.table_pk`; `row_key` textual estable opcional, orden, `pagina_pdf_inicio`, `pagina_pdf_fin`, `pagina_impresa`, `estado_verificacion_localizacion`, `texto_original`, `datos JSONB`, `referencias_notas`, `needs_review`, `estado_auditoria` y procedencia. Es la forma flexible para tablas cuya estructura no justifica aún columnas especializadas.
 - **`structured_table_cells` (opcional/propuesta):** útil cuando se requiera buscar cada valor y columna por separado. Debe conservar `valor_original`, encabezado/código de columna, unidad y FK a fila; solo se justifica tras validar los casos de consulta.
-- **`table_notes` (opcional/propuesta):** PK numérica, FK a tabla y vínculo opcional a fila/celda; texto literal, página y referencia de nota tal como se verificó.
-- **`land_use_compatibility` (existente en el DDL del loader, no en `001_initial_schema.sql`):** hoy usa claves textuales `documento_id`/`tabla_id` y no FK. En el diseño futuro se recomienda agregar relación numérica a documento/tabla, manteniendo las claves legibles durante una migración compatibilizada.
+- **`table_notes` (opcional/propuesta):** PK numérica, `table_pk` FK y vínculo opcional a fila/celda; texto literal, página física/impresa y estado de verificación de la localización de la nota.
+- **`land_use_compatibility` (existente en el DDL del loader, no en `001_initial_schema.sql`):** hoy usa claves textuales `documento_id`/`tabla_id` y no FK. En el diseño futuro se recomienda agregar `document_id`/`table_pk` numéricos como relaciones internas, conservando las claves heredadas y homologándolas en integración con `document_key`/`table_key` durante una migración validada.
 - **`legal_chunks` / `legal_embeddings` (actuales en esquema base):** enlazados con FKs numéricas. Un identificador externo legible no reemplaza estas relaciones.
 
 Todos los datos estructurados deben compartir contrato de evidencia, con localizador tipado (`legislativo`, `planeacion_urbana` o `tabla`) y referencias exactas de página/fila/celda cuando estén verificadas. No usar `article` para secciones decimales de programas urbanos. Deben mantener `needs_review` / estado de revisión. Valores normalizados coexisten con el original y nunca lo sustituyen.
@@ -131,8 +132,9 @@ SELECT
     fuente_paginas,
     needs_review AS pendiente_revision
 FROM land_use_compatibility
-WHERE documento_id = 'ppdu_hipodromo'
-  AND tabla_id = 'tabla_22'
+-- Esquema heredado: documento_id/tabla_id son texto, no FKs.
+WHERE documento_id = :document_key
+  AND tabla_id = :table_key
   AND zonificacion = :zonificacion
   AND (
       lower(actividad_original) = lower(:actividad)
@@ -149,7 +151,9 @@ La consulta debe parametrizar valores de usuario. Un estado `por validar` se dev
 ### Catálogo de tabla (futuro)
 
 ```sql
-SELECT table_id, numero_original, titulo_literal, paginas_pdf,
+SELECT table_pk, table_key, document_id, numero_original, titulo_literal,
+       pagina_pdf_inicio, pagina_pdf_fin, pagina_impresa,
+       estado_verificacion_localizacion,
        tipo_funcional, estado_extraccion, needs_review
 FROM document_tables
 WHERE document_id = :document_id
@@ -159,11 +163,13 @@ WHERE document_id = :document_id
 ### Una fila de una tabla estadística/diagnóstica (futuro)
 
 ```sql
-SELECT r.id AS row_id, r.row_order, r.page_pdf, r.original_text, r.data,
-       r.footnote_refs, r.needs_review, r.audit_status
+SELECT r.id AS row_id, r.orden, r.pagina_pdf_inicio, r.pagina_pdf_fin,
+       r.pagina_impresa, r.estado_verificacion_localizacion,
+       r.texto_original, r.datos, r.referencias_notas,
+       r.needs_review, r.estado_auditoria
 FROM structured_table_rows AS r
-WHERE table_id = :table_id_numeric
-  AND data ->> 'indicador' = :indicador;
+WHERE table_pk = :table_pk
+  AND datos ->> 'indicador' = :indicador;
 ```
 
 El query JSONB es ilustrativo; si el indicador se vuelve un predicado central, conviene una columna tipada o una tabla especializada, no una cadena JSON ad hoc en toda la aplicación.
@@ -182,13 +188,13 @@ El proceso actual `scripts/load_land_use_compatibility.py` valida el JSON y solo
 
 ## 8. Decisiones pendientes
 
-- Aprobar el modelo híbrido y el catálogo documental.
+- Aprobar el modelo híbrido y el catálogo documental, incluidos los nombres finales de `table_pk` y `table_key`.
 - Definir cuáles tablas, además de Tabla 22, tendrán preguntas que requieren SQL exacto.
 - Confirmar estructura, celdas, unidades, notas y páginas a partir del PDF visualmente.
 - Acordar si se conserva el texto/fila de origen como columnas directas, JSONB o ambas; recomendación: columnas comunes más copia original y datos tipados.
 - Diseñar DDL/migraciones y políticas de actualización en una fase futura, separada de este diseño.
 - Verificar en la base viva las tablas, tipos, constraints, claves, índices, conteos y estado real de `land_use_compatibility`; no se hizo conexión a Aurora.
-- Comprobar colisiones/estabilidad de `document_key`, `documento_id`, `tabla_id` y los IDs del loader antes de proponer una FK o backfill.
+- Comprobar colisiones/estabilidad y correspondencia entre `document_key`, `documento_id`, `table_key`, `tabla_id` y los IDs del loader antes de proponer una FK o backfill.
 - Confirmar nombres y compatibilidad PostgreSQL/Aurora para cualquier restricción, tipo o índice propuesto.
 - Definir migración gradual: inspección y respaldo; mapeo validado de claves textuales a `legal_documents.id`; agregar FK numérica de forma compatible; validar relación y conteos; migrar consumidores; retirar claves redundantes solo después de autorización y verificación.
 - Revisar por separado el localizador de páginas: los chunks actuales no conservan página exacta por fragmento.
@@ -199,7 +205,7 @@ No ejecutar hasta que la base viva y sus datos hayan sido inspeccionados y se au
 
 1. Obtener snapshot/verificación aprobada de DDL, índices, constraints, conteos y muestras de claves de la base real; contrastar contra el repositorio y registrar diferencias.
 2. Respaldar artefactos estructurados; verificar correspondencia unívoca entre `land_use_compatibility.documento_id` y `legal_documents.document_key`, sin asumir que todos los valores tienen correspondencia.
-3. Diseñar una transición aditiva: tabla catálogo propuesta con PK numérica y FKs hacia `legal_documents.id`, conservando `document_key`/`table_id` textuales.
+3. Diseñar una transición aditiva: tabla catálogo propuesta con `table_pk` numérico, `document_id` FK a `legal_documents.id` y `table_key` textual, conservando temporalmente los campos heredados `documento_id`/`tabla_id` en la relación actual.
 4. Crear/backfill de relaciones internas solo para filas con mapeo inequívoco; filas sin correspondencia se reportan y no reciben una FK ficticia.
 5. Comprobar conteos, unicidad, orfandad, 51 actividades/357 celdas cuando se trate de Tabla 22, flags y valores literales.
 6. Migrar los lectores/cargadores de forma compatible y mantener la referencia textual para integración/archivos externos.
@@ -209,7 +215,8 @@ La organización JSON se describe en [diseno_modelo_datos_PPCU.md](./diseno_mode
 
 ## Cambios de esta revisión
 
-- Se aclaró la distinción existente y futura entre `id` numérico (PK/FK interna) y `document_key`/`table_id` textuales (identificadores externos estables).
+- Se homologó el modelo con `document_id` (FK numérica), `document_key` (clave textual documental), `table_pk` (PK numérica de tabla) y `table_key` (clave textual estable de tabla). Las claves heredadas `documento_id`/`tabla_id` se describen solo como nombres del DDL actual.
 - Se describieron las relaciones actuales de `legal_documents`, `legal_chunks` y `legal_embeddings`, frente al DDL independiente de `land_use_compatibility`, que hoy usa claves textuales sin FK.
+- Se especificó que las relaciones internas futuras apuntan por `document_id`/`table_pk`, mientras que JSON y referencias externas conservan `document_key`/`table_key`; también se separaron página física, página impresa y estado de verificación.
 - Se extendió el modelo híbrido a matrices cualitativas, parámetros normativos cuantitativos y estadísticas; se fijaron restricciones contra conversiones y cálculos derivados.
 - Se incorporaron localizadores tipados y una estrategia de migración futura gradual, con validación de la base viva pendiente. No se creó DDL ni se ejecutó migración.

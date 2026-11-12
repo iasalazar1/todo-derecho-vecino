@@ -50,7 +50,8 @@ Pregunta
        - evidencia semántica / fila / parámetro / celda
        - referencia estable
        - texto y datos originales
-       - localizador tipado y página, tabla, fila, columna, notas
+       - página física/impresa y localizador tipado, con estado de verificación
+       - tabla, fila, columna y celda exacta cuando exista
        - needs_review y auditoría
                  │
                  ▼
@@ -75,11 +76,13 @@ El interpretador identifica candidatos para actividad/giro, zonificación, colon
 
 Los umbrales de confianza deben fijarse con pruebas futuras, no se presuponen aquí. Una inferencia errónea nunca debe suprimir evidencia potencialmente relevante sin dejar rastro. Si no puede determinarse actividad o zonificación con certeza suficiente, la respuesta debe decirlo o pedir aclaración, no adivinar.
 
+Por ejemplo, la mención de “restaurante” por sí sola puede identificar un giro candidato, pero no determina la zonificación ni el ámbito territorial. No debe convertirse en un filtro de zona; se mantiene una búsqueda semántica amplia o se solicita la zonificación cuando sea necesaria para una consulta exacta.
+
 ### Salvaguardas para filtros estructurados
 
 - Parametrizar cada valor SQL; usar consultas preparadas y listas permitidas para identificadores/tipos.
 - No concatenar texto libre, alias o nombres de usuario en la sentencia SQL.
-- Resolver `document_key`, `table_id`, zonificaciones y alias contra catálogos aprobados.
+- Resolver `document_key` y `table_key` contra catálogos aprobados; usar `document_id` y `table_pk` solo como IDs numéricos internos. En el DDL heredado de Tabla 22, `documento_id`/`tabla_id` son claves textuales, no IDs internos.
 - Aplicar filtros duros solo para criterios explícitos o ya validados. Candidatos inferidos no validados se usan para expansión/búsqueda paralela, no para exclusión.
 - Registrar criterios detectados, su origen/confianza, predicados aplicados y razón de exclusión.
 - Si filtro validado no devuelve filas, distinguir “sin coincidencia exacta” de “prohibido”; ampliar búsqueda o pedir precisión.
@@ -96,16 +99,19 @@ Cada evidencia normalizada debe incluir al menos:
   "document_id": null,
   "document_key": "clave_textual_estable",
   "document_name": "nombre documental",
-  "table_id": "tabla_22",
+  "table_pk": null,
+  "table_key": "tabla_22",
   "table_number_original": 22,
   "table_title_literal": "título verificado",
   "page_pdf_start": null,
   "page_pdf_end": null,
   "page_printed": null,
+  "localization_status": "pending",
   "tipo_localizador": "planeacion_urbana | legislativo | tabla",
   "localizador": {},
   "row_key": null,
   "column_key": null,
+  "cell_key": null,
   "activity_original": null,
   "zonification_original": null,
   "cell_original": null,
@@ -125,13 +131,13 @@ Cada evidencia normalizada debe incluir al menos:
 }
 ```
 
-Es un contrato conceptual común, no la forma actual devuelta por `retrieve()` ni por la API. Campos no aplicables pueden omitirse; datos desconocidos deben permanecer ausentes/null, no reconstruirse. `document_id` es el ID numérico interno cuando se obtuvo de la base; `document_key` es la clave externa textual. `tipo_localizador` determina semánticamente `localizador`:
+Es un contrato conceptual común, no la forma actual devuelta por `retrieve()` ni por la API. Campos no aplicables pueden omitirse; datos desconocidos deben permanecer ausentes/null, no reconstruirse. `document_id` y `table_pk` son IDs numéricos internos cuando se obtienen de la base; `document_key` y `table_key` son claves externas textuales estables. El objeto de evidencia conserva la clave externa aunque incluya el ID interno. `localization_status` usa `pending`, `verified` o `unavailable`; describe cotejo documental, no revisión jurídica. `page_pdf_start`/`page_pdf_end` son páginas físicas del PDF; `page_printed` solo se informa si se verificó directamente en la fuente. La forma equivalente del contrato JSON en español es `pagina_pdf_inicio`/`pagina_pdf_fin`, `pagina_impresa` y `estado_verificacion_localizacion`. `tipo_localizador` determina semánticamente `localizador`:
 
 - `legislativo`: título/capítulo/sección/artículo/fracción/inciso.
 - `planeacion_urbana`: capítulo/apartado/sección/subsección/numeración jerárquica; no utilizar `articulo`.
 - `tabla`: número/ID, página, fila, columna, actividad, zonificación, celda y valor.
 
-Para cita verificable se deben conservar página física del PDF y página impresa solo si ambas se comprobaron; también documento, tabla o ubicación jerárquica, referencia de origen y texto/valor literal. El procesador actual no guarda página exacta por chunk, por lo que habrá que mejorar o validar el mapeo desde PDF a texto/chunk antes de afirmar una página. `contexto_superior` y `cita_legal` no resuelven por sí solos esa localización.
+En `localizador` tabular se conserva `table_key`, número original, fila, columna, actividad, zonificación, celda y valor según aplique. Una fila/celda exacta se identifica solo si fue verificada; el resultado de una consulta a nivel de tabla no se presenta como cita exacta de celda. La página física del PDF, la página impresa y el estado de verificación se preservan por separado. El procesador actual no guarda página exacta por chunk, por lo que habrá que mejorar o validar el mapeo desde PDF a texto/chunk antes de afirmar una página. `contexto_superior` y `cita_legal` no resuelven por sí solos esa localización.
 
 Separación semántica obligatoria:
 
@@ -160,6 +166,19 @@ La búsqueda semántica no es sustituto de un predicado exacto en valores tabula
 `clase_dato` y `tipo_evidencia` identifican la ruta y el formato de respuesta; no declaran validez ni fuerza jurídica.
 
 ## 6. Flujos conceptuales
+
+### Fusión, deduplicación y discrepancias
+
+La integración no debe colapsar evidencias distintas solo porque hablan del mismo tema. Debe conservar cada evidencia y su procedencia, y eliminar únicamente duplicados que representen el mismo fragmento o la misma fila/celda de la misma versión de fuente. Como clave de comparación se propone usar `document_key`, hash/versión de origen, tipo de localizador y ubicación; para datos tabulares se añade `table_key` y fila/celda, y para chunks semánticos su identificador de chunk/segmento. Si el mismo pasaje aparece en más de un resultado, conservar una evidencia canónica y registrar sus referencias equivalentes.
+
+Prioridad de presentación:
+
+1. Para el valor literal de una actividad-zonificación, la celda estructurada exacta y localizada es la evidencia primaria; devolver literalmente su estado y `needs_review`.
+2. Los fragmentos semánticos se mantienen como evidencia separada para contexto, notas, condiciones o fundamento narrativo; no se fusionan dentro del valor de celda.
+3. Si una celda no está localizada/verificada o la consulta solo identifica la tabla, no elevarla a evidencia exacta. La búsqueda semántica puede aportar contexto, pero no sustituye ese dato.
+4. Asignar etiquetas de cita únicas después de deduplicar, manteniendo una relación estable entre cada etiqueta, evidencia y fuente.
+
+Si la evidencia estructurada y la semántica parecen contradecirse, conservar ambas con sus localizadores y estado de revisión, señalar que hay una discrepancia y no resolverla automáticamente por puntuación, fecha supuesta o inferencia. Si la contradicción impide una respuesta fiable, declarar insuficiencia y solicitar revisión/precisión. Ausencia de coincidencia SQL no significa prohibición ni prueba de inexistencia.
 
 ### Pregunta libre antes de filtrar
 
@@ -198,11 +217,12 @@ La búsqueda semántica no es sustituto de un predicado exacto en valores tabula
 Sin implementar, la futura integración debería:
 
 - Mantener una sola interfaz de orquestación que reciba la pregunta y devuelva una colección de evidencias tipadas, no solo chunks vectoriales.
-- Hacer consultas SQL parametrizadas con límites y filtros explícitos de `document_id`, `table_id` y valores; no concatenar entrada de usuario en SQL.
+- Hacer consultas SQL parametrizadas con límites y filtros explícitos; resolver `document_key`/`table_key` a `document_id`/`table_pk` en la base y no concatenar entrada de usuario en SQL. Los nombres heredados `documento_id`/`tabla_id` solo aplican al DDL actual de compatibilidad.
 - Implementar interpretación ligera por reglas, catálogo de alias verificados y clasificación de intención; registrar criterios detectados, confianza, validación y filtros aplicados. No añadir sistema de agentes o varios modelos para el MVP.
 - Mantener búsqueda semántica amplia cuando los criterios sean ambiguos y usar candidatos inferidos solo tras validación antes de filtrar.
 - Tener una ruta de conexión estructurada compatible con el modo Aurora de Lambda y credenciales actuales; el helper local actual no basta.
 - Preservar el objeto original que permita reconstruir referencia de tabla, fila, columna, página, notas, estado original y `needs_review`.
+- Preservar página física del PDF y página impresa en campos separados, con un estado de verificación de localización distinto de `needs_review` y de la revisión jurídica.
 - Extender el procesador y el contrato de fuente para localizadores legislativos, de planeación urbana y tabulares; no usar `articulo` para secciones decimales y resolver la falta de páginas exactas.
 - Extender normalización, prompt y serialización de respuesta para mantener evidencia literal, interpretación y conclusión separadas; preservar `document_key` y page/table/row/cell en citas.
 - Asignar IDs de cita únicos después de combinar y deduplicar fuentes; no perder la relación de cada cita con la evidencia exacta.
@@ -228,6 +248,8 @@ La estructura de JSON, el catálogo y el inventario preliminar se definen en [di
 
 - Se añadió interpretación ligera de pregunta libre con criterios explícitos, inferidos de alta confianza y ambiguos, además de registro de criterios/filtros y salvaguardas contra exclusión accidental.
 - Se armonizó el contrato común de evidencia con `document_id` numérico y `document_key` externo, clases de dato y localizadores tipados legislativo/planeación/tabla.
+- Se homologaron `table_pk` numérico y `table_key` textual, así como página física, página impresa y estado de verificación del localizador.
+- Se definieron reglas de fusión: deduplicar solo evidencia de la misma fuente/ubicación, priorizar la celda exacta para su valor literal, conservar por separado el contexto semántico y no resolver discrepancias automáticamente.
 - Se documentaron las limitaciones existentes: secciones decimales guardadas hoy en `articulo`, falta de página exacta por chunk, helper estructurado local no conectado a `answer_question()`/Lambda y diferencias de contrato/cita.
 - Se reforzó la separación entre evidencia recuperada, interpretación del sistema y conclusión jurídica, además de no hacer cálculos o reinterpretar estados.
 - Permanecen pendientes el cotejo visual completo, la revisión de Tabla 22, la comprobación de la base viva, la aprobación del contrato y cualquier cambio de código, SQL o infraestructura.
