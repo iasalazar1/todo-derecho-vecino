@@ -260,7 +260,7 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_010",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Tiendas de productos básicos y de especialidades",
     "actividad_original": "Venta de abarrotes, comestibles y comida elaborada sin comedor, molinos, panaderías, minisupers y míscieláneas",
     "zonificaciones": {
       "H": "prohibido",
@@ -292,16 +292,16 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_011",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Tiendas de productos básicos y de especialidades",
     "actividad_original": "Venta de artículos manufacturados, farmacias y boticas",
     "zonificaciones": {
       "H": "prohibido",
-      "HC": "prohibido",
+      "HC": "permitido",
       "HO": "permitido",
       "HM": "permitido",
       "HCS": "permitido",
       "E": "prohibido",
-      "EA": "por validar"
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "artículos manufacturados",
@@ -321,7 +321,7 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_012",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Tiendas de productos básicos y de especialidades",
     "actividad_original": "Venta de materiales de construcción y madererías",
     "zonificaciones": {
       "H": "prohibido",
@@ -349,7 +349,7 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_013",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Tiendas de autoservicio",
     "actividad_original": "Tiendas de autoservicio",
     "zonificaciones": {
       "H": "prohibido",
@@ -378,7 +378,7 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_014",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Tiendas departamentales",
     "actividad_original": "Tiendas de departamentos",
     "zonificaciones": {
       "H": "prohibido",
@@ -406,7 +406,7 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_015",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Centros comerciales",
     "actividad_original": "Centro comercial",
     "zonificaciones": {
       "H": "prohibido",
@@ -435,7 +435,7 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_016",
     "categoria": "Comercio",
-    "subcategoria": "Abasto y Almacenamiento",
+    "subcategoria": "Agencias y talleres de reparación",
     "actividad_original": "Venta y renta de vehículos y maquinaria",
     "zonificaciones": {
       "H": "prohibido",
@@ -463,8 +463,8 @@
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_017",
-    "categoria": "Servicios",
-    "subcategoria": "Talleres y Servicios",
+    "categoria": "Comercio",
+    "subcategoria": "Agencias y talleres de reparación",
     "actividad_original": "Talleres automotrices, llanteras",
     "zonificaciones": {
       "H": "prohibido",
@@ -492,8 +492,8 @@
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_018",
-    "categoria": "Servicios",
-    "subcategoria": "Talleres y Servicios",
+    "categoria": "Comercio",
+    "subcategoria": "Agencias y talleres de reparación",
     "actividad_original": "Taller de reparación de maquinaria, lavadoras, refrigeradores y bicicletas",
     "zonificaciones": {
       "H": "prohibido",
@@ -522,8 +522,8 @@
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_019",
-    "categoria": "Servicios",
-    "subcategoria": "Servicios Personales",
+    "categoria": "Comercio",
+    "subcategoria": "Tiendas de Servicios",
     "actividad_original": "Baños públicos",
     "zonificaciones": {
       "H": "prohibido",
@@ -551,8 +551,8 @@
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_020",
-    "categoria": "Servicios",
-    "subcategoria": "Deportes y Recreación",
+    "categoria": "Comercio",
+    "subcategoria": "Tiendas de Servicios",
     "actividad_original": "Gimnasios y adiestramiento físico",
     "zonificaciones": {
       "H": "prohibido",
@@ -579,8 +579,8 @@
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_021",
-    "categoria": "Servicios",
-    "subcategoria": "Servicios Personales",
+    "categoria": "Comercio",
+    "subcategoria": "Tiendas de Servicios",
     "actividad_original": "Salas de belleza, peluquerías, lavanderías, tintorerías, sastrerías y laboratorios fotográficos",
     "zonificaciones": {
       "H": "prohibido",
@@ -611,8 +611,8 @@
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_022",
-    "categoria": "Servicios",
-    "subcategoria": "Alquiler de Artículos y Mudanzas",
+    "categoria": "Comercio",
+    "subcategoria": "Tiendas de Servicios",
     "actividad_original": "Servicios de alquiler de artículos en general, mudanzas y maquetería",
     "zonificaciones": {
       "H": "prohibido",
@@ -644,13 +644,13 @@
     "subcategoria": "Administración",
     "actividad_original": "Oficinas, despachos y consultorios",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "oficinas",
@@ -673,13 +673,13 @@
     "subcategoria": "Administración",
     "actividad_original": "Representaciones oficiales, embajadas y oficinas consulares",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "representaciones oficiales",
@@ -699,16 +699,16 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_025",
     "categoria": "Servicios",
-    "subcategoria": "por validar",
+    "subcategoria": "Administración",
     "actividad_original": "Bancos y casas de cambio",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "bancos",
@@ -730,13 +730,13 @@
     "subcategoria": "Hospitales",
     "actividad_original": "Hospital de urgencias de especialidades general y centro médico",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "hospital de urgencias",
@@ -759,13 +759,13 @@
     "subcategoria": "Centros de Salud",
     "actividad_original": "Centros de salud, clínicas de urgencias y clínicas en general",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "centros de salud",
@@ -785,16 +785,16 @@
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_028",
     "categoria": "Servicios",
-    "subcategoria": "por validar",
+    "subcategoria": "Centros de Salud",
     "actividad_original": "Laboratorios dentales, de análisis clínicos y radiografías",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "laboratorios dentales",
@@ -815,15 +815,15 @@
     "actividad_id": "actividad_029",
     "categoria": "Servicios",
     "subcategoria": "Asistencia Social",
-    "actividad_original": "Asilos de ancianos, casas de cuna y otras instituciones de asistencia**",
+    "actividad_original": "Asilos de ancianos, casas de cuna y otras instituciones de asistencia",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido (*)",
+      "HC": "permitido (*)",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "prohibido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "asilos de ancianos",
@@ -846,13 +846,13 @@
     "subcategoria": "Asistencia Animal",
     "actividad_original": "Veterinarias y tiendas de animales",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "veterinarias",
@@ -874,13 +874,13 @@
     "subcategoria": "Asistencia Animal",
     "actividad_original": "Centros antirrabios, clínicas, hospitales veterinarios",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "centros antirrabios",
@@ -901,15 +901,15 @@
     "actividad_id": "actividad_032",
     "categoria": "Servicios",
     "subcategoria": "Educación Elemental",
-    "actividad_original": "Guarderías, jardines de niños y escuelas para niños atinicos**",
+    "actividad_original": "Guarderías, jardines de niños y escuelas para niños atípicos",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido (*)",
+      "HC": "permitido (*)",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "guarderías",
@@ -932,13 +932,13 @@
     "subcategoria": "Educación Elemental",
     "actividad_original": "Escuelas primarias",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido (*)",
+      "HC": "permitido (*)",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "escuelas primarias",
@@ -952,21 +952,221 @@
     },
     "needs_review": true
   },
+
+
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
     "actividad_id": "actividad_034",
     "categoria": "Servicios",
+    "subcategoria": "Educación Media, Superior e Instituciones Científicas",
+    "actividad_original": "Academias de danza, belleza, contabilidad, computación e idiomas",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "academias de danza",
+      "academias de belleza",
+      "academias de contabilidad",
+      "academias de computación",
+      "academias de idiomas"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_035",
+    "categoria": "Servicios",
+    "subcategoria": "Educación Media, Superior e Instituciones Científicas",
+    "actividad_original": "Escuelas secundarias y secundarias técnicas",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "escuelas secundarias",
+      "secundarias técnicas"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_036",
+    "categoria": "Servicios",
+    "subcategoria": "Educación Media, Superior e Instituciones Científicas",
+    "actividad_original": "Escuelas preparatorias, institutos técnicos, centros de capacitación, CCH, CONALEP, vocacionales, politécnicos, tecnológicos, universidades, centros de estudios de postgrado y escuelas normales",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "escuelas preparatorias",
+      "institutos técnicos",
+      "centros de capacitación",
+      "CCH",
+      "CONALEP",
+      "vocacionales",
+      "politécnicos",
+      "tecnológicos",
+      "universidades",
+      "centros de estudios de postgrado",
+      "escuelas normales"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_037",
+    "categoria": "Servicios",
+    "subcategoria": "Exhibiciones",
+    "actividad_original": "Galerías de arte, museos, centros de exposiciones temporales y al aire libre",
+    "zonificaciones": {
+      "H": "permitido (*)",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "galerías de arte",
+      "museos",
+      "centros de exposiciones temporales",
+      "exposiciones al aire libre"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_038",
+    "categoria": "Servicios",
+    "subcategoria": "Centros de Información",
+    "actividad_original": "Bibliotecas",
+    "zonificaciones": {
+      "H": "permitido (*)",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "bibliotecas"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_039",
+    "categoria": "Servicios",
+    "subcategoria": "Instituciones Religiosas",
+    "actividad_original": "Templos y lugares para culto",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "templos",
+      "lugares para culto"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_040",
+    "categoria": "Servicios",
+    "subcategoria": "Instituciones Religiosas",
+    "actividad_original": "Instalaciones religiosas, seminarios y conventos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "instalaciones religiosas",
+      "seminarios",
+      "conventos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_041",
+    "categoria": "Servicios",
     "subcategoria": "Alimentos y Bebidas",
     "actividad_original": "Cafes, fondas y restaurantes",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "cafés",
@@ -985,9 +1185,9 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_035",
+    "actividad_id": "actividad_042",
     "categoria": "Servicios",
-    "subcategoria": "Entretenimiento",
+    "subcategoria": "Alimentos y Bebidas",
     "actividad_original": "Centros nocturnos y discotecas",
     "zonificaciones": {
       "H": "prohibido",
@@ -1013,22 +1213,25 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_036",
+    "actividad_id": "actividad_043",
     "categoria": "Servicios",
-    "subcategoria": "Recreación Social",
-    "actividad_original": "Centros de convivencias",
+    "subcategoria": "Alimentos y Bebidas",
+    "actividad_original": "Cantinas, bares, cervecerías, pulquerías y video bares",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
-      "centros de convivencias",
-      "convivencias"
+      "cantinas",
+      "bares",
+      "cervecerías",
+      "pulquerías",
+      "video bares"
     ],
     "fuente": {
       "archivo": "PPCU_Hipodromo-80-81.pdf",
@@ -1038,21 +1241,270 @@
     },
     "needs_review": true
   },
+
+
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_037",
+    "actividad_id": "actividad_044",
+    "categoria": "Servicios",
+    "subcategoria": "Entretenimiento",
+    "actividad_original": "Auditorios, teatros, cines, salas de concierto y cineteca",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "auditorios",
+      "teatros",
+      "cines",
+      "salas de concierto",
+      "cineteca"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_045",
+    "categoria": "Servicios",
+    "subcategoria": "Entretenimiento",
+    "actividad_original": "Centros de convenciones",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "centros de convenciones",
+      "convenciones"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_046",
+    "categoria": "Servicios",
+    "subcategoria": "Recreacion Social",
+    "actividad_original": "Centros comunitarios, culturales y salones para fiestas infantiles",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "centros comunitarios",
+      "centros culturales",
+      "salones para fiestas infantiles"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_047",
+    "categoria": "Servicios",
+    "subcategoria": "Recreacion Social",
+    "actividad_original": "Clubes de golf y pista de equitación",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "clubes de golf",
+      "pista de equitación"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_048",
+    "categoria": "Servicios",
+    "subcategoria": "Recreacion Social",
+    "actividad_original": "Clubes sociales y salones para banquetes",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "clubes sociales",
+      "salones para banquetes"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_049",
+    "categoria": "Servicios",
+    "subcategoria": "Deportes y Recreacion",
+    "actividad_original": "Lienzos charros y clubes campestres",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "lienzos charros",
+      "clubes campestres"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_050",
+    "categoria": "Servicios",
+    "subcategoria": "Deportes y Recreacion",
+    "actividad_original": "Centros deportivos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "centros deportivos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_051",
+    "categoria": "Servicios",
+    "subcategoria": "Deportes y Recreacion",
+    "actividad_original": "Estadios, hipódromos, autódromos, galgódromos, velódromos, arenas taurinas y campos de tiro",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "estadios",
+      "hipódromos",
+      "autódromos",
+      "galgódromos",
+      "velódromos",
+      "arenas taurinas",
+      "campos de tiro"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_052",
+    "categoria": "Servicios",
+    "subcategoria": "Deportes y Recreacion",
+    "actividad_original": "Boliches, billares y pistas de patinaje",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "boliches",
+      "billares",
+      "pistas de patinaje"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_053",
     "categoria": "Servicios",
     "subcategoria": "Alojamiento",
     "actividad_original": "Hoteles, moteles",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "hoteles",
@@ -1069,22 +1521,22 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_038",
+    "actividad_id": "actividad_054",
     "categoria": "Servicios",
     "subcategoria": "Alojamiento",
-    "actividad_original": "Alberques, Alojamiento y desayuno*****",
+    "actividad_original": "Albergues, Alojamiento y desayuno",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido (*)",
+      "HC": "permitido (*)",
+      "HO": "permitido (*)",
+      "HM": "permitido (*)",
+      "HCS": "permitido (*)",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "albergues",
-      "alberques",
+      "ab&b",
       "alojamiento y desayuno",
       "bed & breakfast",
       "B&B"
@@ -1097,21 +1549,51 @@
     },
     "needs_review": true
   },
+
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_039",
+    "actividad_id": "actividad_055",
     "categoria": "Servicios",
     "subcategoria": "Policía",
-    "actividad_original": "Centros de vehículos, centrales de policía y estaciones de policía",
+    "actividad_original": "Garitas y casetas de vigilancia",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "garitas",
+      "casetas de vigilancia",
+      "vigilancia"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_056",
+    "categoria": "Servicios",
+    "subcategoria": "Policía",
+    "actividad_original": "Encierro de vehículos, centrales de policía y estaciones de policía",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "centrales de policía",
@@ -1126,24 +1608,53 @@
     },
     "needs_review": true
   },
+
+
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_040",
+    "actividad_id": "actividad_057",
     "categoria": "Servicios",
-    "subcategoria": "Reclusorios",
-    "actividad_original": "Centros de reciclación social y de integración familiar y reformatorio",
+    "subcategoria": "Bomberos",
+    "actividad_original": "Estación de bomberos",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "permitido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
-      "centros de reciclación social",
+      "estación de bomberos",
+      "bomberos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_058",
+    "categoria": "Servicios",
+    "subcategoria": "Reclusorios",
+    "actividad_original": "Centros de readaptación social y de integración familiar y reformatorio",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "centros de readaptación social",
       "integración familiar",
       "reformatorio"
     ],
@@ -1158,18 +1669,18 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_041",
+    "actividad_id": "actividad_059",
     "categoria": "Servicios",
     "subcategoria": "Emergencias",
     "actividad_original": "Puesto de socorro y centrales de ambulancias",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "puesto de socorro",
@@ -1187,18 +1698,18 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_042",
+    "actividad_id": "actividad_060",
     "categoria": "Servicios",
     "subcategoria": "Funerarios",
     "actividad_original": "Cementerios y crematorios",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "cementerios",
@@ -1215,23 +1726,23 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_043",
+    "actividad_id": "actividad_061",
     "categoria": "Servicios",
     "subcategoria": "Funerarios",
-    "actividad_original": "Agencias funerarias y de imbunación",
+    "actividad_original": "Agencias funerarias y de inhumación",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "agencias funerarias",
       "inhumación",
-      "imbunación"
+      "cremación"
     ],
     "fuente": {
       "archivo": "PPCU_Hipodromo-80-81.pdf",
@@ -1241,82 +1752,316 @@
     },
     "needs_review": true
   },
-  {
+
+
+   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_044",
+    "actividad_id": "actividad_062",
     "categoria": "Servicios",
     "subcategoria": "Transportes Terrestres",
-    "actividad_original": "Terminales de autotransporte urbano y foráneo",
+    "actividad_original": "Terminales de carga",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
-      "terminales de autotransporte",
-      "transporte urbano",
-      "transporte foráneo"
+      "terminales de carga",
+      "carga"
     ],
     "fuente": {
       "archivo": "PPCU_Hipodromo-80-81.pdf",
-      "paginas": [
-        81
-      ]
+      "paginas": [81]
     },
     "needs_review": true
   },
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_045",
+    "actividad_id": "actividad_063",
     "categoria": "Servicios",
-    "subcategoria": "Comunicaciones",
+    "subcategoria": "Transportes Terrestres",
     "actividad_original": "Estaciones del sistema del transporte colectivo",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
-      "estaciones de transporte colectivo",
+      "estaciones del sistema del transporte colectivo",
       "transporte colectivo"
     ],
     "fuente": {
       "archivo": "PPCU_Hipodromo-80-81.pdf",
-      "paginas": [
-        81
-      ]
+      "paginas": [81]
     },
     "needs_review": true
   },
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_046",
+    "actividad_id": "actividad_064",
     "categoria": "Servicios",
-    "subcategoria": "Comunicaciones",
-    "actividad_original": "Centros de radio y televisión, con auditorio y estudios cinematográficos",
+    "subcategoria": "Transportes Terrestres",
+    "actividad_original": "Estacionamientos públicos",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "permitido (**)",
+      "HC": "permitido (**)",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "permitido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
-      "centros de radio",
-      "televisión",
+      "estacionamientos públicos",
+      "estacionamientos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_065",
+    "categoria": "Servicios",
+    "subcategoria": "Transportes Terrestres",
+    "actividad_original": "Edificios para estacionamiento de vehículos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "edificios para estacionamiento de vehículos",
+      "estacionamiento de vehículos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_066",
+    "categoria": "Servicios",
+    "subcategoria": "Transportes Terrestres",
+    "actividad_original": "Encierro y mantenimiento de vehículos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "encierro y mantenimiento de vehículos",
+      "mantenimiento de vehículos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_067",
+    "categoria": "Servicios",
+    "subcategoria": "Transportes Terrestres",
+    "actividad_original": "Terminales del sistema del transporte colectivo.",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "terminales del sistema del transporte colectivo",
+      "terminales de transporte"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_068",
+    "categoria": "Servicios",
+    "subcategoria": "Transportes Aéreos",
+    "actividad_original": "Terminales aéreas",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "terminales aéreas"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_069",
+    "categoria": "Servicios",
+    "subcategoria": "Transportes Aéreos",
+    "actividad_original": "Helipuertos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "helipuertos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_070",
+    "categoria": "Servicios",
+    "subcategoria": "Comunicaciones",
+    "actividad_original": "Agencias de correo, telégrafos y teléfonos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "permitido",
+      "HO": "permitido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "agencias de correo",
+      "telégrafos",
+      "teléfonos"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_071",
+    "categoria": "Servicios",
+    "subcategoria": "Comunicaciones",
+    "actividad_original": "Centrales telefónicas y de correos, telégrafos con atención al público.",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "permitido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "centrales telefónicas",
+      "centrales de correos",
+      "telégrafos con atención al público"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_072",
+    "categoria": "Servicios",
+    "subcategoria": "Comunicaciones",
+    "actividad_original": "Centrales telefónicas sin atención al público.",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "centrales telefónicas sin atención al público"
+    ],
+    "fuente": {
+      "archivo": "PPCU_Hipodromo-80-81.pdf",
+      "paginas": [81]
+    },
+    "needs_review": true
+  },
+
+
+  {
+    "documento_id": "ppdu_hipodromo",
+    "tabla_id": "tabla_22",
+    "actividad_id": "actividad_073",
+    "categoria": "Servicios",
+    "subcategoria": "Comunicaciones",
+    "actividad_original": "Estación de radio o televisión, con auditorio y estudios cinematográficos",
+    "zonificaciones": {
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
+    },
+    "alias_busqueda": [
+      "estación de radio",
+      "estación de televisión",
       "auditorio",
       "estudios cinematográficos"
     ],
@@ -1331,21 +2076,21 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_047",
+    "actividad_id": "actividad_074",
     "categoria": "Servicios",
     "subcategoria": "Comunicaciones",
-    "actividad_original": "Estaciones periodistas de comunicación celular",
+    "actividad_original": "Estaciones repetidoras de comunicación celular",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
-      "estaciones de comunicación celular",
+      "estaciones repetidoras de comunicación celular",
       "comunicación celular"
     ],
     "fuente": {
@@ -1359,18 +2104,18 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_048",
+    "actividad_id": "actividad_075",
     "categoria": "Industria",
     "subcategoria": "Industria",
     "actividad_original": "Microindustria, industria doméstica y de alta tecnología",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "microindustria",
@@ -1388,18 +2133,18 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_049",
+    "actividad_id": "actividad_076",
     "categoria": "Industria",
     "subcategoria": "Industria",
     "actividad_original": "Industria y pequeña",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "industria",
@@ -1416,18 +2161,18 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_050",
+    "actividad_id": "actividad_077",
     "categoria": "Infraestructura",
     "subcategoria": "Infraestructura",
     "actividad_original": "Estaciones y subestaciones eléctricas",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "permitido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "estaciones eléctricas",
@@ -1444,18 +2189,18 @@
   {
     "documento_id": "ppdu_hipodromo",
     "tabla_id": "tabla_22",
-    "actividad_id": "actividad_051",
+    "actividad_id": "actividad_078",
     "categoria": "Infraestructura",
     "subcategoria": "Infraestructura",
     "actividad_original": "Estaciónes de transferencia de basura",
     "zonificaciones": {
-      "H": "por validar",
-      "HC": "por validar",
-      "HO": "por validar",
-      "HM": "por validar",
-      "HCS": "por validar",
-      "E": "por validar",
-      "EA": "por validar"
+      "H": "prohibido",
+      "HC": "prohibido",
+      "HO": "prohibido",
+      "HM": "prohibido",
+      "HCS": "prohibido",
+      "E": "prohibido",
+      "EA": "prohibido"
     },
     "alias_busqueda": [
       "estaciones de transferencia de basura",
