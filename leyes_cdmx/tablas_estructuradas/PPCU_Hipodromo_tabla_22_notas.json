@@ -1,0 +1,88 @@
+{
+  "identificador": "tabla_22_notas",
+  "tabla_id": "tabla_22",
+  "documento_id": "ppdu_hipodromo",
+  "documento_fuente": "leyes_cdmx/PPCU_Hipodromo.pdf",
+  "paginas_fisicas_pdf": [
+    80,
+    81
+  ],
+  "notas": [
+    {
+      "nota_id": "nota_1",
+      "marcador": "1",
+      "tipo": "general",
+      "alcance": "general",
+      "texto_literal": "Los usos que no están señalados en esta tabla, se sujetarán al procedimiento establecido en el Reglamento de la Ley de Desarrollo Urbano.",
+      "fuente": {
+        "archivo": "leyes_cdmx/PPCU_Hipodromo.pdf",
+        "paginas": [
+          80,
+          81
+        ]
+      },
+      "needs_review": true
+    },
+    {
+      "nota_id": "nota_2",
+      "marcador": "2",
+      "tipo": "general",
+      "alcance": "general",
+      "texto_literal": "Los equipamientos públicos existentes quedan sujetos a lo dispuesto por el Artículo 3º Fracción IV de la Ley de Desarrollo Urbano del Distrito Federal; así como a otras disposiciones aplicables sobre bienes inmuebles públicos.",
+      "fuente": {
+        "archivo": "leyes_cdmx/PPCU_Hipodromo.pdf",
+        "paginas": [
+          80,
+          81
+        ]
+      },
+      "needs_review": true
+    },
+    {
+      "nota_id": "nota_3",
+      "marcador": "3",
+      "tipo": "aclaracion_contextual",
+      "alcance": "contextual",
+      "texto_literal": "Alojamiento y desayuno se refiere a la modalidad internacionalmente conocida como bed & breakfast (B&B), consistente en brindar habitación temporal con servicio de desayuno a precios sensiblemente menores a los de un hotel.",
+      "fuente": {
+        "archivo": "leyes_cdmx/PPCU_Hipodromo.pdf",
+        "paginas": [
+          80,
+          81
+        ]
+      },
+      "needs_review": true
+    },
+    {
+      "nota_id": "nota_asterisco_1",
+      "marcador": "*",
+      "tipo": "condicion_especial",
+      "alcance": "celda",
+      "texto_literal": "Uso permitido únicamente en inmuebles catalogados con Valor Relevante Sin Alterar, Valor Relevante Alterado y Valor Ambiental.",
+      "fuente": {
+        "archivo": "leyes_cdmx/PPCU_Hipodromo.pdf",
+        "paginas": [
+          80,
+          81
+        ]
+      },
+      "needs_review": true
+    },
+    {
+      "nota_id": "nota_asterisco_2",
+      "marcador": "**",
+      "tipo": "condicion_especial",
+      "alcance": "celda",
+      "texto_literal": "Uso permitido únicamente en lotes mayores a 1,000 m².",
+      "fuente": {
+        "archivo": "leyes_cdmx/PPCU_Hipodromo.pdf",
+        "paginas": [
+          80,
+          81
+        ]
+      },
+      "needs_review": true
+    }
+  ],
+  "needs_review": true
+}
