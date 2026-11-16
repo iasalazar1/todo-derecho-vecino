@@ -1,6 +1,6 @@
 # ajustes_pendientes.md
 # Proyecto: Todo Derecho Vecino — MVP de estancia
-# Última actualización: 16 de noviembre de 2026 — registro de integración del esquema de Tabla 22 en init_db.sh
+# Última actualización: 16 de noviembre de 2026 — registro de pendientes de reconstrucción DEV e identificadores dinámicos de AWS
 # Mantenedor: Agente de IA (bajo validación del usuario)
 
 ## 0. Propósito y reglas de uso de este archivo
@@ -198,6 +198,7 @@ Separar tres niveles de medición:
 | D-08 | Revisar `git diff --check` y `git status` antes de cada commit; no hacer `git add .` automático. | Regla permanente | ✅ Activa |
 | D-09 | Pedir autorización expresa del usuario antes de commit/push. | Regla permanente | ✅ Activa |
 | D-10 | Reestructurar y aclarar `Instructivo_operacion.md` para distinguir la prueba temporal con `PGPASSWORD` de la actualización persistente de `.pgpass` mediante `PGPASSFILE`. Documentar paso a paso la recuperación de la contraseña vigente desde Secrets Manager, la actualización segura del archivo (formato y permisos), la comprobación de conexión y el uso posterior de los cargadores. | Incidencia de autenticación y reconstrucción DEV, 16-nov-2026 | ⬜ Abierto |
+| D-11 | Actualizar y reorganizar `Instructivo_operacion.md` como guía integral de reconstrucción de DEV, incluyendo la renovación y propagación de identificadores dinámicos de AWS después de destruir y recrear el entorno. Documentar cómo recuperar y verificar los valores vigentes (ARN del secreto de Aurora, endpoint de Aurora, ID de instancia EC2, endpoint/ID de API Gateway y otros recursos efímeros), cómo comprobar que Terraform actualiza las referencias dependientes —en particular `secretsmanager:GetSecretValue` en la política IAM de Lambda— y cómo refrescar la configuración del frontend y los pasos de operación. Aclarar que Lambda no conserva ni actualiza automáticamente el ARN del secreto: Terraform define la referencia mediante `aws_rds_cluster.aurora.master_user_secret[0].secret_arn`; tras una reconstrucción debe verificarse que la política aplicada autorice el ARN nuevo. Diferenciar recursos persistentes de `terraform/base` y recursos efímeros de `terraform/dev`, sin asumir que todos los identificadores permanecen iguales. | Error E2E `AccessDeniedException` por ARN anterior en IAM, reconstrucción DEV, 16-nov-2026 | ⬜ Abierto |
 
 ---
 
