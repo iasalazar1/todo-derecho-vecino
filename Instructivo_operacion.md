@@ -12,9 +12,9 @@
 
 ## 0. Control documental y versiones
 
-La versión maestra de este instructivo se conserva en la carpeta `Contexto` de la Biblioteca del proyecto, con el nombre exacto `Instructivo_operacion.md`. La copia de la raíz del repositorio, en la rama `mvp-estancia`, debe mantenerse sincronizada con ese archivo.
+La versión canónica de este instructivo es el archivo `Instructivo_operacion.md` de la raíz del repositorio GitHub, rama `mvp-estancia`. Las copias de la Biblioteca del proyecto son referencias secundarias; no constituyen versiones maestras paralelas.
 
-Las actualizaciones se realizan primero en esta copia maestra y después se reflejan en GitHub. No se deben crear versiones activas con sufijos como `Instructivo_operacion(2).md`, ni sustituir el nombre original por variantes. Si existen copias en otras carpetas, comparar e integrar su información exclusiva antes de retirarlas. La política general está definida en `Agente/AGENTS.md`.
+Las actualizaciones aprobadas se aplican al archivo canónico de GitHub. Si una copia secundaria difiere, prevalece GitHub, salvo que el usuario indique expresamente recuperar información concreta de ella. Conservar el nombre exacto `Instructivo_operacion.md`; no crear variantes activas con sufijos como `(1)` o `(2)`. La política general está definida en `AGENTS.md`.
 
 ---
 
@@ -998,10 +998,30 @@ Antes de declarar completa la evaluación de Semana 5:
 **Estado en esta edición del instructivo:** se documenta el procedimiento, pero no se afirma que Aurora ya esté apagada o destruida. El estado real debe comprobarse justo antes y después de la operación.
 
 
-# 26. Frontend estático en S3 y CloudFront — Semana 8
+# 26. Acceso y operación del frontend
 
-## 26.1 Arquitectura y recursos
+## 26.1 Accesos y recursos
 
-El frontend del MVP se publica como sitio estático en S3 y se distribuye mediante CloudFront. El bucket permanece privado; CloudFront utiliza Origin Access Control (OAC) para leer los objetos. El usuario accede por HTTPS al dominio de CloudFront.
+- **Frontend:** https://d3oqt1m39hvkdh.cloudfront.net
+- **API de consulta:** https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta
+- **Método y ruta:** `POST /consulta`.
+- **Configuración del endpoint:** `config.js`, propiedad `window.TDV_CONFIG.API_URL`.
+- **Bucket S3:** `todo-derecho-vecino-frontend-857385469837-us-east-1`.
+- **Distribución CloudFront:** `E34XFAO1L3C0JJ`.
 
-Recursos desplegados y verificados el 9 de noviembre de 2026:
+El bucket es privado y CloudFront utiliza Origin Access Control (OAC) para acceder a los archivos. El acceso de usuario se realiza por HTTPS mediante el dominio de CloudFront.
+
+## 26.2 Uso del sistema
+
+1. Abrir el dominio público del frontend.
+2. Escribir una consulta sobre uso de suelo y enviarla.
+3. El frontend realiza una solicitud `POST` a la ruta `/consulta` de la API.
+4. Revisar la respuesta, sus fuentes y las limitaciones indicadas.
+
+Si cambia el endpoint de API Gateway al reconstruir DEV, actualizar `window.TDV_CONFIG.API_URL` en `config.js` y volver a publicar los archivos estáticos. No se establece aquí un comando de publicación o invalidación de CloudFront porque no hay un procedimiento versionado y verificado.
+
+## 26.3 Relación con el ambiente DEV
+
+El bucket S3 y la distribución CloudFront pertenecen a `terraform/base` y son recursos persistentes. La API Gateway y Lambda pertenecen a `terraform/dev`.
+
+La ejecución de `./terraform/dev-down.sh` apaga y destruye DEV, pero no elimina los recursos del frontend en `terraform/base`. Mientras el backend DEV esté apagado, el sitio estático puede seguir cargando, pero las consultas no estarán disponibles hasta reconstruir el backend.
