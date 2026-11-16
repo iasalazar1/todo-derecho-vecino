@@ -1,6 +1,6 @@
 # ajustes_pendientes.md
 # Proyecto: Todo Derecho Vecino — MVP de estancia
-# Última actualización: 11 de noviembre de 2026 — auditoría de fuentes PPCU/PDDU y pendientes S9–S10
+# Última actualización: 16 de noviembre de 2026 — registro de integración del esquema de Tabla 22 en init_db.sh
 # Mantenedor: Agente de IA (bajo validación del usuario)
 
 ## 0. Propósito y reglas de uso de este archivo
@@ -92,6 +92,7 @@ La interfaz deberá distinguir, sin confundirlos, estos escenarios:
 | S9-10 | Evaluar manualmente la calidad de respuestas generadas y sus citas con una rúbrica reproducible. | ⬜ Pendiente | Puntuar por separado: fidelidad a las fuentes recuperadas, exactitud/localización de citas, cobertura de aspectos solicitados, reconocimiento de evidencia insuficiente y ausencia de afirmaciones no sustentadas. Revisión humana; no confundir con métricas del retriever. |
 | S9-11 | Definir una política mínima de telemetría y privacidad antes de registrar consultas reales para análisis. | ⬜ Pendiente | Determinar campos, retención, acceso y anonimización; evitar registrar datos personales o contenido sensible innecesario. No crear una tabla nueva ni persistir preguntas completas sin validar necesidad, consentimiento/aviso y diseño. |
 | S9-12 | Verificar en CloudWatch los logs operativos de una consulta exitosa y de una fallida, y documentar qué puede observarse sobre throttling y errores. | ⬜ Pendiente | Separar métricas operativas (incluidos 429, 4xx/5xx y latencia) del conjunto versionado de evaluación de calidad. No asumir que CloudWatch conserva un historial completo de preguntas. |
+| S9-13 | Integrar en el esquema inicial de Aurora la tabla y los objetos necesarios para alojar la Tabla 22 (`land_use_compatibility`), de modo que `scripts/init_db.sh` cree también esa estructura desde una base vacía. | ⬜ Pendiente — bloquea la consolidación del esquema de Tabla 22 | Incorporar el DDL idempotente en `sql/001_initial_schema.sql` (o en una migración invocada por `init_db.sh`), incluidos tipos, restricciones compatibles con los cinco estados literales (`permitido`, `permitido (*)`, `permitido (**)`, `por validar`, `prohibido`), índices y campos de procedencia/revisión que requiera el cargador. Alinear el cargador para que no dependa de crear por su cuenta una tabla ausente del esquema inicial. Probar la inicialización desde una base vacía y la carga posterior; no alterar datos ni aplicar cambios en Aurora sin autorización. |
 
 #### Consideraciones para medir calidad en Semana 9
 
@@ -152,6 +153,7 @@ Separar tres niveles de medición:
 | J-22 | Integrar la recuperación estructurada de tablas al flujo de consulta. `retrieve_land_use()` existe de forma independiente y consulta Tabla 22, pero no está conectada al flujo `lambda_handler` → `answer_question()`. Definir extracción de actividad/zonificación, evidencia estructurada y su presentación/citación, sin tratar la tabla como embeddings. | Auditoría estática de Lambda/retriever 11-nov-2026 | Alta | S9 | ⬜ Abierto |
 | J-23 | Verificar cobertura y diversidad del retriever sobre los cinco instrumentos. La búsqueda vectorial es global, pero limita candidatos antes del reranking y no garantiza cuota ni cobertura por documento. Crear pruebas por fuente y consultas que requieran una o varias fuentes; distinguir búsqueda global de cobertura demostrada. | Auditoría estática de `retriever.py` y pruebas 11-nov-2026 | Alta | S9 | ⬜ Abierto |
 | J-24 | Mantener separadas las métricas de recuperación semántica, consulta estructurada de tablas y generación de respuestas. Definir preguntas esperadas, fuentes/disposiciones correctas y revisión jurídica humana; incluir regresión para tablas y continuidad de secciones. | Protocolo de evaluación S5 + auditoría 11-nov-2026 | Alta | S9 | ⬜ Abierto |
+| J-25 | Revisar el valor literal `permitido (*)` detectado en el registro 29 de `PPCU_Hipodromo_tabla_22.json`, cotejándolo con la tabla y la nota correspondiente del PDF fuente. Determinar qué representa el asterisco y adaptar, si procede, el esquema/validador de `scripts/load_land_use_compatibility.py` para admitirlo sin borrar ni reinterpretar información normativa. No convertirlo automáticamente en `permitido` ni cargar la tabla hasta resolverlo y validar el criterio. | Error de validación del cargador, 16-nov-2026: registro 29, zonificación H, estado no admitido `permitido (*)` | Alta — bloquea carga de Tabla 22 | S9 | ⬜ Abierto |
 
 ---
 
@@ -167,20 +169,21 @@ Separar tres niveles de medición:
 | I-06 | Revisar que la contraseña de Aurora se recupere siempre de Secrets Manager después de reconstruir DEV (no asumir vigencia de credenciales anteriores). | Bitácora S3 | ✅ Regla documentada; verificar en cada reconstrucción |
 | I-07 | Confirmar que los VPC endpoints (`bedrock-runtime`, `secretsmanager`, `logs`) siguen activos y que no hay NAT Gateway. | Bitácora S7 | ⬜ Abierto como checklist |
 | I-08 | Revisar si la API sin autenticación debe mantenerse así al cierre del MVP o si se agrega un control mínimo. | Bitácora S7 | ⬜ Abierto — requiere decisión del usuario |
+| I-09 | Investigar la discrepancia de Terraform en `terraform/dev`: `terraform -chdir=terraform/dev output -raw admin_test_instance_id` no devolvió valor, aunque AWS SSM confirmó `i-01c97f8252c888fa0` como `Online`. Revisar outputs declarados, estado local/backend/workspace y consistencia entre `terraform output`, el estado y los recursos activos. No editar manualmente `.tfstate` ni aplicar cambios de infraestructura sin diagnóstico y autorización. | Reconstrucción DEV y comprobación SSM, 16-nov-2026 | ⬜ Abierto |
 
 ---
 
 ## 5. Pendientes de documentación y control de versiones
 
-### Fuente maestra y control documental (regla vigente desde 16-nov-2026)
+### Fuente maestra y sincronización documental (regla vigente desde 16-nov-2026)
 
-- Los archivos `AGENTS.md`, `Bitacora.md`, `Instructivo_operacion.md` y `ajustes_pendientes.md` de la raíz del repositorio GitHub, rama `mvp-estancia`, son las versiones canónicas.
-- Las copias de la Biblioteca del proyecto son referencias secundarias y no constituyen una fuente maestra paralela.
-- Las actualizaciones documentales aprobadas se aplican a los archivos canónicos de GitHub y se registran mediante commits en `mvp-estancia`; no es necesario actualizar primero una copia de la Biblioteca.
-- Si una copia secundaria difiere, prevalece GitHub, salvo que el usuario indique expresamente recuperar información concreta de esa copia.
+- La raíz del repositorio GitHub, rama `mvp-estancia`, es la **fuente maestra** de los documentos de control.
+- Las copias de la Biblioteca del proyecto son referencias secundarias y deben mantenerse sincronizadas con GitHub; no constituyen una fuente maestra paralela.
+- Toda actualización documental se realiza en GitHub y se refleja en la copia correspondiente de la Biblioteca dentro de la misma operación de trabajo. No dejar versiones divergentes ni continuar usando una copia secundaria desactualizada.
+- Si se detecta una diferencia, prevalece GitHub, salvo que el usuario indique expresamente recuperar información concreta de una copia secundaria; en ese caso, integrar primero esa información en GitHub y después sincronizar la Biblioteca.
 - Conservar exactamente los nombres `Bitacora.md`, `Instructivo_operacion.md`, `AGENTS.md` y `ajustes_pendientes.md`. No crear variantes activas con sufijos como `_actualizada`, `_actualizado`, `(1)` o `(2)`.
-- Antes de reemplazar o retirar una copia secundaria, revisar si contiene información exclusiva que el usuario haya pedido conservar.
-- No hacer commit/push sin autorización expresa del usuario.
+- Registrar en `Bitacora.md` las decisiones documentales relevantes.
+- Los cambios documentales en GitHub generan commits en `mvp-estancia`; esta instrucción autoriza la sincronización documental solicitada, pero no autoriza cambios de código, infraestructura ni operaciones Git locales no solicitadas.
 
 
 | ID | Descripción | Origen | Estado |
@@ -194,6 +197,7 @@ Separar tres niveles de medición:
 | D-07 | Documentar en `Instructivo_operacion.md` el procedimiento de reconstrucción de API Gateway y Lambda. | Bitácora S7, pendiente #4 | ⬜ Abierto |
 | D-08 | Revisar `git diff --check` y `git status` antes de cada commit; no hacer `git add .` automático. | Regla permanente | ✅ Activa |
 | D-09 | Pedir autorización expresa del usuario antes de commit/push. | Regla permanente | ✅ Activa |
+| D-10 | Reestructurar y aclarar `Instructivo_operacion.md` para distinguir la prueba temporal con `PGPASSWORD` de la actualización persistente de `.pgpass` mediante `PGPASSFILE`. Documentar paso a paso la recuperación de la contraseña vigente desde Secrets Manager, la actualización segura del archivo (formato y permisos), la comprobación de conexión y el uso posterior de los cargadores. | Incidencia de autenticación y reconstrucción DEV, 16-nov-2026 | ⬜ Abierto |
 
 ---
 
