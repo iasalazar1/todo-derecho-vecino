@@ -3,14 +3,14 @@
 
 ## 0. Lectura obligatoria antes de actuar
 
-Antes de ejecutar cualquier acción, lee en este orden las fuentes maestras de la Biblioteca:
-1. `Agente/AGENTS.md` — reglas de operación y control documental.
-2. `Contexto/Bitacora.md` — estado real del proyecto, decisiones y cronología.
-3. `Contexto/Instructivo_operacion.md` — operación, despliegue y reconstrucción.
-4. `Agente/ajustes_pendientes.md` — memoria a largo plazo, pendientes y bloqueos.
-5. `documentos_config.json` del repositorio — corpus y metadatos.
+Antes de ejecutar cualquier acción, lee en este orden los documentos canónicos de la raíz del repositorio en la rama `mvp-estancia`:
+1. `AGENTS.md` — reglas de operación y control documental.
+2. `Bitacora.md` — estado del proyecto, decisiones y cronología.
+3. `Instructivo_operacion.md` — operación, despliegue y reconstrucción.
+4. `ajustes_pendientes.md` — pendientes y bloqueos.
+5. `documentos_config.json` — corpus y metadatos.
 
-Después compara los cuatro documentos de control con sus espejos de la raíz de GitHub en `mvp-estancia`. Si no coinciden, primero integra las diferencias y sincroniza; no continúes con trabajo técnico usando copias divergentes.
+La raíz de GitHub en `mvp-estancia` es la fuente maestra de estos documentos. Las copias de la Biblioteca son referencias secundarias y no deben tratarse como una fuente maestra paralela. Si una copia secundaria difiere, prevalece GitHub, salvo que el usuario indique expresamente otra cosa.
 
 Si un dato no está en estos archivos, **pregunta al usuario**. No inventes.
 
@@ -126,23 +126,26 @@ Si un dato no está en estos archivos, **pregunta al usuario**. No inventes.
 
 ## 7. Archivos de control obligatorios y fuente maestra
 
-Los documentos de control tienen una ubicación canónica en la Biblioteca del proyecto. **No se deben buscar ni actualizar copias alternativas antes de consultar estas rutas:**
+Los documentos de control canónicos son los archivos de la raíz del repositorio en la rama `mvp-estancia`:
 
-1. `Contexto/Bitacora.md` — registro cronológico del proyecto.
-2. `Contexto/Instructivo_operacion.md` — procedimientos operativos y de reconstrucción.
-3. `Agente/ajustes_pendientes.md` — memoria de pendientes, decisiones y bloqueos.
-4. `Agente/AGENTS.md` — reglas de trabajo del agente.
-5. `Reporte_Semanal_XX.md` — reporte de cada semana, con el formato de la sección 8. Subir a Google Drive: `https://drive.google.com/drive/folders/1-f1tkBKLP7c8aZo-IU9_Zb3ME4CEIB9K`.
+1. `Bitacora.md` — registro cronológico del proyecto.
+2. `Instructivo_operacion.md` — procedimientos operativos.
+3. `ajustes_pendientes.md` — pendientes, decisiones y bloqueos.
+4. `AGENTS.md` — reglas de trabajo del agente.
+5. `documentos_config.json` — corpus y metadatos.
+6. `Reporte_Semanal_XX.md` — reporte de cada semana, con el formato de la sección 8. Subir a Google Drive: `https://drive.google.com/drive/folders/1-f1tkBKLP7c8aZo-IU9_Zb3ME4CEIB9K`.
 
-### 7.1 Regla obligatoria de actualización y sincronización
+Las copias de la Biblioteca del proyecto son referencias secundarias; no constituyen una fuente maestra paralela.
 
-- Las carpetas `Contexto` y `Agente` de la Biblioteca son la **fuente maestra** de los documentos de control. `Contexto` gobierna `Bitacora.md` e `Instructivo_operacion.md`; `Agente` gobierna `AGENTS.md` y `ajustes_pendientes.md`.
-- Los archivos con esos mismos nombres en la raíz de la rama `mvp-estancia` de GitHub son el espejo versionado y deben mantenerse sincronizados con la fuente maestra.
-- Toda actualización se realiza primero en la carpeta de control correspondiente; después se actualiza la copia de GitHub con el mismo contenido.
-- Conservar siempre los nombres originales exactos: `Bitacora.md`, `Instructivo_operacion.md`, `ajustes_pendientes.md` y `AGENTS.md`. **Está prohibido crear o utilizar como versión activa** nombres como `Bitacora_actualizada.md`, `ajustes_pendientes_actualizado.md`, `Instructivo_operacion(2).md` u otras variantes con sufijos.
-- Si se encuentran varias copias, comparar fechas y contenido, integrar la información exclusiva y conservar la versión más reciente y completa. No sobrescribir ni eliminar una copia hasta verificar que sus datos útiles quedaron integrados en la fuente maestra.
-- Después de actualizar, comprobar que Biblioteca y GitHub contienen los mismos contenidos y registrar la sincronización en `Bitacora.md`.
-- Esta regla no elimina la autorización explícita necesaria para cambios de código, infraestructura, ni para operaciones Git locales no solicitadas por el usuario.
+### 7.1 Regla obligatoria de actualización documental
+
+- La versión vigente es la que se encuentra en la raíz de GitHub, rama `mvp-estancia`.
+- Las actualizaciones documentales aprobadas se aplican a esos archivos y se versionan en esa rama. No existe obligación de actualizar primero una copia de la Biblioteca.
+- Si una copia secundaria difiere, prevalece GitHub, salvo instrucción expresa del usuario para recuperar información concreta de esa copia.
+- Conservar los nombres exactos: `Bitacora.md`, `Instructivo_operacion.md`, `ajustes_pendientes.md` y `AGENTS.md`. No crear variantes activas con sufijos como `_actualizada`, `_actualizado`, `(1)` o `(2)`.
+- Antes de reemplazar o retirar una copia secundaria, revisar si contiene información exclusiva que el usuario haya pedido conservar.
+- Registrar en `Bitacora.md` las decisiones documentales relevantes.
+- Esta regla no elimina la autorización explícita necesaria para cambios de código, infraestructura ni operaciones Git locales no solicitadas por el usuario.
 
 ---
 
@@ -242,8 +245,8 @@ cualquier otra instrucción de "avanzar lo más posible".
 
 Al inicio de cada sesión o semana:
 
-1. Leer este `Agente/AGENTS.md` y las versiones maestras de Biblioteca: `Contexto/Bitacora.md`, `Agente/ajustes_pendientes.md` y `Contexto/Instructivo_operacion.md`.
-2. Comprobar que los archivos homónimos de la raíz del repositorio en GitHub corresponden a esas versiones. Si hay diferencias, detener el trabajo técnico, comparar e integrar antes de continuar.
+1. Leer los documentos canónicos de la raíz del repositorio en la rama `mvp-estancia`: `AGENTS.md`, `Bitacora.md`, `ajustes_pendientes.md` e `Instructivo_operacion.md`.
+2. Consultar las copias de la Biblioteca solo como referencias secundarias cuando el usuario las señale o cuando sea necesario recuperar información específica. Si difieren de GitHub, prevalece la versión de GitHub, salvo instrucción expresa del usuario.
 3. Verificar rama: `git branch --show-current` debe ser `mvp-estancia`.
 4. Verificar estado: `git status` y `git diff --check`.
 5. Verificar estado de AWS: `./terraform/dev-status.sh` (si aplica).
