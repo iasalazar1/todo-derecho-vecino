@@ -172,15 +172,15 @@ Separar tres niveles de medición:
 
 ## 5. Pendientes de documentación y control de versiones
 
-### Fuente maestra y sincronización documental (regla vigente desde 10-nov-2026)
+### Fuente maestra y control documental (regla vigente desde 16-nov-2026)
 
-- `Contexto/Bitacora.md` es la fuente maestra de la bitácora.
-- `Contexto/Instructivo_operacion.md` es la fuente maestra del instructivo.
-- `Agente/AGENTS.md` y `Agente/ajustes_pendientes.md` son los documentos maestros de operación del agente y pendientes.
-- Los cuatro archivos homónimos en la raíz de la rama `mvp-estancia` de GitHub deben contener la misma versión que los documentos maestros de la Biblioteca.
-- Actualizar primero la copia de la carpeta de control correspondiente y sincronizar después GitHub. Conservar exactamente los nombres `Bitacora.md`, `Instructivo_operacion.md`, `AGENTS.md` y `ajustes_pendientes.md`.
-- No crear ni mantener como documentos activos variantes con sufijos como `_actualizada`, `_actualizado`, `(1)` o `(2)`. Antes de retirar una copia duplicada, integrar cualquier información exclusiva en la fuente maestra.
-- No hacer commit/push desde un entorno local sin autorización expresa; la sincronización solicitada para esta normalización se realizará en la rama `mvp-estancia`.
+- Los archivos `AGENTS.md`, `Bitacora.md`, `Instructivo_operacion.md` y `ajustes_pendientes.md` de la raíz del repositorio GitHub, rama `mvp-estancia`, son las versiones canónicas.
+- Las copias de la Biblioteca del proyecto son referencias secundarias y no constituyen una fuente maestra paralela.
+- Las actualizaciones documentales aprobadas se aplican a los archivos canónicos de GitHub y se registran mediante commits en `mvp-estancia`; no es necesario actualizar primero una copia de la Biblioteca.
+- Si una copia secundaria difiere, prevalece GitHub, salvo que el usuario indique expresamente recuperar información concreta de esa copia.
+- Conservar exactamente los nombres `Bitacora.md`, `Instructivo_operacion.md`, `AGENTS.md` y `ajustes_pendientes.md`. No crear variantes activas con sufijos como `_actualizada`, `_actualizado`, `(1)` o `(2)`.
+- Antes de reemplazar o retirar una copia secundaria, revisar si contiene información exclusiva que el usuario haya pedido conservar.
+- No hacer commit/push sin autorización expresa del usuario.
 
 
 | ID | Descripción | Origen | Estado |
