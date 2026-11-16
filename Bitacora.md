@@ -1533,3 +1533,13 @@ Durante la comparación con la versión de `Bitacora.md` que ya estaba en GitHub
 - Estas pruebas acreditan el funcionamiento técnico del caso probado, no la calidad global del RAG, la cobertura del corpus ni la validez jurídica de las fuentes.
 
 La información anterior se conserva como evidencia histórica recuperada de GitHub. No implica que esos estados de infraestructura sigan vigentes hoy; el estado actual debe comprobarse antes de operar AWS.
+
+## Actualización del gobierno documental — 16 de noviembre de 2026
+
+El usuario definió que los archivos de control ubicados en la raíz del repositorio GitHub, rama `mvp-estancia`, son las versiones canónicas del proyecto: `AGENTS.md`, `Bitacora.md`, `Instructivo_operacion.md` y `ajustes_pendientes.md`. Las copias alojadas en la Biblioteca del proyecto quedan como referencias secundarias y no constituyen una fuente maestra paralela. Cuando exista una diferencia, prevalece GitHub, salvo instrucción expresa del usuario para recuperar información concreta de una copia secundaria.
+
+Se precisa también la función documental: `Instructivo_operacion.md` contiene los pasos y datos estables necesarios para encender el ambiente, cargar documentos, conectar y utilizar los componentes, y apagar DEV. `Bitacora.md` conserva la historia del desarrollo, decisiones, despliegues, resultados y evidencias.
+
+La regla sustituye, a partir de esta fecha, la política de sincronización descrita en la entrada del 10 de noviembre de 2026. Esa entrada se conserva intacta como registro histórico de la decisión anterior.
+
+Esta actualización modifica únicamente documentación en la rama `mvp-estancia`. No modifica código, corpus legal, datos de Aurora, configuración Terraform ni recursos AWS. El archivo de respaldo `Instructivo_operacion_2.md` queda fuera de esta actualización y no se modifica.
