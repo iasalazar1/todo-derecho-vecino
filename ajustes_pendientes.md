@@ -1,7 +1,8 @@
 # ajustes_pendientes.md
 # Proyecto: Todo Derecho Vecino — MVP de estancia
-# Última actualización: 16 de noviembre de 2026 — registro de pendientes de reconstrucción DEV e identificadores dinámicos de AWS
+# Última actualización: 16 de noviembre de 2026 — reconstrucción DEV e identificadores dinámicos de AWS; auditoría PPCU/PDDU, pendientes S9–S10 y corrección de config.js publicado
 # Mantenedor: Agente de IA (bajo validación del usuario)
+
 
 ## 0. Propósito y reglas de uso de este archivo
 
@@ -301,6 +302,7 @@ Este apartado documenta los datos que faltaron y que se preguntaron al usuario, 
 | — | Generación de respuestas con citas | Semana 6 | Commit `85d7377`, 6 pruebas offline |
 | — | Backend serverless + API Gateway | Semana 7 | Endpoint `https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta` |
 | — | Frontend web estático, S3 privado, CloudFront y CORS de API Gateway | Semana 8 | URL `https://d3oqt1m39hvkdh.cloudfront.net`; distribución `E34XFAO1L3C0JJ`; prueba pública confirmada por el usuario |
+| — | Corrección del endpoint en el `config.js` publicado | 16-nov-2026 | Objeto S3 de 102 bytes actualizado; CloudFront devolvió HTTP 200 y contenido coincidente con el local, ETag `7cecceb9efc8ed7e399a2cde9ff2630d`; no se invalidó la distribución |
 
 ---
 
@@ -335,3 +337,15 @@ El agente debe trabajar paso a paso, mostrar archivos y diferencias antes de edi
 - DEV/AWS: apagado y sin recursos DEV registrados según `dev-status.sh`.
 - Auditoría estática inicial de JSON: realizada el 11-nov-2026; los hallazgos J-16, J-17 y J-20 siguen abiertos hasta cotejo visual con los PDF.
 - No regenerar embeddings, modificar SQL, cargar datos ni levantar AWS antes de completar los pasos previos y recibir autorización.
+
+### Actividades complementarias de Semana 9 (después de validar la auditoría documental)
+
+Una vez completada y validada la auditoría de las fuentes PPCU y PDDU, continuar con estas actividades:
+
+1. **S9-07 — Inspección de logs:** revisar Lambda y API Gateway para determinar qué datos de las consultas se registran. Mantener separados los logs operativos y el contenido de las conversaciones; no incorporar preguntas ni respuestas completas a los logs operativos.
+2. **S9-08 a S9-10 — Evaluación:** proponer y validar un conjunto fijo de preguntas para los cinco instrumentos del corpus MVP, con fuentes y disposiciones esperadas, criterios de relevancia y revisión humana. Separar las métricas de recuperación, generación de respuestas y calidad de citas. No presentar los resultados del MVP como representativos de un corpus futuro de más de 20 instrumentos.
+3. **S9-11 — Telemetría y privacidad:** definir finalidades, datos mínimos, acceso, retención y tratamiento de información antes de conservar consultas reales. Mantener separados los logs operativos, los datos de analítica y el conjunto de evaluación jurídica.
+4. **Throttling:** utilizar 5 solicitudes por segundo y burst 10 como referencia inicial para pruebas, verificando primero la configuración real. No asumir que esos valores son adecuados para producción.
+5. **Autenticación:** mantener la autenticación de la API como pendiente de Semana 10 (S10-08), sin adelantar su implementación ni modificar el alcance sin autorización.
+
+Estas actividades también deben ejecutarse paso a paso, con validación del usuario antes de realizar cambios.

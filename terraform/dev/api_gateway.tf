@@ -1,3 +1,13 @@
+resource "aws_cloudwatch_log_group" "api_access" {
+  name              = "/aws/apigateway/todo-derecho-vecino-http-api"
+  retention_in_days = 14
+
+  tags = {
+    Name    = "todo-derecho-vecino-api-access"
+    Project = "todo-derecho-vecino"
+  }
+}
+
 resource "aws_apigatewayv2_api" "http" {
   name          = "todo-derecho-vecino-http-api"
   protocol_type = "HTTP"
@@ -37,6 +47,18 @@ resource "aws_apigatewayv2_stage" "default" {
   api_id      = aws_apigatewayv2_api.http.id
   name        = "$default"
   auto_deploy = true
+
+  access_log_settings {
+    destination_arn = aws_cloudwatch_log_group.api_access.arn
+
+    format = jsonencode({
+      requestId      = "$context.requestId"
+      requestTime    = "$context.requestTime"
+      routeKey       = "$context.routeKey"
+      status         = "$context.status"
+      responseLength = "$context.responseLength"
+    })
+  }
 
   default_route_settings {
     throttling_burst_limit = 10

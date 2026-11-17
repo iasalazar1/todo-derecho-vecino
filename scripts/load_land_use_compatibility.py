@@ -9,7 +9,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_JSON = ROOT / "leyes_cdmx" / "PPCU_Hipodromo_tabla_22.json"
 ZONES = {"H", "HC", "HO", "HM", "HCS", "E", "EA"}
-STATES = {"permitido", "prohibido", "por validar"}
+STATES = {
+    "permitido",
+    "permitido (*)",
+    "permitido (**)",
+    "prohibido",
+    "por validar",
+}
+STATE_SQL = ", ".join(f"'{state}'" for state in sorted(STATES))
 
 DDL = """
 CREATE TABLE IF NOT EXISTS land_use_compatibility (
@@ -17,7 +24,7 @@ CREATE TABLE IF NOT EXISTS land_use_compatibility (
  documento_id TEXT NOT NULL, tabla_id TEXT NOT NULL, actividad_id TEXT NOT NULL,
  categoria TEXT, subcategoria TEXT, actividad_original TEXT NOT NULL,
  zonificacion TEXT NOT NULL CHECK (zonificacion IN ('H','HC','HO','HM','HCS','E','EA')),
- estado_original TEXT NOT NULL CHECK (estado_original IN ('permitido','prohibido','por validar')),
+ estado_original TEXT NOT NULL,
  alias_busqueda JSONB NOT NULL DEFAULT '[]'::jsonb,
  fuente_archivo TEXT NOT NULL, fuente_paginas JSONB NOT NULL DEFAULT '[]'::jsonb,
  needs_review BOOLEAN NOT NULL DEFAULT TRUE CHECK (needs_review = TRUE),
@@ -27,6 +34,12 @@ CREATE TABLE IF NOT EXISTS land_use_compatibility (
 CREATE INDEX IF NOT EXISTS idx_luc_activity ON land_use_compatibility (actividad_id);
 CREATE INDEX IF NOT EXISTS idx_luc_zone_state ON land_use_compatibility (zonificacion, estado_original);
 CREATE INDEX IF NOT EXISTS idx_luc_aliases ON land_use_compatibility USING GIN (alias_busqueda);
+""".strip() + f"""
+ALTER TABLE land_use_compatibility
+ DROP CONSTRAINT IF EXISTS land_use_compatibility_estado_original_check;
+ALTER TABLE land_use_compatibility
+ ADD CONSTRAINT land_use_compatibility_estado_original_check
+ CHECK (estado_original IN ({STATE_SQL}));
 """
 
 def text(value: Any, field: str, context: str) -> str:

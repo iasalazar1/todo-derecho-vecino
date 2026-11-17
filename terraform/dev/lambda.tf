@@ -43,7 +43,7 @@ resource "aws_lambda_function" "api" {
       DB_HOST          = "todo-derecho-vecino-aurora.cluster-cmh6wme8kwix.us-east-1.rds.amazonaws.com"
       DB_PORT          = "5432"
       DB_NAME          = "tododerechovecino"
-      DB_SECRET_ARN    = "arn:aws:secretsmanager:us-east-1:857385469837:secret:rds!cluster-db1d83e4-6048-4943-9dc6-83c4c6d3dc8d-EbTCxN"
+      DB_SECRET_ARN    = aws_rds_cluster.aurora.master_user_secret[0].secret_arn
       BEDROCK_MODEL_ID = "us.anthropic.claude-sonnet-4-6"
     }
   }

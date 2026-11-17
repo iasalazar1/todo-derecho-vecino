@@ -1543,3 +1543,13 @@ Se precisa también la función documental: `Instructivo_operacion.md` contiene 
 La regla sustituye, a partir de esta fecha, la política de sincronización descrita en la entrada del 10 de noviembre de 2026. Esa entrada se conserva intacta como registro histórico de la decisión anterior.
 
 Esta actualización modifica únicamente documentación en la rama `mvp-estancia`. No modifica código, corpus legal, datos de Aurora, configuración Terraform ni recursos AWS. El archivo de respaldo `Instructivo_operacion_2.md` queda fuera de esta actualización y no se modifica.
+
+## Actualización — Corrección del endpoint del frontend publicado
+
+**Fecha:** 16 de noviembre de 2026.
+
+La auditoría del frontend público encontró que el `config.js` servido por CloudFront apuntaba al endpoint anterior `https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta`, mientras que el archivo local ya apuntaba al endpoint vigente `https://z4wmsm1i81.execute-api.us-east-1.amazonaws.com/consulta`.
+
+Con autorización del usuario, se publicó únicamente `config.js` en el bucket `todo-derecho-vecino-frontend-857385469837-us-east-1`. No se modificaron otros objetos ni se invalidó la distribución. S3 confirmó una nueva versión del objeto (`_z8vwvN9GEwufC0rYZCQCLKXTl9hYyzl`), de 102 bytes y tipo `application/javascript`.
+
+La verificación por HTTP de `https://d3oqt1m39hvkdh.cloudfront.net/config.js` devolvió `200`, el mismo ETag del objeto S3 y contenido idéntico al archivo local, con el endpoint vigente. La respuesta indicó `X-Cache: Miss from cloudfront`. Esta verificación confirma la configuración estática publicada; no se repitió una consulta funcional ni se hizo una nueva prueba desde navegador.
