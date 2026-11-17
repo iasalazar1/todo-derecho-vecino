@@ -1003,7 +1003,7 @@ Antes de declarar completa la evaluación de Semana 5:
 ## 26.1 Accesos y recursos
 
 - **Frontend:** https://d3oqt1m39hvkdh.cloudfront.net
-- **API de consulta:** https://1zhgtujka8.execute-api.us-east-1.amazonaws.com/consulta
+- **API de consulta:** https://z4wmsm1i81.execute-api.us-east-1.amazonaws.com/consulta
 - **Método y ruta:** `POST /consulta`.
 - **Configuración del endpoint:** `config.js`, propiedad `window.TDV_CONFIG.API_URL`.
 - **Bucket S3:** `todo-derecho-vecino-frontend-857385469837-us-east-1`.
@@ -1018,9 +1018,47 @@ El bucket es privado y CloudFront utiliza Origin Access Control (OAC) para acced
 3. El frontend realiza una solicitud `POST` a la ruta `/consulta` de la API.
 4. Revisar la respuesta, sus fuentes y las limitaciones indicadas.
 
-Si cambia el endpoint de API Gateway al reconstruir DEV, actualizar `window.TDV_CONFIG.API_URL` en `config.js` y volver a publicar los archivos estáticos. No se establece aquí un comando de publicación o invalidación de CloudFront porque no hay un procedimiento versionado y verificado.
+Si cambia el endpoint de API Gateway al reconstruir DEV, actualizar `window.TDV_CONFIG.API_URL` en `config.js` y volver a publicar los archivos estáticos. Para publicar solo ese objeto, seguir el procedimiento puntual de la siguiente sección.
 
-## 26.3 Relación con el ambiente DEV
+### Publicación puntual de `config.js`
+
+Para publicar únicamente la configuración de la API, verificar primero que `config.js` contiene el endpoint vigente y ejecutar desde la raíz del repositorio:
+
+```bash
+aws s3 cp config.js s3://todo-derecho-vecino-frontend-857385469837-us-east-1/config.js \\
+  --content-type application/javascript
+```
+
+Comprobar el objeto con `aws s3api head-object` y el contenido servido por CloudFront mediante `curl`. La distribución tiene un TTL máximo de 300 segundos; si CloudFront aún devuelve el contenido anterior, esperar su expiración y volver a comprobar. No es necesario invalidar toda la distribución para este cambio puntual.
+
+## 26.3 Recarga forzada y problemas de caché
+
+Cuando el frontend local o público no funcione correctamente después de una publicación, actualización de archivos o cambio de configuración, comprobar primero si el navegador está utilizando versiones anteriores de los archivos JavaScript, CSS o configuración.
+
+**Primera medida: realizar una recarga forzada de la página.**
+
+Atajos de teclado:
+
+- **macOS:** `Cmd + Shift + R`.
+- **Windows y Linux:** `Ctrl + Shift + R`.
+
+Aplicar la recarga forzada tanto en el entorno local como en el dominio público de CloudFront, según corresponda.
+
+La recarga forzada solicita nuevamente los recursos de la página y puede resolver problemas causados por archivos conservados en la caché del navegador.
+
+**Si el problema continúa:**
+
+1. Abrir el sitio en una ventana privada o de incógnito.
+2. Comprobar que `index.html`, `config.js`, `script.js` y `styles.css` respondan correctamente.
+3. Comparar las versiones locales, las almacenadas en S3 y las servidas por CloudFront.
+4. Verificar por separado que el endpoint `POST /consulta` responda correctamente.
+5. Si CloudFront sigue entregando archivos anteriores, investigar su caché antes de considerar una invalidación.
+
+**Importante:** la recarga forzada no modifica archivos ni recursos de AWS. Tampoco invalida la caché de CloudFront. No ejecutar invalidaciones, modificar configuraciones ni volver a publicar archivos sin identificar primero el origen del problema y contar con la autorización correspondiente.
+
+**Antecedente:** el 17 de noviembre de 2026, el frontend local y el público respondían correctamente, al igual que el endpoint `POST /consulta`. La interfaz volvió a funcionar después de realizar una recarga forzada en el navegador. Este incidente quedó resuelto sin modificar infraestructura ni código.
+
+## 26.4 Relación con el ambiente DEV
 
 El bucket S3 y la distribución CloudFront pertenecen a `terraform/base` y son recursos persistentes. La API Gateway y Lambda pertenecen a `terraform/dev`.
 
