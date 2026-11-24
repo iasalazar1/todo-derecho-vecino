@@ -126,6 +126,7 @@ Separar tres niveles de medición:
 | S10-06 | Confirmar que `terraform/base` y `terraform/dev` reconstruyen el sistema desde cero. | ⬜ Pendiente | — |
 | S10-07 | Apagar DEV y conservar artefactos (embeddings JSONL, chunks, SQL). | ⬜ Pendiente | — |
 | S10-08 | Implementar autenticación para la API y documentar su configuración y operación. | ⬜ Pendiente — acordado 10-nov-2026 | La API sin autenticación se tolera únicamente como limitación temporal del MVP de pruebas. Definir el mecanismo, autorización, gestión de credenciales/tokens y pruebas antes de considerar el sistema apto para usuarios externos o producción. |
+| S10-09 | Incorporar un modo de consulta de logs desde el frontend, protegido por autenticación y autorización. | ⬜ Pendiente — solicitado 24-nov-2026 | Permitir que usuarios autorizados consulten los logs operativos de CloudWatch desde una sección o modo restringido de la interfaz. La consulta debe pasar por un backend/API con permisos IAM de mínimo privilegio; nunca exponer credenciales AWS ni acceso directo a CloudWatch desde el navegador. Definir roles, alcance de consulta, filtros, auditoría de accesos, protección de datos y límites de retención. No asumir que los logs contienen el texto completo de preguntas/respuestas; mantener separados logs operativos y telemetría de conversaciones. |
 
 ---
 
