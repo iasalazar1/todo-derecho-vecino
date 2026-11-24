@@ -8,8 +8,36 @@ import os
 import boto3
 
 from generar_respuesta import answer_question
-from retriever import retrieve
+from retriever import (
+    is_general_table_22_question,
+    is_land_use_compatibility_question,
+    retrieve,
+    retrieve_hybrid,
+    MissingStructuredParameters,
+    StructuredRetrievalError,
+    Table22NoRecords,
+)
 
+# Estados de respuesta controlada que indican que no hubo evidencia
+# estructurada o que faltan datos estructurados para obtenerla, y que, por
+# tanto, no fueron derivados al modelo generativo.
+ESTADOS_CONTROLADOS_ESTRUCTURA = {
+    "structured_retrieval_error",
+    "table_22_no_matches",
+    "missing_structured_parameters",
+}
+
+# Contrato HTTP: código por estado de respuesta.
+# - answered / table_22_no_matches / missing_structured_parameters: 200
+#   (el estado exacto viaja en el campo `status` del cuerpo JSON).
+# - structured_retrieval_error: 503 (fallo técnico de la recuperación
+#   estructurada; nunca debe presentarse como respuesta jurídica).
+CODIGOS_HTTP_POR_ESTADO = {
+    "answered": 200,
+    "table_22_no_matches": 200,
+    "missing_structured_parameters": 200,
+    "structured_retrieval_error": 503,
+}
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -42,88 +70,135 @@ def _response(status_code, payload):
         "body": json.dumps(payload, ensure_ascii=False),
     }
 
-
 def _parse_request(event):
-    """Valida y extrae los datos de una petición HTTP API Gateway."""
+    """Parsea el evento HTTP y extrae question, top_k, activity, zonification.
 
-    if not isinstance(event, dict):
-        raise ValueError("La petición no tiene un formato válido.")
+    Returns (question, top_k, activity, zonification).
 
-    method = (
-        event.get("requestContext", {})
-        .get("http", {})
-        .get("method")
-    )
-
-    if method and method.upper() != "POST":
-        raise PermissionError("Método HTTP no permitido.")
-
-    body = event.get("body")
-
-    if not isinstance(body, str) or not body.strip():
-        raise ValueError("El cuerpo de la petición está vacío.")
-
-    if event.get("isBase64Encoded", False):
-        try:
-            body = base64.b64decode(body, validate=True).decode("utf-8")
-        except (ValueError, UnicodeDecodeError) as exc:
-            raise ValueError("El cuerpo codificado no es válido.") from exc
-
+    Raises ValueError con mensaje descriptivo si los parámetros son inválidos.
+    """
     try:
-        data = json.loads(body)
-    except json.JSONDecodeError as exc:
-        raise ValueError("El cuerpo debe contener JSON válido.") from exc
+        body = json.loads(event.get("body", "{}"))
+    except (json.JSONDecodeError, TypeError):
+        raise ValueError("Cuerpo JSON inválido o ausente.")
 
-    if not isinstance(data, dict):
-        raise ValueError("El JSON debe ser un objeto.")
+    question = body.get("question")
+    top_k = body.get("top_k", 5)
+    activity = body.get("activity")
+    zonification = body.get("zonification")
 
-    question = data.get("question")
-    top_k = data.get("top_k", 5)
-
-    if not isinstance(question, str) or not question.strip():
+    # Validación: question es obligatorio
+    if not question:
         raise ValueError("El campo question es obligatorio.")
 
-    if isinstance(top_k, bool) or not isinstance(top_k, int):
-        raise ValueError("top_k debe ser un número entero.")
-
-    if not 1 <= top_k <= 10:
+    # Validación: top_k debe ser entero entre 1 y 10
+    if not isinstance(top_k, int) or not (1 <= top_k <= 10):
         raise ValueError("top_k debe estar entre 1 y 10.")
 
-    return question.strip(), top_k
+    # Validación: activity y zonification deben venir juntas o ninguna
+    if (activity is not None) != (zonification is not None):
+        if activity is not None:
+            raise ValueError(
+                "Si se proporciona activity, también debe proporcionarse zonification."
+            )
+        else:
+            raise ValueError(
+                "Si se proporciona zonification, también debe proporcionarse activity."
+            )
+
+    return question, top_k, activity, zonification
 
 
 def lambda_handler(event, context):
-    """Procesa una consulta jurídica recibida mediante API Gateway."""
+    """Handler principal de Lambda.
 
-    try:
-        question, top_k = _parse_request(event)
+    Decide automáticamente si usar retrieve() o retrieve_hybrid() según
+    si se proporcionen activity y zonification.
 
-    except PermissionError as exc:
-        return _response(405, {
-            "status": "error",
-            "message": str(exc),
+    Returns dict con la respuesta HTTP formateada.
+    """
+    # 1. Parsear y validar parámetros
+    question, top_k, activity, zonification = _parse_request(event)
+
+    # 2. Obtener cliente Bedrock
+    bedrock_client = _get_bedrock_client()
+
+    # 3. Selección de escenario de recuperación:
+    # - Escenario B: activity y zonification explícitas -> consulta estructurada puntual.
+    # - Escenario C: pregunta general sobre Tabla 22 (detectada vía
+    #   is_general_table_22_question importada de retriever, no vía globals()).
+    # - Enrutamiento obligatorio: pregunta de compatibilidad/permiso/prohibición
+    #   de uso de suelo del PPCU Hipódromo sin parámetros estructurados -> estado
+    #   controlado `missing_structured_parameters` (HTTP 200) que solicita
+    #   únicamente los datos faltantes. NO cae en recuperación semántica ni
+    #   invoca al modelo; no se infieren actividad ni zonificación.
+    # - Escenario A: recuperación semántica habitual.
+    # La detección solo participa cuando no hay parámetros estructurados;
+    # nunca infiere estados, actividades ni zonificaciones.
+    if activity is not None and zonification is not None:
+        escenario = "B_estructurada"
+    elif is_general_table_22_question(question):
+        escenario = "C_tabla_22_general"
+    elif is_land_use_compatibility_question(question):
+        logger.info(
+            "Consulta de compatibilidad de uso de suelo sin parámetros "
+            "estructurados: se solicitan los datos faltantes."
+        )
+        return _response(200, {
+            "status": "missing_structured_parameters",
+            "question": question.strip(),
+            "answer": "",
+            "citations": [],
+            "missing_fields": ["activity", "zonification"],
+            "limitations": [
+                "La pregunta requiere consultar la evidencia estructurada de "
+                "la Tabla 22 de usos de suelo del PPCU Hipódromo, pero no se "
+                "proporcionaron la actividad y la zonificación a evaluar.",
+                "Reenvíe la consulta incluyendo en el cuerpo JSON el campo "
+                "'activity' (nombre de la actividad) y el campo "
+                "'zonification' (una de: H, HC, HO, HM, HCS, E, EA).",
+                "No se generó ninguna conclusión jurídica ni se infirió la "
+                "compatibilidad solicitada.",
+            ],
+            "model_id": None,
         })
+    else:
+        escenario = "A_semantica"
 
-    except ValueError as exc:
-        return _response(400, {
-            "status": "error",
-            "message": str(exc),
-        })
+    logger.info("Escenario de recuperación seleccionado: %s", escenario)
 
-    try:
-        bedrock_client = _get_bedrock_client()
-
-        # El recuperador utiliza Aurora directamente, sin túnel SSM.
-        def lambda_retrieve(question, top_k=5):
+    if escenario in ("B_estructurada", "C_tabla_22_general"):
+        # Path híbrido: retrieve_hybrid ejecuta semántica + ruta estructurada
+        # correspondiente (B puntual o C general de Tabla 22).
+        def lambda_retrieve(q, top_k=5):
+            return retrieve_hybrid(
+                question=q,
+                top_k=top_k,
+                activity=activity,
+                zonification=zonification,
+                connection_mode="aurora",
+                secret_arn=os.environ.get("DB_SECRET_ARN", ""),
+                region_name=AWS_REGION,
+                client=bedrock_client,
+            )
+    else:
+        # Path semántico: retrieve simple
+        def lambda_retrieve(q, top_k=5):
             return retrieve(
-                question=question,
+                question=q,
                 top_k=top_k,
                 connection_mode="aurora",
-                client=bedrock_client,
-                secret_arn=os.environ.get("DB_SECRET_ARN"),
+                secret_arn=os.environ.get("DB_SECRET_ARN", ""),
                 region_name=AWS_REGION,
+                client=bedrock_client,
             )
 
+    # 4. Llamar a answer_question con el wrapper inyectado.
+    # answer_question reconoce StructuredRetrievalError, Table22NoRecords y
+    # MissingStructuredParameters y devuelve resultados controlados; se repite
+    # aquí la captura como red de seguridad para que el fallo nunca derive en
+    # 500 sin cuerpo controlado.
+    try:
         result = answer_question(
             question=question,
             top_k=top_k,
@@ -131,38 +206,39 @@ def lambda_handler(event, context):
             bedrock_client=bedrock_client,
             region_name=AWS_REGION,
         )
+    except (StructuredRetrievalError, Table22NoRecords, MissingStructuredParameters) as exc:
+        logger.error("Recuperación estructurada no disponible: %s", exc)
+        if isinstance(exc, StructuredRetrievalError):
+            estado = "structured_retrieval_error"
+        elif isinstance(exc, Table22NoRecords):
+            estado = "table_22_no_matches"
+        else:
+            estado = "missing_structured_parameters"
+        result = {
+            "status": estado,
+            "question": question.strip(),
+            "answer": "",
+            "citations": [],
+            "missing_fields": getattr(exc, "missing_fields", []),
+            "limitations": [
+                str(exc),
+                (
+                    "No se generó una conclusión jurídica sustitutiva; la "
+                    "evidencia semántica no reemplaza la evidencia "
+                    "estructurada de Tabla 22."
+                ),
+            ],
+            "model_id": None,
+        }
 
-        request_id = getattr(context, "aws_request_id", "local-test")
-
+    if result.get("status") in ESTADOS_CONTROLADOS_ESTRUCTURA:
         logger.info(
-            "Consulta procesada. request_id=%s status=%s",
-            request_id,
+            "Respuesta controlada por falta de evidencia estructurada: %s",
             result.get("status"),
         )
 
-        if result.get("status") in {
-            "answered",
-            "insufficient_evidence",
-        }:
-            return _response(200, result)
-
-        return _response(500, {
-            "status": "error",
-            "message": (
-                "No fue posible completar la consulta. "
-                "Intenta nuevamente más tarde."
-            ),
-        })
-
-    except Exception:
-        request_id = getattr(context, "aws_request_id", "local-test")
-
-        logger.exception(
-            "Error interno al procesar consulta. request_id=%s",
-            request_id,
-        )
-
-        return _response(500, {
-            "status": "error",
-            "message": "Error interno al procesar la consulta.",
-        })
+    # 5. Retornar respuesta formateada con el código HTTP del contrato.
+    status_code = CODIGOS_HTTP_POR_ESTADO.get(
+        result.get("status"), 200
+    )
+    return _response(status_code, result)
