@@ -227,6 +227,9 @@ a:focus-visible {
 /* ---------- 7. Pantalla de consulta ---------- */
 
 .consultation-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: calc(100vh - var(--header-height));
   padding: 42px var(--page-padding) 56px;
@@ -257,8 +260,8 @@ a:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  min-height: 280px;
-  max-height: 55vh;
+  min-height: 120px;
+  max-height: 250px;
   padding: 22px;
   overflow-y: auto;
   border: 1px solid var(--color-border);
@@ -445,7 +448,7 @@ a:focus-visible {
   }
 
   .chat-messages {
-    max-height: 50vh;
+    max-height: 250px;
   }
 }
 
@@ -512,8 +515,8 @@ a:focus-visible {
   }
 
   .chat-messages {
-    min-height: 240px;
-    max-height: 48vh;
+    min-height: 120px;
+    max-height: 250px;
     padding: 14px;
   }
 

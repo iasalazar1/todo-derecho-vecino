@@ -485,6 +485,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addMessage(question, "user");
 
+    setTimeout(() => {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      questionInput.focus();
+    }, 100);
+
     await sendQuestion(question);
   });
 
