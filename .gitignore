@@ -30,3 +30,10 @@ Instructivo_operacion_2.md
 
 # Planes temporales de Terraform
 *.tfplan
+
+# Respaldos locales de código
+*.bak
+*.bak_*
+
+# Reporte local de experimentación híbrida
+REPORTE_FINAL_HIBRIDO.md

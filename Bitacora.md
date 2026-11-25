@@ -1717,3 +1717,67 @@ Al 24 de noviembre existe evidencia de que la recuperación híbrida está despl
 La semana presenta avances sustanciales, pero no debe declararse cerrada todavía. Persisten pendientes de mínimo privilegio, pruebas E2E más amplias, evaluación reproducible, diagnóstico de errores, telemetría/privacidad y revisión jurídica. La recuperación técnica de una celda o fragmento no equivale a una autorización administrativa ni a una validación legal definitiva.
 
 **Esta entrada documenta exclusivamente actividades, resultados y pendientes de Semana 9. No modifica código, datos de Aurora, corpus legal, Terraform ni recursos AWS.**
+
+## Actualización — Organización de pruebas experimentales del parser PPCU
+
+### Propósito de la carpeta de pruebas
+
+Se trasladaron a `tests/` tres archivos que originalmente se encontraban en
+`experimental/`:
+
+- `ppcu_parser_proto.py`: prototipo de parser jerárquico para el PPCU Hipódromo.
+- `test_ppcu_parser.py`: pruebas automatizadas de encabezados, jerarquía,
+  integridad de tablas, notas, referencias gráficas, páginas y conservación
+  del texto fuente.
+- `comparativa_resultados.py`: herramienta de comparación cuantitativa y
+  cualitativa entre el parser experimental y la línea base histórica de
+  52 fragmentos.
+
+### Razón de su conservación
+
+Estos archivos constituyen una línea experimental de investigación y
+evaluación del procesamiento documental del PPCU Hipódromo. Su finalidad es
+estudiar si una segmentación jerárquica permite conservar mejor la estructura
+normativa, los apartados, las tablas, las referencias gráficas y la
+procedencia del texto original.
+
+Se conservan dentro de `tests/` porque su función es evaluar y documentar
+comportamientos del procesamiento documental, no ejecutar el procesamiento
+productivo del MVP.
+
+### Límites de uso
+
+- El prototipo no sustituye al procesador documental productivo.
+- No modifica los chunks históricos ni regenera embeddings.
+- No modifica la base de datos Aurora ni la infraestructura AWS.
+- Sus resultados son evidencia experimental y requieren revisión técnica
+  y humana.
+- No constituyen validación jurídica del corpus ni autorización para integrar
+  el parser al pipeline productivo.
+
+Cualquier integración futura deberá evaluarse por separado y contar con
+autorización expresa.
+
+### Resultados de ejecución
+
+- Pruebas del parser: 36 aprobadas, 0 fallidas.
+- Comparativa contra línea base: 250 fragmentos experimentales frente a
+  52 históricos.
+- Integridad del archivo histórico: SHA256 coincidente; 316,017 bytes
+  y 52 fragmentos.
+- El parser experimental reconoció 27 tablas, conservó 4 referencias
+  gráficas y produjo 248 fragmentos con jerarquía.
+- Los fragmentos menores de 120 caracteres disminuyeron de 49 a 9.
+- No se detectaron regresiones mediante los controles automatizados
+  de la comparativa.
+
+### Observaciones pendientes de revisión humana
+
+- Verificar la representación de la sección histórica 3.1.
+- Revisar el ejemplo antes/después que muestra una secuencia de
+  signos de igualdad como fragmento.
+- Confirmar que las tablas, notas, condiciones y referencias gráficas
+  conservan su significado y contexto normativo.
+
+Los resultados son experimentales. No constituyen validación jurídica
+ni autorizan la sustitución del procesador documental productivo.
