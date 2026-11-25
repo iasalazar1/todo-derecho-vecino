@@ -1553,3 +1553,167 @@ La auditoría del frontend público encontró que el `config.js` servido por Clo
 Con autorización del usuario, se publicó únicamente `config.js` en el bucket `todo-derecho-vecino-frontend-857385469837-us-east-1`. No se modificaron otros objetos ni se invalidó la distribución. S3 confirmó una nueva versión del objeto (`_z8vwvN9GEwufC0rYZCQCLKXTl9hYyzl`), de 102 bytes y tipo `application/javascript`.
 
 La verificación por HTTP de `https://d3oqt1m39hvkdh.cloudfront.net/config.js` devolvió `200`, el mismo ETag del objeto S3 y contenido idéntico al archivo local, con el endpoint vigente. La respuesta indicó `X-Cache: Miss from cloudfront`. Esta verificación confirma la configuración estática publicada; no se repitió una consulta funcional ni se hizo una nueva prueba desde navegador.
+
+## Semana 9 — Integración E2E, verificación operativa y revisión de seguridad
+
+**Fecha de corte:** 24 de noviembre de 2026.
+
+### Objetivo de la semana
+
+Verificar el flujo desplegado del MVP, integrar y probar la recuperación híbrida de la Tabla 22 del PPCU Hipódromo, revisar la operación básica en CloudWatch y realizar una revisión esencial de permisos IAM. Distinguir las pruebas técnicas reales de las pruebas offline y de la validación jurídica, que tienen alcances diferentes.
+
+### 1. Despliegue del recuperador híbrido en Lambda
+
+Se verificó el repositorio en la rama `mvp-estancia`. El código publicado correspondía al commit:
+
+`1a138f7de8cee5a4cd83b2a06eac6205e0e13feb`
+
+Se preparó un paquete específico para el despliegue híbrido, reutilizando las dependencias existentes e incorporando los módulos actuales de recuperación, generación de respuestas y prompt. El paquete fue validado mediante revisión de estructura, sintaxis y hashes de los archivos relevantes.
+
+Datos de la publicación:
+
+- Lambda: `todo-derecho-vecino-api`.
+- Runtime: Python 3.12; arquitectura x86_64.
+- Timeout: 28 segundos; memoria: 512 MB.
+- ZIP: `build/lambda-deployment-hybrid-20261124.zip`.
+- Tamaño: 21.36 MB.
+- SHA-256: `a5e063be07052bf3f38683f9a882bc61f7c911badd02f3c1fb9e702ab7500032`.
+- AWS confirmó `LastUpdateStatus: Successful` y coincidencia del `CodeSha256` esperado.
+
+El despliegue actualizó el código de Lambda. No se modificaron Aurora, embeddings, tablas, Terraform, IAM, API Gateway ni el frontend durante esta publicación.
+
+### 2. Pruebas reales del flujo híbrido
+
+El endpoint vigente verificado el 24 de noviembre fue:
+
+`https://z4wmsm1i81.execute-api.us-east-1.amazonaws.com/consulta`
+
+La URL pública del frontend es:
+
+https://d3oqt1m39hvkdh.cloudfront.net
+
+#### 2.1 Consulta puntual de compatibilidad por API
+
+Con autorización expresa para una sola invocación real de Bedrock, se ejecutó la consulta:
+
+> ¿Es permitido el alojamiento y desayuno en zonificación H del PPCU Hipódromo?
+
+Se enviaron explícitamente la actividad y la zonificación. La API respondió HTTP 200, con `status: answered` y el modelo `us.anthropic.claude-sonnet-4-6`.
+
+El resultado recuperó el estado literal `permitido (*)`. La respuesta explicó que la condición aplica a inmuebles catalogados con Valor Relevante Sin Alterar, Valor Relevante Alterado y Valor Ambiental, por lo que es necesario verificar la catalogación del inmueble.
+
+Las fuentes conservaron sus marcas de revisión. Se observó además que una cita de nota al pie presenta metadatos de artículo/sección que requieren cotejo con el PDF. La prueba demuestra el funcionamiento de ese caso puntual, no la validez jurídica de la interpretación ni la cobertura de todas las actividades y zonificaciones.
+
+La autorización de consumo real de Bedrock correspondió a esa única consulta y quedó consumida. No se deben ejecutar nuevas consultas reales sin solicitar autorización específica.
+
+#### 2.2 Consulta general de Tabla 22 desde CloudFront
+
+El usuario probó desde la interfaz pública la pregunta:
+
+> ¿Cuáles son los usos permitidos, condicionados y prohibidos en la Tabla 22 del PPCU Hipódromo?
+
+La respuesta identificó la Tabla 22, sus siete zonificaciones y los estados recuperados. También incorporó las notas generales de los asteriscos. El usuario confirmó que la consulta funcionó.
+
+La salida comenzó a presentar la matriz de actividades, pero se interrumpió antes de mostrarla completa. Por ello, la prueba acredita que CloudFront puede activar la recuperación general de Tabla 22 y presentar sus resultados, pero no acredita que toda la matriz se entregue completa ni que todas las celdas hayan sido cotejadas jurídicamente.
+
+La tabla no contiene una categoría independiente denominada “condicionado”: deben conservarse los estados originales y las condiciones expresadas mediante asteriscos y notas. No se deben reinterpretar ni simplificar.
+
+#### 2.3 Límite pendiente de la consulta puntual desde frontend
+
+La inspección de `script.js` confirmó que el frontend envía únicamente `{question}`. La ruta estructurada puntual de Lambda requiere `activity` y `zonification` explícitos. Si faltan, el backend devuelve `missing_structured_parameters`; no debe inferir esos valores.
+
+Por tanto, la consulta general de Tabla 22 desde CloudFront funciona en el caso probado, pero la interfaz todavía no captura ni envía los dos parámetros para una consulta puntual de compatibilidad. Este ajuste queda registrado para seguimiento en S9-16.
+
+### 3. Pruebas automatizadas y alcance de la evidencia
+
+Se reportaron 119 pruebas aprobadas en ocho archivos de pruebas relacionados con la integración híbrida. Son pruebas offline/unitarias con mocks; no equivalen a 119 pruebas contra AWS ni a 119 invocaciones reales de Bedrock.
+
+La evidencia real de esta actualización se limita a la consulta puntual por API autorizada y a la consulta general de Tabla 22 confirmada por el usuario desde CloudFront. No se considera una evaluación exhaustiva de escenarios válidos, evidencia insuficiente, errores técnicos, carga, calidad del RAG o exactitud jurídica.
+
+### 4. Revisión de CloudWatch
+
+Se inspeccionó el grupo de logs:
+
+`/aws/lambda/todo-derecho-vecino-api`
+
+Resultados observados:
+
+- Grupo de logs activo.
+- Retención configurada a 14 días.
+- Tamaño almacenado observado: 21,149 bytes.
+- Streams recientes con eventos del 24 de noviembre.
+- Eventos `REPORT` con duración, memoria utilizada e inicialización de Lambda.
+
+En cuatro ejecuciones recientes se observaron duraciones aproximadas de 6.9 a 12.4 segundos, con memoria máxima cercana a 106–108 MB, sobre una configuración de 512 MB.
+
+Esta evidencia confirma el funcionamiento básico de CloudWatch para los logs de Lambda. No se correlacionó de forma concluyente cada invocación exitosa y fallida con su request ID ni se verificó en esta revisión el contenido completo de todos los campos registrados. Tampoco demuestra que exista un historial de preguntas y respuestas o un dataset de evaluación. El usuario consideró demostrado el funcionamiento básico de CloudWatch.
+
+### 5. Revisión esencial de IAM — solo lectura
+
+No se modificaron políticas, roles, usuarios ni grupos.
+
+#### 5.1 Rol de ejecución Lambda
+
+Rol: `TodoDerechoVecino-Lambda-Execution`.
+
+- Estado de Lambda: `Active`; última actualización: `Successful`.
+- Relación de confianza limitada al servicio `lambda.amazonaws.com`.
+- Política administrada adjunta: `AWSLambdaVPCAccessExecutionRole`.
+- Una política en línea de aplicación con permisos de invocación de Bedrock y lectura del secreto de Aurora.
+- El valor configurado en `DB_SECRET_ARN` coincide exactamente con el ARN autorizado en `secretsmanager:GetSecretValue`.
+- `BEDROCK_MODEL_ID` está configurado como `us.anthropic.claude-sonnet-4-6`.
+
+La revisión esencial no encontró permisos administrativos generales en el rol de ejecución. La política administrada de acceso VPC conserva permisos de administración de interfaces de red requeridos por Lambda en VPC.
+
+#### 5.2 Rol de despliegue Terraform
+
+Rol: `TodoDerechoVecino-TerraformDeployRole`.
+
+- Su relación de confianza permite asumirlo al usuario `Administrator-V3`.
+- No tiene políticas administradas adjuntas.
+- Tiene una política en línea: `TodoDerechoVecino-TerraformDeployPolicy`.
+- Los permisos de VPC y CloudFront incluyen acciones con `Resource: "*"`.
+- El bloque `ManageTerraformDeployRole` permite modificar la relación de confianza y agregar, quitar o eliminar políticas del propio rol.
+- Los permisos S3 están más acotados a buckets con prefijo `todo-derecho-vecino-*` y al bucket específico del frontend.
+- No tiene `PermissionsBoundary`.
+
+Conclusión: el rol es funcional para despliegues, pero no cumple estrictamente el principio de mínimo privilegio. La capacidad de modificar sus propios permisos es el hallazgo de mayor relevancia. Se recomienda diseñar una separación entre administración del rol y operación cotidiana de despliegue antes de modificarlo.
+
+#### 5.3 Usuario administrador
+
+El usuario `Administrator-V3` no tiene políticas en línea. Su política administrada directa es `IAMUserChangePassword`; sin embargo, pertenece al grupo `Admin-V3`, al que está adjunta la política administrada `AdministratorAccess`.
+
+Por pertenecer a ese grupo, el usuario tiene privilegios administrativos sobre la cuenta AWS. Se recomienda reservar esta identidad para tareas administrativas excepcionales y utilizar una identidad de despliegue con permisos acotados para la operación ordinaria. No se retiraron permisos ni se alteró el grupo.
+
+### 6. Estado de los objetivos de Semana 9
+
+**Avances comprobados:**
+
+- Recuperación híbrida desplegada en Lambda.
+- Consulta puntual de compatibilidad probada por API con parámetros explícitos y una invocación real autorizada de Bedrock.
+- Consulta general de Tabla 22 probada desde CloudFront.
+- Logs básicos de Lambda comprobados en CloudWatch.
+- Revisión esencial de los roles Lambda y Terraform y del usuario/grupo administrador.
+- Identificación de los límites actuales de la interfaz para consultas puntuales.
+
+**Pendientes que impiden declarar cerrada la semana:**
+
+1. Completar la prueba E2E con casos válidos, evidencia insuficiente y errores técnicos; conservar evidencia diferenciada de pruebas reales y offline.
+2. Resolver mediante decisión y autorización el hardening del rol Terraform y la separación de la identidad administrativa.
+3. Verificar el throttling real de API Gateway; el valor histórico de referencia es 5 solicitudes por segundo y ráfaga 10, pero no se volvió a comprobar su configuración efectiva en esta revisión.
+4. Inspeccionar el contenido de logs y determinar qué datos de las consultas registra actualmente el código, sin confundir logs operativos con dataset de evaluación.
+5. Correlacionar y diagnosticar la incidencia HTTP 500 observada el 23 de noviembre.
+6. Incorporar al frontend la captura explícita de actividad y zonificación para compatibilidad puntual.
+7. Definir un conjunto fijo y versionado de evaluación, métricas de recuperación y rúbrica humana de respuestas y citas.
+8. Definir la política mínima de telemetría y privacidad antes de registrar consultas reales para análisis.
+9. Completar el cotejo jurídico y visual de Tabla 22, sus notas y metadatos de citas; conservar las marcas de revisión.
+
+La autenticación de la API permanece diferida a Semana 10 por decisión previa. La mejora de visualización de resultados de Tabla 22 se considera una mejora posterior de interfaz, no un requisito técnico ya completado en Semana 9.
+
+### 7. Conclusión de Semana 9
+
+Al 24 de noviembre existe evidencia de que la recuperación híbrida está desplegada y funciona en los escenarios puntuales probados, incluyendo la consulta general de Tabla 22 desde CloudFront. También se comprobó la operación básica de CloudWatch y se completó una revisión esencial de IAM.
+
+La semana presenta avances sustanciales, pero no debe declararse cerrada todavía. Persisten pendientes de mínimo privilegio, pruebas E2E más amplias, evaluación reproducible, diagnóstico de errores, telemetría/privacidad y revisión jurídica. La recuperación técnica de una celda o fragmento no equivale a una autorización administrativa ni a una validación legal definitiva.
+
+**Esta entrada documenta exclusivamente actividades, resultados y pendientes de Semana 9. No modifica código, datos de Aurora, corpus legal, Terraform ni recursos AWS.**
