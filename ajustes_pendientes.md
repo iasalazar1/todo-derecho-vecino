@@ -329,9 +329,9 @@ Este apartado documenta los datos que faltaron y que se preguntaron al usuario, 
 ### Incidencia prioritaria registrada el 23-nov-2026
 
 1. Revisar CloudWatch de `todo-derecho-vecino-api` para identificar las excepciones de las dos consultas que devolvieron `Internal Server Error`. La corrección de `top_k` ya está desplegada y Lambda figura activa, pero aún no se ha verificado la causa de esos 500.
-2. Diseñar y probar la consulta estructurada de Tabla 22 desde Lambda, sin depender de `psql`, `PGPASSFILE` ni del túnel local. La recuperación debe devolver las celdas originales de la actividad solicitada y las zonificaciones consultadas, conservando estados, procedencia y marcas de revisión.
-3. Integrar la evidencia estructurada con la recuperación semántica y el constructor de contexto/citas. Para preguntas de compatibilidad de giros, no responder usando únicamente fragmentos vectoriales que mencionen el título o notas finales de la tabla.
-4. Ejecutar pruebas unitarias y pruebas de integración controladas; después, con autorización, desplegar y repetir la prueba pública desde CloudFront. No considerar resuelta la integración ni cerrar S9 hasta comprobar la respuesta estructurada y sus citas.
+2. La integración estructurada de Tabla 22 en Lambda ya fue desplegada y probada en escenarios puntuales el 24-nov-2026. No repetir su implementación. Mantener pendiente la auditoría de cobertura, procedencia, notas, metadatos de citas y correspondencia de todas las celdas con el PDF original; no modificar datos ni marcas de revisión sin autorización.
+3. Completar S9-16: diseñar e implementar en el frontend la captura explícita de actividad y zonificación para consultas puntuales. El frontend actual envía solo `{question}`; no inferir los parámetros ni presentar una consulta semántica como sustituto de la consulta estructurada.
+4. Ampliar las pruebas E2E con casos válidos, evidencia insuficiente y errores técnicos. Distinguir las pruebas offline/unitarias de las pruebas reales en AWS. Cualquier nueva invocación real de Bedrock requiere autorización expresa; la autorización de una consulta del 24-nov-2026 ya fue consumida.
 
 La siguiente tarea de auditoría documental PPCU se realizará con un agente de programación en VS Code (Kilo Code o GitHub Copilot), con AWS apagado. El agente trabajará primero sobre el PPCU Hipódromo y no pasará al PDDU hasta cerrar y validar esta auditoría inicial.
 
@@ -358,7 +358,8 @@ El agente debe trabajar paso a paso, mostrar archivos y diferencias antes de edi
 
 ### Estado de ejecución
 
-- Pruebas unitarias offline: 35 aprobadas, 1 warning de compatibilidad de pytest; sin fallos.
+- Pruebas unitarias offline anteriores: 35 aprobadas, 1 warning de compatibilidad de pytest; sin fallos.
+- Pruebas relacionadas con la integración híbrida reportadas el 24-nov-2026: 119 aprobadas en ocho archivos; suite offline/unitaria con mocks, no prueba E2E contra AWS.
 - Estado AWS (23-nov-2026): se desplegó la corrección `top_k = body.get("top_k", 5)` en `todo-derecho-vecino-api`; Lambda quedó `State Active` y `LastUpdateStatus Successful`. Esto confirma el despliegue de esa versión, pero no acredita por sí solo que las consultas E2E estén resueltas ni el estado de todos los recursos DEV.
 - Auditoría estática inicial de JSON: realizada el 11-nov-2026; los hallazgos J-16, J-17 y J-20 siguen abiertos hasta cotejo visual con los PDF.
 - No regenerar embeddings, modificar SQL, cargar datos ni levantar AWS antes de completar los pasos previos y recibir autorización.
